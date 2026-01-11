@@ -4,130 +4,142 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WarmesHerz | HeatBelt Pro™ Wellness</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&family=Montserrat:wght@500;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@700;900&family=Montserrat:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-teal: #43ceaf;
+            --accent-orange: #ff650f;
             --text-dark: #1d1d1f;
             --text-medium: #424245;
-            --text-light: #86868b;
-            --glass-ultra: rgba(255, 255, 255, 0.55);
-            --glass-border: rgba(255, 255, 255, 0.7);
+            --glass-ultra: rgba(255, 255, 255, 0.45);
+            --glass-border: rgba(255, 255, 255, 0.8);
+            --bg-dark: #292929;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body { font-family: 'Inter', sans-serif; background-color: #fff; color: var(--text-dark); overflow-x: hidden; line-height: 1.6; }
 
-        /* --- Sticky Header --- */
+        /* --- Header --- */
         .nav-header {
-            position: fixed; top: 0; width: 100%; height: 70px; z-index: 1000;
-            background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            position: fixed; top: 0; width: 100%; height: 80px; z-index: 1000;
+            background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
             border-bottom: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: space-between; padding: 0 5%;
         }
-        .logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; text-decoration: none; color: var(--text-dark); }
-        .nav-links { display: flex; gap: 2rem; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--text-dark); font-weight: 500; font-size: 0.9rem; }
-        .nav-cta { background: var(--text-dark); color: #fff !important; padding: 0.6rem 1.4rem; border-radius: 50px; }
+        .logo { font-family: 'Montserrat', sans-serif; font-size: 1.6rem; font-weight: 900; text-transform: uppercase; color: var(--text-dark); text-decoration: none; letter-spacing: -1px; }
+        .logo span { color: var(--primary-teal); }
 
-        /* --- Hero Section --- */
-        .hero { position: relative; width: 100%; height: 85vh; padding-top: 70px; display: flex; overflow: hidden; }
+        /* --- Hero --- */
+        .hero { position: relative; width: 100%; height: 90vh; padding-top: 80px; display: flex; overflow: hidden; }
         .hero-images { display: flex; width: 100%; height: 100%; }
-        .hero-img { flex: 1; background-size: cover; background-position: center; transition: transform 10s ease; }
+        .hero-img { flex: 1; background-size: cover; background-position: center; transition: transform 12s ease; }
         .img-left { background-image: url('Tragefoto Infrarot fokus.jpg'); }
         .img-right { background-image: url('Tragefoto Bedinunf Fernbedinung fokus.jpg'); }
 
         .hero-overlay {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            background: var(--glass-ultra); backdrop-filter: blur(40px) saturate(150%); -webkit-backdrop-filter: blur(40px) saturate(150%);
-            padding: 2.5rem; border-radius: 20px; border: 1px solid var(--glass-border);
-            text-align: center; width: 85%; max-width: 500px; box-shadow: 0 25px 50px rgba(0,0,0,0.1); z-index: 10;
+            background: var(--glass-ultra); backdrop-filter: blur(50px) saturate(180%); -webkit-backdrop-filter: blur(50px) saturate(180%);
+            padding: 2rem; border-radius: 15px; border: 1px solid var(--glass-border);
+            text-align: center; width: 90%; max-width: 440px; box-shadow: 0 30px 60px rgba(0,0,0,0.12); z-index: 10;
         }
-        .hero-overlay h1 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 0.5rem; }
-        .hero-overlay p { font-size: 1rem; color: var(--text-medium); margin-bottom: 1.5rem; }
+        .hero-overlay h1 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 0.8rem; letter-spacing: -0.5px; }
+        .hero-overlay p { font-size: 0.95rem; color: var(--text-medium); margin-bottom: 1.5rem; font-weight: 500; }
+        .cta-btn-glass { display: inline-block; padding: 0.8rem 2rem; background: var(--text-dark); color: #fff; text-decoration: none; border-radius: 50px; font-weight: 600; font-size: 0.9rem; transition: transform 0.3s; }
 
-        /* --- Feature Plates (Unter dem Hero) --- */
-        .feature-container { padding: 60px 10%; background: #fafafa; }
-        .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; max-width: 1100px; margin: 0 auto; }
-        .plate { 
-            padding: 3rem; border-radius: 20px; background: #fff; text-align: center; 
-            border: 1px solid #eee; position: relative; overflow: hidden; transition: all 0.4s ease;
-        }
-        .plate h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 1rem; }
+        /* --- Creative Plates --- */
+        .feature-container { padding: 80px 10%; background: #ffffff; }
+        .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1200px; margin: 0 auto; }
         
-        /* Stärkere Animationen */
-        .plate-warmth::before {
-            content: ''; position: absolute; inset: 0; 
-            background: radial-gradient(circle, rgba(255,107,74,0.15) 0%, transparent 75%);
-            animation: pulseHeat 3s infinite alternate;
+        .plate { 
+            padding: 4rem 3rem; border-radius: 30px; background: #fff; text-align: center; 
+            border: 1px solid #f0f0f0; position: relative; overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
         }
-        .plate-vibe::before {
-            content: ''; position: absolute; inset: 0;
-            background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(116,185,255,0.1) 10px, rgba(116,185,255,0.1) 20px);
-            animation: vibeShift 2s infinite linear;
-        }
-        @keyframes pulseHeat { from { opacity: 0.3; transform: scale(0.9); } to { opacity: 0.8; transform: scale(1.1); } }
-        @keyframes vibeShift { from { background-position: 0 0; } to { background-position: 40px 40px; } }
+        .plate h3 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.4rem; text-transform: uppercase; margin-bottom: 1.2rem; letter-spacing: 1px; z-index: 2; position: relative; }
+        .plate p { font-size: 1rem; color: var(--text-medium); z-index: 2; position: relative; line-height: 1.7; }
 
-        /* --- Wirkung Section (Stack Layout) --- */
-        .wirkung-section { padding: 100px 10%; display: flex; flex-direction: column; gap: 80px; }
-        .wirkung-row { display: flex; gap: 60px; align-items: flex-start; max-width: 1200px; margin: 0 auto; }
-        .wirkung-images-stack { flex: 1; display: flex; flex-direction: column; gap: 20px; }
-        .wirkung-images-stack img { width: 100%; height: auto; border-radius: 12px; }
-        .wirkung-text-side { flex: 1; position: sticky; top: 120px; }
-        .wirkung-text-side h2 { font-family: 'Playfair Display', serif; font-size: 2.8rem; margin-bottom: 2rem; line-height: 1.2; }
-        .wirkung-text-side p { font-size: 1.1rem; color: var(--text-medium); margin-bottom: 2rem; }
+        /* Glow Animations */
+        .glow-warm { position: absolute; top: 50%; left: 50%; width: 150%; height: 150%; background: radial-gradient(circle, rgba(255,101,15,0.15) 0%, transparent 60%); transform: translate(-50%, -50%); animation: heatPulse 5s infinite ease-in-out; }
+        .glow-vibe { position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(from 180deg at 50% 50%, transparent 0%, rgba(67,206,175,0.1) 25%, transparent 50%); animation: rotateVibe 8s infinite linear; }
 
-        /* --- Bereiche Section (Alternating) --- */
-        .comfort-block { display: flex; align-items: center; min-height: 500px; }
+        @keyframes heatPulse { 0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.4; } 50% { transform: translate(-50%, -50%) scale(1.3); opacity: 0.9; } }
+        @keyframes rotateVibe { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        /* --- Wirkung (Bilder links, Text rechts sticky) --- */
+        .wirkung-section { padding: 120px 10%; background: #fafafa; }
+        .wirkung-row { display: flex; gap: 80px; align-items: flex-start; max-width: 1300px; margin: 0 auto; }
+        .wirkung-images-stack { flex: 1.2; display: flex; flex-direction: column; gap: 40px; }
+        .wirkung-images-stack img { width: 100%; height: auto; border-radius: 4px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+        .wirkung-text-side { flex: 1; position: sticky; top: 140px; padding-top: 20px; }
+        .wirkung-text-side h2 { font-family: 'Playfair Display', serif; font-size: 3.5rem; line-height: 1.1; margin-bottom: 2.5rem; }
+        .wirkung-text-side p { font-size: 1.1rem; color: var(--text-medium); margin-bottom: 1.5rem; max-width: 90%; }
+
+        /* --- Bereiche (Abwechselnd, Text länger) --- */
+        .comfort-block { display: flex; align-items: center; min-height: 650px; border-bottom: 1px solid #f0f0f0; }
         .comfort-block.reverse { flex-direction: row-reverse; }
-        .comfort-image { flex: 1; height: 500px; background-size: cover; background-position: center; }
-        .comfort-content { flex: 1; padding: 5% 8%; }
-        .comfort-content h3 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 1rem; }
+        .comfort-image { flex: 1.2; height: 650px; background-size: cover; background-position: center; }
+        .comfort-content { flex: 1; padding: 80px; }
+        .comfort-content h3 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 2rem; }
+        .comfort-content p { font-size: 1.1rem; color: var(--text-medium); line-height: 1.9; margin-bottom: 1.5rem; }
+
+        /* --- Kontakt Formular (Aphite Style) --- */
+        .aph-contact-wrap { width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; background-color: var(--bg-dark); padding: 100px 0; font-family: 'Montserrat', sans-serif; color: #fff; }
+        .aph-contact-inner { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+        .aph-contact-head { text-align: center; margin-bottom: 50px; }
+        .aph-contact-head h2 { font-weight: 800; font-size: clamp(2rem, 5vw, 2.8rem); text-transform: uppercase; margin-bottom: 10px; }
+        .aph-contact-head p { color: var(--primary-teal); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; }
+        .aph-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .aph-form-full { grid-column: span 2; }
+        .aph-input-group { display: flex; flex-direction: column; }
+        .aph-input-group label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; color: #999; }
+        .aph-input-group input, .aph-input-group textarea { background: #1e1e1e; border: 1px solid #444; padding: 18px; color: #fff; font-family: 'Montserrat', sans-serif; outline: none; transition: border-color 0.3s; }
+        .aph-input-group input:focus, .aph-input-group textarea:focus { border-color: var(--accent-orange); }
+        .aph-submit-btn { grid-column: span 2; background: var(--accent-orange); color: #fff; border: none; padding: 22px; font-family: 'Montserrat', sans-serif; font-weight: 800; text-transform: uppercase; cursor: pointer; transition: all 0.3s; margin-top: 15px; }
+        .aph-submit-btn:hover { background: #e55a0d; transform: translateY(-3px); }
 
         /* --- Trust Bar --- */
-        .aphite-premium-trust { width: 100%; background-color: var(--primary-teal); padding: 70px 0; font-family: 'Montserrat', sans-serif; }
-        .trust-wrapper { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; padding: 0 40px; }
-        .trust-card { display: flex; flex-direction: column; align-items: center; text-align: center; color: #fff; position: relative; }
-        .trust-icon-box { width: 80px; height: 80px; background: rgba(255,255,255,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; border: 2px solid rgba(255,255,255,0.4); }
-        .trust-icon-box img { width: 45px; filter: brightness(0) invert(1); }
-        .trust-icon-box svg { width: 40px; fill: #fff; }
-        .trust-content h3 { font-weight: 800; text-transform: uppercase; margin-bottom: 10px; font-size: 1.1rem; letter-spacing: 1px; }
-
-        /* --- Kontakt Formular --- */
-        .contact-section { padding: 100px 10%; background: #f0f4f7; display: flex; justify-content: center; }
-        .contact-box { background: #fff; padding: 3rem; border-radius: 20px; width: 100%; max-width: 600px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .contact-box h2 { text-align: center; margin-bottom: 2rem; font-family: 'Playfair Display', serif; }
-        .form-group { margin-bottom: 1.5rem; }
-        .form-group label { display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; }
-        .form-group input, .form-group textarea { width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; }
-        .submit-btn { width: 100%; padding: 1rem; background: var(--primary-teal); color: #fff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
+        .trust-bar { width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; background-color: var(--primary-teal); padding: 70px 0; font-family: 'Montserrat', sans-serif; }
+        .trust-wrapper { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; padding: 0 40px; }
+        .trust-card { display: flex; flex-direction: column; align-items: center; text-align: center; color: #fff; }
+        .trust-icon { width: 70px; height: 70px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.4); }
+        .trust-icon img { width: 35px; filter: brightness(0) invert(1); }
+        .trust-icon svg { width: 35px; fill: #fff; }
+        .trust-card h3 { font-weight: 800; text-transform: uppercase; letter-spacing: 1px; font-size: 1rem; margin-bottom: 10px; }
+        .trust-card p { font-size: 0.9rem; opacity: 0.9; max-width: 250px; }
 
         /* --- Footer --- */
-        .main-footer { background: #1d1d1f; color: #fff; padding: 80px 10% 40px; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 50px; }
-        .footer-col h4 { margin-bottom: 1.5rem; font-family: 'Playfair Display', serif; }
-        .footer-col ul { list-style: none; }
-        .footer-col li { margin-bottom: 0.8rem; opacity: 0.7; font-size: 0.9rem; }
-        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; text-align: center; font-size: 0.8rem; opacity: 0.5; }
+        .footer-custom { width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; background: var(--bg-dark); color: #fff; padding: 100px 0 40px; font-family: 'Montserrat', sans-serif; border-top: 1px solid #3d3d3d; }
+        .footer-container { max-width: 95%; margin: 0 auto; padding: 0 20px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 60px; }
+        .f-logo { font-size: 2.2rem; font-weight: 900; color: var(--accent-orange); margin-bottom: 20px; }
+        .f-logo span { color: var(--primary-teal); }
+        .f-label { display: block; font-weight: 800; text-transform: uppercase; margin-bottom: 25px; letter-spacing: 1px; }
+        .f-list { list-style: none; }
+        .f-list li { margin-bottom: 12px; }
+        .f-list a { color: #bbb; text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+        .f-list a:hover { color: var(--primary-teal); }
+        .footer-bottom { margin-top: 80px; padding-top: 30px; border-top: 1px solid #3d3d3d; display: flex; justify-content: space-between; align-items: center; }
+        .payment-flex { display: flex; gap: 15px; align-items: center; }
+        .payment-flex svg { width: 45px; height: auto; opacity: 0.8; }
 
-        @media (max-width: 850px) {
-            .hero-images { flex-direction: column; }
-            .feature-grid, .wirkung-row, .trust-wrapper { grid-template-columns: 1fr; }
+        @media (max-width: 1000px) {
+            .footer-grid, .wirkung-row, .feature-grid { grid-template-columns: 1fr; }
             .comfort-block, .comfort-block.reverse { flex-direction: column; }
-            .comfort-image { width: 100%; height: 300px; }
+            .comfort-image { width: 100%; height: 400px; }
+            .comfort-content { padding: 40px 20px; }
+            .wirkung-text-side { position: relative; top: 0; }
+            .trust-wrapper { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
     <header class="nav-header">
-        <a href="#" class="logo">WarmesHerz</a>
-        <nav class="nav-links">
-            <a href="#wirkung">Routine</a>
-            <a href="#bereiche">Bereiche</a>
-            <a href="#kontakt">Kontakt</a>
-            <a href="product.html" class="nav-cta">Produktseite</a>
+        <a href="#" class="logo">Warmes<span>H</span>erz</a>
+        <nav class="f-list" style="display:flex; gap:30px; align-items:center;">
+            <a href="#wirkung" style="color:var(--text-dark); font-weight:600; text-decoration:none;">Routine</a>
+            <a href="#bereiche" style="color:var(--text-dark); font-weight:600; text-decoration:none;">Bereiche</a>
+            <a href="#kontakt" class="cta-btn-glass" style="margin-top:0">Kontakt</a>
         </nav>
     </header>
 
@@ -138,20 +150,22 @@
         </div>
         <div class="hero-overlay">
             <h1>HeatBelt Pro™</h1>
-            <p>Wärmegefühl + Massagegefühl – für eine ruhige Routine im Alltag.</p>
-            <a href="product.html" class="nav-cta" style="text-decoration:none">Zur Produktseite</a>
+            <p>Sanfte Infrarot-Wärme trifft auf beruhigende Schwingung. Für Ihr tägliches Wohlbefinden.</p>
+            <a href="product.html" class="cta-btn-glass">Zur Produktseite</a>
         </div>
     </section>
 
     <section class="feature-container">
         <div class="feature-grid">
-            <div class="plate plate-warmth">
+            <div class="plate">
+                <div class="glow-warm"></div>
                 <h3>Infrarot-Wärme</h3>
-                <p>Ein gleichmäßiges Wärmegefühl, das tiefgehende Geborgenheit schenkt und Ihre Routine ideal ergänzt.</p>
+                <p>Ein gleichmäßiges Wärmegefühl, das tiefgehende Geborgenheit schenkt und Ihre Routine ideal ergänzt. Fühlen Sie sich spürbar lockerer und gewärmt.</p>
             </div>
-            <div class="plate plate-vibe">
+            <div class="plate">
+                <div class="glow-vibe"></div>
                 <h3>Vibrations-Impulse</h3>
-                <p>Sanfte rhythmische Reize sorgen für ein angenehmes Massagegefühl und lockeres Wohlbefinden.</p>
+                <p>Sanfte rhythmische Reize sorgen für ein angenehmes Massagegefühl und ein lockeres Wohlbefinden – perfekt zum Abschalten nach dem Alltag.</p>
             </div>
         </div>
     </section>
@@ -159,17 +173,15 @@
     <section class="wirkung-section" id="wirkung">
         <div class="wirkung-row">
             <div class="wirkung-images-stack">
-                <img src="Bild_2026-01-11_181630653.png" alt="Detail Wärme">
-                <img src="muskel verspannt image.png" alt="Gefühl Routine">
-                <img src="muskel image entspannt.png" alt="Gefühl Entspannung">
+                <img src="Bild_2026-01-11_181630653.png" alt="Wärme Detail">
+                <img src="muskel verspannt image.png" alt="Anwendung 1">
+                <img src="muskel image entspannt.png" alt="Anwendung 2">
             </div>
             <div class="wirkung-text-side">
-                <h2>Wohlbefinden neu definiert.</h2>
-                <p>Erleben Sie, wie gleichmäßige Wärme als beruhigende Routine Ihren Alltag bereichert. Der HeatBelt Pro™ erzeugt ein sanftes Wärmegefühl, das Sie dabei unterstützt, sich spürbar lockerer zu fühlen.</p>
-                <p>Die Vibration dient als zusätzlicher taktiler Reiz, der wie ein sanftes Massagegefühl wirkt. Nehmen Sie sich 15–30 Minuten Zeit für Ihre persönliche Komfort-Pause.</p>
-                <div style="padding: 20px; border-left: 3px solid var(--primary-teal); background: #f9f9f9;">
-                    "Wärme ist der einfachste Weg zu täglicher Entspannung."
-                </div>
+                <h2>Ihre neue Entspannungs-Routine.</h2>
+                <p>Vergessen Sie den Stress des Tages. Der HeatBelt Pro™ wurde entwickelt, um Ihnen ein exklusives Wellness-Erlebnis in den eigenen vier Wänden zu ermöglichen.</p>
+                <p>Durch die Kombination aus Tiefenwärme und sanfter Vibration wird ein Reiz gesetzt, der das Gewebe lockerer fühlen lässt. Es ist kein medizinisches Gerät, sondern Ihr Begleiter für mehr Lebensqualität und Komfort.</p>
+                <p>Nehmen Sie Platz, legen Sie den Gurt an und spüren Sie, wie die Wärme langsam Ihren Körper umschließt. Eine Anwendung von 15 bis 30 Minuten reicht oft aus, um ein nachhaltiges Gefühl von Ruhe zu erzeugen.</p>
             </div>
         </div>
     </section>
@@ -178,109 +190,132 @@
         <div class="comfort-block">
             <div class="comfort-image" style="background-image: url('task_01kbk4rykdejz9h8dj8eakxeh3_1764800488_img_1_800x800.webp');"></div>
             <div class="comfort-content">
-                <h3>Nacken & Schultern</h3>
-                <p>Ideal für entspannte Momente nach dem Sitzen. Die sanfte Wärme legt sich wie ein schützender Schal um Ihre Schulterpartie.</p>
+                <h3>Nacken & Schulterpartie</h3>
+                <p>Stundenlanges Sitzen oder Stehen fordert unseren Körper. Das Wärmegefühl des HeatBelt Pro™ im oberen Rückenbereich sorgt für eine angenehme Schwere und hilft Ihnen dabei, sich nach getaner Arbeit bewusst zu lockern.</p>
+                <p>Die Vibration ergänzt dieses Gefühl durch sanfte Impulse, die wie eine leichte Streichmassage wirken.</p>
             </div>
         </div>
         <div class="comfort-block reverse">
             <div class="comfort-image" style="background-image: url('Bild_2025-12-03_231518829_800x800 (1).webp');"></div>
             <div class="comfort-content">
-                <h3>Lendenbereich</h3>
-                <p>Gezielter Komfort für den unteren Rücken. Perfekt in Ihre Abendroutine integrierbar für ein wohliges Gefühl der Lockerheit.</p>
+                <h3>Lenden- & Rückenbereich</h3>
+                <p>Der untere Rücken ist oft der Ort, an dem wir Belastung zuerst spüren. Hier schmiegt sich der Gurt besonders fest an und liefert eine konstante, beruhigende Wärmequelle.</p>
+                <p>Nutzen Sie diese Funktion während Sie lesen oder Ihre Lieblingsserie schauen – eine Routine, die man nicht mehr missen möchte.</p>
             </div>
         </div>
         <div class="comfort-block">
             <div class="comfort-image" style="background-image: url('task_01kbk406wvek4trnj6fvt1dppp_1764799687_img_0_800x800.webp');"></div>
             <div class="comfort-content">
-                <h3>Bauch & Mitte</h3>
-                <p>Sanfte Impulse für die Körpermitte. Genießen Sie die wohlige Wärme in Ruhephasen oder bei gemütlichen Stunden auf dem Sofa.</p>
+                <h3>Bauch & Körpermitte</h3>
+                <p>Manchmal braucht man einfach ein kuscheliges Gefühl. Die behagliche Infrarotwärme im Bauchbereich wird als besonders wohltuend und entspannend empfunden.</p>
+                <p>Perfekt für kalte Tage oder Momente, in denen Sie sich einfach etwas Gutes tun wollen. Die intuitive Steuerung lässt Sie die Intensität jederzeit anpassen.</p>
             </div>
         </div>
     </section>
 
-    <section class="aphite-premium-trust">
-        <div class="trust-wrapper">
-            <div class="trust-card">
-                <div class="trust-icon-box">
-                    <img src="https://cdn.shopify.com/s/files/1/0895/6497/1338/files/Download_5.png?v=1767071213" alt="DE">
-                </div>
-                <div class="trust-content">
-                    <h3>Deutsche Qualität</h3>
-                    <p>Konzipiert für höchste Ansprüche an Ihr persönliches Wohlbefinden.</p>
-                </div>
+    <section class="aph-contact-wrap" id="kontakt">
+        <div class="aph-contact-inner">
+            <div class="aph-contact-head">
+                <h2>Weitere Fragen?</h2>
+                <p>Persönliche Beratung für Ihr Wohlbefinden</p>
             </div>
-            <div class="trust-card">
-                <div class="trust-icon-box">
-                    <svg viewBox="0 0 24 24"><path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1Z"/></svg>
-                </div>
-                <div class="trust-content">
-                    <h3>Sichere Anwendung</h3>
-                    <p>Geprüfte Materialien für ein sorgenfreies Wellness-Erlebnis.</p>
-                </div>
-            </div>
-            <div class="trust-card">
-                <div class="trust-icon-box">
-                    <svg viewBox="0 0 24 24"><path d="M13 10V3L4 14H11V21L20 10H13Z"/></svg>
-                </div>
-                <div class="trust-content">
-                    <h3>Sanfte Power</h3>
-                    <p>Effektive Wärme- und Vibrationsstufen für Ihre tägliche Routine.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="contact-section" id="kontakt">
-        <div class="contact-box">
-            <h2>Fragen zu Ihrer Routine?</h2>
-            <form>
-                <div class="form-group">
+            <form class="aph-form-grid">
+                <div class="aph-input-group">
                     <label>Name</label>
-                    <input type="text" placeholder="Ihr Name">
+                    <input type="text" placeholder="Ihr Vor- und Zuname" required>
                 </div>
-                <div class="form-group">
+                <div class="aph-input-group">
                     <label>E-Mail</label>
-                    <input type="email" placeholder="ihre@mail.de">
+                    <input type="email" placeholder="mail@service.de" required>
                 </div>
-                <div class="form-group">
-                    <label>Nachricht</label>
-                    <textarea rows="4" placeholder="Wie können wir helfen?"></textarea>
+                <div class="aph-input-group aph-form-full">
+                    <label>Betreff</label>
+                    <input type="text" placeholder="Anfrage zum HeatBelt Pro™">
                 </div>
-                <button type="submit" class="submit-btn">Nachricht senden</button>
+                <div class="aph-input-group aph-form-full">
+                    <label>Ihre Nachricht</label>
+                    <textarea rows="6" placeholder="Wie können wir Ihnen helfen?" required></textarea>
+                </div>
+                <button type="submit" class="aph-submit-btn">Anfrage jetzt absenden</button>
             </form>
         </div>
     </section>
 
-    <footer class="main-footer">
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h4>WarmesHerz</h4>
-                <p style="opacity:0.7; font-size:0.9rem">Ihre Experten für Wärme-Komfort und tägliche Entspannungsmomente.</p>
+    <section class="trust-bar">
+        <div class="trust-wrapper">
+            <div class="trust-card">
+                <div class="trust-icon">
+                    <img src="https://cdn.shopify.com/s/files/1/0895/6497/1338/files/Download_5.png?v=1767071213" alt="DE">
+                </div>
+                <h3>Konzept Deutschland</h3>
+                <p>Design und Qualitätskontrolle direkt aus unserer Heimat.</p>
             </div>
-            <div class="footer-col">
-                <h4>Links</h4>
-                <ul>
-                    <li>Impressum</li>
-                    <li>Datenschutz</li>
-                    <li>Versandinfos</li>
-                </ul>
+            <div class="trust-card">
+                <div class="trust-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1Z"/></svg>
+                </div>
+                <h3>Sicherer Komfort</h3>
+                <p>Hautfreundliche Materialien und automatische Abschaltung.</p>
             </div>
-            <div class="footer-col">
-                <h4>Kontakt</h4>
-                <ul>
-                    <li>Support: hallo@warmesherz.de</li>
-                    <li>Tel: 0800-WARM-HERZ</li>
-                </ul>
+            <div class="trust-card">
+                <div class="trust-icon">
+                    <svg viewBox="0 0 24 24"><path d="M13 10V3L4 14H11V21L20 10H13Z"/></svg>
+                </div>
+                <h3>Schneller Versand</h3>
+                <p>In 2-3 Werktagen bei Ihnen zu Hause für sofortige Erholung.</p>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p><strong>Wellness-/Komfortprodukt. Kein medizinischer Zweck.</strong></p>
-            <p>&copy; 2026 WarmesHerz. Alle Rechte vorbehalten.</p>
+    </section>
+
+    <footer class="footer-custom">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand-col">
+                    <div class="f-logo">WARMES<span>H</span>ERZ</div>
+                    <p style="color:#bbb; font-size:0.9rem; max-width:350px;">Premium Wellness-Lösungen für Ihr Zuhause. Entdecken Sie die Kraft der Infrarotwärme und finden Sie zurück zu innerer Ruhe.</p>
+                </div>
+                <div class="footer-col">
+                    <span class="f-label">Navigation</span>
+                    <ul class="f-list">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Shop</a></li>
+                        <li><a href="#">Anwendung</a></li>
+                        <li><a href="#">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <span class="f-label">Rechtliches</span>
+                    <ul class="f-list">
+                        <li><a href="#">Datenschutz</a></li>
+                        <li><a href="#">AGB</a></li>
+                        <li><a href="#">Impressum</a></li>
+                        <li><a href="#">Widerruf</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <span class="f-label">Standort</span>
+                    <p style="font-size:0.9rem; color:#bbb;">
+                        <strong>WarmesHerz Wellness</strong><br>
+                        Eschenweg 5<br>
+                        59394 Nordkirchen<br><br>
+                        <a href="mailto:info@warmesherz.de" style="color:var(--primary-teal); text-decoration:none;">info@warmesherz.de</a>
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div style="font-size:0.8rem; color:#666;">
+                    &copy; 2026 WARMESHERZ | WELLNESS & COMFORT. Kein medizinisches Gerät.
+                </div>
+                <div class="payment-flex">
+                    <svg viewBox="0 0 24 24" fill="#003087"><path d="M20.067 8.178c-.652 3.197-2.83 4.968-5.462 4.968h-1.352c-.523 0-.96.386-1.053.9l-.916 5.823-.01.077c-.022.14.086.262.227.262h2.955c.465 0 .86-.337.943-.795l.013-.086.634-4.024.01-.077c.083-.458.478-.795.943-.795h.412c2.49 0 4.432-1.012 5.003-3.99.27-1.405.03-2.583-.752-3.418-.466-.497-1.15-.83-2.035-1.008l-.165-.03c-.225-.042-.45-.07-.675-.09l-.12-.01z"/></svg>
+                    <svg viewBox="0 0 24 24" fill="#1A1F71"><path d="M10 14.5h1.5l1-5H11l-1 5zm5.5-5h-1.75l-1.5 5h1.5l.25-1h1.5l.15 1h1.5l-1.65-5zM4 9.5l1.5 5h1.25l2.25-5H7.75l-1 3.5-1-3.5H4z"/></svg>
+                    <svg viewBox="0 0 24 24"><circle cx="9" cy="12" r="5" fill="#eb001b" fill-opacity=".8"/><circle cx="15" cy="12" r="5" fill="#ff5f00" fill-opacity=".8"/></svg>
+                </div>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Reveal Animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -290,10 +325,10 @@
             });
         }, { threshold: 0.1 });
 
-        document.querySelectorAll('.plate, .wirkung-row, .comfort-block').forEach(el => {
+        document.querySelectorAll('.plate, .comfort-block, .wirkung-row').forEach(el => {
             el.style.opacity = "0";
-            el.style.transform = "translateY(30px)";
-            el.style.transition = "all 0.8s ease-out";
+            el.style.transform = "translateY(40px)";
+            el.style.transition = "all 0.9s cubic-bezier(0.22, 1, 0.36, 1)";
             observer.observe(el);
         });
     </script>
