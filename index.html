@@ -1,50 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HeatBelt Pro™ | Premium Wellness Routine</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-warm: rgba(255, 107, 74, 0.1);
-            --accent-glow: rgba(255, 160, 122, 0.4);
-            --glass-bg: rgba(255, 255, 255, 0.75);
-            --text-dark: #2d3436;
-            --text-light: #636e72;
-            --border-glass: rgba(255, 255, 255, 0.3);
+            --primary-blue: #f0f7f9;
+            --accent-mint: #e0f2f1;
+            --text-dark: #1d1d1f;
+            --text-medium: #424245;
+            --text-light: #86868b;
+            --glass-strong: rgba(255, 255, 255, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --accent-warm: rgba(255, 126, 95, 0.15);
+            --accent-vibe: rgba(116, 185, 255, 0.15);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
         body { 
             font-family: 'Inter', sans-serif; 
-            background-color: #fcfcfc; 
+            background-color: #ffffff; 
             color: var(--text-dark); 
-            line-height: 1.6;
+            line-height: 1.7;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- Header (Sticky Glassmorphism) --- */
+        header.nav-header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 70px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+        }
+
+        .logo { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--text-dark); text-decoration: none; }
+        
+        nav.nav-links { display: flex; gap: 2rem; align-items: center; }
+        nav.nav-links a { text-decoration: none; color: var(--text-dark); font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
+        nav.nav-links a:hover { color: var(--text-light); }
+
+        .nav-cta {
+            background: var(--text-dark);
+            color: white !important;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem !important;
         }
 
         /* --- Hero Section --- */
         .hero {
             position: relative;
             width: 100%;
-            height: 90vh;
+            height: 95vh;
             display: flex;
-            flex-direction: column;
+            padding-top: 70px;
         }
 
-        .hero-images {
-            display: flex;
-            width: 100%;
-            height: 100%;
-        }
-
-        .hero-img {
-            flex: 1;
-            background-size: cover;
-            background-position: center;
-        }
-
+        .hero-images { display: flex; width: 100%; height: 100%; }
+        .hero-img { flex: 1; background-size: cover; background-position: center; transition: transform 2s ease; }
         .img-left { background-image: url('Tragefoto Infrarot fokus.jpg'); }
         .img-right { background-image: url('Tragefoto Bedinunf Fernbedinung fokus.jpg'); }
 
@@ -53,221 +80,241 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 3rem;
-            border-radius: 20px;
-            border: 1px solid var(--border-glass);
+            background: var(--glass-strong);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            padding: 4rem;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.5);
             text-align: center;
             width: 90%;
-            max-width: 600px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            max-width: 650px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
             z-index: 10;
         }
 
         .hero-overlay h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 1rem;
-            letter-spacing: -1px;
+            letter-spacing: -0.02em;
         }
 
-        .cta-btn {
+        .hero-overlay p { font-size: 1.1rem; color: var(--text-medium); margin-bottom: 2rem; }
+
+        .cta-btn-main {
             display: inline-block;
-            margin-top: 2rem;
-            padding: 1rem 2.5rem;
+            padding: 1.2rem 3rem;
             background: var(--text-dark);
             color: white;
             text-decoration: none;
             border-radius: 50px;
-            font-weight: 600;
-            transition: transform 0.3s ease;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-
-        .cta-btn:hover { transform: translateY(-3px); }
+        .cta-btn-main:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
 
         /* --- Feature Plates --- */
         .feature-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            padding: 40px 10%;
-            margin-top: -50px;
+            gap: 30px;
+            padding: 0 10% 80px;
+            margin-top: -60px;
             position: relative;
             z-index: 20;
         }
 
         .plate {
-            padding: 3rem;
-            border-radius: 15px;
+            padding: 4rem 3rem;
+            border-radius: 24px;
             text-align: center;
-            background: white;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            background: #ffffff;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+            border: 1px solid #f0f0f0;
             position: relative;
             overflow: hidden;
         }
 
-        .plate-warmth { border-bottom: 4px solid #ff7675; }
-        .plate-vibe { border-bottom: 4px solid #74b9ff; }
+        .plate h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 1rem; }
+        .plate p { color: var(--text-light); font-size: 1rem; }
 
-        /* Animations */
-        .plate-warmth::before {
+        /* Premium Plate Animations */
+        .plate::after {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(45deg, transparent, var(--accent-glow), transparent);
-            background-size: 200% 200%;
-            animation: shimmer 4s infinite linear;
+            inset: 0;
+            opacity: 0.4;
             pointer-events: none;
         }
 
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
+        /* Infrarot Glow */
+        .plate-warmth::after {
+            background: radial-gradient(circle at 50% 120%, rgba(255, 107, 74, 0.2), transparent 70%);
+            animation: heatPulse 4s infinite ease-in-out;
         }
 
-        /* --- How It Works --- */
-        .how-it-works {
-            padding: 80px 10%;
-            max-width: 1200px;
-            margin: 0 auto;
+        /* Vibration Shimmer */
+        .plate-vibe::after {
+            background: linear-gradient(110deg, transparent 40%, rgba(116, 185, 255, 0.2) 50%, transparent 60%);
+            background-size: 200% 100%;
+            animation: waveShimmer 6s infinite linear;
         }
 
-        .how-grid {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 50px;
-            margin-bottom: 60px;
+        @keyframes heatPulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.05); }
         }
 
-        .how-img-container { flex: 1; text-align: center; }
-        .how-img-container img { max-width: 100%; height: auto; }
-        .how-text { flex: 1; }
-
-        /* --- Comfort Areas (Alternating) --- */
-        .comfort-section { padding: 40px 0; }
-        .comfort-block {
-            display: flex;
-            align-items: center;
-            min-height: 400px;
-            width: 100%;
+        @keyframes waveShimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
 
+        /* --- Wirkung Section (Stacked) --- */
+        .wirkung-section { padding: 100px 10%; background: #fafafa; }
+        .wirkung-stack { display: flex; flex-direction: column; gap: 120px; max-width: 1000px; margin: 0 auto; }
+        
+        .wirkung-item { display: flex; align-items: center; gap: 80px; }
+        .wirkung-item:nth-child(even) { flex-direction: row-reverse; }
+
+        .wirkung-img-box { flex: 1.2; position: relative; }
+        .wirkung-img-box img { width: 100%; height: auto; border-radius: 0; /* No Box Look */ filter: drop-shadow(0 20px 40px rgba(0,0,0,0.05)); }
+        
+        .wirkung-text { flex: 1; }
+        .badge { display: inline-block; padding: 4px 12px; background: var(--accent-mint); color: #2d5a57; font-size: 0.75rem; font-weight: 600; border-radius: 4px; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .wirkung-text h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 1.5rem; line-height: 1.2; }
+        .wirkung-text p { color: var(--text-medium); font-size: 1.1rem; margin-bottom: 1.5rem; }
+        .wirkung-text ul { list-style: none; }
+        .wirkung-text li { position: relative; padding-left: 1.5rem; margin-bottom: 0.8rem; color: var(--text-medium); }
+        .wirkung-text li::before { content: '•'; position: absolute; left: 0; color: #74b9ff; font-weight: bold; }
+
+        /* --- Bereiche Section (Alternating) --- */
+        .comfort-section { padding: 60px 0; }
+        .comfort-block { display: flex; align-items: center; min-height: 550px; width: 100%; }
         .comfort-block:nth-child(even) { flex-direction: row-reverse; }
 
-        .comfort-image {
-            flex: 1;
-            height: 450px;
-            background-size: cover;
-            background-position: center;
+        .comfort-image { flex: 1; height: 550px; background-size: cover; background-position: center; }
+        
+        .comfort-content { flex: 1; padding: 0 8%; }
+        .comfort-text-box { max-width: 500px; }
+        .comfort-text-box h3 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 1.5rem; }
+        .comfort-text-box p { font-size: 1.1rem; color: var(--text-medium); line-height: 1.8; }
+
+        /* --- Footer & Disclaimer --- */
+        .disclaimer-area { padding: 60px 10%; background: #fff; border-top: 1px solid #eee; text-align: center; }
+        .disclaimer-box { max-width: 800px; margin: 0 auto; font-size: 0.85rem; color: var(--text-light); }
+        .disclaimer-badge { display: inline-block; border: 1px solid #ddd; padding: 2px 10px; border-radius: 4px; margin-bottom: 1rem; }
+
+        /* --- Responsive --- */
+        @media (max-width: 992px) {
+            .hero-overlay h1 { font-size: 2.5rem; }
+            .wirkung-item, .wirkung-item:nth-child(even) { flex-direction: column; text-align: center; gap: 40px; }
+            .comfort-block, .comfort-block:nth-child(even) { flex-direction: column; min-height: auto; }
+            .comfort-image { width: 100%; height: 400px; }
+            .comfort-content { padding: 50px 10%; }
         }
 
-        .comfort-content {
-            flex: 1;
-            padding: 5%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .glass-panel {
-            background: var(--glass-bg);
-            padding: 2.5rem;
-            border-radius: 15px;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255,255,255,0.5);
-        }
-
-        /* --- Disclaimer --- */
-        .disclaimer {
-            padding: 40px 10%;
-            font-size: 0.8rem;
-            color: var(--text-light);
-            text-align: center;
-            border-top: 1px solid #eee;
-        }
-
-        /* --- Mobile Responsive --- */
         @media (max-width: 768px) {
+            .nav-links { display: none; }
             .hero-images { flex-direction: column; }
-            .hero { height: auto; }
-            .hero-img { height: 40vh; }
-            .hero-overlay { padding: 2rem; position: relative; top: 0; left: 0; transform: none; margin: -50px auto 20px; width: 95%; }
-            .feature-grid { grid-template-columns: 1fr; margin-top: 0; }
-            .how-grid { flex-direction: column; text-align: center; }
-            .comfort-block, .comfort-block:nth-child(even) { flex-direction: column; }
-            .comfort-image { width: 100%; height: 300px; }
+            .hero-img { height: 50%; }
+            .feature-grid { grid-template-columns: 1fr; margin-top: 20px; }
+            .hero-overlay { padding: 2rem; }
         }
     </style>
 </head>
 <body>
 
-    <header class="hero">
+    <header class="nav-header">
+        <a href="#" class="logo">HeatBelt Pro™</a>
+        <nav class="nav-links">
+            <a href="#wirkung">Wirkung</a>
+            <a href="#anwendung">Anwendung</a>
+            <a href="#bereiche">Bereiche</a>
+            <a href="product.html" class="nav-cta">Zur Produktseite</a>
+        </nav>
+    </header>
+
+    <section class="hero">
         <div class="hero-images">
             <div class="hero-img img-left"></div>
             <div class="hero-img img-right"></div>
         </div>
         <div class="hero-overlay">
+            <div class="badge" style="background: rgba(0,0,0,0.05); color: var(--text-dark);">Wellness & Komfort</div>
             <h1>HeatBelt Pro™</h1>
-            <p>Elevate your daily comfort with a fusion of deep warmth and soothing vibration. Designed for your everyday recovery routine.</p>
-            <a href="product.html" class="cta-btn">Experience Comfort</a>
+            <p>Sanftes Wärmegefühl trifft auf beruhigendes Massagegefühl. <br>Ihre neue Routine für mehr Wohlbefinden im Alltag.</p>
+            <a href="product.html" class="cta-btn-main">Jetzt entdecken</a>
         </div>
-    </header>
+    </section>
 
-    <section class="feature-grid">
+    <section class="feature-grid" id="anwendung">
         <div class="plate plate-warmth">
-            <h3>Infrarot Wärme Routine</h3>
-            <p>Gentle, deep-reaching warmth sensation for a "warmed-through" feeling.</p>
+            <h3>Infrarot-Wärme</h3>
+            <p>Ein gleichmäßiges Wärmegefühl, das tiefgehende Geborgenheit schenkt und Ihre Routine ideal ergänzt.</p>
         </div>
         <div class="plate plate-vibe">
-            <h3>Vibrationsmassage Routine</h3>
-            <p>Rhythmic sensory stimulus to complement your relaxation moments.</p>
+            <h3>Vibrations-Impulse</h3>
+            <p>Sanfte rhythmische Reize sorgen für ein angenehmes Massagegefühl und lockeres Wohlbefinden.</p>
         </div>
     </section>
 
-    <section class="how-it-works">
-        <div class="how-grid">
-            <div class="how-img-container">
-                <img src="Bild_2026-01-11_181630653.png" alt="Process Visualization">
-            </div>
-            <div class="how-text">
-                <h2>Soothing Warmth Routine</h2>
-                <p>The HeatBelt Pro™ focuses on creating a cocoon of warmth around your core. This gentle temperature rise is designed to reduce the sensation of stiffness and promote a general feeling of tissue comfort during rest.</p>
-            </div>
-        </div>
-
-        <div class="how-grid" style="flex-direction: row-reverse;">
-            <div class="how-img-container">
-                <div style="display:flex; gap:10px;">
-                    <img src="muskel verspannt image.png" style="width:48%" alt="Tension Sensation">
-                    <img src="muskel image entspannt.png" style="width:48%" alt="Relaxed Sensation">
+    <section class="wirkung-section" id="wirkung">
+        <div class="wirkung-stack">
+            
+            <div class="wirkung-item">
+                <div class="wirkung-img-box">
+                    <img src="Bild_2026-01-11_181630653.png" alt="Wellness Technologie">
+                </div>
+                <div class="wirkung-text">
+                    <span class="badge">Komfort</span>
+                    <h2>Beruhigende Wärme-Routine</h2>
+                    <p>Der HeatBelt Pro™ wurde entwickelt, um ein Kokon-Gefühl der Wärme zu erzeugen. Die konstante Temperatur wird als besonders wohltuend empfunden und kann helfen, sich nach einem langen Tag spürbar lockerer zu fühlen.</p>
+                    <ul>
+                        <li>Gleichmäßige Wärmeverteilung</li>
+                        <li>Individuell einstellbare Stufen</li>
+                        <li>Ideal für 15–30 Minuten Entspannung</li>
+                    </ul>
                 </div>
             </div>
-            <div class="how-text">
-                <h2>The Power of Vibration</h2>
-                <p>Integrated vibration motors provide a massage-like routine. Many users find this sensory input highly effective for unwinding after a long day, helping the body transition into a state of everyday relaxation.</p>
+
+            <div class="wirkung-item">
+                <div class="wirkung-img-box">
+                    <div style="display:flex; gap:20px;">
+                        <img src="muskel verspannt image.png" style="width:48%" alt="Illustration Routine">
+                        <img src="muskel image entspannt.png" style="width:48%" alt="Illustration Entspannung">
+                    </div>
+                </div>
+                <div class="wirkung-text">
+                    <span class="badge">Massagegefühl</span>
+                    <h2>Sanfte Impulse genießen</h2>
+                    <p>Integrierte Vibrationsmotoren erzeugen ein sanftes Massagegefühl. Diese zusätzliche sensorische Komponente ist perfekt, um die tägliche Ruhephase zu vertiefen und den Körper in einen Zustand angenehmer Entspannung zu versetzen.</p>
+                    <p>Nutzen Sie die Vibration als ergänzenden Reiz zu den Wärmemodi für ein vollendetes Wellness-Erlebnis in den eigenen vier Wänden.</p>
+                </div>
             </div>
+
         </div>
     </section>
 
-    <section class="comfort-section">
+    <section class="comfort-section" id="bereiche">
+        
         <div class="comfort-block">
             <div class="comfort-image" style="background-image: url('task_01kbk4rykdejz9h8dj8eakxeh3_1764800488_img_1_800x800.webp');"></div>
             <div class="comfort-content">
-                <div class="glass-panel">
-                    <h3>Upper Back & Neck</h3>
-                    <p>Perfect for those who spend long hours at a desk. Soothe the upper posture with targeted warmth and light vibration.</p>
+                <div class="comfort-text-box">
+                    <h3>Oberer Rücken & Nacken</h3>
+                    <p>Besonders angenehm nach langen Stunden am Schreibtisch. Genießen Sie gezielte Wärme im Schulterbereich für ein befreites Gefühl in der Haltung.</p>
                 </div>
             </div>
         </div>
 
         <div class="comfort-block">
             <div class="comfort-content">
-                <div class="glass-panel">
-                    <h3>Lower Back Focus</h3>
-                    <p>Designed to wrap snugly around the lumbar region, providing a steady sensation of comfort throughout your evening routine.</p>
+                <div class="comfort-text-box">
+                    <h3>Lendenwirbel-Komfort</h3>
+                    <p>Schmiegt sich perfekt an den unteren Rücken an. Ideal für die Abendstunden auf der Couch, um den Bereich wohltuend zu wärmen.</p>
                 </div>
             </div>
             <div class="comfort-image" style="background-image: url('Bild_2025-12-03_231518829_800x800 (1).webp');"></div>
@@ -276,32 +323,38 @@
         <div class="comfort-block">
             <div class="comfort-image" style="background-image: url('task_01kbk406wvek4trnj6fvt1dppp_1764799687_img_0_800x800.webp');"></div>
             <div class="comfort-content">
-                <div class="glass-panel">
-                    <h3>Lower Abdomen</h3>
-                    <p>A gentle companion for quiet moments. The soothing warmth offers a cozy sensation where you need it most.</p>
+                <div class="comfort-text-box">
+                    <h3>Unterleib & Körpermitte</h3>
+                    <p>Ein sanfter Begleiter für ruhige Momente. Die behagliche Wärme sorgt für ein kuscheliges Gefühl genau dort, wo Sie es gerade brauchen.</p>
                 </div>
             </div>
         </div>
 
         <div class="comfort-block">
             <div class="comfort-content">
-                <div class="glass-panel">
-                    <h3>Legs & Thighs</h3>
-                    <p>Versatile positioning allows for recovery-focused warmth on larger muscle groups after light exercise or long walks.</p>
+                <div class="comfort-text-box">
+                    <h3>Beine & Oberschenkel</h3>
+                    <p>Die flexible Form ermöglicht eine Anwendung an großen Muskelpartien – perfekt für ein entspanntes Gefühl nach einem langen Spaziergang.</p>
                 </div>
             </div>
             <div class="comfort-image" style="background-image: url('task_01kbk6199xfhgabaqmdg0kg4j3_1764801804_img_0_800x800.webp');"></div>
         </div>
+
     </section>
 
-    <footer class="disclaimer">
-        <p><strong>Disclaimer:</strong> Wellness/comfort use only. Not medical advice. The HeatBelt Pro™ is intended to promote relaxation and personal comfort through warmth and vibration. It is not a medical device and is not intended to treat, cure, or diagnose any medical condition.</p>
-        <p>&copy; 2026 HeatBelt Pro™ Wellness. All rights reserved.</p>
+    <footer class="disclaimer-area">
+        <div class="disclaimer-box">
+            <div class="disclaimer-badge">Hinweis</div>
+            <p><strong>Wellness-/Komfortprodukt. Kein medizinischer Zweck.</strong></p>
+            <p>Der HeatBelt Pro™ dient ausschließlich der Entspannung und Steigerung des persönlichen Wohlbefindens durch Wärme und Vibration. Es handelt sich nicht um ein Medizinprodukt. Es werden keine Heilversprechen gegeben und keine Diagnosen gestellt.</p>
+            <br>
+            <p>&copy; 2026 HeatBelt Pro™ Wellness. Alle Rechte vorbehalten.</p>
+        </div>
     </footer>
 
     <script>
-        // Simple Scroll Reveal Effect
-        const observerOptions = { threshold: 0.1 };
+        // Smooth Scroll Reveal
+        const observerOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -311,11 +364,23 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.comfort-block, .how-grid, .plate').forEach(el => {
+        document.querySelectorAll('.wirkung-item, .comfort-block, .plate').forEach(el => {
             el.style.opacity = "0";
-            el.style.transform = "translateY(30px)";
-            el.style.transition = "all 0.8s ease-out";
+            el.style.transform = "translateY(40px)";
+            el.style.transition = "all 0.9s cubic-bezier(0.22, 1, 0.36, 1)";
             observer.observe(el);
+        });
+
+        // Header Scroll Effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.nav-header');
+            if (window.scrollY > 50) {
+                header.style.padding = "0.5rem 5%";
+                header.style.background = "rgba(255, 255, 255, 0.8)";
+            } else {
+                header.style.padding = "0 5%";
+                header.style.background = "rgba(255, 255, 255, 0.4)";
+            }
         });
     </script>
 </body>
