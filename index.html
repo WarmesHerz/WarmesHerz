@@ -1,270 +1,341 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800;900&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --aph-teal: #43ceaf;
-      --aph-orange: #ff650f;
-      --aph-bg: #292929;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WarmesHerz | HeatBelt Pro™ Wellness</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@700;900&family=Montserrat:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-teal: #43ceaf;
+            --accent-orange: #ff650f;
+            --text-dark: #1d1d1f;
+            --text-medium: #424245;
+            --glass-ultra: rgba(255, 255, 255, 0.45);
+            --glass-border: rgba(255, 255, 255, 0.8);
+            --bg-dark: #292929;
+            --bg-focus: #1d1d1f;
+        }
 
-    /* --- HERO SECTION (Optimierter Glas-Effekt & Zentrierung) --- */
-    .hero-wrap {
-      width: 100vw; height: 80vh; position: relative;
-      left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw;
-      display: flex; overflow: hidden; background: #000;
-    }
-    .hero-split { display: flex; width: 100%; height: 100%; }
-    .hero-side { flex: 1; background-size: cover; background-position: center; }
-    
-    .hero-glass-box {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      background: rgba(255, 255, 255, 0.1); 
-      backdrop-filter: blur(25px) saturate(150%); -webkit-backdrop-filter: blur(25px) saturate(150%);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      padding: 60px 40px; text-align: center; width: 90%; max-width: 550px; z-index: 10;
-      color: #fff; box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    }
-    .hero-glass-box h1 { font-size: 3rem; font-weight: 900; text-transform: uppercase; margin-bottom: 15px; }
-    .hero-glass-box p { font-size: 1.2rem; margin-bottom: 30px; font-weight: 500; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background-color: #fff; color: var(--text-dark); overflow-x: hidden; line-height: 1.6; -webkit-font-smoothing: antialiased; }
 
-    /* --- BRANCHEN-GRID (SEKTION 6) --- */
-    .aphite-industry-images {
-      width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw;
-      display: flex; height: 550px; overflow: hidden; background-color: var(--aph-bg);
-    }
-    .industry-box {
-      position: relative; flex: 1; display: flex; align-items: flex-end; overflow: hidden;
-      text-decoration: none; transition: flex 0.7s cubic-bezier(0.25, 1, 0.3, 1);
-      border-right: 1px solid rgba(255,255,255,0.1);
-    }
-    .industry-box img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; transition: transform 0.8s ease; filter: brightness(0.7); }
-    .industry-box-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(0deg, rgba(41,41,41,0.95) 0%, rgba(41,41,41,0) 100%); z-index: 2; }
-    .industry-box-content { position: relative; z-index: 3; padding: 40px 25px; width: 100%; color: #ffffff; }
-    .industry-indicator { width: 45px; height: 5px; background-color: var(--aph-orange); margin-bottom: 20px; transition: 0.4s; }
-    .industry-box h4 { font-size: 1.4rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px; }
-    .industry-box p { font-size: 0.95rem; color: #ddd; opacity: 0; transform: translateY(10px); transition: 0.4s; }
-    .industry-box:hover { flex: 1.4; }
-    .industry-box:hover p { opacity: 1; transform: translateY(0); }
-    .industry-box:hover .industry-indicator { width: 70px; background-color: var(--aph-teal); }
+        /* --- Header --- */
+        .nav-header {
+            position: fixed; top: 0; width: 100%; height: 70px; z-index: 1000;
+            background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+            border-bottom: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: space-between; padding: 0 5%;
+        }
+        .logo { font-family: 'Montserrat', sans-serif; font-size: 1.4rem; font-weight: 900; text-transform: uppercase; color: var(--text-dark); text-decoration: none; letter-spacing: -1px; }
+        .logo span { color: var(--primary-teal); }
 
-    /* --- COMFORT SECTIONS (MOBILE FIX: Bild UNTER Text) --- */
-    .comfort-row { display: flex; align-items: center; background: #fff; min-height: 500px; }
-    .comfort-row.reverse { flex-direction: row-reverse; }
-    .comfort-text { flex: 1; padding: 60px 10%; }
-    .comfort-text h2 { font-size: 2.2rem; font-weight: 800; text-transform: uppercase; margin-bottom: 20px; color: var(--aph-bg); }
-    .comfort-text p { font-size: 1.1rem; line-height: 1.6; color: #444; }
-    .comfort-img { flex: 1; height: 500px; background-size: cover; background-position: center; }
+        /* --- Hero --- */
+        .hero { position: relative; width: 100%; height: 85vh; padding-top: 70px; display: flex; overflow: hidden; }
+        .hero-images { display: flex; width: 100%; height: 100%; }
+        .hero-img { flex: 1; background-size: cover; background-position: center; transition: transform 12s ease; }
+        .img-left { background-image: url('Tragefoto Infrarot fokus.jpg'); }
+        .img-right { background-image: url('Tragefoto Bedinunf Fernbedinung fokus.jpg'); }
 
-    /* --- TRUST BAR (SEKTION 10) --- */
-    .aphite-premium-trust {
-      width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw;
-      background-color: var(--aph-teal); padding: 70px 0;
-    }
-    .trust-wrapper { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; padding: 0 40px; }
-    .trust-card { display: flex; flex-direction: column; align-items: center; text-align: center; color: #fff; position: relative; }
-    .trust-icon-box { width: 85px; height: 85px; background: rgba(255, 255, 255, 0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 25px; border: 2px solid rgba(255, 255, 255, 0.4); }
-    .trust-icon-box img { width: 50px; filter: brightness(0) invert(1); }
-    .trust-icon-box svg { width: 45px; fill: #fff; }
-    .trust-content h3 { font-size: 1.2rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px; letter-spacing: 1.5px; }
+        .hero-overlay {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: var(--glass-ultra); backdrop-filter: blur(40px) saturate(180%); -webkit-backdrop-filter: blur(40px) saturate(180%);
+            padding: 2.5rem 2rem; border-radius: 20px; border: 1px solid var(--glass-border);
+            text-align: center; width: 90%; max-width: 440px; box-shadow: 0 30px 60px rgba(0,0,0,0.1); z-index: 10;
+        }
+        .hero-overlay h1 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 1rem; line-height: 1.1; }
+        .hero-overlay p { font-size: 1rem; color: var(--text-medium); margin-bottom: 2rem; font-weight: 500; }
+        .cta-btn-glass { display: inline-block; padding: 1rem 2.5rem; background: var(--text-dark); color: #fff; text-decoration: none; border-radius: 50px; font-weight: 600; font-size: 0.95rem; transition: all 0.3s; }
+        .cta-btn-glass:hover { background: var(--accent-orange); transform: translateY(-2px); }
 
-    /* --- KONTAKTFORMULAR (SEKTION 9) --- */
-    .aph-contact-wrap { width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; background-color: var(--aph-bg); padding: 100px 0; color: #fff; }
-    .aph-contact-inner { max-width: 800px; margin: 0 auto; padding: 0 20px; }
-    .aph-contact-head { text-align: center; margin-bottom: 50px; }
-    .aph-contact-head h2 { font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 800; text-transform: uppercase; color: #fff; }
-    .aph-contact-head p { color: var(--aph-teal); font-weight: 700; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 2px; }
-    .aph-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .aph-input-group { display: flex; flex-direction: column; }
-    .aph-input-group label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; color: #999; }
-    .aph-input-group input, .aph-input-group textarea { background: #1e1e1e; border: 1px solid #444; padding: 15px; color: #fff !important; }
-    .aph-form-full { grid-column: span 2; }
-    .aph-submit-btn { grid-column: span 2; background: var(--aph-orange); color: #fff; border: none; padding: 20px; font-weight: 800; text-transform: uppercase; cursor: pointer; transition: 0.3s; }
+        /* --- Feature Plates --- */
+        .feature-container { padding: 100px 10%; background: #ffffff; }
+        .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1200px; margin: 0 auto; }
+        .plate { padding: 5rem 3rem; border-radius: 40px; background: #fff; text-align: center; border: 1px solid #f2f2f2; position: relative; overflow: hidden; box-shadow: 0 15px 45px rgba(0,0,0,0.04); }
+        .plate h3 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.4rem; text-transform: uppercase; margin-bottom: 1.5rem; letter-spacing: 1.5px; z-index: 2; position: relative; }
+        .plate p { font-size: 1.05rem; color: var(--text-medium); z-index: 2; position: relative; line-height: 1.8; }
+        .glow-warm { position: absolute; top: 50%; left: 50%; width: 150%; height: 150%; background: radial-gradient(circle, rgba(255,101,15,0.12) 0%, transparent 60%); transform: translate(-50%, -50%); animation: heatPulse 6s infinite ease-in-out; }
+        .glow-vibe { position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(from 180deg at 50% 50%, transparent 0%, rgba(67,206,175,0.08) 25%, transparent 50%); animation: rotateVibe 10s infinite linear; }
+        @keyframes heatPulse { 0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; } 50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; } }
+        @keyframes rotateVibe { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-    /* --- FOOTER (SEKTION 11) --- */
-    .aphite-footer-custom { width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; background-color: var(--aph-bg); color: #fff; padding: 100px 0 40px; border-top: 2px solid #3d3d3d; }
-    .footer-wide-container { max-width: 95%; margin: 0 auto; padding: 0 20px; }
-    .footer-main-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 80px; }
-    .footer-brand-logo { font-size: 2.5rem; font-weight: 900; color: var(--aph-orange); text-transform: uppercase; margin-bottom: 20px; }
-    .footer-brand-logo .dot-i { color: var(--aph-teal); position: relative; }
-    .footer-brand-logo .dot-i::after { content: ""; position: absolute; top: -5px; left: 50%; transform: translateX(-50%); width: 8px; height: 8px; background: var(--aph-teal); border-radius: 50%; }
-    .aph-footer-label { display: block; font-weight: 800; text-transform: uppercase; margin-bottom: 30px; letter-spacing: 2px; }
-    .footer-nav-list { list-style: none; }
-    .footer-nav-list li { margin-bottom: 15px; }
-    .footer-nav-list a { color: #fff; text-decoration: none; transition: 0.3s; }
-    .footer-nav-list a:hover { color: var(--aph-teal); }
+        /* --- Wirkung --- */
+        .wirkung-section { padding: 120px 10%; background: #fafafa; }
+        .wirkung-row { display: flex; gap: 80px; align-items: flex-start; max-width: 1300px; margin: 0 auto; }
+        .wirkung-images-stack { flex: 1.2; display: flex; flex-direction: column; gap: 40px; }
+        .wirkung-images-stack img { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 20px 40px rgba(0,0,0,0.06); }
+        .wirkung-text-side { flex: 1; position: sticky; top: 120px; padding-top: 20px; }
+        .wirkung-text-side h2 { font-family: 'Playfair Display', serif; font-size: 3.5rem; line-height: 1.1; margin-bottom: 2.5rem; }
 
-    /* --- MOBILE RESPONSIVE --- */
-    @media (max-width: 900px) {
-      .hero-split { flex-direction: column; }
-      .hero-side { height: 50%; }
-      .hero-glass-box { width: 85%; padding: 40px 20px; }
-      
-      /* Fix: Bilder unter Text */
-      .comfort-row, .comfort-row.reverse { flex-direction: column !important; }
-      .comfort-text { padding: 40px 20px; order: 1; }
-      .comfort-img { width: 100%; height: 350px; order: 2; }
+        /* --- Komfort-Bereiche --- */
+        .comfort-block { display: flex; align-items: center; min-height: 600px; border-bottom: 1px solid #f5f5f5; }
+        .comfort-block.reverse { flex-direction: row-reverse; }
+        .comfort-image { flex: 1.2; height: 600px; background-size: cover; background-position: center; }
+        .comfort-content { flex: 1; padding: 100px; }
+        .comfort-content h3 { font-family: 'Playfair Display', serif; font-size: 2.8rem; margin-bottom: 2rem; color: var(--text-dark); }
+        .comfort-content p { font-size: 1.1rem; color: var(--text-medium); line-height: 2; margin-bottom: 1.5rem; }
 
-      .aphite-industry-images { flex-direction: column; height: auto; }
-      .industry-box { height: 350px; flex: none; width: 100%; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
-      
-      .trust-wrapper { grid-template-columns: 1fr; gap: 40px; }
-      .aph-form-grid { grid-template-columns: 1fr; }
-      .aph-form-full { grid-column: span 1; }
-      .aph-submit-btn { grid-column: span 1; }
-      
-      .footer-main-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
-    }
-  </style>
+        /* --- Focus Grid --- */
+        .belt-focus-wrap {
+            width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw;
+            display: flex; height: 600px; overflow: hidden; background-color: var(--bg-focus); font-family: 'Montserrat', sans-serif;
+        }
+        .focus-box {
+            position: relative; flex: 1; display: flex; align-items: flex-end; overflow: hidden;
+            text-decoration: none; transition: flex 0.8s cubic-bezier(0.25, 1, 0.3, 1);
+            border-right: 1px solid rgba(255,255,255,0.08); cursor: pointer;
+        }
+        .focus-box img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; transition: transform 1.2s ease, filter 0.8s ease; filter: brightness(0.6) saturate(0.8); }
+        .focus-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(0deg, rgba(29,29,31,1) 5%, rgba(29,29,31,0.4) 40%, rgba(29,29,31,0) 100%); z-index: 2; }
+        .focus-content { position: relative; z-index: 3; padding: 60px 40px; width: 100%; color: #fff; }
+        .focus-box h4 { font-weight: 900; font-size: 1.6rem; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 2px; }
+        .focus-indicator { width: 40px; height: 4px; background-color: var(--primary-teal); margin-bottom: 25px; transition: all 0.5s ease; }
+        .focus-box p { font-size: 1rem; color: #ccc; margin: 0; max-width: 300px; opacity: 0; transform: translateY(20px); transition: all 0.6s ease; line-height: 1.6; }
+
+        @media (min-width: 769px) {
+            .focus-box:hover { flex: 1.6; }
+            .focus-box:hover img { transform: scale(1.1); filter: brightness(0.9) saturate(1.1); }
+            .focus-box:hover .focus-indicator { width: 90px; background-color: var(--accent-orange); box-shadow: 0 0 20px rgba(255, 101, 15, 0.6); }
+            .focus-box:hover p { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
+        }
+
+        /* --- Kontakt (Verbessertes Design) --- */
+        .aph-contact-wrap { width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; background-color: var(--bg-dark); padding: 120px 0; font-family: 'Montserrat', sans-serif; color: #fff; }
+        .aph-contact-inner { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+        .aph-contact-head { text-align: center; margin-bottom: 60px; }
+        .aph-contact-head h2 { font-size: 2.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 10px; }
+        .aph-contact-head p { color: var(--primary-teal); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+        
+        .aph-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+        .aph-input-group { display: flex; flex-direction: column; }
+        .aph-input-group label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; color: #999; }
+        .aph-input-group input, .aph-input-group textarea { background: #1e1e1e; border: 1px solid #444; padding: 18px; color: #fff; font-family: 'Inter', sans-serif; font-size: 1rem; }
+        .aph-input-group input:focus, .aph-input-group textarea:focus { border-color: var(--primary-teal); outline: none; }
+        .aph-form-full { grid-column: span 2; }
+        .aph-submit-btn { width: 100%; grid-column: span 2; background: var(--accent-orange); color: #fff; border: none; padding: 22px; font-weight: 800; text-transform: uppercase; cursor: pointer; transition: all 0.3s; margin-top: 20px; border-radius: 4px; letter-spacing: 1px; }
+        .aph-submit-btn:hover { background: #e55a0d; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+
+        /* --- Footer (Verbessertes Design) --- */
+        .footer-custom { width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; background: #1a1a1a; color: #fff; padding: 100px 0 60px; font-family: 'Montserrat', sans-serif; border-top: 1px solid #333; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 60px; max-width: 90%; margin: 0 auto; }
+        .f-logo { font-size: 1.8rem; font-weight: 900; margin-bottom: 25px; color: #fff; }
+        .f-logo span { color: var(--accent-orange); }
+        .f-label { display: block; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; margin-bottom: 30px; color: var(--primary-teal); letter-spacing: 2px; }
+        .f-list { list-style: none; }
+        .f-list li { margin-bottom: 15px; }
+        .f-list a { color: #bbb; text-decoration: none; transition: 0.3s; font-size: 0.95rem; }
+        .f-list a:hover { color: #fff; }
+
+        /* --- Mobile Optimization --- */
+        @media (max-width: 768px) {
+            .hero { height: auto; flex-direction: column; }
+            .hero-images { flex-direction: column; height: 500px; }
+            .hero-overlay { width: 85%; top: 40%; padding: 1.5rem; }
+            .hero-overlay h1 { font-size: 1.8rem; }
+            
+            .feature-grid { grid-template-columns: 1fr; }
+            .wirkung-row { flex-direction: column; gap: 40px; }
+            .wirkung-text-side h2 { font-size: 2.5rem; }
+
+            .comfort-block, .comfort-block.reverse { flex-direction: column !important; min-height: auto; }
+            .comfort-content { padding: 40px 20px; order: 1; }
+            .comfort-image { width: 100%; height: 350px; order: 2; }
+
+            .belt-focus-wrap { flex-direction: column; height: auto; }
+            .focus-box { height: 350px; width: 100%; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+            
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .aph-form-grid { grid-template-columns: 1fr; }
+            .aph-submit-btn, .aph-form-full { grid-column: 1; }
+        }
+    </style>
 </head>
 <body>
 
-  <section class="hero-wrap">
-    <div class="hero-split">
-      <div class="hero-side" style="background-image: url('Tragefoto Infrarot fokus.jpg');"></div>
-      <div class="hero-side" style="background-image: url('Tragefoto Bedinunf Fernbedinung fokus.jpg');"></div>
-    </div>
-    <div class="hero-glass-box">
-      <h1>HeatBelt Pro™</h1>
-      <p>Maximale Regeneration durch intelligente Tiefenwärme.</p>
-      <a href="#anfrage" style="background: var(--aph-orange); color:#fff; text-decoration:none; padding: 15px 40px; font-weight:800; text-transform:uppercase;">Jetzt Anfragen</a>
-    </div>
-  </section>
+    <header class="nav-header">
+        <a href="#" class="logo">Warmes<span>H</span>erz</a>
+        <nav style="display:flex; gap:20px; align-items:center;">
+            <a href="#wirkung" style="color:var(--text-dark); font-weight:600; text-decoration:none; font-size:0.9rem;">Wellness</a>
+            <a href="#bereiche" style="color:var(--text-dark); font-weight:600; text-decoration:none; font-size:0.9rem;">Bereiche</a>
+            <a href="#kontakt" class="cta-btn-glass" style="padding:0.6rem 1.2rem; font-size:0.8rem;">Kontakt</a>
+        </nav>
+    </header>
 
-  <div class="aphite-industry-images">
-    <a href="#" class="industry-box">
-      <img src="Tragefoto Infrarot fokus.jpg" alt="Technik">
-      <div class="industry-box-overlay"></div>
-      <div class="industry-box-content">
-        <div class="industry-indicator"></div>
-        <h4>Hybrid Technik</h4>
-        <p>Infrarot-Wärme trifft auf rhythmische Impulse für maximale Wirkung.</p>
-      </div>
-    </a>
-    <a href="#" class="industry-box">
-      <img src="Tragefoto Bedinunf Fernbedinung fokus.jpg" alt="Smart">
-      <div class="industry-box-overlay"></div>
-      <div class="industry-box-content">
-        <div class="industry-indicator"></div>
-        <h4>Smart Control</h4>
-        <p>Intuitive 3-Stufen Steuerung direkt am Gurt für volle Kontrolle.</p>
-      </div>
-    </a>
-    <a href="#" class="industry-box">
-      <img src="Maße fertig.jpg" alt="Akku">
-      <div class="industry-box-overlay"></div>
-      <div class="industry-box-content">
-        <div class="industry-indicator"></div>
-        <h4>Kabellos</h4>
-        <p>Integrierter Akku für Wellness an jedem Ort, zu jeder Zeit.</p>
-      </div>
-    </a>
-    <a href="#" class="industry-box">
-      <img src="Bild_2026-01-11_181630653.png" alt="Form">
-      <div class="industry-box-overlay"></div>
-      <div class="industry-box-content">
-        <div class="industry-indicator"></div>
-        <h4>Ergonomisch</h4>
-        <p>Flexibles Design für jede Körperstatur, perfekt anpassbar.</p>
-      </div>
-    </a>
-  </div>
-
-  <div class="comfort-row">
-    <div class="comfort-text">
-      <h2>Nacken & Schulter</h2>
-      <p>Nach einem Tag voller Fokus bietet der HeatBelt Pro™ im oberen Rückenbereich eine einladende Ruhezone. Das flächige Wärmegefühl schenkt Ihnen eine angenehme Schwere.</p>
-    </div>
-    <div class="comfort-img" style="background-image: url('task_01kbk4rykdejz9h8dj8eakxeh3_1764800488_img_1_800x800.webp');"></div>
-  </div>
-
-  <div class="comfort-row reverse">
-    <div class="comfort-text">
-      <h2>Lenden & Rücken</h2>
-      <p>Die ergonomische Passform schmiegt sich präzise an Ihre untere Rückenpartie an. Eine konstante Wärmequelle umschließt diesen Bereich und schafft ein diskretes Wohlgefühl.</p>
-    </div>
-    <div class="comfort-img" style="background-image: url('Bild_2025-12-03_231518829_800x800 (1).webp');"></div>
-  </div>
-
-  <div class="comfort-row">
-    <div class="comfort-text">
-      <h2>Bauch & Mitte</h2>
-      <p>Behagliche Infrarotwärme im Bereich der Körpermitte wird oft als besonders ausgleichend empfunden. Die feine Abstufung der Intensität erlaubt individuellen Schutz.</p>
-    </div>
-    <div class="comfort-img" style="background-image: url('task_01kbk406wvek4trnj6fvt1dppp_1764799687_img_0_800x800.webp');"></div>
-  </div>
-
-  <div class="comfort-row reverse">
-    <div class="comfort-text">
-      <h2>Beine & Knie</h2>
-      <p>Gönnen Sie Ihren Beinen nach langem Stehen eine wärmende Routine. Die sanften Vibrationsimpulse lassen Ihre Beine spürbar locker wirken.</p>
-    </div>
-    <div class="comfort-img" style="background-image: url('task_01kbk6199xfhgabaqmdg0kg4j3_1764801804_img_0_800x800.webp');"></div>
-  </div>
-
-  <div class="aphite-premium-trust">
-    <div class="trust-wrapper">
-      <div class="trust-card">
-        <div class="trust-icon-box"><img src="https://cdn.shopify.com/s/files/1/0895/6497/1338/files/Download_5.png?v=1767071213" alt="DE"></div>
-        <div class="trust-content"><h3>Konzept Deutschland</h3><p>Infrarot-Technologie nach höchsten Standards entwickelt.</p></div>
-      </div>
-      <div class="trust-card">
-        <div class="trust-icon-box"><svg viewBox="0 0 24 24"><path d="M13 10V3L4 14H11V21L20 10H13Z"/></svg></div>
-        <div class="trust-content"><h3>Express Wellness</h3><p>Schnelle Lieferung für Ihre Erholung. Sofort einsatzbereit.</p></div>
-      </div>
-      <div class="trust-card">
-        <div class="trust-icon-box"><svg viewBox="0 0 24 24"><path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1Z"/></svg></div>
-        <div class="trust-content"><h3>Premium Material</h3><p>Hautfreundlich, atmungsaktiv und garantiert langlebig.</p></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="aph-contact-wrap" id="anfrage">
-    <div class="aph-contact-inner">
-      <div class="aph-contact-head"><h2>Weitere Fragen?</h2><p>Persönliche Beratung für Profis</p></div>
-      <form class="aph-form-grid">
-        <div class="aph-input-group"><label>Name</label><input type="text" placeholder="Ihr Vor- und Zuname" required></div>
-        <div class="aph-input-group"><label>E-Mail</label><input type="email" placeholder="mail@service.de" required></div>
-        <div class="aph-input-group aph-form-full"><label>Nachricht</label><textarea rows="6" placeholder="Wie können wir Ihnen helfen?" required></textarea></div>
-        <button type="submit" class="aph-submit-btn">Anfrage jetzt absenden</button>
-      </form>
-    </div>
-  </div>
-
-  <footer class="aphite-footer-custom">
-    <div class="footer-wide-container">
-      <div class="footer-main-grid">
-        <div class="footer-brand-col">
-          <div class="footer-brand-logo">HEATBELT PRO<span class="dot-i">I</span></div>
-          <p style="color:#bbb;">Premium Wellness-Lösungen für maximale Regeneration im Alltag.</p>
+    <section class="hero">
+        <div class="hero-images">
+            <div class="hero-img img-left"></div>
+            <div class="hero-img img-right"></div>
         </div>
-        <div class="footer-col">
-          <span class="aph-footer-label">Navigation</span>
-          <ul class="footer-nav-list">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Technologie</a></li>
-            <li><a href="#">Shop</a></li>
-          </ul>
+        <div class="hero-overlay">
+            <h1>HeatBelt Pro™</h1>
+            <p>Die moderne Synergie aus Infrarot-Wärme und sanfter Vibration für Ihre tägliche Ruhepause.</p>
+            <a href="#bereiche" class="cta-btn-glass">Entdecken</a>
         </div>
-        <div class="footer-col">
-          <span class="aph-footer-label">Rechtliches</span>
-          <ul class="footer-nav-list">
-            <li><a href="#">Datenschutz</a></li>
-            <li><a href="#">Impressum</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <span class="aph-footer-label">Kontakt</span>
-          <p style="color:#fff;">Aphite Wellness<br>info@aphite-wellness.de</p>
-        </div>
-      </div>
-    </div>
-  </footer>
+    </section>
 
+    <section class="feature-container">
+        <div class="feature-grid">
+            <div class="plate">
+                <div class="glow-warm"></div>
+                <h3>Tiefen-Wärme</h3>
+                <p>Erleben Sie ein sanftes, gleichmäßiges Wärmegefühl, das Ihren Körper behutsam umschließt und für eine Atmosphäre vollkommener Geborgenheit sorgt.</p>
+            </div>
+            <div class="plate">
+                <div class="glow-vibe"></div>
+                <h3>Sanfte Impulse</h3>
+                <p>Beruhigende rhythmische Schwingungen bieten ein dezentes Massageerlebnis, das Ihnen dabei hilft, nach einem aktiven Tag bewusst abzuschalten.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="wirkung-section" id="wirkung">
+        <div class="wirkung-row">
+            <div class="wirkung-images-stack">
+                <img src="Bild_2026-01-11_181630653.png" alt="Wärme-Technologie">
+                <img src="muskel verspannt image.png" alt="Körper-Wellness">
+                <img src="muskel image entspannt.png" alt="Entspannungs-Zustand">
+            </div>
+            <div class="wirkung-text-side">
+                <h2>Zeit für Ihr Wohlbefinden.</h2>
+                <p>Der HeatBelt Pro™ definiert Komfort neu. Entwickelt für Menschen, die Wert auf eine hochwertige Auszeit legen, verbindet er schlichtes Design mit sanften Wellness-Funktionen.</p>
+                <p style="margin-top:20px;">Schaffen Sie sich eine wohltuende Routine: Ob am Morgen für einen behutsamen Start oder am Abend als Abschluss Ihres Tages – die Kombination aus Wärme und sanfter Bewegung unterstützt Ihr persönliches Gefühl von Lockerheit.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="bereiche">
+        <div class="comfort-block">
+            <div class="comfort-content">
+                <h3>Nacken & Schulter</h3>
+                <p>Nach einem Tag voller Fokus und Aktivität bietet der HeatBelt Pro™ im oberen Rückenbereich eine einladende Ruhezone. Das flächige Wärmegefühl schenkt Ihnen eine angenehme Schwere.</p>
+            </div>
+            <div class="comfort-image" style="background-image: url('task_01kbk4rykdejz9h8dj8eakxeh3_1764800488_img_1_800x800.webp');"></div>
+        </div>
+        
+        <div class="comfort-block reverse">
+            <div class="comfort-content">
+                <h3>Lenden & Rücken</h3>
+                <p>Die ergonomische Passform schmiegt sich präzise an Ihre untere Rückenpartie an. Eine konstante, beruhigende Wärmequelle umschließt diesen Bereich und schafft ein diskretes Wohlgefühl.</p>
+            </div>
+            <div class="comfort-image" style="background-image: url('Bild_2025-12-03_231518829_800x800 (1).webp');"></div>
+        </div>
+
+        <div class="comfort-block">
+            <div class="comfort-content">
+                <h3>Bauch & Körpermitte</h3>
+                <p>Behagliche Infrarotwärme im Bereich der Körpermitte wird oft als besonders ausgleichend empfunden. Die feine Abstufung der Intensität erlaubt individuellen Schutz.</p>
+            </div>
+            <div class="comfort-image" style="background-image: url('task_01kbk406wvek4trnj6fvt1dppp_1764799687_img_0_800x800.webp');"></div>
+        </div>
+
+        <div class="comfort-block reverse">
+            <div class="comfort-content">
+                <h3>Beine & Kniebereich</h3>
+                <p>Gönnen Sie Ihren Beinen nach langem Stehen eine wärmende Routine. Die sanften Vibrationsimpulse bieten ein Massagegefühl, das Ihre Beine locker wirken lässt.</p>
+            </div>
+            <div class="comfort-image" style="background-image: url('task_01kbk6199xfhgabaqmdg0kg4j3_1764801804_img_0_800x800.webp');"></div>
+        </div>
+    </section>
+
+    <div class="belt-focus-wrap">
+        <div class="focus-box" onclick="this.classList.toggle('active-mobile')">
+            <img src="S64a9a16806dd4be28b7bf4d6c58f38f6u.avif" alt="Akku">
+            <div class="focus-overlay"></div>
+            <div class="focus-content">
+                <div class="focus-indicator"></div>
+                <h4>Kabellose Freiheit</h4>
+                <p>Langlebiger Akku für über 120 Min. kabelloses Wohlbefinden. Flexibel einsetzbar dank modernem USB-C Anschluss.</p>
+            </div>
+        </div>
+        <div class="focus-box" onclick="this.classList.toggle('active-mobile')">
+            <img src="Tragefoto Bedinunf Fernbedinung fokus.jpg" alt="Smart Touch">
+            <div class="focus-overlay"></div>
+            <div class="focus-content">
+                <div class="focus-indicator"></div>
+                <h4>Intuitive Kontrolle</h4>
+                <p>Einfache 3-Stufen-Steuerung für Wärme und Schwingung inklusive Tastensperre für ungestörte Momente.</p>
+            </div>
+        </div>
+        <div class="focus-box" onclick="this.classList.toggle('active-mobile')">
+            <img src="Tragefoto Infrarot fokus.jpg" alt="Hybrid Core">
+            <div class="focus-overlay"></div>
+            <div class="focus-content">
+                <div class="focus-indicator"></div>
+                <h4>Hybrid Technik</h4>
+                <p>Präzise Infrarot-Technik trifft auf sanfte mechanische Impulse für ein vollendetes Massageerlebnis.</p>
+            </div>
+        </div>
+        <div class="focus-box" onclick="this.classList.toggle('active-mobile')">
+            <img src="Maße fertig.jpg" alt="Universal Fit">
+            <div class="focus-overlay"></div>
+            <div class="focus-content">
+                <div class="focus-indicator"></div>
+                <h4>Perfekte Passform</h4>
+                <p>Dank inklusivem Verlängerungs-Element passt sich der Gurt jeder Statur an – für universellen Komfort.</p>
+            </div>
+        </div>
+    </div>
+
+    <section class="aph-contact-wrap" id="kontakt">
+        <div class="aph-contact-inner">
+            <div class="aph-contact-head">
+                <h2>Fragen zum Produkt?</h2>
+                <p>Wir beraten Sie gerne zu Ihrem Wellness-Erlebnis</p>
+            </div>
+            <form class="aph-form-grid">
+                <div class="aph-input-group"><label>Name</label><input type="text" placeholder="Ihr Name" required></div>
+                <div class="aph-input-group"><label>E-Mail</label><input type="email" placeholder="mail@service.de" required></div>
+                <div class="aph-input-group aph-form-full"><label>Ihre Nachricht</label><textarea rows="5" placeholder="Wie können wir Ihnen weiterhelfen?" required></textarea></div>
+                <button type="submit" class="aph-submit-btn">Nachricht senden</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer-custom">
+        <div class="footer-grid">
+            <div class="footer-brand-col">
+                <div class="f-logo">WARMES<span>H</span>ERZ</div>
+                <p style="color: #999; font-size: 0.9rem;">Wir begleiten Sie auf dem Weg zu mehr Ruhe und Wohlbefinden in Ihrem Zuhause.</p>
+            </div>
+            <div class="footer-col">
+                <span class="f-label">Navigation</span>
+                <ul class="f-list">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#wirkung">Wellness</a></li>
+                    <li><a href="#kontakt">Kontakt</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <span class="f-label">Rechtliches</span>
+                <ul class="f-list">
+                    <li><a href="#">Impressum</a></li>
+                    <li><a href="#">Datenschutz</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <span class="f-label">Kontakt</span>
+                <p style="font-size: 0.9rem; color: #bbb;">Eschenweg 5, 59394 Nordkirchen<br><br><a href="mailto:info@warmesherz.de" style="color:var(--primary-teal); text-decoration: none; font-weight: 700;">info@warmesherz.de</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.plate, .comfort-block, .wirkung-row').forEach(el => {
+            el.style.opacity = "0";
+            el.style.transform = "translateY(30px)";
+            el.style.transition = "all 0.8s ease-out";
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
