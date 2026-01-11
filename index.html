@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WarmesHerz</title>
+  <meta name="description" content="Wärmegürtel für entspannte Wärme & Komfort." />
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: #0b0f17;
+      color: #e5e7eb;
+    }
+    .wrap {
+      max-width: 1100px;
+      margin: auto;
+      padding: 24px;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid rgba(255,255,255,.08);
+      padding: 16px;
+      border-radius: 16px;
+      background: rgba(16,24,39,.6);
+    }
+    nav a {
+      margin-left: 12px;
+      color: #9ca3af;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    nav a:hover { color: #fff; }
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 24px;
+    }
+    .img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      border-radius: 16px;
+      background: linear-gradient(135deg,#1f2937,#020617);
+    }
+    .card {
+      border: 1px solid rgba(255,255,255,.08);
+      padding: 24px;
+      border-radius: 16px;
+      background: rgba(16,24,39,.6);
+    }
+    .price {
+      font-size: 32px;
+      font-weight: 800;
+      margin: 12px 0;
+    }
+    .btns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .btn {
+      padding: 14px;
+      border-radius: 14px;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      color: white;
+    }
+    .paypal { background: #2563eb; }
+    .cardpay { background: #059669; }
+    footer {
+      margin-top: 40px;
+      font-size: 14px;
+      color: #9ca3af;
+      text-align: center;
+    }
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .btns { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <strong>WarmesHerz</strong>
+    <nav>
+      <a href="#">Impressum</a>
+      <a href="#">Datenschutz</a>
+      <a href="#">Widerruf</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="img"></div>
+    <div class="card">
+      <h1>WarmesHerz Wärmegürtel</h1>
+      <p>Angenehme Wärme für Entspannung und Komfort im Alltag.</p>
+      <div class="price">39,00 €</div>
+      <div class="btns">
+        <a class="btn paypal" href="#" target="_blank">PayPal</a>
+        <a class="btn cardpay" href="#" target="_blank">Kreditkarte</a>
+      </div>
+      <p style="font-size:13px;color:#9ca3af;margin-top:10px">
+        Sicher bezahlen über PayPal oder Kreditkarte.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 WarmesHerz · Impressum · Datenschutz · Widerruf
+  </footer>
+</div>
+
+</body>
+</html>
