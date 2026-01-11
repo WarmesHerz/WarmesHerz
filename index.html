@@ -1,523 +1,166 @@
-<!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>HeatBelt Pro™ – Infrarot-Wärme & Vibrationsmassage</title>
-  <meta name="description" content="HeatBelt Pro™: Infrarot-Wärme und Vibrationsmassage – premium Medical-Design, professionell erklärt, alltagstauglich." />
-
-  <style>
-    :root{
-      --bg:#f5f7fb;
-      --ink:#0b1220;
-      --muted:#516178;
-      --line: rgba(15,23,42,.10);
-      --blue:#2563eb;
-      --mint:#10b981;
-      --heat:#ff6a00;
-      --heat2:#ff3d3d;
-      --r1:28px;
-      --r2:22px;
-      --shadow: 0 26px 90px rgba(15,23,42,.12);
-      --shadow2: 0 30px 120px rgba(0,0,0,.35);
-      --glassDark: rgba(10,12,16,.62);
-      --glassDarkLine: rgba(255,255,255,.14);
-      --glass: rgba(255,255,255,.72);
-      --glassLine: rgba(15,23,42,.10);
-    }
-
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0}
-    body{
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--ink);
-      background: var(--bg);
-      overflow-x:hidden;
-    }
-    a{color:inherit;text-decoration:none}
-
-    /* ===== HEADER ===== */
-    header{
-      position: sticky; top:12px; z-index:80;
-      display:flex; align-items:center; justify-content:space-between; gap:14px;
-      padding:12px 14px;
-      border-radius:999px;
-      background: var(--glassDark);
-      border:1px solid var(--glassDarkLine);
-      box-shadow: var(--shadow2);
-      backdrop-filter: blur(14px);
-    }
-    .brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:1000;letter-spacing:.2px}
-    .dot{
-      width:10px;height:10px;border-radius:50%;
-      background: linear-gradient(135deg, var(--blue), var(--mint));
-      box-shadow: 0 0 0 6px rgba(37,99,235,.16);
-    }
-    nav{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-    nav a{
-      color:rgba(255,255,255,.86);
-      font-size:13px;
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid transparent;
-    }
-    nav a:hover{border-color:rgba(255,255,255,.16);background:rgba(255,255,255,.06)}
-    nav a.cta{
-      font-weight:1000;
-      background:rgba(255,255,255,.10);
-      border-color:rgba(255,255,255,.16);
-    }
-
-    /* ===== HERO FULLWIDTH ===== */
-    .heroFull{
-      width:100vw;
-      margin-left: calc(50% - 50vw);
-      margin-top:14px;
-      position:relative;
-    }
-    .heroStage{
-      height:92vh;
-      min-height:640px;
-      position:relative;
-      overflow:hidden;
-      display:flex;
-      align-items:center;
-      background:#0b0f16;
-    }
-
-    /* Hero Backgrounds (Bilder) */
-    .heroBg{
-      position:absolute; inset:0;
-      display:flex;
-      width:100%;
-      height:100%;
-    }
-    .side{
-      flex:1;
-      overflow:hidden;
-    }
-    .side img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      transform:scale(1.02);
-    }
-    /* Fixieren und Überlappung vermeiden */
-    /* Optional: Additional overlay for effects */
-
-    /* Center Content im Hero */
-    .heroCenter{
-      position:absolute;
-      left:50%; top:50%;
-      transform:translate(-50%, -50%);
-      width:calc(100% - 40px);
-      max-width:920px;
-      padding:18px;
-      z-index:2;
-    }
-    .heroGlass{
-      border-radius:34px;
-      background: rgba(10,12,16,.65);
-      border:1px solid rgba(255,255,255,.16);
-      box-shadow: var(--shadow2);
-      backdrop-filter: blur(16px);
-      padding:26px;
-      color:#fff;
-      position:relative;
-      overflow:hidden;
-    }
-    /* Animation für Hitzeabsonderung (wie siedende Luft) */
-    @keyframes heatEmission {
-      0% { box-shadow: 0 0 10px var(--heat), 0 0 20px var(--heat); }
-      50% { box-shadow: 0 0 20px var(--heat), 0 0 40px var(--heat); }
-      100% { box-shadow: 0 0 10px var(--heat), 0 0 20px var(--heat); }
-    }
-    .heatEffect {
-      position:absolute;
-      top:0; left:0; right:0; bottom:0;
-      border-radius:34px;
-      background: radial-gradient(circle, rgba(255,106,0,0.2) 0%, transparent 70%);
-      animation: heatEmission 2s infinite ease-in-out;
-      pointer-events:none;
-      z-index:-1;
-    }
-
-    .heroInner{
-      position:relative; z-index:1;
-    }
-    .kicker{
-      display:inline-flex; gap:10px; align-items:center;
-      padding:9px 12px;
-      border-radius:999px;
-      background: rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.14);
-      color: rgba(255,255,255,.88);
-      font-weight:900;
-      font-size:12.5px;
-      letter-spacing:.2px;
-    }
-    .heroTitle{
-      margin:14px 0 10px;
-      font-weight:1000;
-      letter-spacing:-1px;
-      line-height:1.02;
-      font-size:clamp(42px,5vw,66px);
-    }
-    .heroSub{
-      margin:0 0 18px;
-      color: rgba(255,255,255,.86);
-      font-size:16.5px;
-      line-height:1.75;
-      max-width:88ch;
-    }
-    .heroActions{
-      display:flex; gap:10px; flex-wrap:wrap;
-    }
-    .btn{
-      border-radius:18px;
-      padding:13px 16px;
-      font-weight:1000;
-      border:1px solid rgba(255,255,255,.16);
-      background: rgba(255,255,255,.08);
-      color: rgba(255,255,255,.95);
-      display:inline-flex; align-items:center; gap:10px;
-      backdrop-filter:blur(12px);
-      transition:transform .12s ease,filter .2s ease,box-shadow .2s ease;
-      user-select:none;
-    }
-    .btn:hover{transform:translateY(-1px); filter:brightness(1.06)}
-    .btn.primary{
-      background: linear-gradient(135deg, rgba(37,99,235,.65), rgba(16,185,129,.40));
-      border-color:rgba(255,255,255,.22);
-      box-shadow:0 18px 60px rgba(0,0,0,.25);
-    }
-    .heroFine{
-      margin-top:14px;
-      color: rgba(255,255,255,.70);
-      font-size:12.8px;
-      line-height:1.55;
-    }
-
-    /* ===== Treatments Plates ===== */
-    .treatments{
-      max-width:1180px;
-      margin: -58px auto 0;
-      display:flex;
-      flex-wrap:wrap;
-      gap:20px;
-      justify-content:center;
-    }
-    .plate{
-      position:relative;
-      width: calc(50% - 20px);
-      min-width:300px;
-      border-radius:var(--r1);
-      background:#fff;
-      border:1px solid var(--line);
-      box-shadow:var(--shadow);
-      padding:18px;
-      overflow:hidden;
-      transition:transform 0.3s;
-    }
-    /* Animierte Hitze-Wellen */
-    .waves{
-      position:absolute; inset:-60px;
-      background: radial-gradient(circle, rgba(255,106,0,0.2) 0%, transparent 70%);
-      animation: waveMove 4s linear infinite;
-      opacity:0.8;
-      z-index:0;
-    }
-    @keyframes waveMove {
-      0% {transform:translateX(0);}
-      100% {transform: translateX(50px);}
-    }
-    .plateContent{
-      position:relative; z-index:1;
-    }
-
-    /* ===== Sections ===== */
-    .section{
-      margin-top:40px;
-      padding:24px;
-      max-width: 1180px;
-      margin-left:auto;
-      margin-right:auto;
-    }
-    .h2{
-      font-size:30px;
-      font-weight:1000;
-      margin-bottom:10px;
-    }
-    .subline{
-      margin-top:10px;
-      color: var(--muted);
-      font-size:15.5px;
-      line-height:1.85;
-    }
-
-    /* ===== Bilder + Text im Abschnitt ===== */
-    .dualSection{
-      display:flex;
-      flex-wrap:wrap;
-      align-items:center;
-      gap:20px;
-      margin-top:40px;
-      position:relative;
-    }
-    .dualSection .text{
-      flex:1;
-      min-width:250px;
-      max-width:600px;
-    }
-    .dualSection .images{
-      flex:1;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-    }
-    .largeImage{
-      width:100%;
-      height:auto;
-      border-radius:8px;
-      border:none;
-    }
-
-    /* Text Blöcke, die direkt an die Bilder angrenzen */
-    .textBlock{
-      background: rgba(255,255,255,0.76);
-      border:1px solid var(--line);
-      border-radius:var(--r1);
-      padding:16px;
-      margin-top:-20px; /* um eng an die Bilder anzuschließen */
-    }
-
-    /* ===== Schmerzstellen - Anordnung wie in Skizze ===== */
-    .painArea{
-      display:flex;
-      flex-direction:column;
-      gap:20px;
-      position:relative;
-    }
-    .painRow{
-      display:flex;
-      flex-wrap:wrap;
-      align-items:center;
-      gap:10px;
-      margin-bottom:0;
-    }
-
-    .painImage{
-      flex:1;
-      min-width:250px;
-      overflow:hidden;
-      border-radius:var(--r1);
-    }
-    .painImage img{
-      width:100%; height:auto; object-fit:cover; border:none; border-radius:var(--r1);
-    }
-    .painText{
-      flex:1;
-      min-width:250px;
-    }
-    /* Um die Textblöcke an die Bilder anzuordnen, nahe beieinander, kürzere Textblöcke */
-    .painText h3{
-      margin-top:0;
-      font-size:18px;
-      font-weight:1000;
-    }
-    .painText p{
-      margin-top:8px;
-      font-size:14px;
-      line-height:1.75;
-      color:var(--muted);
-    }
-
-    /* Responsive Anpassungen */
-    @media(max-width:768px){
-      .dualSection{
-        flex-direction:column;
-      }
-      .painRow{
-        flex-direction:column;
-      }
-      .largeImage, .painText{
-        max-width:100%;
-      }
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HeatBelt Pro™ – Schmerzlinderung durch Infrarot-Wärme und Vibration</title>
+<meta name="description" content="HeatBelt Pro: Evidenzbasierte Schmerzlinderung durch Wärme, Infrarot und Vibration für Muskelentspannung und mehr." />
+<style>
+:root {
+--bg: #ffffff;
+--text: #333333;
+--muted: #666666;
+--accent-blue: #007bff;
+--accent-orange: #ff7a00; /* Für Wärme-Glow */
+--accent-green: #28a745;
+--border: #dee2e6;
+--shadow: 0 4px 12px rgba(0,0,0,0.1);
+--glass-bg: rgba(255, 255, 255, 0.5); /* Für Glaskasten */
+--radius: 12px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+font-family: system-ui, -apple-system, sans-serif;
+color: var(--text);
+background: var(--bg);
+line-height: 1.6;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+header {
+position: sticky; top: 0; z-index: 10;
+background: var(--bg); border-bottom: 1px solid var(--border);
+padding: 10px 0;
+}
+.logo { font-size: 24px; font-weight: bold; color: var(--accent-blue); }
+nav { display: flex; justify-content: space-between; align-items: center; }
+nav ul { list-style: none; display: flex; gap: 20px; }
+nav a { color: var(--text); text-decoration: none; font-weight: 500; }
+nav a:hover { color: var(--accent-blue); }
+.cta { background: var(--accent-green); color: white; padding: 10px 20px; border-radius: var(--radius); }
+.hero { position: relative; display: flex; flex-wrap: wrap; justify-content: space-between; margin: 40px 0; }
+.hero img { width: 48%; height: auto; border-radius: var(--radius); box-shadow: var(--shadow); }
+@media (max-width: 768px) { .hero img { width: 100%; margin-bottom: 20px; } }
+.glass-box {
+position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+background: var(--glass-bg); backdrop-filter: blur(10px);
+border: 1px solid rgba(255,255,255,0.8); border-radius: var(--radius);
+padding: 20px; text-align: center; max-width: 80%; box-shadow: var(--shadow);
+}
+.glass-box h1 { font-size: 32px; margin-bottom: 10px; }
+.glass-box p { font-size: 18px; margin-bottom: 15px; color: var(--muted); }
+.plates { display: flex; justify-content: space-around; margin: 40px 0; }
+.plate { padding: 20px; border-radius: var(--radius); box-shadow: 0 0 20px var(--accent-orange); background: rgba(255, 122, 0, 0.1); text-align: center; width: 45%; }
+.section-title { font-size: 28px; margin-bottom: 20px; color: var(--accent-blue); text-align: center; }
+.effect-row { display: flex; align-items: center; margin-bottom: 40px; gap: 20px; }
+.effect-row img { width: 40%; border-radius: var(--radius); }
+.effect-text { width: 60%; }
+@media (max-width: 768px) { .effect-row { flex-direction: column; } .effect-row img, .effect-text { width: 100%; } }
+.pain-row { display: flex; align-items: center; margin-bottom: 40px; gap: 20px; position: relative; }
+.pain-row.reverse { flex-direction: row-reverse; }
+.pain-row img { width: 40%; border-radius: var(--radius); }
+.pain-text { width: 60%; background: var(--glass-bg); backdrop-filter: blur(5px); padding: 15px; border-radius: var(--radius); border: 1px solid var(--border); }
+@media (max-width: 768px) { .pain-row, .pain-row.reverse { flex-direction: column; } .pain-row img, .pain-text { width: 100%; } }
+footer { text-align: center; color: var(--muted); font-size: 14px; margin-top: 40px; border-top: 1px solid var(--border); padding: 20px 0; }
+footer a { color: var(--muted); text-decoration: none; margin: 0 10px; }
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div class="brand"><span class="dot"></span>HeatBelt Pro™</div>
-      <nav>
-        <a href="#wirkung">Wirkung</a>
-        <a href="#schmerzstellen">Schmerzstellen</a>
-        <a href="./product.html">Produkt</a>
-        <a class="cta" href="./product.html#checkout">Jetzt kaufen</a>
-      </nav>
-    </header>
-
-    <!-- HERO FULLWIDTH -->
-    <section class="heroFull">
-      <div class="heroStage">
-        <div class="heroBg">
-          <div class="side">
-            <img src="Tragefoto%20Infrarot%20fokus.jpg" alt="HeatBelt Pro – Infrarot Anwendung" />
-          </div>
-          <div class="side">
-            <img src="Tragefoto%20Bedinunf%20Fernbedinung%20fokus.jpg" alt="HeatBelt Pro – Bedienung" />
-          </div>
-        </div>
-        <!-- Hitzeanimation (wie Hitze aufsteigen) -->
-        <div class="heatEffect"></div>
-        <div class="heroCenter">
-          <div class="heroGlass">
-            <div class="heroInner">
-              <div class="kicker">Infrarot-Wärme · Vibrationsmassage · Kabellos</div>
-              <h1 class="heroTitle">HeatBelt Pro™</h1>
-              <p class="heroSub">
-                Premium Wärme- und Massage-Routine für den Alltag: Wärme als Entspannungsreiz, Vibration als Massagegefühl – mit klarer, medizinisch-logischer Erklärung statt Werbe-Blabla.
-              </p>
-              <div class="heroActions">
-                <a class="btn primary" href="./product.html">Zur Produktseite</a>
-                <a class="btn" href="#wirkung">Wie es wirkt</a>
-              </div>
-              <p class="heroFine">
-                Hinweis: Komfort-/Wellness-Anwendung. Kein Ersatz für medizinische Diagnose oder Behandlung.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Platten unter dem Hero -->
-      <div class="treatments" style="margin-top:40px;">
-        <div class="plate">
-          <div class="waves"></div>
-          <div class="plateContent">
-            <h3 class="plateTitle">Infrarot-Wärme Behandlung</h3>
-            <div class="heatEffect" style="top:-20px; left:-20px; width:150%; height:150%;"></div>
-            <p class="plateText">
-              Angenehme Wärme wird häufig genutzt, um Steifigkeit zu reduzieren und Entspannung zu erleichtern – besonders nach langem Sitzen, Stress oder Belastung.
-            </p>
-          </div>
-        </div>
-        <div class="plate">
-          <div class="waves"></div>
-          <div class="plateContent">
-            <h3 class="plateTitle">Vibrationsmassage Behandlung</h3>
-            <div class="heatEffect" style="top:-20px; left:-20px; width:150%; height:150%;"></div>
-            <p class="plateText">
-              Vibration liefert einen zusätzlichen Reiz, der sich oft wie Massage anfühlt – in Kombination mit Wärme besonders angenehm, weil das Gewebe subjektiv „weicher“ wirkt.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Wirkung Sektion -->
-    <section class="section" id="wirkung">
-      <h2 class="h2">Warum Wärme + Vibration so stark empfunden wird</h2>
-      <p class="subline">
-        Statt „Marketing-Sätzen“: Eine klare, medizinisch-logische Erklärung. Wärme wirkt als Entspannungsreiz, Vibration als Massagegefühl – zusammen wird es häufig intensiver und „tiefer“ wahrgenommen.
-      </p>
-
-      <div class="dualSection">
-        <!-- Linke Seite: Text -->
-        <div class="text">
-          <!-- Beispiel für eine Kurzinfo -->
-          <div class="textBlock">
-            <h3>Muskelentspannung</h3>
-            <p>Wärme senkt subjektive Schutzspannung, reduziert Verspannung und fördert Beweglichkeit.</p>
-          </div>
-          <!-- Weitere Blöcke können hier folgen -->
-        </div>
-        <!-- Rechte Seite: Großbilder -->
-        <div class="images">
-          <img src="muskel%20verspannt%20image.png" alt="Muskel verspannt" class="largeImage" />
-        </div>
-      </div>
-
-      <div class="dualSection" style="margin-top:40px;">
-        <!-- Umkehrung der Anordnung -->
-        <div class="images">
-          <img src="muskel%20entspannt.png" alt="Muskel entspannt" class="largeImage" />
-        </div>
-        <div class="text">
-          <div class="textBlock">
-            <h3>Durchblutung & Komfort</h3>
-            <p>Wärme erhöht die Durchblutung, fördert den Austausch im Gewebe und sorgt für ein angenehmes Wärmegefühl.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Schmerzstellen -->
-    <section class="section" id="schmerzstellen">
-      <h2 class="h2">Typische Schmerzstellen – so nutzt du HeatBelt Pro™ sinnvoll</h2>
-      <p class="subline">
-        Bild + Text sind „ineinander geschoben“ (wie deine Referenz). Keine Leerflächen, keine riesigen Textboxen – moderne Bild/Text-Komposition.
-      </p>
-
-      <div class="painArea">
-        <!-- Beispiel: Nacken -->
-        <div class="painRow">
-          <div class="painImage">
-            <img src="task_01kbk4rykdejz9h8dj8eakxeh3_1764800488_img_1_800x800.webp" alt="Nacken/oberer Rücken" />
-          </div>
-          <div class="painText">
-            <h3>Nacken & oberer Rücken</h3>
-            <p>Häufige Trigger: Bildschirmhaltung, Stress. Wärme reduziert das "harte" Gefühl, Vibration wirkt massageähnlich – ideal für abends.</p>
-          </div>
-        </div>
-        <!-- Beispiel: Unterer Rücken -->
-        <div class="painRow" style="flex-direction:row-reverse;">
-          <div class="painImage">
-            <img src="Bild_2025-12-03_231518829_800x800%20(1).webp" alt="Unterer Rücken" />
-          </div>
-          <div class="painText">
-            <h3>Unterer Rücken</h3>
-            <p>Reagiert oft mit Schutzspannung. Wärme kann entlasten, Vibration beruhigt. 20-30 Min. angenehm warm, kein Maximalhot.</p>
-          </div>
-        </div>
-        <!-- Weitere Schmerzstellen können hier folgen -->
-        <div class="painRow">
-          <div class="painImage">
-            <img src="task_01kbk406wvek4trnj6fvt1dppp_1764799687_img_0_800x800.webp" alt="Unterleib" />
-          </div>
-          <div class="painText">
-            <h3>Unterleib</h3>
-            <p>Wärme im Unterleib als Komfort-Routine. Sanft, gleichmäßig, ohne Übertreiben.</p>
-          </div>
-        </div>
-        <div class="painRow" style="flex-direction:row-reverse;">
-          <div class="painImage">
-            <img src="task_01kbk6199xfhgabaqmdg0kg4j3_1764801804_img_0_800x800.webp" alt="Beine" />
-          </div>
-          <div class="painText">
-            <h3>Beine</h3>
-            <p>Nach Belastung in Oberschenkel/Wade: Wärme und Massagegefühl, regelmäßig kurze Anwendungen.</p>
-          </div>
-        </div>
-      </div>
-      <div style="margin-top:16px; display:flex; justify-content:center;">
-        <a class="btn primary" href="./product.html#checkout">Zur Produktseite</a>
-      </div>
-      <p class="subline" style="margin-top:12px;">Hinweis: Komfort-/Wellness-Anwendung. Bei starken/anhaltenden Beschwerden bitte medizinisch abklären.</p>
-    </section>
-
-    <footer>
-      <span>© <span id="year"></span> HeatBelt Pro™</span>
-      <span class="sep">·</span><a href="./impressum.html">Impressum</a>
-      <span class="sep">·</span><a href="./datenschutz.html">Datenschutz</a>
-      <span class="sep">·</span><a href="./widerruf.html">Widerruf</a>
-    </footer>
-  </div>
-
+<div class="container">
+<header>
+<nav>
+<div class="logo">HeatBelt Pro™</div>
+<ul>
+<li><a href="#wirkung">Wie es wirkt</a></li>
+<li><a href="#schmerzstellen">Schmerzstellen</a></li>
+<li><a href="produkt.html">Produkt</a></li>
+<li><a class="cta" href="produkt.html#checkout">Jetzt kaufen</a></li>
+</ul>
+</nav>
+</header>
+    
+    
+      HeatBelt Pro mit Infrarot-Fokus
+      HeatBelt Pro mit Bedienung-Fokus
+      
+        HeatBelt Pro™
+        Endlich schmerzfrei durch den Tag
+        Mehr erfahren
+      
+    
+    
+    
+      
+        Infrarot-Hitze-Behandlung
+        Tiefe Wärme für Entspannung und Heilung
+      
+      
+        Vibrations-Massage-Behandlung
+        Zielgerichtete Vibration für Knotenlösung
+      
+    
+    
+    
+      Wie HeatBelt Pro physiologisch wirkt
+      
+        Blutgefäße und Wärmewirkung
+        
+          Blutgefäßweitung und Muskelentspannung durch Wärme
+          Infrarot-Wärme verursacht eine Vasodilatation, also eine Erweiterung der Blutgefäße. Dies führt zu einer verbesserten Durchblutung, die Sauerstoff und Nährstoffe effizienter zu den Muskeln transportiert. Als Folge entspannen sich die Muskeln, was Steifigkeit reduziert und die Beweglichkeit verbessert. Klinische Beobachtungen zeigen, dass diese Wirkung besonders bei Verspannungen hilfreich ist, da sie den Muskeltonus senkt und Schmerzen lindert.
+          Weitere Auswirkungen: Die erhöhte Blutzirkulation fördert die Regeneration von Gewebe und kann Entzündungen mindern, was zu einer langfristigen Verbesserung der Muskelgesundheit beiträgt.
+        
+      
+      
+        Verspannter Muskel
+        
+          Schadstoffabtransport und positive Folgen
+          Durch die Wärmeinduzierte Vasodilatation werden Schadstoffe wie Milchsäure und andere Metaboliten schneller abtransportiert. Dies verhindert die Anhäufung von Abfallprodukten in den Muskeln, die oft zu Schmerzen und Ermüdung führen. Die Folge ist eine schnellere Erholung nach Belastung und eine Reduktion chronischer Beschwerden. In Verbindung mit der Muskelentspannung entsteht ein synergistischer Effekt, der die allgemeine Wohlbefindung steigert.
+          Zusammenhänge: Bessere Durchblutung unterstützt auch das Immunsystem, da entzündliche Marker effizienter abgebaut werden, was zu weniger Schwellungen und einer verbesserten Heilung führt.
+        
+      
+      
+        Entspannter Muskel
+        
+          Vibration löst tiefliegende Verspannungen und Knoten
+          Die Vibration simuliert eine tiefe Massage, die myofasziale Triggerpunkte (Knoten) löst. Durch die vorherige Wärmeanwendung werden die Muskeln weich und empfänglich, was die Vibration effektiver macht. Evidenz aus Studien zeigt, dass Vibration Muskelspasmen reduziert und die propriozeptive Wahrnehmung verbessert, was zu besserer Koordination und weniger Schmerzen führt.
+          Anregung des natürlichen Heilungsprozesses durch Infrarot: Infrarot-Licht stimuliert die Mitochondrien in den Zellen, erhöht die ATP-Produktion und fördert Kollagen-Synthese. Dies beschleunigt die Heilung von Mikroverletzungen in Muskeln und reduziert Entzündungen. Zusammenhänge: Die Kombination aus Wärme, Vibration und Infrarot schafft einen ganzheitlichen Effekt, der nicht nur symptome lindert, sondern die Ursachen von Verspannungen angeht, wie z.B. durch verbesserte Zellregeneration und reduzierte oxidativen Stress.
+        
+      
+    
+    
+    
+      Gezielte Hilfe bei typischen Schmerzstellen
+      
+        Schmerzstelle Nacken
+        
+          Nacken-Schmerzen
+          HeatBelt Pro entspannt die Nackenmuskulatur durch Infrarot-Wärme, die Verspannungen löst und die Durchblutung fördert. Vibration hilft bei tiefen Knoten, die oft durch Stress entstehen, und reduziert Kopfschmerzen als Folge.
+        
+      
+      
+        Schmerzstelle Unterer Rücken
+        
+          Unterer Rücken
+          Im Lendenbereich weitet die Wärme Blutgefäße, transportiert Schadstoffe ab und entspannt tiefe Muskeln. Die Kombination mit Vibration löst Ischias-ähnliche Beschwerden und verbessert die Haltung durch reduzierte Steifigkeit.
+        
+      
+      
+        Schmerzstelle Unterleib
+        
+          Unterleib
+          Hier stimuliert Infrarot den Heilungsprozess, reduziert Entzündungen und entspannt Bauch- und Rückenmuskeln. Vibration unterstützt bei krampfartigen Schmerzen, indem sie Knoten löst und die Durchblutung anregt.
+        
+      
+      
+        Schmerzstelle Beine
+        
+          Beine
+          Für Beinverspannungen sorgt die Wärme für Vasodilatation, die Müdigkeit lindert und Schadstoffe abtransportiert. Vibration löst tiefe Knoten in Waden und Oberschenkeln, was zu besserer Mobilität und weniger Krämpfen führt.
+        
+      
+    
+    
+      ©  HeatBelt Pro | Impressum | Datenschutz | Widerrufsrecht | Produkt
+    
+  
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
-</body>
-</html>
