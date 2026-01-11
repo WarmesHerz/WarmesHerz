@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WarmesHerz – Produkt</title>
+  <meta name="description" content="WarmesHerz Wärmegürtel – Produktseite mit PayPal & Karten-Zahlung." />
+
+  <style>
+    :root{
+      --bg:#0b0f17;
+      --card:rgba(16,24,39,.62);
+      --line:rgba(255,255,255,.10);
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background: radial-gradient(1100px 600px at 20% 10%, rgba(59,130,246,.18), transparent 55%),
+                  radial-gradient(900px 500px at 80% 30%, rgba(16,185,129,.14), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1100px;margin:0 auto;padding:24px}
+    .top{
+      display:flex;align-items:center;justify-content:space-between;gap:16px;
+      border:1px solid var(--line);
+      background:var(--card);
+      backdrop-filter: blur(8px);
+      border-radius: var(--radius);
+      padding:14px 16px;
+    }
+    .brand{font-weight:800}
+    .nav{display:flex;flex-wrap:wrap;gap:12px}
+    .nav a{color:var(--muted);font-size:14px}
+    .nav a:hover{color:var(--text)}
+
+    .hero{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:18px;
+      margin-top:18px;
+    }
+    .panel{
+      border:1px solid var(--line);
+      background:var(--card);
+      backdrop-filter: blur(8px);
+      border-radius: var(--radius);
+      padding:18px;
+    }
+
+    .media{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      overflow:hidden;
+      background: rgba(0,0,0,.18);
+      min-height: 460px;
+      position:relative;
+    }
+    .media img{width:100%;height:100%;object-fit:cover;display:block}
+    .placeholder{
+      position:absolute;inset:0;
+      display:grid;place-items:center;
+      color:var(--muted);
+      font-weight:700;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.07), rgba(255,255,255,.02)),
+        repeating-linear-gradient(45deg, rgba(255,255,255,.06) 0 12px, rgba(255,255,255,.02) 12px 24px);
+    }
+
+    h1{margin:0 0 8px;font-size:34px;line-height:1.05}
+    .sub{margin:0 0 14px;color:var(--muted);line-height:1.6}
+    .priceRow{display:flex;align-items:center;gap:10px;margin:10px 0 8px}
+    .price{font-size:28px;font-weight:900}
+    .badge{
+      font-size:12px;color:#d1fae5;
+      background:rgba(16,185,129,.12);
+      border:1px solid rgba(16,185,129,.28);
+      padding:6px 10px;border-radius:999px;
+    }
+
+    .bullets{margin:12px 0 16px;padding-left:18px}
+    .bullets li{margin:6px 0}
+
+    .checkout{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:12px 14px;border-radius:14px;
+      border:1px solid var(--line);
+      font-weight:900;
+      transition:transform .08s ease, filter .2s ease;
+      user-select:none;
+    }
+    .btn:hover{filter:brightness(1.06);transform:translateY(-1px)}
+    .btn:active{transform:translateY(0)}
+    .btn.paypal{background:rgba(59,130,246,.18);border-color:rgba(59,130,246,.35)}
+    .btn.card{background:rgba(16,185,129,.14);border-color:rgba(16,185,129,.30)}
+
+    .fine{margin:10px 0 0;color:var(--muted);font-size:13px;line-height:1.5}
+
+    .grid{margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .card{
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.18);
+      border-radius:16px;
+      padding:14px;
+    }
+    .card h3{margin:0 0 8px;font-size:16px}
+    .card p{margin:0;color:var(--muted);font-size:14px;line-height:1.6}
+
+    .footer{
+      margin-top:18px;
+      display:flex;flex-wrap:wrap;gap:10px;
+      justify-content:center;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .sep{opacity:.5}
+
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      .checkout{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand"><a href="./index.html">WarmesHerz</a></div>
+      <nav class="nav">
+        <a href="./produkt.html">Produkt</a>
+        <a href="./impressum.html">Impressum</a>
+        <a href="./datenschutz.html">Datenschutz</a>
+        <a href="./widerruf.html">Widerruf</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="media">
+        <!-- Später echtes Produktbild:
+        <img src="./assets/product.jpg" alt="WarmesHerz Wärmegürtel"> -->
+        <div class="placeholder">PRODUKTBILD (später einfügen)</div>
+      </div>
+
+      <div class="panel" id="checkout">
+        <h1>WarmesHerz Wärmegürtel</h1>
+        <p class="sub">Angenehme Wärme für Komfort und Entspannung – einfach im Alltag.</p>
+
+        <div class="priceRow">
+          <div class="price">39,00 €</div>
+          <div class="badge">Schneller Versand</div>
+        </div>
+
+        <ul class="bullets">
+          <li>Wärme auf Knopfdruck</li>
+          <li>30 Minuten Abschaltautomatik</li>
+          <li>Weich & angenehm zu tragen</li>
+        </ul>
+
+        <div class="checkout">
+          <a class="btn paypal" id="paypalBtn" href="#" target="_blank" rel="noopener">PayPal</a>
+          <a class="btn card" id="stripeBtn" href="#" target="_blank" rel="noopener">Karte / Apple Pay</a>
+        </div>
+
+        <p class="fine">
+          Du wirst zum sicheren Checkout weitergeleitet. Mit Kauf akzeptierst du unsere Hinweise in Impressum/Datenschutz/Widerruf.
+        </p>
+      </div>
+    </section>
+
+    <section class="panel" style="margin-top:18px">
+      <h2 style="margin:0 0 12px">Details</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Lieferumfang</h3>
+          <p>Wärmegürtel, Kabel/Adapter (je nach Version), Kurzanleitung.</p>
+        </div>
+        <div class="card">
+          <h3>Hinweise</h3>
+          <p>Nur zur Anwendung für Komfort/Wärme. Nicht als medizinisches Heilversprechen.</p>
+        </div>
+        <div class="card">
+          <h3>Support</h3>
+          <p>Fragen? Schreib uns: <a href="mailto:deinemail@domain.de" style="text-decoration:underline">deinemail@domain.de</a></p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>© <span id="year"></span> WarmesHerz</span>
+      <span class="sep">·</span><a href="./impressum.html">Impressum</a>
+      <span class="sep">·</span><a href="./datenschutz.html">Datenschutz</a>
+      <span class="sep">·</span><a href="./widerruf.html">Widerruf</a>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // TODO: HIER DEINE LINKS EINTRAGEN
+    const PAYPAL_LINK = "https://paypal.me/DEINNAME/39";
+    const STRIPE_LINK = "https://buy.stripe.com/DEINLINK";
+
+    document.getElementById("paypalBtn").href = PAYPAL_LINK;
+    document.getElementById("stripeBtn").href = STRIPE_LINK;
+  </script>
+</body>
+</html>
