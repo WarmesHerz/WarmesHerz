@@ -3,412 +3,589 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>WarmesHerz – Premium Wärme- & Vibrationstherapie</title>
-  <meta name="description" content="Gezielte Entspannung für Ihren Rücken. Kabelloser Wärmegürtel mit intelligenter Vibration. Wissenschaftlich fundiert, im Alltag bewährt." />
+  <title>HeatBelt Pro™ – Wärme & Vibration für spürbare Entlastung</title>
+  <meta name="description" content="HeatBelt Pro™ kombiniert Infrarot-Wärme und Vibrationsmassage – klar erklärt, seriös, alltagstauglich." />
 
   <style>
-    :root {
-      /* Palette - Modern Medical & Trust */
-      --primary: #2563eb;
-      --primary-dark: #1d4ed8;
-      --accent: #10b981;
-      --bg-body: #f8fafc;
-      --text-main: #0f172a;
-      --text-muted: #475569;
-      --white: #ffffff;
-      --card-border: rgba(226, 232, 240, 0.8);
-      --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
-      --radius-lg: 24px;
-      --radius-md: 16px;
+    :root{
+      /* Medical + Premium */
+      --bg:#f6f8fc;
+      --ink:#0b1220;
+      --muted:#516178;
+      --line: rgba(15, 23, 42, 0.10);
+      --card: rgba(255,255,255,0.80);
+      --shadow: 0 22px 70px rgba(15,23,42,.10);
+      --radius: 24px;
+
+      /* Day-One-ish black glass */
+      --glass-bg: rgba(12, 14, 20, 0.58);
+      --glass-line: rgba(255,255,255,0.14);
+      --glass-shadow: 0 18px 70px rgba(0,0,0,.28);
+
+      /* Accents */
+      --blue:#2563eb;
+      --green:#10b981;
+      --heat:#ff6a00;   /* Wärme */
+      --heat2:#ff3d3d;
     }
 
-    * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
-    
-    body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      color: var(--text-main);
-      background-color: var(--bg-body);
-      line-height: 1.6;
-      margin: 0;
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(900px 520px at 10% 0%, rgba(37,99,235,.14), transparent 60%),
+        radial-gradient(900px 520px at 90% 10%, rgba(16,185,129,.10), transparent 60%),
+        var(--bg);
     }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1180px;margin:0 auto;padding:22px}
+    .soft{color:var(--muted);line-height:1.7}
 
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-
-    /* --- Navigation --- */
-    header {
-      position: sticky;
-      top: 15px;
-      z-index: 1000;
-      background: rgba(255, 255, 255, 0.8);
+    /* Header (black glass) */
+    header{
+      position: sticky; top: 12px; z-index: 50;
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+      padding:12px 14px;
+      border-radius:999px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-line);
+      box-shadow: var(--glass-shadow);
       backdrop-filter: blur(12px);
-      border: 1px solid var(--card-border);
-      border-radius: 100px;
-      margin: 15px auto;
-      max-width: 1100px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 24px;
-      box-shadow: var(--shadow-sm);
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      color:#fff; font-weight:1000; letter-spacing:.2px;
+      padding: 6px 10px; border-radius:999px;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:50%;
+      background: linear-gradient(135deg, var(--blue), var(--green));
+      box-shadow: 0 0 0 6px rgba(37,99,235,.16);
+    }
+    nav{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+    nav a{
+      color: rgba(255,255,255,.86);
+      font-size: 13px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+    }
+    nav a:hover{border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.06)}
+    nav a.cta{
+      font-weight: 1000;
+      background: rgba(255,255,255,.10);
+      border-color: rgba(255,255,255,.18);
     }
 
-    .logo {
-      font-weight: 800;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--primary);
+    /* Glass card (white glass) */
+    .card{
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
     }
 
-    .logo-dot { width: 12px; height: 12px; background: var(--accent); border-radius: 50%; }
-
-    nav a {
-      text-decoration: none;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      font-weight: 500;
-      margin-left: 20px;
-      transition: color 0.2s;
-    }
-
-    nav a:hover { color: var(--primary); }
-
-    .nav-cta {
-      background: var(--primary);
-      color: white !important;
-      padding: 8px 20px;
-      border-radius: 50px;
-    }
-
-    /* --- Hero Section --- */
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 32px;
-      padding: 40px 0 80px;
-    }
-
-    .hero-content {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .badge-promo {
-      display: inline-flex;
-      background: #dbeafe;
-      color: #1e40af;
-      padding: 6px 16px;
-      border-radius: 50px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-      width: fit-content;
-    }
-
-    h1 {
-      font-size: clamp(2.5rem, 5vw, 3.8rem);
-      line-height: 1.1;
-      font-weight: 800;
-      margin: 0 0 24px;
-      letter-spacing: -0.03em;
-    }
-
-    .hero-sub {
-      font-size: 1.2rem;
-      color: var(--text-muted);
-      margin-bottom: 32px;
-      max-width: 540px;
-    }
-
-    .hero-image-card {
-      background: white;
-      border-radius: var(--radius-lg);
-      padding: 16px;
-      border: 1px solid var(--card-border);
-      box-shadow: var(--shadow-lg);
+    /* HERO: two images + center glass overlay */
+    .hero{
+      margin-top: 18px;
+      border-radius: var(--radius);
+      overflow: hidden;
       position: relative;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      background: #fff;
     }
-
-    .hero-image-card img {
-      width: 100%;
-      border-radius: var(--radius-md);
-      display: block;
-    }
-
-    .price-tag {
-      position: absolute;
-      bottom: -20px;
-      right: 20px;
-      background: var(--white);
-      padding: 16px 24px;
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-lg);
-      border: 1px solid var(--card-border);
-    }
-
-    .price-value { font-size: 1.5rem; font-weight: 800; color: var(--primary); }
-
-    /* --- Features Grid --- */
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-      margin-bottom: 80px;
-    }
-
-    .f-card {
-      background: var(--white);
-      padding: 32px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--card-border);
-      transition: transform 0.3s;
-    }
-
-    .f-card:hover { transform: translateY(-5px); }
-
-    .f-icon {
-      font-size: 2rem;
-      margin-bottom: 16px;
-      display: block;
-    }
-
-    .f-card h3 { margin: 0 0 12px; font-size: 1.25rem; }
-    .f-card p { color: var(--text-muted); font-size: 0.95rem; margin: 0; }
-
-    /* --- Content Section --- */
-    .info-section {
-      background: var(--white);
-      border-radius: var(--radius-lg);
-      padding: 60px;
-      margin-bottom: 80px;
-      border: 1px solid var(--card-border);
-    }
-
-    .section-head { text-align: center; max-width: 700px; margin: 0 auto 48px; }
-    .section-head h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 16px; }
-
-    .split-row {
-      display: grid;
+    .heroGrid{
+      display:grid;
       grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: center;
+      min-height: 520px;
+    }
+    .heroImg{
+      position:relative;
+      overflow:hidden;
+      background:#fff;
+    }
+    .heroImg img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+      transform: scale(1.01);
+    }
+    /* Center overlay glass box */
+    .heroOverlay{
+      position:absolute;
+      left:50%; top:50%;
+      transform: translate(-50%,-50%);
+      width: min(640px, calc(100% - 26px));
+      border-radius: 26px;
+      background: rgba(12,14,20,0.56);
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow: 0 24px 90px rgba(0,0,0,.35);
+      backdrop-filter: blur(14px);
+      padding: 18px;
+      color:#fff;
+    }
+    .heroTitle{
+      font-size: 40px;
+      line-height: 1.05;
+      letter-spacing: -0.6px;
+      margin: 0 0 8px;
+      font-weight: 1000;
+    }
+    .heroSub{
+      margin: 0 0 14px;
+      color: rgba(255,255,255,.85);
+      line-height: 1.6;
+      font-size: 15.5px;
+      max-width: 62ch;
+    }
+    .heroRow{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+    }
+    .btn{
+      border-radius: 16px;
+      padding: 12px 14px;
+      font-weight: 1000;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.08);
+      color: rgba(255,255,255,.95);
+      display:inline-flex; align-items:center; gap:10px;
+      user-select:none;
+      transition: transform .08s ease, filter .2s ease;
+      backdrop-filter: blur(10px);
+    }
+    .btn:hover{filter:brightness(1.05); transform: translateY(-1px)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(37,99,235,.58), rgba(16,185,129,.40));
+      border-color: rgba(255,255,255,.22);
+      color:#fff;
     }
 
-    .evidence-list { list-style: none; padding: 0; }
-    .evidence-list li {
-      padding-left: 28px;
-      position: relative;
-      margin-bottom: 16px;
-      color: var(--text-muted);
+    .heroDisclaimer{
+      margin: 12px 0 0;
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: rgba(255,255,255,.75);
     }
 
-    .evidence-list li::before {
-      content: "→";
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-      font-weight: bold;
+    /* Two plates under hero */
+    .plates{
+      margin-top: 14px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
     }
+    .plate{
+      position:relative;
+      border-radius: 22px;
+      overflow:hidden;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.78);
+      box-shadow: var(--shadow);
+      padding: 16px;
+    }
+    /* Heat glow effect */
+    .plate::before{
+      content:"";
+      position:absolute; inset:-60px;
+      background: radial-gradient(circle at 25% 30%, rgba(255,106,0,.22), transparent 52%),
+                  radial-gradient(circle at 75% 70%, rgba(255,61,61,.16), transparent 55%);
+      filter: blur(10px);
+      opacity: .9;
+      pointer-events:none;
+    }
+    .plateInner{position:relative; z-index:1; display:flex; gap:12px; align-items:flex-start}
+    .plateIcon{
+      width:46px;height:46px;border-radius:16px;
+      background: rgba(255,106,0,.10);
+      border: 1px solid rgba(255,106,0,.20);
+      display:grid;place-items:center;
+      font-weight: 1000;
+      color: #a34200;
+      flex:0 0 auto;
+    }
+    .plate h3{margin:0 0 6px; font-size:16px; letter-spacing:-.2px}
+    .plate p{margin:0; color:var(--muted); font-size:13.5px; line-height:1.6}
 
-    /* --- FAQ --- */
-    .faq-container { max-width: 800px; margin: 0 auto 80px; }
-    details {
-      background: var(--white);
+    /* Sections */
+    .section{margin-top: 16px; padding: 18px}
+    .head{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
       margin-bottom: 12px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--card-border);
     }
-    summary {
-      padding: 20px;
-      font-weight: 700;
-      cursor: pointer;
-      outline: none;
-      list-style: none;
-      display: flex;
-      justify-content: space-between;
+    .head h2{margin:0;font-size:22px;letter-spacing:-0.2px}
+    .head p{margin:0;color:var(--muted);font-size:13px;max-width:80ch}
+
+    /* Mechanism block (3 images + texts) */
+    .mechGrid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 12px;
+      align-items: stretch;
+    }
+    .mechStack{
+      display:grid;
+      grid-template-rows: auto auto auto;
+      gap: 12px;
+    }
+    .panel{
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.78);
+      overflow:hidden;
+      box-shadow: 0 10px 40px rgba(15,23,42,.06);
+    }
+    .panel .pad{padding:14px}
+    .panel h3{margin:0 0 6px;font-size:15px}
+    .panel p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.65}
+    .figure{
+      border-top:1px solid var(--line);
+      background:#fff;
+    }
+    .figure img{width:100%;display:block;object-fit:cover}
+    .cap{padding:10px 12px;font-size:12.5px;color:var(--muted);line-height:1.5;border-top:1px solid var(--line)}
+
+    /* Pain areas alternating */
+    .alt{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
       align-items: center;
+      margin-top: 12px;
     }
-    summary::after { content: "+"; font-size: 1.2rem; color: var(--primary); }
-    details[open] summary::after { content: "−"; }
-    .details-content { padding: 0 20px 20px; color: var(--text-muted); font-size: 0.95rem; }
-
-    /* --- Footer --- */
-    footer {
-      padding: 60px 0 30px;
-      border-top: 1px solid var(--card-border);
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 0.9rem;
+    .alt.reverse{grid-template-columns: 1fr 1fr}
+    .glassPlate{
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.80);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
     }
-
-    .footer-links { margin-bottom: 20px; }
-    .footer-links a { margin: 0 10px; text-decoration: none; color: inherit; }
-
-    /* --- CTA Button --- */
-    .btn-main {
-      display: inline-block;
-      background: var(--primary);
-      color: white;
-      padding: 18px 36px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 1.1rem;
-      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
-      transition: all 0.3s;
-      border: none;
-      cursor: pointer;
+    .glassPlate::before{
+      content:"";
+      position:absolute; inset:-80px;
+      background: radial-gradient(circle at 20% 30%, rgba(255,106,0,.18), transparent 58%),
+                  radial-gradient(circle at 80% 70%, rgba(37,99,235,.12), transparent 60%);
+      filter: blur(12px);
+      opacity: .85;
+      pointer-events:none;
     }
+    .glassIn{position:relative; z-index:1}
+    .glassImg{background:#fff; border-bottom:1px solid var(--line)}
+    .glassImg img{width:100%;display:block;object-fit:cover}
+    .glassText{padding:16px}
+    .glassText h3{margin:0 0 8px; font-size:18px; letter-spacing:-.2px}
+    .glassText p{margin:0; color:var(--muted); font-size:13.8px; line-height:1.7}
+    .miniList{margin:10px 0 0; padding-left:18px}
+    .miniList li{margin:6px 0; color:var(--muted); font-size:13.6px; line-height:1.6}
 
-    .btn-main:hover {
-      background: var(--primary-dark);
-      transform: scale(1.02);
-      box-shadow: 0 15px 30px rgba(37, 99, 235, 0.3);
+    /* Footer */
+    footer{
+      margin: 18px 0 8px;
+      display:flex; flex-wrap:wrap; gap:10px;
+      justify-content:center;
+      color: var(--muted);
+      font-size: 13px;
     }
+    .sep{opacity:.5}
 
-    /* --- Responsive --- */
-    @media (max-width: 968px) {
-      .hero-grid, .split-row { grid-template-columns: 1fr; }
-      header { margin: 10px; }
-      nav { display: none; } /* Mobile Menu Toggle could be added here */
-      .info-section { padding: 30px 20px; }
-      h1 { font-size: 2.5rem; }
+    /* Responsive */
+    @media (max-width: 980px){
+      .heroGrid{grid-template-columns:1fr; min-height: auto}
+      .heroOverlay{position: absolute; top: 56%; }
+      .plates{grid-template-columns:1fr}
+      .mechGrid{grid-template-columns:1fr}
+      .alt{grid-template-columns:1fr}
+    }
+    @media (max-width: 520px){
+      .heroTitle{font-size: 32px}
+      .heroOverlay{top: 58%}
     }
   </style>
 </head>
 
 <body>
+  <div class="wrap">
 
-  <div class="container">
     <header>
-      <div class="logo"><div class="logo-dot"></div> WarmesHerz</div>
+      <div class="brand"><span class="dot"></span>HeatBelt Pro™</div>
       <nav>
-        <a href="#wirkung">Wirkweise</a>
-        <a href="#vorteile">Vorteile</a>
-        <a href="#faq">FAQ</a>
-        <a href="./produkt.html" class="nav-cta">Jetzt entdecken</a>
+        <a href="#science">Wirkung</a>
+        <a href="#areas">Schmerzstellen</a>
+        <a href="./product.html">Produkt</a>
+        <a class="cta" href="./product.html#checkout">Jetzt kaufen</a>
       </nav>
     </header>
 
-    <section class="hero-grid">
-      <div class="hero-content">
-        <div class="badge-promo">✨ Neu: Generation 2 mit 5000mAh Akku</div>
-        <h1>Wohlbefinden für Ihren Rücken.</h1>
-        <p class="hero-sub">
-          Erleben Sie die synergetische Wirkung von Tiefenwärme und sanfter Vibration. Entwickelt für Menschen, die auch im aktiven Alltag nicht auf Entspannung verzichten wollen.
-        </p>
-        <div style="display: flex; gap: 16px; align-items: center;">
-          <a href="./produkt.html#checkout" class="btn-main">Gürtel sichern – 39€</a>
-          <span style="font-size: 0.85rem; color: var(--accent); font-weight: 600;">✓ Sofort lieferbar</span>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="heroGrid">
+        <div class="heroImg">
+          <img src="Tragefoto%20Infrarot%20fokus.jpg" alt="HeatBelt Pro – Infrarot-Wärme Anwendung" />
         </div>
-        <p style="margin-top: 20px; font-size: 0.8rem; color: var(--text-muted);">
-          30 Tage Geld-zurück-Garantie | Kostenloser Versand ab 50€
-        </p>
+        <div class="heroImg">
+          <img src="Tragefoto%20Bedinunf%20Fernbedinung%20fokus.jpg" alt="HeatBelt Pro – Bedienung & Anwendung" />
+        </div>
       </div>
 
-      <div class="hero-image-card">
-        
-        <div class="price-tag">
-          <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Sonderpreis</div>
-          <div class="price-value">39,00 €</div>
+      <div class="heroOverlay">
+        <h1 class="heroTitle">HeatBelt Pro™</h1>
+        <p class="heroSub">
+          Wärme & Vibrationsmassage – entwickelt für <b>Komfort</b>, <b>Entspannung</b> und ein besseres Körpergefühl im Alltag.
+          Klar erklärt statt leerer Versprechen.
+        </p>
+        <div class="heroRow">
+          <a class="btn primary" href="./product.html">Zur Produktseite</a>
+          <a class="btn" href="#science">Wie es wirkt</a>
+        </div>
+        <p class="heroDisclaimer">
+          Hinweis: Wellness-/Komfort-Anwendung. Kein Ersatz für medizinische Diagnose oder Behandlung.
+        </p>
+      </div>
+    </section>
+
+    <!-- Plates -->
+    <section class="plates">
+      <div class="plate">
+        <div class="plateInner">
+          <div class="plateIcon">IR</div>
+          <div>
+            <h3>Infrarot Wärme Behandlung</h3>
+            <p>Angenehme Tiefenwärme als Entspannungsreiz – oft genutzt, um Steifigkeit zu reduzieren und ein lockeres Gefühl zu fördern.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="plate">
+        <div class="plateInner">
+          <div class="plateIcon">VIB</div>
+          <div>
+            <h3>Vibrations Massage Behandlung</h3>
+            <p>Zusätzlicher Massage-Reiz. Viele empfinden Vibration als „muskel-beruhigend“ – besonders kombiniert mit Wärme.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="feature-grid" id="vorteile">
-      <div class="f-card">
-        <span class="f-icon">🔋</span>
-        <h3>Maximale Freiheit</h3>
-        <p>Dank USB-C Akkubetrieb nutzen Sie den Gürtel im Büro, beim Einkaufen oder auf dem Sofa – ganz ohne Steckdose.</p>
-      </div>
-      <div class="f-card">
-        <span class="f-icon">🔥</span>
-        <h3>3-Stufen Wärme</h3>
-        <p>Präzise Temperaturregelung für Ihre Bedürfnisse. Von sanfter Entspannung bis zu intensiver Tiefenwärme.</p>
-      </div>
-      <div class="f-card">
-        <span class="f-icon">〰️</span>
-        <h3>Vibrationsmassage</h3>
-        <p>Drei verschiedene Modi helfen dabei, die Muskulatur zu lockern und die lokale Durchblutung zu fördern.</p>
-      </div>
-    </section>
-
-    <section class="info-section" id="wirkung">
-      <div class="section-head">
-        <h2>Wissenschaft trifft Komfort</h2>
-        <p>Wärme ist eine der ältesten Methoden zur Entspannung. Wir haben sie für das 21. Jahrhundert optimiert.</p>
-      </div>
-
-      <div class="split-row">
+    <!-- Mechanism / Science -->
+    <section class="card section" id="science">
+      <div class="head">
         <div>
-          <h3>Wie Wärme Ihren Körper unterstützt</h3>
-          <p>Durch die Erhöhung der Gewebetemperatur werden physiologische Prozesse angeregt:</p>
-          <ul class="evidence-list">
-            <li><strong>Gefäßerweiterung:</strong> Eine bessere Durchblutung transportiert Nährstoffe schneller zum Zielgewebe.</li>
-            <li><strong>Muskelentspannung:</strong> Wärme reduziert den Muskeltonus und kann so Verspannungen lösen.</li>
-            <li><strong>Schmerzüberlagerung:</strong> Thermoreize können die Weiterleitung von Schmerzsignalen im Nervensystem mildern.</li>
-          </ul>
+          <h2>Warum Wärme + Vibration sich so effektiv anfühlen kann</h2>
+          <p>Ärztlich-logisch erklärt: Wärme beeinflusst Muskeltonus & Durchblutung – Vibration liefert einen zusätzlichen Reiz, der sich wie Massage anfühlt.</p>
         </div>
-        <div class="hero-image-card" style="box-shadow: none; background: #f1f5f9;">
-          
+      </div>
+
+      <div class="mechGrid">
+
+        <!-- Left: Three concept images -->
+        <div class="mechStack">
+          <div class="panel">
+            <div class="figure">
+              <img src="Bild_2026-01-11_181630653.png" alt="Wärme & Durchblutung – schematische Erklärung" />
+            </div>
+            <div class="cap">Schematisch: Wärme als Reiz → spürbar angenehmes, lockeres Gefühl (je nach Person unterschiedlich).</div>
+          </div>
+
+          <div class="panel">
+            <div class="figure">
+              <img src="muskel%20verspannt%20image.png" alt="Muskel verspannt – schematische Darstellung" />
+            </div>
+            <div class="cap">Verspannung: erhöhte Spannung/„Tonus“ kann sich wie Druck/Steifigkeit anfühlen.</div>
+          </div>
+
+          <div class="panel">
+            <div class="figure">
+              <img src="muskel%20image%20entspannt.png" alt="Muskel entspannt – schematische Darstellung" />
+            </div>
+            <div class="cap">Entspannung: Wärme kann helfen, dass sich Muskulatur „weicher“ anfühlt.</div>
+          </div>
         </div>
+
+        <!-- Right: Professional explanation -->
+        <div class="panel">
+          <div class="pad">
+            <h3>1) Muskelentspannung durch Wärme</h3>
+            <p>
+              Wärme wird oft als angenehmer Reiz empfunden. Viele berichten, dass sich verspannte Areale „lockerer“ anfühlen.
+              Das kann den subjektiven Schmerz reduzieren, weil weniger Schutzspannung im Alltag wahrgenommen wird.
+            </p>
+
+            <h3 style="margin-top:14px">2) Gefäßerweiterung & besseres „Gewebegefühl“</h3>
+            <p>
+              Wärme kann die lokale Durchblutung erhöhen. Mehr Durchblutung wird häufig mit einem angenehmen, „durchwärmten“
+              Gefühl verbunden – besonders nach langem Sitzen oder einseitiger Belastung.
+            </p>
+
+            <h3 style="margin-top:14px">3) „Abtransport“ & Regeneration (realistisch formuliert)</h3>
+            <p>
+              Durchblutung unterstützt den Austausch im Gewebe. Das wird oft als förderlich für ein gutes Körpergefühl beschrieben.
+              Wichtig: Das ist kein Heilversprechen – Reaktion und Nutzen unterscheiden sich individuell.
+            </p>
+
+            <h3 style="margin-top:14px">4) Vibration: Massage-Reiz für tieferes Entspannungsgefühl</h3>
+            <p>
+              Vibration liefert einen zusätzlichen sensorischen Reiz (ähnlich Massage). Viele empfinden das als wohltuend,
+              besonders wenn Wärme die Muskulatur zuvor „weicher“ wirken lässt.
+            </p>
+
+            <h3 style="margin-top:14px">5) Infrarot: warum es „tiefer“ wirken kann</h3>
+            <p>
+              Infrarot-/Wärme-Ansätze werden häufig genutzt, weil sie als angenehm „durchdringend“ wahrgenommen werden.
+              Das kann helfen, leichter in Entspannung zu kommen – besonders in Ruhephasen.
+            </p>
+          </div>
+        </div>
+
       </div>
     </section>
 
-    <section class="faq-container" id="faq">
-      <div class="section-head">
-        <h2>Häufige Fragen</h2>
+    <!-- Pain areas alternating glass plates -->
+    <section class="card section" id="areas">
+      <div class="head">
+        <div>
+          <h2>Typische Schmerzstellen – und wie Wärme dort im Alltag unterstützen kann</h2>
+          <p>Jede Zone separat erklärt. Fokus: Entspannung, Wärmegefühl, Routine – keine medizinischen Heilversprechen.</p>
+        </div>
       </div>
-      
-      <details>
-        <summary>Wie lange hält der Akku?</summary>
-        <div class="details-content">
-          Je nach gewählter Wärme- und Vibrationsstufe hält der integrierte 5000mAh Akku zwischen 3 und 6 Stunden. Aufgeladen wird bequem per mitgeliefertem USB-C Kabel.
-        </div>
-      </details>
 
-      <details>
-        <summary>Kann ich den Gürtel unter der Kleidung tragen?</summary>
-        <div class="details-content">
-          Ja! Das Design ist extra flach gehalten (Slim-Profile), sodass er unter einem lockeren Pullover oder Sakko nahezu unsichtbar ist.
+      <!-- 1) Nacken -->
+      <div class="alt">
+        <div class="glassPlate">
+          <div class="glassIn">
+            <div class="glassImg">
+              <img src="task_01kbk4rykdejz9h8dj8eakxeh3_1764800488_img_1_800x800.webp" alt="Nacken/oberer Rücken – Schmerzbereich" />
+            </div>
+          </div>
         </div>
-      </details>
 
-      <details>
-        <summary>Ist die Anwendung sicher?</summary>
-        <div class="details-content">
-          Absolut. Das Gerät verfügt über eine automatische Sicherheitsabschaltung nach 30 Minuten und einen Überhitzungsschutz.
+        <div class="glassPlate">
+          <div class="glassIn">
+            <div class="glassText">
+              <h3>Nacken & oberer Rücken</h3>
+              <p>
+                Häufige Auslöser sind langes Sitzen, Stress und „hochgezogene“ Schultern. Wärme kann helfen,
+                dass sich die Zone ruhiger und weniger steif anfühlt – ideal als Routine nach Arbeit/Training.
+              </p>
+              <ul class="miniList">
+                <li>Wärme kann das Gefühl von Steifigkeit reduzieren.</li>
+                <li>Vibration kann wie „Massage“ wirken (zusätzlicher Reiz).</li>
+                <li>Am besten in ruhiger Haltung + bewusster Atmung anwenden.</li>
+              </ul>
+            </div>
+          </div>
         </div>
-      </details>
+      </div>
+
+      <!-- 2) Unterer Rücken (reverse) -->
+      <div class="alt" style="margin-top:12px">
+        <div class="glassPlate">
+          <div class="glassIn">
+            <div class="glassText">
+              <h3>Unterer Rücken</h3>
+              <p>
+                Der untere Rücken reagiert oft auf langes Sitzen oder ungewohnte Belastung mit Schutzspannung.
+                Wärme kann subjektiv entlasten, indem sie Entspannung erleichtert. Vibration kann zusätzlich beruhigen.
+              </p>
+              <ul class="miniList">
+                <li>Wärme → Entspannungsreiz</li>
+                <li>Vibration → „Massagegefühl“ für mehr Komfort</li>
+                <li>Als 20–30 Minuten Routine (angenehm, nicht „maximal heiß“)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="glassPlate">
+          <div class="glassIn">
+            <div class="glassImg">
+              <img src="Bild_2025-12-03_231518829_800x800%20(1).webp" alt="Unterer Rücken – Schmerzbereich" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3) Unterleib -->
+      <div class="alt" style="margin-top:12px">
+        <div class="glassPlate">
+          <div class="glassIn">
+            <div class="glassImg">
+              <img src="task_01kbk406wvek4trnj6fvt1dppp_1764799687_img_0_800x800.webp" alt="Unterleib – Schmerzbereich" />
+            </div>
+          </div>
+        </div>
+
+        <div class="glassPlate">
+          <div class="glassIn">
+            <div class="glassText">
+              <h3>Unterleib</h3>
+              <p>
+                Viele nutzen Wärme im Unterleib als Komfort-Routine (z. B. bei einem „krampfartigen Gefühl“).
+                Das Ziel ist nicht „Heilung“, sondern spürbare Entspannung und angenehmes Wärmegefühl.
+              </p>
+              <ul class="miniList">
+                <li>Wärme kann „beruhigend“ wirken.</li>
+                <li>Sanfte Anwendung, Pausen, angenehme Intensität.</li>
+                <li>Bei starken, ungewöhnlichen oder neuen Beschwerden ärztlich abklären.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4) Beine (reverse) -->
+      <div class="alt" style="margin-top:12px">
+        <div class="glassPlate">
+          <div class="glassIn">
+            <div class="glassText">
+              <h3>Beine</h3>
+              <p>
+                Nach langem Stehen oder Sport wünschen viele ein warmes, entspanntes Gefühl in Oberschenkel/Wade.
+                Wärme kann als Regenerations-Routine genutzt werden, Vibration als Zusatzreiz.
+              </p>
+              <ul class="miniList">
+                <li>Nach Belastung: Wärme als Wohlfühl-Routine</li>
+                <li>Vibration: Massage-ähnlicher Reiz</li>
+                <li>Auf Hautgefühl achten (nicht übertreiben)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="glassPlate">
+          <div class="glassIn">
+            <div class="glassImg">
+              <img src="task_01kbk6199xfhgabaqmdg0kg4j3_1764801804_img_0_800x800.webp" alt="Beine – Schmerzbereich" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:14px; display:flex; justify-content:center;">
+        <a class="btn primary" href="./product.html#checkout">Jetzt zu HeatBelt Pro™</a>
+      </div>
+
+      <p class="soft" style="margin:12px 4px 0; font-size:13px;">
+        Sicherheits-Hinweis: Bei starken/anhaltenden Beschwerden, Taubheit, Ausstrahlung, Fieber, Verletzung oder Unsicherheit bitte medizinisch abklären.
+      </p>
     </section>
 
     <footer>
-      <div class="footer-links">
-        <a href="./impressum.html">Impressum</a>
-        <a href="./datenschutz.html">Datenschutz</a>
-        <a href="./widerruf.html">Widerruf</a>
-        <a href="./kontakt.html">Kontakt</a>
-      </div>
-      <p>&copy; <span id="year"></span> WarmesHerz. Alle Rechte vorbehalten.</p>
-      <p style="font-size: 0.75rem; margin-top: 20px; opacity: 0.7;">Hinweis: Kein Medizinprodukt. Bei chronischen Schmerzen konsultieren Sie bitte einen Arzt.</p>
+      <span>© <span id="year"></span> HeatBelt Pro™</span>
+      <span class="sep">·</span><a href="./impressum.html">Impressum</a>
+      <span class="sep">·</span><a href="./datenschutz.html">Datenschutz</a>
+      <span class="sep">·</span><a href="./widerruf.html">Widerruf</a>
     </footer>
+
   </div>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
-    
-    // Smooth Scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
   </script>
 </body>
 </html>
