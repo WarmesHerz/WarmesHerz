@@ -14,6 +14,7 @@
             --glass-ultra: rgba(255, 255, 255, 0.45);
             --glass-border: rgba(255, 255, 255, 0.8);
             --bg-dark: #292929;
+            --bg-focus: #1d1d1f;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -46,10 +47,9 @@
         .hero-overlay p { font-size: 0.95rem; color: var(--text-medium); margin-bottom: 1.5rem; font-weight: 500; }
         .cta-btn-glass { display: inline-block; padding: 0.8rem 2rem; background: var(--text-dark); color: #fff; text-decoration: none; border-radius: 50px; font-weight: 600; font-size: 0.9rem; transition: transform 0.3s; }
 
-        /* --- Creative Plates --- */
+        /* --- Feature Plates --- */
         .feature-container { padding: 80px 10%; background: #ffffff; }
         .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1200px; margin: 0 auto; }
-        
         .plate { 
             padding: 4rem 3rem; border-radius: 30px; background: #fff; text-align: center; 
             border: 1px solid #f0f0f0; position: relative; overflow: hidden;
@@ -58,23 +58,22 @@
         .plate h3 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.4rem; text-transform: uppercase; margin-bottom: 1.2rem; letter-spacing: 1px; z-index: 2; position: relative; }
         .plate p { font-size: 1rem; color: var(--text-medium); z-index: 2; position: relative; line-height: 1.7; }
 
-        /* Glow Animations */
         .glow-warm { position: absolute; top: 50%; left: 50%; width: 150%; height: 150%; background: radial-gradient(circle, rgba(255,101,15,0.15) 0%, transparent 60%); transform: translate(-50%, -50%); animation: heatPulse 5s infinite ease-in-out; }
         .glow-vibe { position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(from 180deg at 50% 50%, transparent 0%, rgba(67,206,175,0.1) 25%, transparent 50%); animation: rotateVibe 8s infinite linear; }
 
         @keyframes heatPulse { 0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.4; } 50% { transform: translate(-50%, -50%) scale(1.3); opacity: 0.9; } }
         @keyframes rotateVibe { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        /* --- Wirkung (Bilder links, Text rechts sticky) --- */
+        /* --- Wirkung --- */
         .wirkung-section { padding: 120px 10%; background: #fafafa; }
         .wirkung-row { display: flex; gap: 80px; align-items: flex-start; max-width: 1300px; margin: 0 auto; }
         .wirkung-images-stack { flex: 1.2; display: flex; flex-direction: column; gap: 40px; }
         .wirkung-images-stack img { width: 100%; height: auto; border-radius: 4px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
         .wirkung-text-side { flex: 1; position: sticky; top: 140px; padding-top: 20px; }
         .wirkung-text-side h2 { font-family: 'Playfair Display', serif; font-size: 3.5rem; line-height: 1.1; margin-bottom: 2.5rem; }
-        .wirkung-text-side p { font-size: 1.1rem; color: var(--text-medium); margin-bottom: 1.5rem; max-width: 90%; }
+        .wirkung-text-side p { font-size: 1.1rem; color: var(--text-medium); margin-bottom: 1.5rem; }
 
-        /* --- Bereiche (Abwechselnd, Text länger) --- */
+        /* --- Bereiche --- */
         .comfort-block { display: flex; align-items: center; min-height: 650px; border-bottom: 1px solid #f0f0f0; }
         .comfort-block.reverse { flex-direction: row-reverse; }
         .comfort-image { flex: 1.2; height: 650px; background-size: cover; background-position: center; }
@@ -82,7 +81,36 @@
         .comfort-content h3 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 2rem; }
         .comfort-content p { font-size: 1.1rem; color: var(--text-medium); line-height: 1.9; margin-bottom: 1.5rem; }
 
-        /* --- Kontakt Formular (Aphite Style) --- */
+        /* --- NEU: HeatBelt Focus Grid (Accordion) --- */
+        .belt-focus-wrap {
+            width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw;
+            display: flex; height: 600px; overflow: hidden; background-color: var(--bg-focus); font-family: 'Montserrat', sans-serif;
+        }
+        .focus-box {
+            position: relative; flex: 1; display: flex; align-items: flex-end; overflow: hidden;
+            text-decoration: none; transition: flex 0.8s cubic-bezier(0.25, 1, 0.3, 1);
+            border-right: 1px solid rgba(255,255,255,0.08); cursor: pointer;
+        }
+        .focus-box:last-child { border-right: none; }
+        .focus-box:hover { flex: 1.6; }
+        .focus-box img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
+            z-index: 1; transition: transform 1.2s ease, filter 0.8s ease; filter: brightness(0.6) saturate(0.8);
+        }
+        .focus-box:hover img { transform: scale(1.08); filter: brightness(0.9) saturate(1.1); }
+        .focus-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(0deg, rgba(29,29,31,1) 5%, rgba(29,29,31,0.4) 40%, rgba(29,29,31,0) 100%);
+            z-index: 2;
+        }
+        .focus-content { position: relative; z-index: 3; padding: 50px 30px; width: 100%; color: #fff; }
+        .focus-box h4 { font-weight: 900; font-size: 1.5rem; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1.5px; line-height: 1.2; }
+        .focus-indicator { width: 40px; height: 4px; background-color: var(--primary-teal); margin-bottom: 25px; transition: all 0.5s ease; }
+        .focus-box:hover .focus-indicator { width: 85px; background-color: var(--accent-orange); box-shadow: 0 0 15px rgba(255, 101, 15, 0.6); }
+        .focus-box p { font-size: 0.95rem; color: #ccc; margin: 0; max-width: 280px; opacity: 0; transform: translateY(20px); transition: all 0.5s ease; }
+        .focus-box:hover p { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
+
+        /* --- Kontakt (Aphite Style) --- */
         .aph-contact-wrap { width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; background-color: var(--bg-dark); padding: 100px 0; font-family: 'Montserrat', sans-serif; color: #fff; }
         .aph-contact-inner { max-width: 800px; margin: 0 auto; padding: 0 20px; }
         .aph-contact-head { text-align: center; margin-bottom: 50px; }
@@ -92,9 +120,8 @@
         .aph-form-full { grid-column: span 2; }
         .aph-input-group { display: flex; flex-direction: column; }
         .aph-input-group label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; color: #999; }
-        .aph-input-group input, .aph-input-group textarea { background: #1e1e1e; border: 1px solid #444; padding: 18px; color: #fff; font-family: 'Montserrat', sans-serif; outline: none; transition: border-color 0.3s; }
-        .aph-input-group input:focus, .aph-input-group textarea:focus { border-color: var(--accent-orange); }
-        .aph-submit-btn { grid-column: span 2; background: var(--accent-orange); color: #fff; border: none; padding: 22px; font-family: 'Montserrat', sans-serif; font-weight: 800; text-transform: uppercase; cursor: pointer; transition: all 0.3s; margin-top: 15px; }
+        .aph-input-group input, .aph-input-group textarea { background: #1e1e1e; border: 1px solid #444; padding: 18px; color: #fff; font-family: 'Montserrat', sans-serif; outline: none; }
+        .aph-submit-btn { grid-column: span 2; background: var(--accent-orange); color: #fff; border: none; padding: 22px; font-weight: 800; text-transform: uppercase; cursor: pointer; transition: all 0.3s; margin-top: 15px; }
         .aph-submit-btn:hover { background: #e55a0d; transform: translateY(-3px); }
 
         /* --- Trust Bar --- */
@@ -103,9 +130,7 @@
         .trust-card { display: flex; flex-direction: column; align-items: center; text-align: center; color: #fff; }
         .trust-icon { width: 70px; height: 70px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.4); }
         .trust-icon img { width: 35px; filter: brightness(0) invert(1); }
-        .trust-icon svg { width: 35px; fill: #fff; }
-        .trust-card h3 { font-weight: 800; text-transform: uppercase; letter-spacing: 1px; font-size: 1rem; margin-bottom: 10px; }
-        .trust-card p { font-size: 0.9rem; opacity: 0.9; max-width: 250px; }
+        .trust-card h3 { font-weight: 800; text-transform: uppercase; font-size: 1rem; margin-bottom: 10px; }
 
         /* --- Footer --- */
         .footer-custom { width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; background: var(--bg-dark); color: #fff; padding: 100px 0 40px; font-family: 'Montserrat', sans-serif; border-top: 1px solid #3d3d3d; }
@@ -114,21 +139,21 @@
         .f-logo { font-size: 2.2rem; font-weight: 900; color: var(--accent-orange); margin-bottom: 20px; }
         .f-logo span { color: var(--primary-teal); }
         .f-label { display: block; font-weight: 800; text-transform: uppercase; margin-bottom: 25px; letter-spacing: 1px; }
-        .f-list { list-style: none; }
+        .f-list { list-style: none; padding: 0; }
         .f-list li { margin-bottom: 12px; }
         .f-list a { color: #bbb; text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
         .f-list a:hover { color: var(--primary-teal); }
         .footer-bottom { margin-top: 80px; padding-top: 30px; border-top: 1px solid #3d3d3d; display: flex; justify-content: space-between; align-items: center; }
-        .payment-flex { display: flex; gap: 15px; align-items: center; }
-        .payment-flex svg { width: 45px; height: auto; opacity: 0.8; }
+        .payment-flex { display: flex; gap: 15px; }
+        .payment-flex svg { width: 45px; height: auto; }
 
         @media (max-width: 1000px) {
-            .footer-grid, .wirkung-row, .feature-grid { grid-template-columns: 1fr; }
-            .comfort-block, .comfort-block.reverse { flex-direction: column; }
-            .comfort-image { width: 100%; height: 400px; }
+            .footer-grid, .wirkung-row, .feature-grid, .trust-wrapper, .belt-focus-wrap { flex-direction: column; height: auto; display: flex; }
+            .focus-box, .comfort-block { flex: none; width: 100%; height: 400px; display: block; }
+            .comfort-block.reverse { flex-direction: column; }
+            .comfort-image { height: 350px; }
             .comfort-content { padding: 40px 20px; }
-            .wirkung-text-side { position: relative; top: 0; }
-            .trust-wrapper { grid-template-columns: 1fr; }
+            .focus-box p { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -136,7 +161,7 @@
 
     <header class="nav-header">
         <a href="#" class="logo">Warmes<span>H</span>erz</a>
-        <nav class="f-list" style="display:flex; gap:30px; align-items:center;">
+        <nav style="display:flex; gap:30px; align-items:center;">
             <a href="#wirkung" style="color:var(--text-dark); font-weight:600; text-decoration:none;">Routine</a>
             <a href="#bereiche" style="color:var(--text-dark); font-weight:600; text-decoration:none;">Bereiche</a>
             <a href="#kontakt" class="cta-btn-glass" style="margin-top:0">Kontakt</a>
@@ -151,7 +176,7 @@
         <div class="hero-overlay">
             <h1>HeatBelt Pro™</h1>
             <p>Sanfte Infrarot-Wärme trifft auf beruhigende Schwingung. Für Ihr tägliches Wohlbefinden.</p>
-            <a href="product.html" class="cta-btn-glass">Zur Produktseite</a>
+            <a href="#" class="cta-btn-glass">Zur Produktseite</a>
         </div>
     </section>
 
@@ -180,8 +205,7 @@
             <div class="wirkung-text-side">
                 <h2>Ihre neue Entspannungs-Routine.</h2>
                 <p>Vergessen Sie den Stress des Tages. Der HeatBelt Pro™ wurde entwickelt, um Ihnen ein exklusives Wellness-Erlebnis in den eigenen vier Wänden zu ermöglichen.</p>
-                <p>Durch die Kombination aus Tiefenwärme und sanfter Vibration wird ein Reiz gesetzt, der das Gewebe lockerer fühlen lässt. Es ist kein medizinisches Gerät, sondern Ihr Begleiter für mehr Lebensqualität und Komfort.</p>
-                <p>Nehmen Sie Platz, legen Sie den Gurt an und spüren Sie, wie die Wärme langsam Ihren Körper umschließt. Eine Anwendung von 15 bis 30 Minuten reicht oft aus, um ein nachhaltiges Gefühl von Ruhe zu erzeugen.</p>
+                <p>Durch die Kombination aus Tiefenwärme und sanfter Vibration wird ein Reiz gesetzt, der das Gewebe lockerer fühlen lässt. Nehmen Sie sich 15 bis 30 Minuten Zeit für Ihre persönliche Komfort-Pause.</p>
             </div>
         </div>
     </section>
@@ -191,27 +215,63 @@
             <div class="comfort-image" style="background-image: url('task_01kbk4rykdejz9h8dj8eakxeh3_1764800488_img_1_800x800.webp');"></div>
             <div class="comfort-content">
                 <h3>Nacken & Schulterpartie</h3>
-                <p>Stundenlanges Sitzen oder Stehen fordert unseren Körper. Das Wärmegefühl des HeatBelt Pro™ im oberen Rückenbereich sorgt für eine angenehme Schwere und hilft Ihnen dabei, sich nach getaner Arbeit bewusst zu lockern.</p>
-                <p>Die Vibration ergänzt dieses Gefühl durch sanfte Impulse, die wie eine leichte Streichmassage wirken.</p>
+                <p>Das Wärmegefühl des HeatBelt Pro™ im oberen Rückenbereich sorgt für eine angenehme Schwere und hilft Ihnen dabei, sich nach getaner Arbeit bewusst zu lockern.</p>
             </div>
         </div>
         <div class="comfort-block reverse">
             <div class="comfort-image" style="background-image: url('Bild_2025-12-03_231518829_800x800 (1).webp');"></div>
             <div class="comfort-content">
                 <h3>Lenden- & Rückenbereich</h3>
-                <p>Der untere Rücken ist oft der Ort, an dem wir Belastung zuerst spüren. Hier schmiegt sich der Gurt besonders fest an und liefert eine konstante, beruhigende Wärmequelle.</p>
-                <p>Nutzen Sie diese Funktion während Sie lesen oder Ihre Lieblingsserie schauen – eine Routine, die man nicht mehr missen möchte.</p>
+                <p>Hier schmiegt sich der Gurt besonders fest an und liefert eine konstante, beruhigende Wärmequelle – perfekt während Sie lesen oder Ihre Lieblingsserie schauen.</p>
             </div>
         </div>
         <div class="comfort-block">
             <div class="comfort-image" style="background-image: url('task_01kbk406wvek4trnj6fvt1dppp_1764799687_img_0_800x800.webp');"></div>
             <div class="comfort-content">
                 <h3>Bauch & Körpermitte</h3>
-                <p>Manchmal braucht man einfach ein kuscheliges Gefühl. Die behagliche Infrarotwärme im Bauchbereich wird als besonders wohltuend und entspannend empfunden.</p>
-                <p>Perfekt für kalte Tage oder Momente, in denen Sie sich einfach etwas Gutes tun wollen. Die intuitive Steuerung lässt Sie die Intensität jederzeit anpassen.</p>
+                <p>Die behagliche Infrarotwärme im Bauchbereich wird als besonders wohltuend empfunden. Die intuitive Steuerung lässt Sie die Intensität jederzeit anpassen.</p>
             </div>
         </div>
     </section>
+
+    <div class="belt-focus-wrap">
+        <div class="focus-box">
+            <img src="S64a9a16806dd4be28b7bf4d6c58f38f6u.avif" alt="Akku">
+            <div class="focus-overlay"></div>
+            <div class="focus-content">
+                <div class="focus-indicator"></div>
+                <h4>Wireless Freedom</h4>
+                <p>Ausdauernder Akku mit über 120 Min. Laufzeit. Dank USB-C Schnellladefunktion ist Ihr Gurt überall einsatzbereit.</p>
+            </div>
+        </div>
+        <div class="focus-box">
+            <img src="Tragefoto Bedinunf Fernbedinung fokus.jpg" alt="Smart Touch">
+            <div class="focus-overlay"></div>
+            <div class="focus-content">
+                <div class="focus-indicator"></div>
+                <h4>Smart Touch</h4>
+                <p>Intuitive 3-Stufen Steuerung für Hitze & Vibration. Inklusive Sicherheits-Sperre gegen versehentliches Verstellen.</p>
+            </div>
+        </div>
+        <div class="focus-box">
+            <img src="Tragefoto Infrarot fokus.jpg" alt="Hybrid Core">
+            <div class="focus-overlay"></div>
+            <div class="focus-content">
+                <div class="focus-indicator"></div>
+                <h4>Hybrid Core</h4>
+                <p>Präzise Infrarot-Hitzequellen kombiniert mit kraftvollen elektrischen Vibrations-Erzeugern für maximale Wirkung.</p>
+            </div>
+        </div>
+        <div class="focus-box">
+            <img src="Maße fertig.jpg" alt="Universal Fit">
+            <div class="focus-overlay"></div>
+            <div class="focus-content">
+                <div class="focus-indicator"></div>
+                <h4>Universal Fit</h4>
+                <p>Dank beiliegendem Verlängerungs-Strip passt sich der Gurt jeder Körperform perfekt an. Wellness für jeden.</p>
+            </div>
+        </div>
+    </div>
 
     <section class="aph-contact-wrap" id="kontakt">
         <div class="aph-contact-inner">
@@ -229,10 +289,6 @@
                     <input type="email" placeholder="mail@service.de" required>
                 </div>
                 <div class="aph-input-group aph-form-full">
-                    <label>Betreff</label>
-                    <input type="text" placeholder="Anfrage zum HeatBelt Pro™">
-                </div>
-                <div class="aph-input-group aph-form-full">
                     <label>Ihre Nachricht</label>
                     <textarea rows="6" placeholder="Wie können wir Ihnen helfen?" required></textarea>
                 </div>
@@ -244,25 +300,16 @@
     <section class="trust-bar">
         <div class="trust-wrapper">
             <div class="trust-card">
-                <div class="trust-icon">
-                    <img src="https://cdn.shopify.com/s/files/1/0895/6497/1338/files/Download_5.png?v=1767071213" alt="DE">
-                </div>
+                <div class="trust-icon"><img src="https://cdn.shopify.com/s/files/1/0895/6497/1338/files/Download_5.png?v=1767071213" alt="DE"></div>
                 <h3>Konzept Deutschland</h3>
-                <p>Design und Qualitätskontrolle direkt aus unserer Heimat.</p>
             </div>
             <div class="trust-card">
-                <div class="trust-icon">
-                    <svg viewBox="0 0 24 24"><path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1Z"/></svg>
-                </div>
+                <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1Z" fill="#fff"/></svg></div>
                 <h3>Sicherer Komfort</h3>
-                <p>Hautfreundliche Materialien und automatische Abschaltung.</p>
             </div>
             <div class="trust-card">
-                <div class="trust-icon">
-                    <svg viewBox="0 0 24 24"><path d="M13 10V3L4 14H11V21L20 10H13Z"/></svg>
-                </div>
+                <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M13 10V3L4 14H11V21L20 10H13Z" fill="#fff"/></svg></div>
                 <h3>Schneller Versand</h3>
-                <p>In 2-3 Werktagen bei Ihnen zu Hause für sofortige Erholung.</p>
             </div>
         </div>
     </section>
@@ -272,44 +319,31 @@
             <div class="footer-grid">
                 <div class="footer-brand-col">
                     <div class="f-logo">WARMES<span>H</span>ERZ</div>
-                    <p style="color:#bbb; font-size:0.9rem; max-width:350px;">Premium Wellness-Lösungen für Ihr Zuhause. Entdecken Sie die Kraft der Infrarotwärme und finden Sie zurück zu innerer Ruhe.</p>
+                    <p style="color:#bbb; font-size:0.9rem;">Premium Wellness-Lösungen für Ihr Zuhause. Entdecken Sie die Kraft der Infrarotwärme.</p>
                 </div>
                 <div class="footer-col">
                     <span class="f-label">Navigation</span>
                     <ul class="f-list">
-                        <li><a href="#">Home</a></li>
                         <li><a href="#">Shop</a></li>
                         <li><a href="#">Anwendung</a></li>
-                        <li><a href="#">Kontakt</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <span class="f-label">Rechtliches</span>
                     <ul class="f-list">
-                        <li><a href="#">Datenschutz</a></li>
-                        <li><a href="#">AGB</a></li>
                         <li><a href="#">Impressum</a></li>
-                        <li><a href="#">Widerruf</a></li>
+                        <li><a href="#">Datenschutz</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <span class="f-label">Standort</span>
-                    <p style="font-size:0.9rem; color:#bbb;">
-                        <strong>WarmesHerz Wellness</strong><br>
-                        Eschenweg 5<br>
-                        59394 Nordkirchen<br><br>
-                        <a href="mailto:info@warmesherz.de" style="color:var(--primary-teal); text-decoration:none;">info@warmesherz.de</a>
-                    </p>
+                    <span class="f-label">Kontakt</span>
+                    <p style="font-size:0.9rem; color:#bbb;">Eschenweg 5, 59394 Nordkirchen<br><a href="mailto:info@warmesherz.de" style="color:var(--primary-teal);">info@warmesherz.de</a></p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <div style="font-size:0.8rem; color:#666;">
-                    &copy; 2026 WARMESHERZ | WELLNESS & COMFORT. Kein medizinisches Gerät.
-                </div>
+                <div style="font-size:0.8rem; color:#666;">&copy; 2026 WARMESHERZ. Kein medizinisches Produkt.</div>
                 <div class="payment-flex">
-                    <svg viewBox="0 0 24 24" fill="#003087"><path d="M20.067 8.178c-.652 3.197-2.83 4.968-5.462 4.968h-1.352c-.523 0-.96.386-1.053.9l-.916 5.823-.01.077c-.022.14.086.262.227.262h2.955c.465 0 .86-.337.943-.795l.013-.086.634-4.024.01-.077c.083-.458.478-.795.943-.795h.412c2.49 0 4.432-1.012 5.003-3.99.27-1.405.03-2.583-.752-3.418-.466-.497-1.15-.83-2.035-1.008l-.165-.03c-.225-.042-.45-.07-.675-.09l-.12-.01z"/></svg>
-                    <svg viewBox="0 0 24 24" fill="#1A1F71"><path d="M10 14.5h1.5l1-5H11l-1 5zm5.5-5h-1.75l-1.5 5h1.5l.25-1h1.5l.15 1h1.5l-1.65-5zM4 9.5l1.5 5h1.25l2.25-5H7.75l-1 3.5-1-3.5H4z"/></svg>
-                    <svg viewBox="0 0 24 24"><circle cx="9" cy="12" r="5" fill="#eb001b" fill-opacity=".8"/><circle cx="15" cy="12" r="5" fill="#ff5f00" fill-opacity=".8"/></svg>
+                    <svg viewBox="0 0 24 24" fill="#fff" width="40"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
                 </div>
             </div>
         </div>
@@ -328,7 +362,7 @@
         document.querySelectorAll('.plate, .comfort-block, .wirkung-row').forEach(el => {
             el.style.opacity = "0";
             el.style.transform = "translateY(40px)";
-            el.style.transition = "all 0.9s cubic-bezier(0.22, 1, 0.36, 1)";
+            el.style.transition = "all 0.9s ease-out";
             observer.observe(el);
         });
     </script>
