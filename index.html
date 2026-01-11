@@ -4,186 +4,471 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>WarmesHerz – Wärmegürtel</title>
-  <meta name="description" content="WarmesHerz – angenehme Wärme für Entspannung und Komfort." />
+  <meta name="description" content="WarmesHerz – Wärme für Komfort & Entspannung. Sicher bezahlen mit PayPal oder Karte." />
 
   <style>
     :root{
-      --bg:#0b0f17;
-      --card:rgba(16,24,39,.62);
-      --line:rgba(255,255,255,.10);
-      --text:#e5e7eb;
-      --muted:#9ca3af;
-      --radius:18px;
+      --bg:#f5f7fb;
+      --ink:#0b1220;
+      --muted:#5b677a;
+      --line: rgba(15, 23, 42, 0.10);
+      --card: rgba(255,255,255,0.78);
+      --shadow: 0 18px 60px rgba(15,23,42,.10);
+
+      /* “Black glass” wie Day One: */
+      --glass-bg: rgba(10, 12, 18, 0.55);
+      --glass-line: rgba(255,255,255,0.14);
+      --glass-shadow: 0 18px 70px rgba(0,0,0,.28);
+
+      --radius: 22px;
+      --radius2: 18px;
+
+      --accent: #2563eb; /* Medical blue */
+      --accent2:#10b981; /* calm green */
     }
+
     *{box-sizing:border-box}
     html,body{margin:0;padding:0}
     body{
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background: radial-gradient(1100px 600px at 20% 10%, rgba(59,130,246,.18), transparent 55%),
-                  radial-gradient(900px 500px at 80% 30%, rgba(16,185,129,.14), transparent 55%),
-                  var(--bg);
-      color:var(--text);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(900px 500px at 15% 5%, rgba(37,99,235,.18), transparent 55%),
+        radial-gradient(800px 450px at 90% 20%, rgba(16,185,129,.10), transparent 55%),
+        var(--bg);
     }
     a{color:inherit;text-decoration:none}
-    .wrap{max-width:1100px;margin:0 auto;padding:24px}
+    .wrap{max-width:1120px;margin:0 auto;padding:22px}
 
+    /* Header “black glass” */
     .top{
-      display:flex;align-items:center;justify-content:space-between;gap:16px;
-      border:1px solid var(--line);
-      background:var(--card);
-      backdrop-filter: blur(8px);
-      border-radius: var(--radius);
-      padding:14px 16px;
+      position:sticky; top:12px; z-index:50;
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+      padding:12px 14px;
+      border-radius: 999px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-line);
+      box-shadow: var(--glass-shadow);
+      backdrop-filter: blur(12px);
     }
-    .brand{font-weight:800;letter-spacing:.2px}
-    .nav{display:flex;flex-wrap:wrap;gap:12px}
-    .nav a{color:var(--muted);font-size:14px}
-    .nav a:hover{color:var(--text)}
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      color:#fff;
+      font-weight:900;
+      letter-spacing:.2px;
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 6px rgba(37,99,235,.16);
+    }
+    .nav{
+      display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+    }
+    .nav a{
+      color: rgba(255,255,255,.85);
+      font-size: 13px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+    }
+    .nav a:hover{
+      border-color: rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+    }
+    .nav .cta{
+      font-weight:900;
+      background: rgba(255,255,255,.10);
+      border-color: rgba(255,255,255,.18);
+    }
 
+    /* Hero */
     .hero{
+      margin-top: 18px;
       display:grid;
       grid-template-columns: 1.05fr .95fr;
-      gap:18px;
-      margin-top:18px;
+      gap: 16px;
+      align-items: stretch;
     }
-    .panel{
-      border:1px solid var(--line);
-      background:var(--card);
+
+    .card{
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
       backdrop-filter: blur(8px);
-      border-radius: var(--radius);
-      padding:18px;
     }
-    .media{
-      border:1px solid var(--line);
-      border-radius: var(--radius);
+    .heroLeft{ padding: 20px; }
+    .kicker{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size: 12px;
+      color: #0b3aa6;
+      background: rgba(37,99,235,.10);
+      border: 1px solid rgba(37,99,235,.16);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-weight: 800;
+    }
+    h1{
+      margin: 12px 0 10px;
+      font-size: 44px;
+      line-height: 1.02;
+      letter-spacing: -0.6px;
+    }
+    .sub{
+      margin:0;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 16px;
+      max-width: 52ch;
+    }
+    .benefits{
+      margin-top: 16px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .pill{
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 10px 12px;
+      background: rgba(255,255,255,.70);
+      display:flex; gap:10px; align-items:flex-start;
+    }
+    .ico{
+      width:34px;height:34px;border-radius:12px;
+      background: rgba(16,185,129,.12);
+      border: 1px solid rgba(16,185,129,.18);
+      display:grid;place-items:center;
+      flex:0 0 auto;
+      font-weight:900;
+      color:#056b47;
+    }
+    .pill b{display:block;font-size:13px;margin-bottom:2px}
+    .pill span{display:block;color:var(--muted);font-size:13px;line-height:1.4}
+
+    /* Right product card */
+    .heroRight{
+      padding: 16px;
+      display:flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .productMedia{
+      border-radius: calc(var(--radius) - 6px);
+      border: 1px solid var(--line);
+      background: #fff;
       overflow:hidden;
-      background: rgba(0,0,0,.18);
-      min-height: 430px;
+      min-height: 380px;
+      display:grid;
+      place-items:center;
       position:relative;
     }
-    .media img{width:100%;height:100%;object-fit:cover;display:block}
-    .placeholder{
-      position:absolute;inset:0;
-      display:grid;place-items:center;
-      color:var(--muted);
-      font-weight:700;
+    .productMedia img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      background:#fff;
+      display:block;
+      padding: 10px;
+    }
+    .ph{
+      position:absolute; inset:0;
+      display:grid; place-items:center;
+      color: #6b7280;
+      font-weight: 900;
       background:
-        linear-gradient(135deg, rgba(255,255,255,.07), rgba(255,255,255,.02)),
-        repeating-linear-gradient(45deg, rgba(255,255,255,.06) 0 12px, rgba(255,255,255,.02) 12px 24px);
+        linear-gradient(135deg, rgba(0,0,0,.03), rgba(0,0,0,.01)),
+        repeating-linear-gradient(45deg, rgba(0,0,0,.06) 0 12px, rgba(0,0,0,.02) 12px 24px);
+    }
+    .priceRow{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
+      padding: 2px 2px 0;
+    }
+    .price{
+      font-size: 30px;
+      font-weight: 1000;
+      letter-spacing: -0.3px;
+    }
+    .trust{
+      font-size: 12px;
+      color: #0b1220;
+      background: rgba(16,185,129,.10);
+      border: 1px solid rgba(16,185,129,.18);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-weight: 900;
+      white-space: nowrap;
     }
 
-    h1{margin:0 0 10px;font-size:38px;line-height:1.05}
-    .sub{margin:0 0 16px;color:var(--muted);line-height:1.6}
-    .chips{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 0}
-    .chip{
-      font-size:12px;color:#d1fae5;
-      background:rgba(16,185,129,.12);
-      border:1px solid rgba(16,185,129,.28);
-      padding:6px 10px;border-radius:999px;
+    .glassBtns{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 2px;
     }
-
-    .ctaRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;
-      padding:12px 14px;border-radius:14px;
-      border:1px solid var(--line);
-      font-weight:800;
-      transition:transform .08s ease, filter .2s ease;
+    .gbtn{
+      border-radius: 16px;
+      padding: 12px 12px;
+      font-weight: 1000;
+      text-align:center;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(10,12,18,.55);
+      color: rgba(255,255,255,.92);
+      box-shadow: 0 14px 40px rgba(0,0,0,.18);
+      backdrop-filter: blur(12px);
+      transition: transform .08s ease, filter .2s ease, background .2s ease;
       user-select:none;
     }
-    .btn:hover{filter:brightness(1.06);transform:translateY(-1px)}
-    .btn:active{transform:translateY(0)}
-    .btn.primary{
-      background:rgba(59,130,246,.18);
-      border-color:rgba(59,130,246,.35);
+    .gbtn:hover{filter:brightness(1.05); transform: translateY(-1px)}
+    .gbtn:active{transform: translateY(0px)}
+    .gbtn.primary{
+      background: linear-gradient(135deg, rgba(37,99,235,.55), rgba(16,185,129,.35));
+      border-color: rgba(255,255,255,.22);
+      color:#fff;
     }
-    .btn.secondary{
-      background:rgba(255,255,255,.06);
+    .fine{
+      margin: 0;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.5;
+      padding: 0 2px;
     }
 
-    .grid{
-      margin-top:18px;
+    /* Pain / explanation section */
+    .section{
+      margin-top: 16px;
+      padding: 18px;
+    }
+    .secHead{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
+      margin-bottom: 10px;
+    }
+    .secHead h2{
+      margin:0;
+      font-size: 22px;
+      letter-spacing: -0.2px;
+    }
+    .secHead p{
+      margin:0;
+      color: var(--muted);
+      font-size: 13px;
+      max-width: 60ch;
+    }
+
+    .painGrid{
+      margin-top: 12px;
       display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:12px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
     }
-    .card{
-      border:1px solid var(--line);
-      background:rgba(0,0,0,.18);
-      border-radius:16px;
-      padding:14px;
+    .painCard{
+      border-radius: 18px;
+      overflow:hidden;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.72);
+      display:flex;
+      flex-direction:column;
+      min-height: 260px;
     }
-    .card h3{margin:0 0 8px;font-size:16px}
-    .card p{margin:0;color:var(--muted);font-size:14px;line-height:1.6}
+    .painImg{
+      height: 140px;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+      position:relative;
+      display:grid;
+      place-items:center;
+    }
+    .painImg img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .painPh{
+      position:absolute; inset:0;
+      display:grid; place-items:center;
+      font-weight:1000;
+      color:#6b7280;
+      background:
+        linear-gradient(135deg, rgba(0,0,0,.03), rgba(0,0,0,.01)),
+        repeating-linear-gradient(45deg, rgba(0,0,0,.06) 0 12px, rgba(0,0,0,.02) 12px 24px);
+    }
+    .painBody{
+      padding: 12px;
+      display:flex;
+      flex-direction:column;
+      gap: 6px;
+    }
+    .painBody b{font-size:13px}
+    .painBody span{font-size:13px;color:var(--muted);line-height:1.45}
 
+    /* Footer */
     .footer{
-      margin-top:18px;
-      display:flex;flex-wrap:wrap;gap:10px;
+      margin: 18px 0 8px;
+      display:flex; flex-wrap:wrap; gap:10px;
       justify-content:center;
-      color:var(--muted);
-      font-size:14px;
+      color: var(--muted);
+      font-size: 13px;
     }
     .sep{opacity:.5}
-    @media (max-width: 900px){
-      .hero{grid-template-columns:1fr}
-      .grid{grid-template-columns:1fr}
-      h1{font-size:32px}
+
+    @media (max-width: 980px){
+      .hero{grid-template-columns: 1fr}
+      h1{font-size: 36px}
+      .benefits{grid-template-columns:1fr}
+      .glassBtns{grid-template-columns:1fr}
+      .painGrid{grid-template-columns: 1fr 1fr}
+    }
+    @media (max-width: 520px){
+      .painGrid{grid-template-columns: 1fr}
     }
   </style>
 </head>
 
 <body>
   <div class="wrap">
+
     <header class="top">
-      <div class="brand">WarmesHerz</div>
+      <div class="brand">
+        <span class="dot"></span>
+        WarmesHerz
+      </div>
       <nav class="nav">
         <a href="./produkt.html">Produkt</a>
+        <a href="#pain">Wie es hilft</a>
         <a href="./impressum.html">Impressum</a>
         <a href="./datenschutz.html">Datenschutz</a>
         <a href="./widerruf.html">Widerruf</a>
+        <a class="cta" href="./produkt.html#checkout">Jetzt kaufen</a>
       </nav>
     </header>
 
     <section class="hero">
-      <div class="media">
-        <!-- Später ersetzt du das mit deinem Bild:
-             <img src="./assets/hero.jpg" alt="WarmesHerz Wärmegürtel"> -->
-        <div class="placeholder">HERO-BILD (später einfügen)</div>
-      </div>
-
-      <div class="panel">
-        <h1>Angenehme Wärme für deinen Alltag</h1>
+      <div class="card heroLeft">
+        <span class="kicker">Komfort · Wärme · Entspannung</span>
+        <h1>Wärme, die sich wie Hilfe anfühlt.</h1>
         <p class="sub">
-          WarmesHerz ist ein Wärmegürtel für Komfort und Entspannung – ideal zuhause, im Büro oder unterwegs.
+          WarmesHerz ist ein Wärmegürtel für entspannte Wärme im Alltag – cleanes Design, simple Anwendung,
+          Fokus auf Komfort.
         </p>
 
-        <div class="ctaRow">
-          <a class="btn primary" href="./produkt.html">Jetzt ansehen</a>
-          <a class="btn secondary" href="./produkt.html#checkout">Direkt kaufen</a>
+        <div class="benefits">
+          <div class="pill">
+            <div class="ico">✓</div>
+            <div>
+              <b>Einfach & schnell</b>
+              <span>Anlegen, starten, entspannen – ohne komplizierte Menüs.</span>
+            </div>
+          </div>
+          <div class="pill">
+            <div class="ico">⏱</div>
+            <div>
+              <b>Abschaltautomatik</b>
+              <span>Für ein beruhigtes Gefühl bei der Anwendung.</span>
+            </div>
+          </div>
+          <div class="pill">
+            <div class="ico">🧵</div>
+            <div>
+              <b>Angenehm zu tragen</b>
+              <span>Weich, flexibel, alltagstauglich – auch beim Sitzen.</span>
+            </div>
+          </div>
+          <div class="pill">
+            <div class="ico">🔒</div>
+            <div>
+              <b>Sicher bezahlen</b>
+              <span>PayPal und Karte – Checkout über etablierte Anbieter.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card heroRight">
+        <div class="productMedia">
+          <!-- ✅ Wenn du das Bild hochgeladen hast, klappt das direkt:
+               <img src="./assets/product.jpg" alt="WarmesHerz Wärmegürtel"> -->
+
+          <!-- Platzhalter (wird automatisch überdeckt, sobald img existiert und geladen wird): -->
+          <div class="ph">PRODUKTBILD: assets/product.jpg</div>
+
+          <!-- Optional: Wenn du erstmal direkt das Bild im Root hochlädst,
+               ändere src z.B. auf "./product.jpg" -->
+          <img src="./assets/product.jpg" alt="WarmesHerz Wärmegürtel" onload="this.previousElementSibling.style.display='none';" onerror="this.style.display='none';" />
         </div>
 
-        <div class="chips">
-          <span class="chip">30 Min Auto-Off</span>
-          <span class="chip">Weiches Material</span>
-          <span class="chip">Schnell einsatzbereit</span>
+        <div class="priceRow">
+          <div class="price">39,00 €</div>
+          <div class="trust">Versand aus DE/EU*</div>
         </div>
+
+        <div class="glassBtns">
+          <a class="gbtn" href="./produkt.html#checkout">Details ansehen</a>
+          <a class="gbtn primary" href="./produkt.html#checkout">Jetzt kaufen</a>
+        </div>
+
+        <p class="fine">
+          *Text anpassen, sobald du Versand genau weißt. Keine Heilversprechen – Fokus auf Komfort & Wärme.
+        </p>
       </div>
     </section>
 
-    <section class="panel" style="margin-top:18px">
-      <h2 style="margin:0 0 12px">Warum WarmesHerz?</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>Wärme, wenn du sie brauchst</h3>
-          <p>Einfach anlegen, starten, entspannen – ohne komplizierte Einstellungen.</p>
+    <!-- Pain / Erklärung Section (1 Section wie du wolltest) -->
+    <section class="card section" id="pain">
+      <div class="secHead">
+        <div>
+          <h2>So wirkt Wärme im Alltag</h2>
+          <p>Hier kommen später deine 4 erklärenden Bilder rein (Schmerz-Zonen / Alltag / Anwendung / Ergebnis).</p>
         </div>
-        <div class="card">
-          <h3>Alltagstauglich</h3>
-          <p>Für zuhause, beim Arbeiten oder abends auf dem Sofa. Komfort steht im Fokus.</p>
+        <a class="gbtn" href="./produkt.html#checkout" style="padding:10px 12px; border-radius:14px;">Zum Kauf</a>
+      </div>
+
+      <div class="painGrid">
+        <div class="painCard">
+          <div class="painImg">
+            <div class="painPh">pain-1.jpg</div>
+            <img src="./assets/pain-1.jpg" alt="Schmerzpunkt / Problem" onload="this.previousElementSibling.style.display='none';" onerror="this.style.display='none';">
+          </div>
+          <div class="painBody">
+            <b>1) Problem</b>
+            <span>Bildidee: Rücken/Alltag – „verspannt, sitzend, gestresst“ (clean, medizinisch, nicht dramatisch).</span>
+          </div>
         </div>
-        <div class="card">
-          <h3>Sicherheitsfunktionen</h3>
-          <p>Mit Abschaltautomatik und angenehmer, gleichmäßiger Wärme.</p>
+
+        <div class="painCard">
+          <div class="painImg">
+            <div class="painPh">pain-2.jpg</div>
+            <img src="./assets/pain-2.jpg" alt="Wärme trifft Zone" onload="this.previousElementSibling.style.display='none';" onerror="this.style.display='none';">
+          </div>
+          <div class="painBody">
+            <b>2) Anwendung</b>
+            <span>Bildidee: Gürtel angelegt, dezente Wärme-Visualisierung (soft orange/rot, apotheken-like).</span>
+          </div>
+        </div>
+
+        <div class="painCard">
+          <div class="painImg">
+            <div class="painPh">pain-3.jpg</div>
+            <img src="./assets/pain-3.jpg" alt="Tiefe Wärme / Komfort" onload="this.previousElementSibling.style.display='none';" onerror="this.style.display='none';">
+          </div>
+          <div class="painBody">
+            <b>3) Komfort</b>
+            <span>Bildidee: Querschnitt/Illustration „Wärmebereich“ – aber neutral, ohne medizinische Heil-Claims.</span>
+          </div>
+        </div>
+
+        <div class="painCard">
+          <div class="painImg">
+            <div class="painPh">pain-4.jpg</div>
+            <img src="./assets/pain-4.jpg" alt="Ergebnis / Entspannung" onload="this.previousElementSibling.style.display='none';" onerror="this.style.display='none';">
+          </div>
+          <div class="painBody">
+            <b>4) Ergebnis</b>
+            <span>Bildidee: entspannter Alltag (Sofa/Arbeiten) – „fühlt sich besser an“, kein Heilversprechen.</span>
+          </div>
         </div>
       </div>
     </section>
