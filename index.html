@@ -3,119 +3,201 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>WarmesHerz</title>
-  <meta name="description" content="Wärmegürtel für entspannte Wärme & Komfort." />
+  <title>WarmesHerz – Wärmegürtel</title>
+  <meta name="description" content="WarmesHerz – angenehme Wärme für Entspannung und Komfort." />
+
   <style>
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: #0b0f17;
-      color: #e5e7eb;
+    :root{
+      --bg:#0b0f17;
+      --card:rgba(16,24,39,.62);
+      --line:rgba(255,255,255,.10);
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --radius:18px;
     }
-    .wrap {
-      max-width: 1100px;
-      margin: auto;
-      padding: 24px;
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background: radial-gradient(1100px 600px at 20% 10%, rgba(59,130,246,.18), transparent 55%),
+                  radial-gradient(900px 500px at 80% 30%, rgba(16,185,129,.14), transparent 55%),
+                  var(--bg);
+      color:var(--text);
     }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border: 1px solid rgba(255,255,255,.08);
-      padding: 16px;
-      border-radius: 16px;
-      background: rgba(16,24,39,.6);
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1100px;margin:0 auto;padding:24px}
+
+    .top{
+      display:flex;align-items:center;justify-content:space-between;gap:16px;
+      border:1px solid var(--line);
+      background:var(--card);
+      backdrop-filter: blur(8px);
+      border-radius: var(--radius);
+      padding:14px 16px;
     }
-    nav a {
-      margin-left: 12px;
-      color: #9ca3af;
-      text-decoration: none;
-      font-size: 14px;
+    .brand{font-weight:800;letter-spacing:.2px}
+    .nav{display:flex;flex-wrap:wrap;gap:12px}
+    .nav a{color:var(--muted);font-size:14px}
+    .nav a:hover{color:var(--text)}
+
+    .hero{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:18px;
+      margin-top:18px;
     }
-    nav a:hover { color: #fff; }
-    .hero {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin-top: 24px;
+    .panel{
+      border:1px solid var(--line);
+      background:var(--card);
+      backdrop-filter: blur(8px);
+      border-radius: var(--radius);
+      padding:18px;
     }
-    .img {
-      width: 100%;
-      aspect-ratio: 1/1;
-      border-radius: 16px;
-      background: linear-gradient(135deg,#1f2937,#020617);
+    .media{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      overflow:hidden;
+      background: rgba(0,0,0,.18);
+      min-height: 430px;
+      position:relative;
     }
-    .card {
-      border: 1px solid rgba(255,255,255,.08);
-      padding: 24px;
-      border-radius: 16px;
-      background: rgba(16,24,39,.6);
+    .media img{width:100%;height:100%;object-fit:cover;display:block}
+    .placeholder{
+      position:absolute;inset:0;
+      display:grid;place-items:center;
+      color:var(--muted);
+      font-weight:700;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.07), rgba(255,255,255,.02)),
+        repeating-linear-gradient(45deg, rgba(255,255,255,.06) 0 12px, rgba(255,255,255,.02) 12px 24px);
     }
-    .price {
-      font-size: 32px;
-      font-weight: 800;
-      margin: 12px 0;
+
+    h1{margin:0 0 10px;font-size:38px;line-height:1.05}
+    .sub{margin:0 0 16px;color:var(--muted);line-height:1.6}
+    .chips{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 0}
+    .chip{
+      font-size:12px;color:#d1fae5;
+      background:rgba(16,185,129,.12);
+      border:1px solid rgba(16,185,129,.28);
+      padding:6px 10px;border-radius:999px;
     }
-    .btns {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 16px;
+
+    .ctaRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:12px 14px;border-radius:14px;
+      border:1px solid var(--line);
+      font-weight:800;
+      transition:transform .08s ease, filter .2s ease;
+      user-select:none;
     }
-    .btn {
-      padding: 14px;
-      border-radius: 14px;
-      font-weight: 700;
-      text-align: center;
-      text-decoration: none;
-      color: white;
+    .btn:hover{filter:brightness(1.06);transform:translateY(-1px)}
+    .btn:active{transform:translateY(0)}
+    .btn.primary{
+      background:rgba(59,130,246,.18);
+      border-color:rgba(59,130,246,.35);
     }
-    .paypal { background: #2563eb; }
-    .cardpay { background: #059669; }
-    footer {
-      margin-top: 40px;
-      font-size: 14px;
-      color: #9ca3af;
-      text-align: center;
+    .btn.secondary{
+      background:rgba(255,255,255,.06);
     }
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; }
-      .btns { grid-template-columns: 1fr; }
+
+    .grid{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+    }
+    .card{
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.18);
+      border-radius:16px;
+      padding:14px;
+    }
+    .card h3{margin:0 0 8px;font-size:16px}
+    .card p{margin:0;color:var(--muted);font-size:14px;line-height:1.6}
+
+    .footer{
+      margin-top:18px;
+      display:flex;flex-wrap:wrap;gap:10px;
+      justify-content:center;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .sep{opacity:.5}
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      h1{font-size:32px}
     }
   </style>
 </head>
+
 <body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">WarmesHerz</div>
+      <nav class="nav">
+        <a href="./produkt.html">Produkt</a>
+        <a href="./impressum.html">Impressum</a>
+        <a href="./datenschutz.html">Datenschutz</a>
+        <a href="./widerruf.html">Widerruf</a>
+      </nav>
+    </header>
 
-<div class="wrap">
-  <header>
-    <strong>WarmesHerz</strong>
-    <nav>
-      <a href="#">Impressum</a>
-      <a href="#">Datenschutz</a>
-      <a href="#">Widerruf</a>
-    </nav>
-  </header>
-
-  <section class="hero">
-    <div class="img"></div>
-    <div class="card">
-      <h1>WarmesHerz Wärmegürtel</h1>
-      <p>Angenehme Wärme für Entspannung und Komfort im Alltag.</p>
-      <div class="price">39,00 €</div>
-      <div class="btns">
-        <a class="btn paypal" href="#" target="_blank">PayPal</a>
-        <a class="btn cardpay" href="#" target="_blank">Kreditkarte</a>
+    <section class="hero">
+      <div class="media">
+        <!-- Später ersetzt du das mit deinem Bild:
+             <img src="./assets/hero.jpg" alt="WarmesHerz Wärmegürtel"> -->
+        <div class="placeholder">HERO-BILD (später einfügen)</div>
       </div>
-      <p style="font-size:13px;color:#9ca3af;margin-top:10px">
-        Sicher bezahlen über PayPal oder Kreditkarte.
-      </p>
-    </div>
-  </section>
 
-  <footer>
-    © 2026 WarmesHerz · Impressum · Datenschutz · Widerruf
-  </footer>
-</div>
+      <div class="panel">
+        <h1>Angenehme Wärme für deinen Alltag</h1>
+        <p class="sub">
+          WarmesHerz ist ein Wärmegürtel für Komfort und Entspannung – ideal zuhause, im Büro oder unterwegs.
+        </p>
 
+        <div class="ctaRow">
+          <a class="btn primary" href="./produkt.html">Jetzt ansehen</a>
+          <a class="btn secondary" href="./produkt.html#checkout">Direkt kaufen</a>
+        </div>
+
+        <div class="chips">
+          <span class="chip">30 Min Auto-Off</span>
+          <span class="chip">Weiches Material</span>
+          <span class="chip">Schnell einsatzbereit</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" style="margin-top:18px">
+      <h2 style="margin:0 0 12px">Warum WarmesHerz?</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Wärme, wenn du sie brauchst</h3>
+          <p>Einfach anlegen, starten, entspannen – ohne komplizierte Einstellungen.</p>
+        </div>
+        <div class="card">
+          <h3>Alltagstauglich</h3>
+          <p>Für zuhause, beim Arbeiten oder abends auf dem Sofa. Komfort steht im Fokus.</p>
+        </div>
+        <div class="card">
+          <h3>Sicherheitsfunktionen</h3>
+          <p>Mit Abschaltautomatik und angenehmer, gleichmäßiger Wärme.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>© <span id="year"></span> WarmesHerz</span>
+      <span class="sep">·</span><a href="./impressum.html">Impressum</a>
+      <span class="sep">·</span><a href="./datenschutz.html">Datenschutz</a>
+      <span class="sep">·</span><a href="./widerruf.html">Widerruf</a>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
