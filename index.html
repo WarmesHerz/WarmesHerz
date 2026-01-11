@@ -3,28 +3,29 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>WarmesHerz – Wärmegürtel</title>
-  <meta name="description" content="WarmesHerz – Wärme für Komfort & Entspannung. Sicher bezahlen mit PayPal oder Karte." />
+  <title>WarmesHerz – Wärme & Komfort für den unteren Rücken</title>
+  <meta name="description" content="WarmesHerz Wärmegürtel mit Wärme- und Vibrationsmodus. Cleanes Medical-Design, klare Anwendung, sicher bezahlen." />
 
   <style>
     :root{
-      --bg:#f5f7fb;
-      --ink:#0b1220;
-      --muted:#5b677a;
+      /* Medical */
+      --bg: #f6f8fc;
+      --ink: #0b1220;
+      --muted:#56657a;
       --line: rgba(15, 23, 42, 0.10);
-      --card: rgba(255,255,255,0.78);
-      --shadow: 0 18px 60px rgba(15,23,42,.10);
+      --card: rgba(255,255,255,0.86);
+      --shadow: 0 18px 70px rgba(15,23,42,.10);
+      --radius: 22px;
 
-      /* “Black glass” wie Day One: */
-      --glass-bg: rgba(10, 12, 18, 0.55);
+      /* Accent */
+      --blue:#2563eb;
+      --green:#10b981;
+      --orange:#ff7a18;
+
+      /* Black glass like Day One */
+      --glass-bg: rgba(10, 12, 18, 0.56);
       --glass-line: rgba(255,255,255,0.14);
       --glass-shadow: 0 18px 70px rgba(0,0,0,.28);
-
-      --radius: 22px;
-      --radius2: 18px;
-
-      --accent: #2563eb; /* Medical blue */
-      --accent2:#10b981; /* calm green */
     }
 
     *{box-sizing:border-box}
@@ -33,19 +34,19 @@
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(900px 500px at 15% 5%, rgba(37,99,235,.18), transparent 55%),
-        radial-gradient(800px 450px at 90% 20%, rgba(16,185,129,.10), transparent 55%),
+        radial-gradient(900px 520px at 10% 0%, rgba(37,99,235,.16), transparent 60%),
+        radial-gradient(900px 520px at 90% 10%, rgba(16,185,129,.10), transparent 60%),
         var(--bg);
     }
     a{color:inherit;text-decoration:none}
-    .wrap{max-width:1120px;margin:0 auto;padding:22px}
+    .wrap{max-width:1160px;margin:0 auto;padding:22px}
 
-    /* Header “black glass” */
-    .top{
-      position:sticky; top:12px; z-index:50;
+    /* Glass header */
+    header{
+      position: sticky; top: 12px; z-index: 50;
       display:flex; align-items:center; justify-content:space-between; gap:14px;
       padding:12px 14px;
-      border-radius: 999px;
+      border-radius:999px;
       background: var(--glass-bg);
       border: 1px solid var(--glass-line);
       box-shadow: var(--glass-shadow);
@@ -53,54 +54,47 @@
     }
     .brand{
       display:flex; align-items:center; gap:10px;
-      color:#fff;
-      font-weight:900;
-      letter-spacing:.2px;
-      padding: 6px 10px;
-      border-radius: 999px;
+      color:#fff; font-weight:1000; letter-spacing:.2px;
+      padding: 6px 10px; border-radius:999px;
     }
     .dot{
-      width:10px; height:10px; border-radius:50%;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      width:10px;height:10px;border-radius:50%;
+      background: linear-gradient(135deg, var(--blue), var(--green));
       box-shadow: 0 0 0 6px rgba(37,99,235,.16);
     }
-    .nav{
-      display:flex; align-items:center; gap:8px; flex-wrap:wrap;
-    }
-    .nav a{
-      color: rgba(255,255,255,.85);
+    nav{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+    nav a{
+      color: rgba(255,255,255,.86);
       font-size: 13px;
       padding: 8px 10px;
       border-radius: 999px;
       border: 1px solid transparent;
     }
-    .nav a:hover{
-      border-color: rgba(255,255,255,.18);
-      background: rgba(255,255,255,.06);
-    }
-    .nav .cta{
-      font-weight:900;
+    nav a:hover{border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.06)}
+    nav a.cta{
+      font-weight: 1000;
       background: rgba(255,255,255,.10);
       border-color: rgba(255,255,255,.18);
     }
 
-    /* Hero */
-    .hero{
+    /* Layout */
+    .grid{
       margin-top: 18px;
       display:grid;
       grid-template-columns: 1.05fr .95fr;
       gap: 16px;
       align-items: stretch;
     }
-
     .card{
       background: var(--card);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(10px);
     }
-    .heroLeft{ padding: 20px; }
+
+    /* Hero */
+    .heroLeft{padding:22px}
     .kicker{
       display:inline-flex; align-items:center; gap:8px;
       font-size: 12px;
@@ -109,7 +103,7 @@
       border: 1px solid rgba(37,99,235,.16);
       padding: 6px 10px;
       border-radius: 999px;
-      font-weight: 800;
+      font-weight: 900;
     }
     h1{
       margin: 12px 0 10px;
@@ -120,21 +114,21 @@
     .sub{
       margin:0;
       color: var(--muted);
-      line-height: 1.65;
+      line-height: 1.7;
       font-size: 16px;
-      max-width: 52ch;
+      max-width: 62ch;
     }
-    .benefits{
+    .heroBadges{
       margin-top: 16px;
       display:grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
     }
-    .pill{
+    .badge{
       border: 1px solid var(--line);
       border-radius: 16px;
-      padding: 10px 12px;
-      background: rgba(255,255,255,.70);
+      padding: 11px 12px;
+      background: rgba(255,255,255,.74);
       display:flex; gap:10px; align-items:flex-start;
     }
     .ico{
@@ -143,56 +137,59 @@
       border: 1px solid rgba(16,185,129,.18);
       display:grid;place-items:center;
       flex:0 0 auto;
-      font-weight:900;
+      font-weight:1000;
       color:#056b47;
     }
-    .pill b{display:block;font-size:13px;margin-bottom:2px}
-    .pill span{display:block;color:var(--muted);font-size:13px;line-height:1.4}
+    .badge b{display:block;font-size:13px;margin-bottom:2px}
+    .badge span{display:block;color:var(--muted);font-size:13px;line-height:1.4}
 
-    /* Right product card */
-    .heroRight{
-      padding: 16px;
-      display:flex;
-      flex-direction: column;
-      gap: 12px;
+    .heroCTA{
+      margin-top: 14px;
+      display:flex; gap:10px; flex-wrap:wrap;
+      align-items:center;
     }
-    .productMedia{
+    .btn{
+      border-radius: 16px;
+      padding: 12px 14px;
+      font-weight: 1000;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(10,12,18,.55);
+      color: rgba(255,255,255,.92);
+      box-shadow: 0 14px 40px rgba(0,0,0,.18);
+      backdrop-filter: blur(12px);
+      display:inline-flex; align-items:center; gap:10px;
+      user-select:none;
+      transition: transform .08s ease, filter .2s ease;
+    }
+    .btn:hover{filter:brightness(1.05); transform: translateY(-1px)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(37,99,235,.58), rgba(16,185,129,.40));
+      border-color: rgba(255,255,255,.22);
+      color:#fff;
+    }
+    .note{
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.55;
+      max-width: 80ch;
+    }
+
+    /* Hero right image */
+    .heroRight{padding:14px; display:flex; flex-direction:column; gap:10px}
+    .media{
       border-radius: calc(var(--radius) - 6px);
       border: 1px solid var(--line);
       background: #fff;
       overflow:hidden;
-      min-height: 380px;
+      min-height: 420px;
       display:grid;
       place-items:center;
-      position:relative;
     }
-    .productMedia img{
-      width:100%;
-      height:100%;
-      object-fit:contain;
-      background:#fff;
-      display:block;
-      padding: 10px;
-    }
-    .ph{
-      position:absolute; inset:0;
-      display:grid; place-items:center;
-      color: #6b7280;
-      font-weight: 900;
-      background:
-        linear-gradient(135deg, rgba(0,0,0,.03), rgba(0,0,0,.01)),
-        repeating-linear-gradient(45deg, rgba(0,0,0,.06) 0 12px, rgba(0,0,0,.02) 12px 24px);
-    }
-    .priceRow{
-      display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
-      padding: 2px 2px 0;
-    }
-    .price{
-      font-size: 30px;
-      font-weight: 1000;
-      letter-spacing: -0.3px;
-    }
-    .trust{
+    .media img{width:100%;height:100%;object-fit:cover;display:block}
+    .priceRow{display:flex; align-items:flex-end; justify-content:space-between; gap:12px; padding: 2px 2px 0}
+    .price{font-size: 30px; font-weight:1000; letter-spacing:-0.3px}
+    .chip{
       font-size: 12px;
       color: #0b1220;
       background: rgba(16,185,129,.10);
@@ -203,110 +200,51 @@
       white-space: nowrap;
     }
 
-    .glassBtns{
+    /* Sections */
+    .section{margin-top:16px; padding:18px}
+    .head{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
+      margin-bottom: 12px;
+    }
+    .head h2{margin:0;font-size:22px;letter-spacing:-0.2px}
+    .head p{margin:0;color:var(--muted);font-size:13px;max-width:70ch}
+
+    .two{
       display:grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 2px;
-    }
-    .gbtn{
-      border-radius: 16px;
-      padding: 12px 12px;
-      font-weight: 1000;
-      text-align:center;
-      border: 1px solid rgba(255,255,255,.16);
-      background: rgba(10,12,18,.55);
-      color: rgba(255,255,255,.92);
-      box-shadow: 0 14px 40px rgba(0,0,0,.18);
-      backdrop-filter: blur(12px);
-      transition: transform .08s ease, filter .2s ease, background .2s ease;
-      user-select:none;
-    }
-    .gbtn:hover{filter:brightness(1.05); transform: translateY(-1px)}
-    .gbtn:active{transform: translateY(0px)}
-    .gbtn.primary{
-      background: linear-gradient(135deg, rgba(37,99,235,.55), rgba(16,185,129,.35));
-      border-color: rgba(255,255,255,.22);
-      color:#fff;
-    }
-    .fine{
-      margin: 0;
-      color: var(--muted);
-      font-size: 12.5px;
-      line-height: 1.5;
-      padding: 0 2px;
-    }
-
-    /* Pain / explanation section */
-    .section{
-      margin-top: 16px;
-      padding: 18px;
-    }
-    .secHead{
-      display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
-      margin-bottom: 10px;
-    }
-    .secHead h2{
-      margin:0;
-      font-size: 22px;
-      letter-spacing: -0.2px;
-    }
-    .secHead p{
-      margin:0;
-      color: var(--muted);
-      font-size: 13px;
-      max-width: 60ch;
-    }
-
-    .painGrid{
-      margin-top: 12px;
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
       gap: 12px;
     }
-    .painCard{
+    .panel{
       border-radius: 18px;
-      overflow:hidden;
       border: 1px solid var(--line);
       background: rgba(255,255,255,.72);
-      display:flex;
-      flex-direction:column;
-      min-height: 260px;
+      overflow:hidden;
     }
-    .painImg{
-      height: 140px;
-      background: #fff;
-      border-bottom: 1px solid var(--line);
-      position:relative;
-      display:grid;
-      place-items:center;
+    .panel .pad{padding:14px}
+    .panel h3{margin:0 0 6px; font-size:15px}
+    .panel p{margin:0; color:var(--muted); font-size:13.5px; line-height:1.6}
+
+    .figure{border-top:1px solid var(--line); background:#fff}
+    .figure img{width:100%; display:block; object-fit:cover}
+    .cap{padding:10px 12px; font-size:12.5px; color:var(--muted); line-height:1.5; border-top:1px solid var(--line)}
+
+    /* Evidence list */
+    .bullets{margin:10px 0 0; padding-left:18px}
+    .bullets li{margin:6px 0; color:var(--muted); font-size:13.5px; line-height:1.6}
+
+    /* FAQ */
+    details{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.72);
+      border-radius: 16px;
+      padding: 12px 12px;
     }
-    .painImg img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-    .painPh{
-      position:absolute; inset:0;
-      display:grid; place-items:center;
-      font-weight:1000;
-      color:#6b7280;
-      background:
-        linear-gradient(135deg, rgba(0,0,0,.03), rgba(0,0,0,.01)),
-        repeating-linear-gradient(45deg, rgba(0,0,0,.06) 0 12px, rgba(0,0,0,.02) 12px 24px);
-    }
-    .painBody{
-      padding: 12px;
-      display:flex;
-      flex-direction:column;
-      gap: 6px;
-    }
-    .painBody b{font-size:13px}
-    .painBody span{font-size:13px;color:var(--muted);line-height:1.45}
+    details + details{margin-top:10px}
+    summary{cursor:pointer; font-weight:900; font-size:14px}
+    details p{margin:10px 0 0; color:var(--muted); font-size:13.5px; line-height:1.65}
 
     /* Footer */
-    .footer{
+    footer{
       margin: 18px 0 8px;
       display:flex; flex-wrap:wrap; gap:10px;
       justify-content:center;
@@ -316,14 +254,11 @@
     .sep{opacity:.5}
 
     @media (max-width: 980px){
-      .hero{grid-template-columns: 1fr}
+      .grid{grid-template-columns:1fr}
       h1{font-size: 36px}
-      .benefits{grid-template-columns:1fr}
-      .glassBtns{grid-template-columns:1fr}
-      .painGrid{grid-template-columns: 1fr 1fr}
-    }
-    @media (max-width: 520px){
-      .painGrid{grid-template-columns: 1fr}
+      .heroBadges{grid-template-columns:1fr}
+      .two{grid-template-columns:1fr}
+      .media{min-height: 360px}
     }
   </style>
 </head>
@@ -331,154 +266,248 @@
 <body>
   <div class="wrap">
 
-    <header class="top">
-      <div class="brand">
-        <span class="dot"></span>
-        WarmesHerz
-      </div>
-      <nav class="nav">
+    <header>
+      <div class="brand"><span class="dot"></span>WarmesHerz</div>
+      <nav>
+        <a href="#science">Wie Wärme wirkt</a>
+        <a href="#modes">Modi</a>
+        <a href="#faq">FAQ</a>
         <a href="./produkt.html">Produkt</a>
-        <a href="#pain">Wie es hilft</a>
-        <a href="./impressum.html">Impressum</a>
-        <a href="./datenschutz.html">Datenschutz</a>
-        <a href="./widerruf.html">Widerruf</a>
         <a class="cta" href="./produkt.html#checkout">Jetzt kaufen</a>
       </nav>
     </header>
 
-    <section class="hero">
+    <!-- HERO -->
+    <section class="grid">
       <div class="card heroLeft">
-        <span class="kicker">Komfort · Wärme · Entspannung</span>
-        <h1>Wärme, die sich wie Hilfe anfühlt.</h1>
+        <span class="kicker">Medical-Look · Klar erklärt · Alltagstauglich</span>
+        <h1>Wärme & Vibration – für spürbare Entspannung im Alltag.</h1>
         <p class="sub">
-          WarmesHerz ist ein Wärmegürtel für entspannte Wärme im Alltag – cleanes Design, simple Anwendung,
-          Fokus auf Komfort.
+          WarmesHerz ist ein Wärmegürtel mit Wärme- und Vibrationsmodus. Auf dieser Seite erklären wir dir
+          transparent, was Wärme physiologisch macht – und wo die Evidenz stark oder gemischt ist.
         </p>
 
-        <div class="benefits">
-          <div class="pill">
-            <div class="ico">✓</div>
-            <div>
-              <b>Einfach & schnell</b>
-              <span>Anlegen, starten, entspannen – ohne komplizierte Menüs.</span>
-            </div>
-          </div>
-          <div class="pill">
-            <div class="ico">⏱</div>
-            <div>
-              <b>Abschaltautomatik</b>
-              <span>Für ein beruhigtes Gefühl bei der Anwendung.</span>
-            </div>
-          </div>
-          <div class="pill">
-            <div class="ico">🧵</div>
-            <div>
-              <b>Angenehm zu tragen</b>
-              <span>Weich, flexibel, alltagstauglich – auch beim Sitzen.</span>
-            </div>
-          </div>
-          <div class="pill">
-            <div class="ico">🔒</div>
-            <div>
-              <b>Sicher bezahlen</b>
-              <span>PayPal und Karte – Checkout über etablierte Anbieter.</span>
-            </div>
-          </div>
+        <div class="heroBadges">
+          <div class="badge"><div class="ico">✓</div><div><b>Wärme kann entlasten</b><span>Häufig genutzt zur Entspannung und bei Muskelverspannung.</span></div></div>
+          <div class="badge"><div class="ico">🧠</div><div><b>Schmerz ist auch „Signal“</b><span>Wärme kann Wahrnehmung und Muskeltonus beeinflussen.</span></div></div>
+          <div class="badge"><div class="ico">🔋</div><div><b>Akku + Type-C</b><span>Kabellos im Alltag – Zuhause, Büro, unterwegs.</span></div></div>
+          <div class="badge"><div class="ico">🔒</div><div><b>Sicherer Checkout</b><span>Zahlung über etablierte Anbieter (PayPal/Karte, je nach Setup).</span></div></div>
         </div>
+
+        <div class="heroCTA">
+          <a class="btn primary" href="./produkt.html#checkout">Jetzt kaufen</a>
+          <a class="btn" href="./produkt.html">Produktdetails</a>
+        </div>
+
+        <p class="note">
+          Hinweis: WarmesHerz ist ein Wellness-/Komfort-Produkt und ersetzt keine medizinische Diagnose oder Behandlung.
+          Bei starken/anhaltenden Beschwerden bitte ärztlich abklären.
+        </p>
       </div>
 
       <div class="card heroRight">
-        <div class="productMedia">
-          <!-- ✅ Wenn du das Bild hochgeladen hast, klappt das direkt:
-               <img src="./assets/product.jpg" alt="WarmesHerz Wärmegürtel"> -->
-
-          <!-- Platzhalter (wird automatisch überdeckt, sobald img existiert und geladen wird): -->
-          <div class="ph">PRODUKTBILD: assets/product.jpg</div>
-
-          <!-- Optional: Wenn du erstmal direkt das Bild im Root hochlädst,
-               ändere src z.B. auf "./product.jpg" -->
-          <img src="./assets/product.jpg" alt="WarmesHerz Wärmegürtel" onload="this.previousElementSibling.style.display='none';" onerror="this.style.display='none';" />
+        <!-- Cleanste Lifestyle-Option ohne „Uterine“-Framing: Mann trägt Gürtel -->
+        <div class="media">
+          <img src="S641606816d334e68a88bee4a67b18d8fE.avif" alt="WarmesHerz – Anwendung am unteren Rücken" />
         </div>
-
         <div class="priceRow">
           <div class="price">39,00 €</div>
-          <div class="trust">Versand aus DE/EU*</div>
+          <div class="chip">Kabellos</div>
         </div>
-
-        <div class="glassBtns">
-          <a class="gbtn" href="./produkt.html#checkout">Details ansehen</a>
-          <a class="gbtn primary" href="./produkt.html#checkout">Jetzt kaufen</a>
-        </div>
-
-        <p class="fine">
-          *Text anpassen, sobald du Versand genau weißt. Keine Heilversprechen – Fokus auf Komfort & Wärme.
-        </p>
       </div>
     </section>
 
-    <!-- Pain / Erklärung Section (1 Section wie du wolltest) -->
-    <section class="card section" id="pain">
-      <div class="secHead">
+    <!-- SCIENCE -->
+    <section class="card section" id="science">
+      <div class="head">
         <div>
-          <h2>So wirkt Wärme im Alltag</h2>
-          <p>Hier kommen später deine 4 erklärenden Bilder rein (Schmerz-Zonen / Alltag / Anwendung / Ergebnis).</p>
+          <h2>Wie Wärme physiologisch wirkt (verständlich, aber seriös)</h2>
+          <p>Wärme ist keine „Magie“ – sie wirkt über Durchblutung, Muskeltonus und Schmerzverarbeitung.</p>
         </div>
-        <a class="gbtn" href="./produkt.html#checkout" style="padding:10px 12px; border-radius:14px;">Zum Kauf</a>
+        <a class="btn" href="./produkt.html#checkout" style="padding:10px 12px;border-radius:14px;">Zum Checkout</a>
       </div>
 
-      <div class="painGrid">
-        <div class="painCard">
-          <div class="painImg">
-            <div class="painPh">pain-1.jpg</div>
-            <img src="./assets/pain-1.jpg" alt="Schmerzpunkt / Problem" onload="this.previousElementSibling.style.display='none';" onerror="this.style.display='none';">
+      <div class="two">
+        <div class="panel">
+          <div class="pad">
+            <h3>1) Muskulatur & „Tonus“</h3>
+            <p>
+              Wärme kann Muskelentspannung fördern und das Gefühl von Steifigkeit reduzieren.
+              In klinischen Übersichten (z. B. Physiotherapie-Infos) wird Wärme u. a. mit
+              „mehr Entspannung / weniger Spasmus“ und „mehr Durchblutung“ beschrieben.
+            </p>
+            <ul class="bullets">
+              <li>Wärme kann Schmerzen lindern, Steifigkeit reduzieren und die Muskulatur entspannen. (Patienteninfos) :contentReference[oaicite:4]{index=4}</li>
+              <li>Bei akuten/subakuten Rückenschmerzen zeigte „heat wrap“ in Studien kurzfristige Verbesserungen. :contentReference[oaicite:5]{index=5}</li>
+            </ul>
           </div>
-          <div class="painBody">
-            <b>1) Problem</b>
-            <span>Bildidee: Rücken/Alltag – „verspannt, sitzend, gestresst“ (clean, medizinisch, nicht dramatisch).</span>
-          </div>
-        </div>
-
-        <div class="painCard">
-          <div class="painImg">
-            <div class="painPh">pain-2.jpg</div>
-            <img src="./assets/pain-2.jpg" alt="Wärme trifft Zone" onload="this.previousElementSibling.style.display='none';" onerror="this.style.display='none';">
-          </div>
-          <div class="painBody">
-            <b>2) Anwendung</b>
-            <span>Bildidee: Gürtel angelegt, dezente Wärme-Visualisierung (soft orange/rot, apotheken-like).</span>
+          <div class="figure">
+            <img src="S6bbc507a20e34536b66ea841f293a075B.avif" alt="Wärme/Rotlicht – Visualisierung" />
+            <div class="cap">Bild: Wärmebereich (LED/„Red Light“ Visualisierung). Wichtig: Wirkung kann je nach Person/Problem stark variieren.</div>
           </div>
         </div>
 
-        <div class="painCard">
-          <div class="painImg">
-            <div class="painPh">pain-3.jpg</div>
-            <img src="./assets/pain-3.jpg" alt="Tiefe Wärme / Komfort" onload="this.previousElementSibling.style.display='none';" onerror="this.style.display='none';">
+        <div class="panel">
+          <div class="pad">
+            <h3>2) Wärme & Schmerz-Wahrnehmung</h3>
+            <p>
+              Schmerz entsteht nicht nur „im Rücken“, sondern auch in der Verarbeitung im Nervensystem.
+              Wärme kann als angenehmer Reiz wirken und die Wahrnehmung überlagern – viele nutzen das als
+              Teil ihrer Entspannungsroutine.
+            </p>
+            <ul class="bullets">
+              <li>NHS-Infos betonen: „gentle warmth“ kann Schmerzen/Spasmus beruhigen – nicht „so heiß wie möglich“. :contentReference[oaicite:6]{index=6}</li>
+              <li>Für Rot-/Infrarot-Ansätze ist die Evidenz je nach Indikation gemischt: es gibt Reviews mit Potential, aber auch Reviews ohne klaren Nutzen bei unspezifischem Low-Back-Pain. :contentReference[oaicite:7]{index=7}</li>
+            </ul>
           </div>
-          <div class="painBody">
-            <b>3) Komfort</b>
-            <span>Bildidee: Querschnitt/Illustration „Wärmebereich“ – aber neutral, ohne medizinische Heil-Claims.</span>
-          </div>
-        </div>
-
-        <div class="painCard">
-          <div class="painImg">
-            <div class="painPh">pain-4.jpg</div>
-            <img src="./assets/pain-4.jpg" alt="Ergebnis / Entspannung" onload="this.previousElementSibling.style.display='none';" onerror="this.style.display='none';">
-          </div>
-          <div class="painBody">
-            <b>4) Ergebnis</b>
-            <span>Bildidee: entspannter Alltag (Sofa/Arbeiten) – „fühlt sich besser an“, kein Heilversprechen.</span>
+          <div class="figure">
+            <img src="Sc01036608f51490bbafaedcb1a5f85427.avif" alt="Alltag – Wärmegefühl am Bauch/Rücken" />
+            <div class="cap">Bild: Alltagsszene. Hinweis: Die im Bild stehenden Claims sind Hersteller-Marketing; wir formulieren bewusst neutral.</div>
           </div>
         </div>
       </div>
     </section>
 
-    <footer class="footer">
+    <!-- MODES -->
+    <section class="card section" id="modes">
+      <div class="head">
+        <div>
+          <h2>Modi: Wärme + Vibration (was man realistisch erwarten kann)</h2>
+          <p>Wärme = Komfort/Entspannung. Vibration = zusätzlicher Reiz, ähnlich Massage-Feeling.</p>
+        </div>
+      </div>
+
+      <div class="two">
+        <div class="panel">
+          <div class="pad">
+            <h3>Wärmemodus</h3>
+            <p>
+              Bei Wärme steht Komfort im Vordergrund. Entscheidend ist, dass es angenehm bleibt
+              (nicht „maximal heiß“). Viele Anwendungen sind zeitlich begrenzt.
+            </p>
+            <ul class="bullets">
+              <li>Bei akuten/subakuten Rückenschmerzen gibt es moderate Evidenz für kurzfristige Effekte von oberflächlicher Wärme. :contentReference[oaicite:8]{index=8}</li>
+              <li>Wärme wird in klinischen Patienteninfos u. a. mit „mehr Entspannung / weniger Spasmus“ beschrieben. :contentReference[oaicite:9]{index=9}</li>
+            </ul>
+          </div>
+          <div class="figure">
+            <img src="S414decc615c14c93ac9387a626701cbeH.avif" alt="Wärmegürtel – kabellos" />
+            <div class="cap">Bild: kabellose Nutzung. (Das eingebrannte „Cordless…“ im Bild ist ok für Feature-Nachweis, aber nicht als Premium-Hero.)</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="pad">
+            <h3>Vibrationsmodus</h3>
+            <p>
+              Vibration wird häufig als „Massage-ähnlich“ erlebt. Die Evidenz bei Rückenschmerz hängt stark von
+              Protokoll und Person ab; bei Whole-Body-Vibration gibt es Meta-Analysen mit positiven Effekten auf
+              Schmerz/Funktion, aber die optimale Anwendung variiert.
+            </p>
+            <ul class="bullets">
+              <li>Meta-Analysen zu WBV berichten Verbesserungen bei chronischem unspezifischem Low-Back-Pain (abhängig von Protokollen). :contentReference[oaicite:10]{index=10}</li>
+            </ul>
+          </div>
+          <div class="figure">
+            <img src="S1247d4c138d741c4b1253d1b5adb1b75j.avif" alt="Touchscreen Controls – Wärme/Vibration" />
+            <div class="cap">Bild: Bedienung & Modi (Wärme / Vibration / Sperre). Perfekt für Vertrauen, weil es konkret ist.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- POWER -->
+    <section class="card section" id="power">
+      <div class="head">
+        <div>
+          <h2>Akku & Bedienung (Alltagstauglichkeit)</h2>
+          <p>Kabellos, Type-C, Statusanzeige – das sind die Dinge, die im echten Alltag zählen.</p>
+        </div>
+      </div>
+
+      <div class="two">
+        <div class="panel">
+          <div class="figure">
+            <img src="S64a9a16806dd4be28b7bf4d6c58f38f6u.avif" alt="5000mAh Akku – Type-C" />
+            <div class="cap">Bild: Akku/Type-C (Herstellerangabe 5000mAh – wenn dein Produkt abweicht, sag’s mir, dann passe ich es sauber an.)</div>
+          </div>
+          <div class="pad">
+            <h3>Warum Type-C + Akku wichtig ist</h3>
+            <p>
+              Für Conversion ist nicht nur „Wärme“, sondern auch: Kann ich es im Alltag nutzen,
+              ohne Kabelstress? Genau dafür ist die Akku/Type-C-Story da.
+            </p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="figure">
+            <img src="S5cc52da8774f424e927d8938622cabacX.avif" alt="°C/°F Umschaltung" />
+            <div class="cap">Bild: °C/°F-Umschaltung (Detail-Trust, passt gut in diese Sektion oder später in die Produkt-FAQ).</div>
+          </div>
+          <div class="pad">
+            <h3>Detail-Trust</h3>
+            <p>
+              Solche kleinen Feature-Grafiken wirken wie „Technik-Proof“ – gut, um Skepsis abzubauen.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="card section" id="faq">
+      <div class="head">
+        <div>
+          <h2>FAQ (seriös, ohne übertriebene Claims)</h2>
+          <p>Kurze, klare Antworten – und wenn nötig: Hinweis auf ärztliche Abklärung.</p>
+        </div>
+      </div>
+
+      <details>
+        <summary>Ist das ein Medizinprodukt?</summary>
+        <p>
+          Das ist ein Komfort-/Wellness-Produkt zur Wärme- und Entspannungsanwendung.
+          Es ersetzt keine medizinische Behandlung. Wenn du starke oder anhaltende Schmerzen hast,
+          klär das bitte ärztlich ab.
+        </p>
+      </details>
+
+      <details>
+        <summary>Wie lange sollte man Wärme anwenden?</summary>
+        <p>
+          Viele klinische Patienteninfos empfehlen eher „angenehme Wärme“ und zeitlich begrenzte Anwendungen,
+          statt dauerhaft hoher Hitze. Achte auf Hautgefühl und Pausen. :contentReference[oaicite:11]{index=11}
+        </p>
+      </details>
+
+      <details>
+        <summary>Hilft Rotlicht/Infrared „wissenschaftlich“?</summary>
+        <p>
+          Je nach Anwendung/Indikation gibt es Reviews mit positiven Ergebnissen, aber auch systematische Reviews,
+          die bei unspezifischem Low-Back-Pain keinen klaren Zusatznutzen fanden – wir kommunizieren das bewusst
+          transparent als „gemischte Evidenz“. :contentReference[oaicite:12]{index=12}
+        </p>
+      </details>
+
+      <details>
+        <summary>Für wen ist das ungeeignet?</summary>
+        <p>
+          Wenn du eingeschränkte Sensibilität/ Durchblutung, akute Entzündungen, Hautprobleme oder Unsicherheiten hast:
+          lieber vorher ärztlich/physiotherapeutisch abklären. (Allgemeine Wärme-Sicherheitshinweise findet man z. B.
+          in klinischen Patienteninfos.) :contentReference[oaicite:13]{index=13}
+        </p>
+      </details>
+    </section>
+
+    <footer>
       <span>© <span id="year"></span> WarmesHerz</span>
       <span class="sep">·</span><a href="./impressum.html">Impressum</a>
       <span class="sep">·</span><a href="./datenschutz.html">Datenschutz</a>
       <span class="sep">·</span><a href="./widerruf.html">Widerruf</a>
+      <span class="sep">·</span><a href="./produkt.html">Produkt</a>
     </footer>
+
   </div>
 
   <script>
