@@ -15,7 +15,6 @@
       --text-dark:#1d1d1f;
       --text-medium:#424245;
 
-      /* Glass */
       --glass-ultra: rgba(255,255,255,0.12);
       --glass-border: rgba(255,255,255,0.68);
 
@@ -60,9 +59,16 @@
       color:var(--text-dark);
       text-decoration:none;
       letter-spacing:-1px;
-      display:flex; align-items:center; gap:8px;
+      display:inline-flex;
+      align-items:center;
+      gap:0;              /* FIX: no unwanted space */
+      white-space:nowrap; /* FIX: keep logo tight */
     }
-    .logo span{color:var(--primary-teal)}
+    .logo span{
+      color:var(--primary-teal);
+      margin:0; padding:0; /* FIX: no spacing around H */
+    }
+
     .nav{
       display:flex;
       gap:18px;
@@ -165,8 +171,6 @@
       transition: transform 12s ease;
       transform: scale(1.02);
     }
-
-    /* IMPORTANT: URL-encode filenames for best mobile compatibility */
     .img-left{background-image:url('Tragefoto%20Infrarot%20fokus.jpg')}
     .img-right{background-image:url('Tragefoto%20Bedinunf%20Fernbedinung%20fokus.jpg')}
 
@@ -175,7 +179,6 @@
       top:50%; left:50%;
       transform: translate(-50%,-50%);
       background: rgba(255,255,255,0.10);
-      /* “durchsichtiger und unverschwommener”: less blur, still glass */
       backdrop-filter: blur(18px) saturate(170%);
       -webkit-backdrop-filter: blur(18px) saturate(170%);
       padding: 2.4rem 2.0rem;
@@ -310,7 +313,7 @@
       flex: 1.2;
       display:flex;
       flex-direction:column;
-      gap: 38px;
+      gap: 32px;
     }
     .wirkung-images-stack img{
       width:100%;
@@ -344,14 +347,14 @@
       font-family:'Playfair Display',serif;
       font-size: 3.2rem;
       line-height:1.05;
-      margin-bottom: 1.6rem;
+      margin-bottom: 1.2rem;
       letter-spacing:-.6px;
     }
     .wirkung-text-side p{
       color: var(--text-medium);
       font-size: 1.03rem;
       line-height: 1.9;
-      margin-top: 14px;
+      margin-top: 12px;
     }
     .wirkung-points{
       margin-top: 18px;
@@ -392,15 +395,6 @@
       font-size: .98rem;
       line-height: 1.85;
     }
-    .wirkung-note{
-      margin-top: 16px;
-      font-size: .88rem;
-      color: rgba(66,66,69,0.85);
-      padding: 12px 14px;
-      border-radius: 16px;
-      border: 1px dashed rgba(29,29,31,0.18);
-      background: rgba(255,255,255,0.55);
-    }
 
     /* ===== Komfort-Bereiche ===== */
     #bereiche{ padding-top: 40px; }
@@ -412,7 +406,6 @@
       background:#fff;
     }
     .comfort-block.reverse{flex-direction:row-reverse}
-
     .comfort-image{
       flex: 1.2;
       height: 600px;
@@ -429,7 +422,6 @@
       object-position: center;
       display:block;
     }
-
     .comfort-content{ flex:1; padding: 100px; }
     .comfort-content h3{
       font-family:'Playfair Display',serif;
@@ -468,24 +460,6 @@
     }
 
     /* ===== Focus Grid ===== */
-    .focus-section-head{
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 10% 18px;
-    }
-    .focus-section-head h2{
-      font-family:'Playfair Display',serif;
-      font-size: 2.5rem;
-      letter-spacing:-.4px;
-      margin-bottom: 10px;
-    }
-    .focus-section-head p{
-      color: var(--text-medium);
-      font-size: 1.02rem;
-      line-height: 1.85;
-      max-width: 80ch;
-    }
-
     .belt-focus-wrap{
       width:100vw;
       position:relative;
@@ -561,7 +535,6 @@
       text-transform: uppercase;
       opacity:.85;
     }
-
     @media (min-width: 769px){
       .focus-box:hover{flex:1.6}
       .focus-box:hover img{transform:scale(1.1); filter: brightness(.92) saturate(1.08)}
@@ -586,7 +559,6 @@
     .aph-contact-head{text-align:center;margin-bottom:60px}
     .aph-contact-head h2{font-size:2.5rem;font-weight:900;text-transform:uppercase;margin-bottom:10px}
     .aph-contact-head p{color:var(--primary-teal);font-weight:700;letter-spacing:2px;text-transform:uppercase}
-
     .aph-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px}
     .aph-input-group{display:flex;flex-direction:column}
     .aph-input-group label{font-size:.75rem;font-weight:700;text-transform:uppercase;margin-bottom:10px;color:#999}
@@ -600,7 +572,6 @@
       margin-top:20px; border-radius:4px; letter-spacing:1px;
     }
     .aph-submit-btn:hover{background:#e55a0d; transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,0.2)}
-
     .footer-custom{
       width:100vw; position:relative; left:50%; right:50%;
       margin-left:-50vw; margin-right:-50vw;
@@ -622,49 +593,60 @@
       .nav-toggle{display:block}
       .nav-drawer.show{display:block}
 
-      /* HERO mobile: images stacked, overlay centered between, less cover */
       .hero{height:auto; flex-direction:column}
       .hero-images{flex-direction:column; height: 600px}
       .hero-img{flex:none; height: 300px}
+
+      /* hero box smaller on mobile */
       .hero-overlay{
-        width: 86%;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-        padding: 1.25rem 1.1rem; /* smaller so it covers less image */
-        max-width: 430px;
-        background: rgba(255,255,255,0.09);
-        backdrop-filter: blur(14px) saturate(165%);
-        -webkit-backdrop-filter: blur(14px) saturate(165%);
+        width: 82%;
+        max-width: 380px;
+        padding: .95rem .95rem;
+        background: rgba(255,255,255,0.085);
+        backdrop-filter: blur(12px) saturate(160%);
+        -webkit-backdrop-filter: blur(12px) saturate(160%);
       }
-      .hero-overlay h1{font-size:1.85rem}
-      .hero-overlay p{margin-bottom: 1.05rem}
-      .cta-btn-glass{width:100%; text-align:center}
+      .hero-overlay h1{font-size:1.72rem;margin-bottom:.55rem}
+      .hero-overlay p{font-size:.95rem; margin-bottom:.85rem}
+      .cta-btn-glass{width:100%; text-align:center; padding:.95rem 1.2rem}
 
       .feature-grid{grid-template-columns:1fr}
 
-      .wirkung-row{flex-direction:column; gap: 40px}
-      .wirkung-text-side{position:static; top:auto; padding-top:0}
-      .wirkung-text-side h2{font-size:2.45rem}
-      .wirkung-images-stack{gap:20px}
+      /* MOBILE ORDER for Wirkung: title -> images -> explanations */
+      .wirkung-row{flex-direction:column; gap: 26px}
+      .wirkung-text-side{
+        position:static;
+        top:auto;
+        padding-top:0;
+        order: 1; /* title + first intro stays first */
+      }
+      .wirkung-images-stack{
+        order: 2; /* images come after title on mobile */
+        gap: 16px;
+      }
+      .wirkung-text-side .wirkung-points{
+        order: 3; /* explanations after images */
+      }
+
+      /* We need a wrapper to enforce ordering reliably */
+      .wirkung-text-side{display:flex; flex-direction:column}
+      .wirkung-text-side h2{font-size:2.25rem}
+      .wirkung-text-side p:first-of-type{margin-top:10px}
+      .wirkung-text-side .wirkung-points{margin-top:14px}
 
       #bereiche{padding-top: 18px}
-      .comfort-block,.comfort-block.reverse{
-        flex-direction:column !important;
-        min-height:auto;
-      }
+      .comfort-block,.comfort-block.reverse{flex-direction:column !important; min-height:auto}
       .comfort-content{padding: 44px 20px; order:1}
 
-      /* FIX: ensure images always show in portrait */
       .comfort-image{
         width:100%;
-        height: auto;               /* let img define height */
-        min-height: 320px;          /* guarantee visible area */
+        height: auto;
+        min-height: 320px;
         order:2;
         position: relative;
       }
       .comfort-image img{
-        position: relative;         /* not absolute on mobile */
+        position: relative;
         width:100%;
         height:auto;
         object-fit: cover;
@@ -673,7 +655,6 @@
 
       .section-spacer{height: 70px}
 
-      .focus-section-head{padding: 0 20px 18px}
       .belt-focus-wrap{flex-direction:column; height:auto}
       .focus-box{
         height: 360px;
@@ -687,10 +668,7 @@
         background-color: var(--accent-orange);
         box-shadow: 0 0 20px rgba(255,101,15,0.6);
       }
-      .focus-box.active-mobile p{
-        opacity:1;
-        transform: translateY(0);
-      }
+      .focus-box.active-mobile p{opacity:1; transform: translateY(0)}
 
       .footer-grid{grid-template-columns:1fr; text-align:center}
       .aph-form-grid{grid-template-columns:1fr}
@@ -702,12 +680,12 @@
 <body id="top">
 
   <header class="nav-header">
-    <a href="#top" class="logo">WarmesHerz</a>
+    <!-- FIX: remove whitespace around span by removing literal spaces in markup -->
+    <a href="#top" class="logo">Warmes<span>H</span>erz</a>
 
     <nav class="nav">
       <a href="#wirkung">Wirkung</a>
       <a href="#bereiche">Bereiche</a>
-      <a href="#features">Details</a>
       <a href="#kontakt">Kontakt</a>
       <a href="product.html" class="btn">Zur Produktseite</a>
     </nav>
@@ -720,7 +698,6 @@
   <div class="nav-drawer" id="navDrawer">
     <a href="#wirkung">Wirkung</a>
     <a href="#bereiche">Bereiche</a>
-    <a href="#features">Details</a>
     <a href="#kontakt">Kontakt</a>
     <a href="product.html" class="btn">Zur Produktseite</a>
   </div>
@@ -735,7 +712,6 @@
       <h1>HeatBelt Pro™</h1>
       <p>Infrarot-Wärme und sanfte Vibration – entwickelt für entspannte Routinen zu Hause.</p>
       <div class="hero-actions">
-        <!-- removed “Wie es wirkt” button as requested -->
         <a href="product.html" class="cta-btn-glass">Zur Produktseite</a>
       </div>
     </div>
@@ -764,17 +740,12 @@
         <img src="Bild_2026-01-11_181630653.png" alt="Wärme & Anwendung" />
         <img src="muskel%20verspannt%20image.png" alt="Vorher: angespanntes Gefühl" />
         <img src="muskel%20image%20entspannt.png" alt="Nachher: entspannteres Gefühl" />
+        <img src="Bild_2026-01-12_035113055.png" alt="Zusätzliche Darstellung" />
       </div>
 
       <div class="wirkung-text-side">
         <div class="wirkung-kicker">Physiologie • Wärme • Reizantwort</div>
         <h2>Warum Wärme & Vibration oft als hilfreich empfunden werden.</h2>
-
-        <p>
-          Hinweis vorab: HeatBelt Pro™ ist kein Medizinprodukt und ersetzt keine ärztliche Abklärung.
-          Die folgenden Punkte beschreiben <strong>allgemeine, gut bekannte Mechanismen</strong>, weshalb Wärme- und Vibrationsreize
-          bei vielen Menschen das <em>Schmerz- und Verspannungsempfinden</em> positiv beeinflussen können.
-        </p>
 
         <div class="wirkung-points">
           <div class="point">
@@ -822,10 +793,6 @@
             </div>
           </div>
         </div>
-
-        <div class="wirkung-note">
-          Wenn Schmerzen stark sind, neu auftreten oder länger anhalten: bitte medizinisch abklären lassen.
-        </div>
       </div>
 
     </div>
@@ -862,7 +829,6 @@
         </div>
       </div>
       <div class="comfort-image">
-        <!-- URL-encoded (space + parentheses) to fix mobile issues -->
         <img src="Bild_2025-12-03_231518829_800x800%20(1).webp" alt="Lenden & Rücken" />
       </div>
     </div>
@@ -902,15 +868,8 @@
 
   <div class="section-spacer"></div>
 
-  <div class="focus-section-head" id="features">
-    <h2>Details, die im Alltag zählen.</h2>
-    <p>
-      Vier Features, die HeatBelt Pro™ unkompliziert machen – damit die Routine wirklich im Alltag bleibt.
-      (Auf Mobile: Tippen, um den Text einzublenden.)
-    </p>
-  </div>
-
-  <div class="belt-focus-wrap">
+  <!-- REMOVED: focus-section-head text block completely -->
+  <div class="belt-focus-wrap" id="features">
     <div class="focus-box" onclick="toggleFocus(this)">
       <img src="S64a9a16806dd4be28b7bf4d6c58f38f6u.avif" alt="Kabellose Freiheit" />
       <div class="focus-overlay"></div>
@@ -1029,7 +988,7 @@
       });
     }, observerOptions);
 
-    document.querySelectorAll('.plate, .comfort-block, .wirkung-row, .focus-section-head').forEach(el => {
+    document.querySelectorAll('.plate, .comfort-block, .wirkung-row, .belt-focus-wrap').forEach(el => {
       el.style.opacity = "0";
       el.style.transform = "translateY(26px)";
       el.style.transition = "all 0.85s ease-out";
