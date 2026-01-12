@@ -15,8 +15,9 @@
       --text-dark:#1d1d1f;
       --text-medium:#424245;
 
-      --glass-ultra: rgba(255,255,255,0.18);
-      --glass-border: rgba(255,255,255,0.70);
+      /* Glass */
+      --glass-ultra: rgba(255,255,255,0.12);
+      --glass-border: rgba(255,255,255,0.68);
 
       --bg-dark:#292929;
       --bg-focus:#1d1d1f;
@@ -24,8 +25,7 @@
       --radius-lg: 26px;
       --radius-xl: 40px;
 
-      --shadow-soft: 0 18px 50px rgba(0,0,0,0.08);
-      --shadow-glass: 0 30px 70px rgba(0,0,0,0.14);
+      --shadow-glass: 0 26px 70px rgba(0,0,0,0.12);
     }
 
     *{margin:0;padding:0;box-sizing:border-box}
@@ -165,22 +165,25 @@
       transition: transform 12s ease;
       transform: scale(1.02);
     }
-    .img-left{background-image:url('Tragefoto Infrarot fokus.jpg')}
-    .img-right{background-image:url('Tragefoto Bedinunf Fernbedinung fokus.jpg')}
+
+    /* IMPORTANT: URL-encode filenames for best mobile compatibility */
+    .img-left{background-image:url('Tragefoto%20Infrarot%20fokus.jpg')}
+    .img-right{background-image:url('Tragefoto%20Bedinunf%20Fernbedinung%20fokus.jpg')}
 
     .hero-overlay{
       position:absolute;
       top:50%; left:50%;
       transform: translate(-50%,-50%);
-      background: rgba(255,255,255,0.14);
-      backdrop-filter: blur(48px) saturate(190%);
-      -webkit-backdrop-filter: blur(48px) saturate(190%);
-      padding: 2.7rem 2.2rem;
+      background: rgba(255,255,255,0.10);
+      /* “durchsichtiger und unverschwommener”: less blur, still glass */
+      backdrop-filter: blur(18px) saturate(170%);
+      -webkit-backdrop-filter: blur(18px) saturate(170%);
+      padding: 2.4rem 2.0rem;
       border-radius: var(--radius-lg);
-      border: 1px solid rgba(255,255,255,0.70);
+      border: 1px solid rgba(255,255,255,0.65);
       text-align:center;
       width:90%;
-      max-width: 480px;
+      max-width: 470px;
       box-shadow: var(--shadow-glass);
       z-index:10;
       overflow:hidden;
@@ -188,27 +191,28 @@
     .hero-overlay:before{
       content:"";
       position:absolute;
-      inset:-220px;
+      inset:-240px;
       background:
-        radial-gradient(circle at 25% 30%, rgba(67,206,175,.22), transparent 55%),
-        radial-gradient(circle at 80% 70%, rgba(255,101,15,.16), transparent 55%),
-        radial-gradient(circle at 50% 10%, rgba(255,255,255,.22), transparent 65%);
+        radial-gradient(circle at 22% 30%, rgba(67,206,175,.18), transparent 58%),
+        radial-gradient(circle at 78% 70%, rgba(255,101,15,.12), transparent 58%),
+        radial-gradient(circle at 50% 12%, rgba(255,255,255,.18), transparent 66%);
       filter: blur(10px);
-      opacity:.9;
+      opacity:.75;
       pointer-events:none;
     }
     .hero-overlay > *{position:relative; z-index:2}
+
     .hero-overlay h1{
       font-family:'Playfair Display',serif;
       font-size:2.35rem;
-      margin-bottom:1rem;
+      margin-bottom:.9rem;
       line-height:1.08;
       letter-spacing:-.3px;
     }
     .hero-overlay p{
       font-size:1rem;
       color: var(--text-medium);
-      margin-bottom: 1.7rem;
+      margin-bottom: 1.35rem;
       font-weight: 550;
       line-height: 1.75;
     }
@@ -228,25 +232,9 @@
       font-weight:700;
       font-size:.95rem;
       transition: all .25s ease;
+      width:auto;
     }
     .cta-btn-glass:hover{background:var(--accent-orange); transform:translateY(-2px)}
-    .cta-btn-ghost{
-      display:inline-block;
-      padding: 1rem 2.0rem;
-      background: rgba(255,255,255,0.22);
-      color: var(--text-dark);
-      text-decoration:none;
-      border-radius:999px;
-      font-weight:800;
-      font-size:.92rem;
-      border: 1px solid rgba(255,255,255,0.65);
-      transition: all .25s ease;
-    }
-    .cta-btn-ghost:hover{
-      transform: translateY(-2px);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.10);
-      background: rgba(255,255,255,0.32);
-    }
 
     /* ===== Feature Plates ===== */
     .feature-container{ padding: 100px 10%; background:#fff; }
@@ -284,13 +272,11 @@
       position:relative;
       line-height:1.85;
     }
-
     .glow-warm{
       position:absolute;
       top:50%; left:50%;
       width:170%; height:170%;
-      background:
-        radial-gradient(circle, rgba(255,101,15,0.14) 0%, transparent 58%);
+      background: radial-gradient(circle, rgba(255,101,15,0.14) 0%, transparent 58%);
       transform: translate(-50%,-50%);
       animation: heatPulse 6s infinite ease-in-out;
     }
@@ -298,12 +284,10 @@
       position:absolute;
       top:-55%; left:-55%;
       width:210%; height:210%;
-      background:
-        conic-gradient(from 180deg at 50% 50%, transparent 0%, rgba(67,206,175,0.10) 26%, transparent 52%);
+      background: conic-gradient(from 180deg at 50% 50%, transparent 0%, rgba(67,206,175,0.10) 26%, transparent 52%);
       animation: rotateVibe 10s infinite linear;
       opacity:.95;
     }
-
     @keyframes heatPulse{
       0%,100%{transform:translate(-50%,-50%) scale(1); opacity:.55}
       50%{transform:translate(-50%,-50%) scale(1.22); opacity:.9}
@@ -369,7 +353,6 @@
       line-height: 1.9;
       margin-top: 14px;
     }
-
     .wirkung-points{
       margin-top: 18px;
       display:flex;
@@ -478,7 +461,7 @@
       box-shadow: 0 10px 28px rgba(0,0,0,0.04);
     }
 
-    /* ===== Spacer between Bereiche and Focus Grid ===== */
+    /* Spacer between Bereiche and Focus Grid */
     .section-spacer{
       height: 80px;
       background: linear-gradient(180deg, #fff, #fafafa);
@@ -590,7 +573,7 @@
       .focus-box:hover p{opacity:1; transform:translateY(0); transition-delay:.18s}
     }
 
-    /* ===== Kontakt / Footer (unchanged styles you had) ===== */
+    /* ===== Kontakt / Footer ===== */
     .aph-contact-wrap{
       width:100vw; position:relative; left:50%; right:50%;
       margin-left:-50vw; margin-right:-50vw;
@@ -639,21 +622,24 @@
       .nav-toggle{display:block}
       .nav-drawer.show{display:block}
 
-      /* HERO mobile: images stacked, overlay centered between */
+      /* HERO mobile: images stacked, overlay centered between, less cover */
       .hero{height:auto; flex-direction:column}
-      .hero-images{flex-direction:column; height: 640px}
-      .hero-img{flex:none; height: 320px}
+      .hero-images{flex-direction:column; height: 600px}
+      .hero-img{flex:none; height: 300px}
       .hero-overlay{
-        width: 88%;
+        width: 86%;
         top: 50%;
         left: 50%;
         transform: translate(-50%,-50%);
-        padding: 1.7rem 1.4rem;
-        max-width: 460px;
+        padding: 1.25rem 1.1rem; /* smaller so it covers less image */
+        max-width: 430px;
+        background: rgba(255,255,255,0.09);
+        backdrop-filter: blur(14px) saturate(165%);
+        -webkit-backdrop-filter: blur(14px) saturate(165%);
       }
-      .hero-overlay h1{font-size:1.9rem}
-      .hero-actions{gap:8px}
-      .cta-btn-glass,.cta-btn-ghost{width:100%; text-align:center}
+      .hero-overlay h1{font-size:1.85rem}
+      .hero-overlay p{margin-bottom: 1.05rem}
+      .cta-btn-glass{width:100%; text-align:center}
 
       .feature-grid{grid-template-columns:1fr}
 
@@ -668,7 +654,22 @@
         min-height:auto;
       }
       .comfort-content{padding: 44px 20px; order:1}
-      .comfort-image{width:100%; height: 360px; order:2}
+
+      /* FIX: ensure images always show in portrait */
+      .comfort-image{
+        width:100%;
+        height: auto;               /* let img define height */
+        min-height: 320px;          /* guarantee visible area */
+        order:2;
+        position: relative;
+      }
+      .comfort-image img{
+        position: relative;         /* not absolute on mobile */
+        width:100%;
+        height:auto;
+        object-fit: cover;
+        display:block;
+      }
 
       .section-spacer{height: 70px}
 
@@ -680,7 +681,6 @@
         border-right:none;
         border-bottom:1px solid rgba(255,255,255,0.10);
       }
-      /* Mobile: tap to reveal text */
       .focus-box.active-mobile img{filter: brightness(.90) saturate(1.05)}
       .focus-box.active-mobile .focus-indicator{
         width: 90px;
@@ -733,10 +733,10 @@
 
     <div class="hero-overlay">
       <h1>HeatBelt Pro™</h1>
-      <p>Infrarot-Wärmegefühl und sanfte Vibration – für eine ruhige, hochwertige Wellness-Routine zu Hause.</p>
+      <p>Infrarot-Wärme und sanfte Vibration – entwickelt für entspannte Routinen zu Hause.</p>
       <div class="hero-actions">
+        <!-- removed “Wie es wirkt” button as requested -->
         <a href="product.html" class="cta-btn-glass">Zur Produktseite</a>
-        <a href="#wirkung" class="cta-btn-ghost">Wie es wirkt</a>
       </div>
     </div>
   </section>
@@ -746,13 +746,13 @@
       <div class="plate">
         <div class="glow-warm"></div>
         <h3>Tiefen-Wärme</h3>
-        <p>Ein gleichmäßiges, sanftes Wärmegefühl, das sich wie eine ruhige Hülle anlegt – ideal, um nach einem langen Tag bewusst herunterzufahren.</p>
+        <p>Ein gleichmäßiger Wärmereiz, der das Gewebe durchwärmt und häufig als entlastend bei Verspannungsempfinden erlebt wird.</p>
       </div>
 
       <div class="plate">
         <div class="glow-vibe"></div>
         <h3>Sanfte Impulse</h3>
-        <p>Rhythmische Schwingungen als dezentes Massagegefühl – angenehm, wenn man nicht „drücken“, sondern einfach entspannen möchte.</p>
+        <p>Rhythmische Vibration als Massage-Reiz – kann die Wahrnehmung „fester“ Stellen modulieren und die Entspannung unterstützen.</p>
       </div>
     </div>
   </section>
@@ -762,64 +762,69 @@
 
       <div class="wirkung-images-stack">
         <img src="Bild_2026-01-11_181630653.png" alt="Wärme & Anwendung" />
-        <img src="muskel verspannt image.png" alt="Vorher: angespanntes Gefühl" />
-        <img src="muskel image entspannt.png" alt="Nachher: entspannteres Gefühl" />
+        <img src="muskel%20verspannt%20image.png" alt="Vorher: angespanntes Gefühl" />
+        <img src="muskel%20image%20entspannt.png" alt="Nachher: entspannteres Gefühl" />
       </div>
 
       <div class="wirkung-text-side">
-        <div class="wirkung-kicker">Wellness • Komfort • Routine</div>
-        <h2>Wärme + Vibration, logisch erklärt.</h2>
+        <div class="wirkung-kicker">Physiologie • Wärme • Reizantwort</div>
+        <h2>Warum Wärme & Vibration oft als hilfreich empfunden werden.</h2>
 
         <p>
-          HeatBelt Pro™ ist als <strong>Entspannungsprodukt</strong> gedacht: eine ruhige Kombination aus Wärmegefühl und sanften Impulsen.
-          Viele empfinden genau diese Mischung als besonders angenehm – weil sie zwei Ebenen anspricht: <em>Wärme als „Runterkommen“</em> und
-          <em>Vibration als Massagegefühl</em>.
+          Hinweis vorab: HeatBelt Pro™ ist kein Medizinprodukt und ersetzt keine ärztliche Abklärung.
+          Die folgenden Punkte beschreiben <strong>allgemeine, gut bekannte Mechanismen</strong>, weshalb Wärme- und Vibrationsreize
+          bei vielen Menschen das <em>Schmerz- und Verspannungsempfinden</em> positiv beeinflussen können.
         </p>
 
         <div class="wirkung-points">
           <div class="point">
-            <div class="point-title">1) Muskelentspannung durch Wärmegefühl</div>
+            <div class="point-title">1) Wärme senkt Muskeltonus (Entspannung über Thermorezeptoren)</div>
             <div class="point-text">
-              Angenehme Wärme wird oft als Signal zum Loslassen wahrgenommen. Der Bereich fühlt sich „weicher“ und weniger steif an –
-              perfekt als kurze Auszeit nach Sitzen, Bildschirmarbeit oder einem aktiven Tag.
+              Wärme aktiviert Thermorezeptoren in Haut und Gewebe. Das kann reflektorisch den Muskeltonus reduzieren:
+              Muskeln lassen „leichter los“, Dehngefühl wird angenehmer und das typische Steifigkeitsgefühl nach Sitzen/Stress
+              kann abnehmen.
             </div>
           </div>
 
           <div class="point">
-            <div class="point-title">2) Wärme & Durchwärmung: „leichteres“ Körpergefühl</div>
+            <div class="point-title">2) Vasodilatation & bessere lokale Durchblutung</div>
             <div class="point-text">
-              Ein gleichmäßiges Wärmegefühl sorgt häufig für ein ruhiges, durchwärmtes Empfinden. Das unterstützt die persönliche Wohlfühl-Routine,
-              gerade wenn man abends einfach gemütlich lesen oder abschalten möchte.
+              Ein Wärmereiz führt häufig zu einer Weitstellung kleiner Blutgefäße (Vasodilatation). Dadurch kann sich die lokale
+              Durchblutung erhöhen – was mit einem besseren Sauerstoff-/Nährstoffangebot und dem Abtransport von Stoffwechselprodukten
+              zusammenhängt. Viele empfinden das als „entlastend“ im betroffenen Bereich.
             </div>
           </div>
 
           <div class="point">
-            <div class="point-title">3) „Mehr Austausch“ im Alltag (Komfort-Perspektive)</div>
+            <div class="point-title">3) Modulation der Schmerzleitung (Gate-Control-Prinzip)</div>
             <div class="point-text">
-              Viele verbinden Wärme mit einem angenehmen „Flow“-Gefühl im Gewebe – als würde der Bereich besser „durchkommen“.
-              Wichtig: HeatBelt Pro™ ist kein Medizinprodukt, es geht um Komfort und subjektives Wohlbefinden.
+              Berührungs-, Druck- und Wärmereize können die Weiterleitung von Schmerzsignalen im Nervensystem beeinflussen
+              (vereinfacht: „Gate-Control“). Dadurch kann die Schmerzintensität subjektiv geringer wirken – besonders bei
+              muskulär bedingtem Unwohlsein.
             </div>
           </div>
 
           <div class="point">
-            <div class="point-title">4) Vibration: Massagegefühl gegen „Knoten-Gefühl“</div>
+            <div class="point-title">4) Vibration als mechanischer Reiz (Massage-Effekt ohne Druck)</div>
             <div class="point-text">
-              Die Vibration liefert einen sanften Reiz, den viele als Massage wahrnehmen. Gerade wenn Wärme vorher ein entspanntes Grundgefühl schafft,
-              wirkt die Vibration oft angenehmer und „tiefer“ – ohne starken Druck.
+              Vibration stimuliert Mechanorezeptoren und kann die Wahrnehmung „knotiger“/fester Stellen verändern.
+              Zusätzlich wird die Körperwahrnehmung (Propriozeption) angeregt – viele erleben dadurch ein „lockeres“ Gefühl.
+              In Kombination mit vorheriger Wärme (weicheres Gewebe) wird der Vibrationsreiz oft als angenehmer empfunden.
             </div>
           </div>
 
           <div class="point">
-            <div class="point-title">5) Infrarot als ruhige Routine-Wärme</div>
+            <div class="point-title">5) Infrarot-Wärme: gleichmäßige Erwärmung & Komfortdosierung</div>
             <div class="point-text">
-              Infrarot-Wärme wird häufig gewählt, weil sie als gleichmäßig und angenehm empfunden wird.
-              Für die beste Erfahrung gilt: <strong>sanft starten</strong>, eine angenehme Intensität wählen und regelmäßig nutzen.
+              Infrarotstrahlung wird genutzt, um Wärme gleichmäßig an die Körperoberfläche zu bringen. Entscheidend ist die
+              richtige Dosierung: angenehm warm statt „zu heiß“, dafür regelmäßiger. So bleibt die Routine komfortabel und
+              kann das Verspannungsempfinden über die Zeit besser adressieren.
             </div>
           </div>
         </div>
 
         <div class="wirkung-note">
-          Hinweis: Wellness-/Komfortprodukt. Kein medizinischer Zweck, keine Diagnose oder Behandlung.
+          Wenn Schmerzen stark sind, neu auftreten oder länger anhalten: bitte medizinisch abklären lassen.
         </div>
       </div>
 
@@ -827,19 +832,16 @@
   </section>
 
   <section id="bereiche">
-
     <div class="comfort-block">
       <div class="comfort-content">
         <h3>Nacken & Schulter</h3>
         <p>
-          Ideal nach Bildschirmarbeit oder einem langen Tag: Die Wärme wirkt wie eine ruhige „Schwere“, die den oberen Rückenbereich
-          in eine entspannte Pause bringt. Die sanften Impulse können das Massagegefühl abrunden.
-        </p>
-        <p>
-          <strong>So nutzen viele es:</strong> angenehm warm einstellen, zurücklehnen – z. B. 15–30 Minuten als Feierabend-Routine.
+          Der obere Rücken reagiert oft sensibel auf Stress und Bildschirmhaltung. Wärme kann hier den Muskeltonus senken,
+          die lokale Durchblutung fördern und so das „Zug-/Druckgefühl“ reduzieren. Die Vibration kann zusätzlich
+          Mechanorezeptoren stimulieren (Massage-Reiz ohne starken Druck).
         </p>
         <div class="comfort-mini">
-          <span>Feierabend-Pause</span><span>Wärmegefühl</span><span>Massage-Impuls</span>
+          <span>Wärme</span><span>Vibration</span><span>Alltagshaltung</span>
         </div>
       </div>
       <div class="comfort-image">
@@ -851,18 +853,17 @@
       <div class="comfort-content">
         <h3>Lenden & Rücken</h3>
         <p>
-          Die ergonomische Passform schmiegt sich präzise an Ihre untere Rückenpartie an. Eine konstante, beruhigende Wärmequelle
-          umschließt diesen Bereich und schafft ein diskretes Wohlgefühl, während Sie entspannt lesen oder Ihre Lieblingsserie genießen.
-        </p>
-        <p>
-          <strong>Tipp für die Routine:</strong> lieber regelmäßig angenehm warm als selten „maximal“ – so bleibt es komfortabel.
+          Im unteren Rücken spielen Muskeltonus, Durchblutung und nervale Reizverarbeitung häufig zusammen. Ein kontrollierter
+          Wärmereiz kann entspannen und die subjektive Schmerzintensität modulieren. Vibration ergänzt als mechanischer Reiz
+          und kann das „Verkrampft“-Empfinden vermindern.
         </p>
         <div class="comfort-mini">
-          <span>Konstant & ruhig</span><span>Abend-Routine</span><span>Komfort-Fit</span>
+          <span>Vasodilatation</span><span>Gate-Control</span><span>Komfort-Fit</span>
         </div>
       </div>
       <div class="comfort-image">
-        <img src="Bild_2025-12-03_231518829_800x800 (1).webp" alt="Lenden & Rücken" />
+        <!-- URL-encoded (space + parentheses) to fix mobile issues -->
+        <img src="Bild_2025-12-03_231518829_800x800%20(1).webp" alt="Lenden & Rücken" />
       </div>
     </div>
 
@@ -870,14 +871,11 @@
       <div class="comfort-content">
         <h3>Bauch & Körpermitte</h3>
         <p>
-          Wärme im Bereich der Körpermitte wird häufig als besonders behaglich empfunden – ein ruhiges, ausgleichendes Gefühl,
-          das sich gut in eine entspannte Abendroutine einfügt.
-        </p>
-        <p>
-          <strong>Praktisch:</strong> Intensität fein anpassen, bis es sich „genau richtig“ anfühlt – warm, nicht übertrieben.
+          Wärme im Bereich der Körpermitte wird oft als besonders beruhigend erlebt. Ein sanfter Wärmereiz kann Spannungsgefühl
+          reduzieren und die Entspannung fördern. Entscheidend ist eine angenehme Intensität und ausreichend Pausen.
         </p>
         <div class="comfort-mini">
-          <span>Behaglich</span><span>Fein dosierbar</span><span>Ruhige Auszeit</span>
+          <span>Sanft dosieren</span><span>Entspannung</span><span>Routine</span>
         </div>
       </div>
       <div class="comfort-image">
@@ -889,21 +887,17 @@
       <div class="comfort-content">
         <h3>Beine & Kniebereich</h3>
         <p>
-          Nach langem Stehen oder einem aktiven Tag kann eine wärmende Routine an Beinen/Kniebereich besonders angenehm sein.
-          Die sanften Impulse ergänzen das Wärmegefühl mit einem dezenten Massage-Charakter.
-        </p>
-        <p>
-          <strong>Alltags-Usecase:</strong> auf dem Sofa, beim Lesen oder nach Bewegung – kurz abschalten, warm werden, durchatmen.
+          Nach Belastung/Stehen werden Wärme und Vibration häufig als angenehm empfunden: Wärme kann Muskeltonus und Steifigkeit
+          reduzieren, Vibration ergänzt als sanfter Massage-Reiz. Gerade abends kann das helfen, „runterzufahren“.
         </p>
         <div class="comfort-mini">
-          <span>Nach dem Tag</span><span>Wärme + Impuls</span><span>Wohlfühl-Routine</span>
+          <span>Nach Belastung</span><span>Wärme + Vibration</span><span>Komfort</span>
         </div>
       </div>
       <div class="comfort-image">
         <img src="task_01kbk6199xfhgabaqmdg0kg4j3_1764801804_img_0_800x800.webp" alt="Beine & Kniebereich" />
       </div>
     </div>
-
   </section>
 
   <div class="section-spacer"></div>
@@ -911,7 +905,7 @@
   <div class="focus-section-head" id="features">
     <h2>Details, die im Alltag zählen.</h2>
     <p>
-      Vier Features, die HeatBelt Pro™ unkompliziert machen – damit die Wellness-Routine wirklich im Alltag bleibt.
+      Vier Features, die HeatBelt Pro™ unkompliziert machen – damit die Routine wirklich im Alltag bleibt.
       (Auf Mobile: Tippen, um den Text einzublenden.)
     </p>
   </div>
@@ -929,7 +923,7 @@
     </div>
 
     <div class="focus-box" onclick="toggleFocus(this)">
-      <img src="Tragefoto Bedinunf Fernbedinung fokus.jpg" alt="Intuitive Kontrolle" />
+      <img src="Tragefoto%20Bedinunf%20Fernbedinung%20fokus.jpg" alt="Intuitive Kontrolle" />
       <div class="focus-overlay"></div>
       <div class="focus-content">
         <div class="focus-indicator"></div>
@@ -940,18 +934,18 @@
     </div>
 
     <div class="focus-box" onclick="toggleFocus(this)">
-      <img src="Tragefoto Infrarot fokus.jpg" alt="Hybrid Technik" />
+      <img src="Tragefoto%20Infrarot%20fokus.jpg" alt="Hybrid Technik" />
       <div class="focus-overlay"></div>
       <div class="focus-content">
         <div class="focus-indicator"></div>
         <h4>Hybrid Technik</h4>
-        <p>Präzise Infrarot-Wärme trifft auf sanfte Impulse – für eine rundere, angenehmere Routine ohne Aufwand.</p>
+        <p>Infrarot-Wärme kombiniert mit sanften Impulsen – abgestimmt auf eine komfortable, alltagstaugliche Anwendung.</p>
         <div class="focus-hint">Tippen zum Lesen</div>
       </div>
     </div>
 
     <div class="focus-box" onclick="toggleFocus(this)">
-      <img src="Maße fertig.jpg" alt="Perfekte Passform" />
+      <img src="Ma%C3%9Fe%20fertig.jpg" alt="Perfekte Passform" />
       <div class="focus-overlay"></div>
       <div class="focus-content">
         <div class="focus-indicator"></div>
@@ -1013,20 +1007,13 @@
     // Mobile nav toggle
     const navToggle = document.getElementById('navToggle');
     const navDrawer = document.getElementById('navDrawer');
-    navToggle.addEventListener('click', () => {
-      navDrawer.classList.toggle('show');
-    });
-    // Close drawer on link click
-    navDrawer.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => navDrawer.classList.remove('show'));
-    });
+    navToggle.addEventListener('click', () => navDrawer.classList.toggle('show'));
+    navDrawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navDrawer.classList.remove('show')));
 
     // Focus boxes: on mobile, only one open at a time
     function toggleFocus(el){
       if (window.matchMedia("(max-width: 768px)").matches){
-        document.querySelectorAll('.focus-box.active-mobile').forEach(b => {
-          if (b !== el) b.classList.remove('active-mobile');
-        });
+        document.querySelectorAll('.focus-box.active-mobile').forEach(b => { if (b !== el) b.classList.remove('active-mobile'); });
         el.classList.toggle('active-mobile');
       }
     }
@@ -1049,6 +1036,5 @@
       observer.observe(el);
     });
   </script>
-
 </body>
 </html>
