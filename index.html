@@ -61,13 +61,10 @@
       letter-spacing:-1px;
       display:inline-flex;
       align-items:center;
-      gap:0;              /* FIX: no unwanted space */
-      white-space:nowrap; /* FIX: keep logo tight */
+      gap:0;
+      white-space:nowrap;
     }
-    .logo span{
-      color:var(--primary-teal);
-      margin:0; padding:0; /* FIX: no spacing around H */
-    }
+    .logo span{color:var(--primary-teal); margin:0; padding:0}
 
     .nav{
       display:flex;
@@ -302,6 +299,32 @@
 
     /* ===== Wirkung ===== */
     .wirkung-section{ padding: 120px 10%; background:#fafafa; }
+
+    /* Mobile-only heading for exact order */
+    .wirkung-mobile-head{display:none; max-width:1300px; margin:0 auto 18px; }
+    .wirkung-mobile-head .wirkung-kicker{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.70);
+      border: 1px solid rgba(255,255,255,0.85);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+      color: rgba(29,29,31,0.70);
+      font-weight: 800;
+      font-size:.82rem;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .wirkung-mobile-head h2{
+      font-family:'Playfair Display',serif;
+      font-size: 3.2rem;
+      line-height:1.05;
+      letter-spacing:-.6px;
+    }
+
     .wirkung-row{
       display:flex;
       gap: 80px;
@@ -350,12 +373,6 @@
       margin-bottom: 1.2rem;
       letter-spacing:-.6px;
     }
-    .wirkung-text-side p{
-      color: var(--text-medium);
-      font-size: 1.03rem;
-      line-height: 1.9;
-      margin-top: 12px;
-    }
     .wirkung-points{
       margin-top: 18px;
       display:flex;
@@ -394,6 +411,124 @@
       color: var(--text-medium);
       font-size: .98rem;
       line-height: 1.85;
+    }
+
+    /* Mobile-only points (so order is: title -> images -> points) */
+    .wirkung-mobile-points{display:none; max-width:1300px; margin: 18px auto 0; }
+
+    /* ===== Product Highlight Section ===== */
+    .product-highlight{
+      padding: 110px 10%;
+      background: #fff;
+    }
+    .product-highlight-inner{
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .product-card{
+      background: rgba(255,255,255,0.60);
+      border: 1px solid rgba(255,255,255,0.85);
+      border-radius: 30px;
+      padding: 40px 38px;
+      backdrop-filter: blur(18px) saturate(170%);
+      -webkit-backdrop-filter: blur(18px) saturate(170%);
+      box-shadow: 0 24px 70px rgba(0,0,0,0.08);
+      position: relative;
+      overflow: hidden;
+    }
+    .product-card:before{
+      content:"";
+      position:absolute;
+      inset:-260px;
+      background:
+        radial-gradient(circle at 18% 25%, rgba(67,206,175,.20), transparent 60%),
+        radial-gradient(circle at 82% 70%, rgba(255,101,15,.14), transparent 62%),
+        radial-gradient(circle at 50% 10%, rgba(255,255,255,.22), transparent 70%);
+      filter: blur(10px);
+      opacity:.8;
+      pointer-events:none;
+    }
+    .product-card > *{position:relative; z-index:2}
+    .product-kicker{
+      font-family:'Montserrat',sans-serif;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-size: .82rem;
+      color: rgba(29,29,31,0.72);
+      margin-bottom: 12px;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+    }
+    .product-title{
+      font-family:'Playfair Display',serif;
+      font-size: 2.5rem;
+      line-height: 1.08;
+      letter-spacing: -.5px;
+      margin-bottom: 12px;
+    }
+    .product-subtitle{
+      color: var(--text-medium);
+      font-size: 1.05rem;
+      line-height: 1.85;
+      margin-bottom: 22px;
+      max-width: 70ch;
+    }
+    .benefit-chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      margin-bottom: 26px;
+    }
+    .benefit-chips .chip{
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(29,29,31,0.10);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.04);
+      font-weight: 900;
+      font-size: .86rem;
+      color: rgba(29,29,31,0.78);
+      font-family:'Montserrat',sans-serif;
+    }
+    .cta-strong{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 1rem 1.3rem;
+      border-radius: 999px;
+      background: var(--accent-orange);
+      color:#fff;
+      text-decoration:none;
+      font-weight: 900;
+      font-family:'Montserrat',sans-serif;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      transition: all .25s ease;
+      box-shadow: 0 18px 45px rgba(255,101,15,0.28);
+    }
+    .cta-strong:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 24px 60px rgba(255,101,15,0.34);
+    }
+    .product-image-wrap{
+      width:100%;
+      border-radius: 34px;
+      overflow:hidden;
+      box-shadow: 0 30px 70px rgba(0,0,0,0.10);
+      border: 1px solid rgba(0,0,0,0.06);
+      background: #fff;
+    }
+    .product-image-wrap img{
+      width:100%;
+      height:auto;
+      display:block;
     }
 
     /* ===== Komfort-Bereiche ===== */
@@ -572,6 +707,7 @@
       margin-top:20px; border-radius:4px; letter-spacing:1px;
     }
     .aph-submit-btn:hover{background:#e55a0d; transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,0.2)}
+
     .footer-custom{
       width:100vw; position:relative; left:50%; right:50%;
       margin-left:-50vw; margin-right:-50vw;
@@ -587,6 +723,97 @@
     .f-list a{color:#bbb;text-decoration:none;transition:.3s;font-size:.95rem}
     .f-list a:hover{color:#fff}
 
+    /* ===== Trust Bar (before footer) ===== */
+    .aphite-premium-trust {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      background-color: #43ceaf;
+      padding: 70px 0;
+      font-family: 'Montserrat', sans-serif !important;
+    }
+    .trust-wrapper {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      padding: 0 40px;
+    }
+    .trust-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      color: #ffffff;
+      position: relative;
+    }
+    .trust-icon-box {
+      width: 85px;
+      height: 85px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 25px;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+    .trust-icon-box img {
+      width: 50px;
+      height: auto;
+      filter: brightness(0) invert(1);
+      display: block;
+    }
+    .trust-icon-box svg {
+      width: 45px;
+      height: 45px;
+      fill: #ffffff;
+      display: block;
+    }
+    .trust-card:hover .trust-icon-box {
+      background: rgba(255, 255, 255, 0.25);
+      transform: scale(1.05);
+      border-color: rgba(255, 255, 255, 0.8);
+    }
+    .trust-content h3 {
+      font-family: 'Montserrat', sans-serif !important;
+      font-size: 1.2rem !important;
+      font-weight: 800 !important;
+      text-transform: uppercase !important;
+      margin: 0 0 12px 0 !important;
+      letter-spacing: 1.5px !important;
+      color: #ffffff !important;
+    }
+    .trust-content p {
+      font-family: 'Montserrat', sans-serif !important;
+      font-size: 1rem !important;
+      font-weight: 500 !important;
+      margin: 0 !important;
+      line-height: 1.5 !important;
+      color: #ffffff !important;
+      max-width: 320px;
+    }
+    .trust-card:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      right: -15px;
+      top: 20%;
+      height: 60%;
+      width: 1px;
+      background: rgba(255, 255, 255, 0.3);
+    }
+    @media (max-width: 1000px) {
+      .trust-wrapper { grid-template-columns: 1fr; gap: 60px; }
+      .trust-card:not(:last-child)::after { display: none; }
+      .trust-card:not(:last-child) { border-bottom: 1px solid rgba(255, 255, 255, 0.2); padding-bottom: 40px; }
+    }
+
     /* ===== Mobile ===== */
     @media (max-width: 768px){
       .nav{display:none}
@@ -597,47 +824,36 @@
       .hero-images{flex-direction:column; height: 600px}
       .hero-img{flex:none; height: 300px}
 
-      /* hero box smaller on mobile */
       .hero-overlay{
-        width: 82%;
-        max-width: 380px;
-        padding: .95rem .95rem;
+        width: 78%;
+        max-width: 340px;
+        padding: .82rem .82rem;
         background: rgba(255,255,255,0.085);
         backdrop-filter: blur(12px) saturate(160%);
         -webkit-backdrop-filter: blur(12px) saturate(160%);
       }
-      .hero-overlay h1{font-size:1.72rem;margin-bottom:.55rem}
-      .hero-overlay p{font-size:.95rem; margin-bottom:.85rem}
+      .hero-overlay h1{font-size:1.62rem;margin-bottom:.45rem}
+      .hero-overlay p{font-size:.92rem; margin-bottom:.75rem}
       .cta-btn-glass{width:100%; text-align:center; padding:.95rem 1.2rem}
 
       .feature-grid{grid-template-columns:1fr}
 
-      /* MOBILE ORDER for Wirkung: title -> images -> explanations */
-      .wirkung-row{flex-direction:column; gap: 26px}
-      .wirkung-text-side{
-        position:static;
-        top:auto;
-        padding-top:0;
-        order: 1; /* title + first intro stays first */
-      }
-      .wirkung-images-stack{
-        order: 2; /* images come after title on mobile */
-        gap: 16px;
-      }
-      .wirkung-text-side .wirkung-points{
-        order: 3; /* explanations after images */
-      }
+      /* Wirkung: on mobile show only the mobile head + images + mobile points */
+      .wirkung-text-side{display:none}
+      .wirkung-mobile-head{display:block}
+      .wirkung-mobile-head h2{font-size:2.25rem}
+      .wirkung-mobile-points{display:block}
+      .wirkung-row{flex-direction:column; gap: 16px}
+      .wirkung-images-stack{gap: 14px}
 
-      /* We need a wrapper to enforce ordering reliably */
-      .wirkung-text-side{display:flex; flex-direction:column}
-      .wirkung-text-side h2{font-size:2.25rem}
-      .wirkung-text-side p:first-of-type{margin-top:10px}
-      .wirkung-text-side .wirkung-points{margin-top:14px}
+      .product-highlight-inner{grid-template-columns:1fr; gap: 26px}
+      .product-card{padding: 28px 22px}
+      .product-title{font-size: 2.05rem}
+      .product-image-wrap{border-radius: 26px}
 
       #bereiche{padding-top: 18px}
       .comfort-block,.comfort-block.reverse{flex-direction:column !important; min-height:auto}
       .comfort-content{padding: 44px 20px; order:1}
-
       .comfort-image{
         width:100%;
         height: auto;
@@ -680,7 +896,6 @@
 <body id="top">
 
   <header class="nav-header">
-    <!-- FIX: remove whitespace around span by removing literal spaces in markup -->
     <a href="#top" class="logo">Warmes<span>H</span>erz</a>
 
     <nav class="nav">
@@ -733,9 +948,15 @@
     </div>
   </section>
 
+  <!-- ===== Wirkung Section ===== -->
   <section class="wirkung-section" id="wirkung">
-    <div class="wirkung-row">
+    <!-- Mobile: heading first -->
+    <div class="wirkung-mobile-head">
+      <div class="wirkung-kicker">Physiologie • Wärme • Reizantwort</div>
+      <h2>Warum Wärme & Vibration oft als hilfreich empfunden werden.</h2>
+    </div>
 
+    <div class="wirkung-row">
       <div class="wirkung-images-stack">
         <img src="Bild_2026-01-11_181630653.png" alt="Wärme & Anwendung" />
         <img src="muskel%20verspannt%20image.png" alt="Vorher: angespanntes Gefühl" />
@@ -743,6 +964,7 @@
         <img src="Bild_2026-01-12_035113055.png" alt="Zusätzliche Darstellung" />
       </div>
 
+      <!-- Desktop sticky text -->
       <div class="wirkung-text-side">
         <div class="wirkung-kicker">Physiologie • Wärme • Reizantwort</div>
         <h2>Warum Wärme & Vibration oft als hilfreich empfunden werden.</h2>
@@ -794,10 +1016,88 @@
           </div>
         </div>
       </div>
+    </div>
 
+    <!-- Mobile: points after images -->
+    <div class="wirkung-mobile-points">
+      <div class="wirkung-points">
+        <div class="point">
+          <div class="point-title">1) Wärme senkt Muskeltonus (Entspannung über Thermorezeptoren)</div>
+          <div class="point-text">
+            Wärme aktiviert Thermorezeptoren in Haut und Gewebe. Das kann reflektorisch den Muskeltonus reduzieren:
+            Muskeln lassen „leichter los“, Dehngefühl wird angenehmer und das typische Steifigkeitsgefühl nach Sitzen/Stress
+            kann abnehmen.
+          </div>
+        </div>
+
+        <div class="point">
+          <div class="point-title">2) Vasodilatation & bessere lokale Durchblutung</div>
+          <div class="point-text">
+            Ein Wärmereiz führt häufig zu einer Weitstellung kleiner Blutgefäße (Vasodilatation). Dadurch kann sich die lokale
+            Durchblutung erhöhen – was mit einem besseren Sauerstoff-/Nährstoffangebot und dem Abtransport von Stoffwechselprodukten
+            zusammenhängt. Viele empfinden das als „entlastend“ im betroffenen Bereich.
+          </div>
+        </div>
+
+        <div class="point">
+          <div class="point-title">3) Modulation der Schmerzleitung (Gate-Control-Prinzip)</div>
+          <div class="point-text">
+            Berührungs-, Druck- und Wärmereize können die Weiterleitung von Schmerzsignalen im Nervensystem beeinflussen
+            (vereinfacht: „Gate-Control“). Dadurch kann die Schmerzintensität subjektiv geringer wirken – besonders bei
+            muskulär bedingtem Unwohlsein.
+          </div>
+        </div>
+
+        <div class="point">
+          <div class="point-title">4) Vibration als mechanischer Reiz (Massage-Effekt ohne Druck)</div>
+          <div class="point-text">
+            Vibration stimuliert Mechanorezeptoren und kann die Wahrnehmung „knotiger“/fester Stellen verändern.
+            Zusätzlich wird die Körperwahrnehmung (Propriozeption) angeregt – viele erleben dadurch ein „lockeres“ Gefühl.
+            In Kombination mit vorheriger Wärme (weicheres Gewebe) wird der Vibrationsreiz oft als angenehmer empfunden.
+          </div>
+        </div>
+
+        <div class="point">
+          <div class="point-title">5) Infrarot-Wärme: gleichmäßige Erwärmung & Komfortdosierung</div>
+          <div class="point-text">
+            Infrarotstrahlung wird genutzt, um Wärme gleichmäßig an die Körperoberfläche zu bringen. Entscheidend ist die
+            richtige Dosierung: angenehm warm statt „zu heiß“, dafür regelmäßiger. So bleibt die Routine komfortabel und
+            kann das Verspannungsempfinden über die Zeit besser adressieren.
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
+  <!-- ===== NEW: Product Highlight Section (after Wirkung) ===== -->
+  <section class="product-highlight" id="produkt-teaser">
+    <div class="product-highlight-inner">
+      <div class="product-card">
+        <div class="product-kicker">WarmesHerz • HeatBelt Pro™</div>
+        <div class="product-title">Infrarot-Hitze Gürtel<br>mit Massage-Funktion</div>
+        <div class="product-subtitle">
+          Die komfortable Kombination aus Wärme und sanften Impulsen – für Ihre tägliche Regenerationsroutine zu Hause.
+        </div>
+
+        <div class="benefit-chips">
+          <span class="chip">Maximale Entspannung</span>
+          <span class="chip">Maximale Entlastung</span>
+          <span class="chip">Schmerzlinderung*</span>
+        </div>
+
+        <a class="cta-strong" href="product.html">Jetzt HeatBelt Pro™ sichern →</a>
+        <div style="margin-top:10px; font-size:.85rem; color:rgba(66,66,69,0.85);">
+          *Subjektives Empfinden. Kein Medizinprodukt.
+        </div>
+      </div>
+
+      <div class="product-image-wrap">
+        <img src="Haupt%20Produkt%20Bild.webp" alt="HeatBelt Pro™ Hauptproduktbild">
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Bereiche ===== -->
   <section id="bereiche">
     <div class="comfort-block">
       <div class="comfort-content">
@@ -868,7 +1168,6 @@
 
   <div class="section-spacer"></div>
 
-  <!-- REMOVED: focus-section-head text block completely -->
   <div class="belt-focus-wrap" id="features">
     <div class="focus-box" onclick="toggleFocus(this)">
       <img src="S64a9a16806dd4be28b7bf4d6c58f38f6u.avif" alt="Kabellose Freiheit" />
@@ -930,6 +1229,43 @@
     </div>
   </section>
 
+  <!-- ===== NEW: Trust Bar (last section before footer) ===== -->
+  <div class="aphite-premium-trust">
+    <div class="trust-wrapper">
+
+      <div class="trust-card">
+        <div class="trust-icon-box">
+          <img src="https://cdn.shopify.com/s/files/1/0895/6497/1338/files/Download_5.png?v=1767071213" alt="Deutschland">
+        </div>
+        <div class="trust-content">
+          <h3>Deutscher Service</h3>
+          <p>Schnelle Hilfe per E-Mail – klar, zuverlässig und ohne Umwege.</p>
+        </div>
+      </div>
+
+      <div class="trust-card">
+        <div class="trust-icon-box">
+          <svg viewBox="0 0 24 24"><path d="M13 10V3L4 14H11V21L20 10H13Z"/></svg>
+        </div>
+        <div class="trust-content">
+          <h3>Schneller Versand</h3>
+          <p>Zügige Zustellung, damit Ihre Wohlfühl-Routine direkt starten kann.</p>
+        </div>
+      </div>
+
+      <div class="trust-card">
+        <div class="trust-icon-box">
+          <svg viewBox="0 0 24 24"><path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1Z"/></svg>
+        </div>
+        <div class="trust-content">
+          <h3>Sicher bezahlen</h3>
+          <p>Verschlüsselte Zahlung & geschützter Checkout für maximale Sicherheit.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <footer class="footer-custom">
     <div class="footer-grid">
       <div class="footer-brand-col">
@@ -988,7 +1324,9 @@
       });
     }, observerOptions);
 
-    document.querySelectorAll('.plate, .comfort-block, .wirkung-row, .belt-focus-wrap').forEach(el => {
+    document.querySelectorAll(
+      '.plate, .wirkung-row, .wirkung-mobile-head, .wirkung-mobile-points, .product-highlight-inner, .comfort-block, .belt-focus-wrap, .aphite-premium-trust'
+    ).forEach(el => {
       el.style.opacity = "0";
       el.style.transform = "translateY(26px)";
       el.style.transition = "all 0.85s ease-out";
