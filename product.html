@@ -114,6 +114,35 @@
     }
     .nav-drawer a.btn{background:var(--text-dark); color:#fff; border:1px solid rgba(255,255,255,0.20); text-align:center}
 
+    /* Cart icon in header */
+    .nav-actions{display:flex; align-items:center; gap:12px;}
+    .cart-btn{
+      width:44px;height:44px;border-radius:14px;
+      border:1px solid rgba(255,255,255,0.65);
+      background: rgba(255,255,255,0.22);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      cursor:pointer;
+      display:inline-flex; align-items:center; justify-content:center;
+      position:relative;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .cart-btn:hover{transform: translateY(-1px); box-shadow:0 14px 35px rgba(0,0,0,0.12); border-color: rgba(67,206,175,0.40)}
+    .cart-btn svg{width:20px;height:20px; fill: rgba(29,29,31,0.90)}
+    .cart-badge{
+      position:absolute; top:6px; right:6px;
+      min-width:18px; height:18px; padding:0 5px;
+      border-radius:999px;
+      background: var(--primary-teal);
+      color:#0b0f14;
+      font-family:'Montserrat',sans-serif;
+      font-weight:900;
+      font-size:.72rem;
+      display:flex; align-items:center; justify-content:center;
+      border: 1px solid rgba(255,255,255,0.35);
+      box-shadow: 0 12px 30px rgba(67,206,175,0.35);
+    }
+
     /* ===== Utilities ===== */
     .glass-card{
       background: rgba(255,255,255,0.55);
@@ -164,15 +193,15 @@
     .pdp-hero{padding-top: 98px; padding-bottom: 44px;}
     .pdp-grid{
       display:grid;
-      grid-template-columns: 1.15fr 0.85fr; /* Gallery größer */
+      grid-template-columns: 1.15fr 0.85fr;
       gap: 34px;
-      align-items: stretch;
+      align-items: start;
     }
 
-    /* Gallery (größer + gleiche Höhe wie Buybox) */
+    /* Gallery: keep images 4-eckig & fit screen, not stretched to buybox height */
     .gallery{
       padding: 16px;
-      height: 100%;
+      height: auto;
       display:flex;
       flex-direction:column;
     }
@@ -183,15 +212,18 @@
       background:#fff;
       box-shadow: 0 20px 70px rgba(0,0,0,0.10);
       position:relative;
-      flex: 1;             /* nimmt Resthöhe ein */
-      min-height: 560px;   /* Desktop groß */
       cursor: zoom-in;
+
+      /* ✅ fix “too long” images: keep a classic rectangle */
+      aspect-ratio: 4 / 3;
+      width: 100%;
+      max-height: min(72vh, 720px);
     }
     .gallery-main img{
       width:100%; height:100%;
-      object-fit: cover;
+      object-fit: contain; /* keep full image visible */
       display:block;
-      transform: scale(1.01);
+      background: #fff;
     }
     .thumbs{
       display:grid;
@@ -222,7 +254,6 @@
       padding: 26px 26px 18px;
       position: sticky;
       top: 92px;
-      min-height: 690px; /* gleiche “Kante” wie Gallery wirkt wie ein Block */
     }
 
     .rating-row{
@@ -234,6 +265,7 @@
       letter-spacing: .9px;
       font-size: .82rem;
       color: rgba(29,29,31,0.78);
+      flex-wrap:wrap;
     }
     .stars{
       display:inline-flex; align-items:center; gap:2px;
@@ -274,33 +306,41 @@
       font-weight: 650;
     }
 
-    /* Hero USPs (oben) */
-    .usp-stack{
+    /* ✅ Short checklist USPs with teal check (like you want) */
+    .usp-list{
+      margin: 14px 0 18px;
       display:flex;
       flex-direction:column;
       gap: 10px;
-      margin: 14px 0 18px;
-    }
-    .usp{
-      display:flex; gap:10px; align-items:flex-start;
-      padding: 12px 12px;
-      border-radius: 18px;
+      padding: 14px 14px;
+      border-radius: 22px;
       background: rgba(255,255,255,0.62);
       border: 1px solid rgba(29,29,31,0.08);
       box-shadow: 0 12px 34px rgba(0,0,0,0.05);
-      font-weight: 800;
+    }
+    .usp-item{
+      display:flex; align-items:flex-start; gap: 10px;
+      font-family:'Montserrat',sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .6px;
       color: rgba(29,29,31,0.86);
+      font-size: .92rem;
+      line-height: 1.3;
     }
-    .usp .ic{
-      width: 34px; height:34px; border-radius: 14px;
-      background: rgba(67,206,175,0.18);
-      border: 1px solid rgba(67,206,175,0.30);
+    .usp-item .check{
+      width: 22px; height:22px; border-radius: 9px;
+      background: rgba(67,206,175,0.20);
+      border: 1px solid rgba(67,206,175,0.35);
       display:flex; align-items:center; justify-content:center;
-      flex: 0 0 auto;
+      flex:0 0 auto;
+      margin-top: 1px;
     }
-    .usp .ic svg{width:18px;height:18px; fill: rgba(29,29,31,0.85)}
-    .usp .tx{line-height:1.35}
-    .usp .tx small{display:block; font-weight:750; color: rgba(66,66,69,0.78); margin-top:2px}
+    .usp-item .check svg{width:14px;height:14px; fill: rgba(29,29,31,0.85)}
+    .usp-item span{display:block}
+    .usp-item b{
+      color: rgba(29,29,31,0.90);
+    }
 
     .price-row{
       display:flex;
@@ -350,6 +390,7 @@
       transition: all .25s ease;
       box-shadow: 0 22px 60px rgba(67,206,175,0.35);
       border: 1px solid rgba(255,255,255,0.20);
+      cursor:pointer;
     }
     .cta-primary:hover{
       background: var(--primary-teal-strong);
@@ -370,10 +411,11 @@
       transition: all .25s ease;
       border: 1px solid rgba(29,29,31,0.10);
       box-shadow: 0 14px 40px rgba(0,0,0,0.06);
+      cursor:pointer;
     }
     .cta-secondary:hover{transform: translateY(-1px); border-color: rgba(67,206,175,0.35)}
 
-    /* Trust icons unter Button */
+    /* Trust icons under button */
     .trust-row{
       display:grid;
       grid-template-columns: 1fr;
@@ -416,6 +458,7 @@
       font-size: .92rem;
     }
 
+    /* ✅ Updated disclaimer text */
     .disclaimer{
       margin-top: 12px;
       padding: 12px 14px;
@@ -428,14 +471,13 @@
       font-weight: 650;
     }
 
-    /* ===== Vorteile (Wärme/Vibration) – kreativer Rahmen ===== */
+    /* ===== Vorteile (Wärme/Vibration) – creative frames ===== */
     .split{
       display:grid;
       grid-template-columns: 1fr 1fr;
       gap: 22px;
       align-items: stretch;
     }
-
     .feat{
       padding: 26px 22px;
       border-radius: var(--radius-xl);
@@ -447,7 +489,6 @@
     }
     .feat > *{position:relative; z-index:2}
 
-    /* Wellig (Wärme) */
     .feat.heat::after{
       content:"";
       position:absolute; inset:10px;
@@ -470,7 +511,6 @@
       pointer-events:none;
     }
 
-    /* Zackig (Vibration) */
     .feat.vibe::after{
       content:"";
       position:absolute; inset:10px;
@@ -785,6 +825,184 @@
       cursor:pointer;
     }
 
+    /* ===== Cart modal ===== */
+    .cart-backdrop{
+      position:fixed; inset:0; z-index:3000;
+      background: rgba(0,0,0,0.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+    }
+    .cart-backdrop.show{display:flex}
+    .cart-modal{
+      width: min(760px, 96vw);
+      border-radius: 26px;
+      overflow:hidden;
+      background: rgba(255,255,255,0.22);
+      backdrop-filter: blur(34px) saturate(170%);
+      -webkit-backdrop-filter: blur(34px) saturate(170%);
+      border:1px solid rgba(255,255,255,0.35);
+      box-shadow: 0 30px 120px rgba(0,0,0,0.35);
+      position:relative;
+    }
+    .cart-head{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 16px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.18);
+    }
+    .cart-head h3{
+      font-family:'Montserrat',sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.95);
+    }
+    .cart-close{
+      width:42px;height:42px;border-radius:14px;
+      border:1px solid rgba(255,255,255,0.25);
+      background: rgba(0,0,0,0.28);
+      color:#fff;
+      font-weight:900;
+      cursor:pointer;
+    }
+    .cart-body{
+      padding: 16px;
+      background: rgba(255,255,255,0.14);
+    }
+    .cart-empty{
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(0,0,0,0.18);
+      color: rgba(255,255,255,0.86);
+      font-weight: 650;
+      line-height: 1.7;
+    }
+    .cart-item{
+      display:grid;
+      grid-template-columns: 110px 1fr;
+      gap: 14px;
+      padding: 14px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(0,0,0,0.18);
+      color:#fff;
+    }
+    .cart-item img{
+      width:100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+    .cart-item h4{
+      font-family:'Montserrat',sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      font-size: .98rem;
+      margin-bottom: 6px;
+    }
+    .cart-item .line{
+      color: rgba(255,255,255,0.78);
+      font-weight: 650;
+      line-height: 1.6;
+      font-size: .95rem;
+    }
+    .cart-controls{
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .qty{
+      display:flex; align-items:center; gap: 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.12);
+      padding: 6px;
+    }
+    .qty button{
+      width:34px;height:34px;border-radius:999px;
+      border: 1px solid rgba(255,255,255,0.22);
+      background: rgba(0,0,0,0.22);
+      color:#fff;
+      font-weight:900;
+      cursor:pointer;
+    }
+    .qty input{
+      width:48px;
+      text-align:center;
+      border:none;
+      background: transparent;
+      color:#fff;
+      font-weight:900;
+      font-family:'Montserrat',sans-serif;
+      outline:none;
+    }
+    .remove-btn{
+      border:none;
+      background: transparent;
+      color: rgba(255,255,255,0.85);
+      font-weight: 900;
+      font-family:'Montserrat',sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      cursor:pointer;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.22);
+    }
+    .remove-btn:hover{background: rgba(255,255,255,0.10)}
+    .cart-foot{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,0.20);
+      color:#fff;
+    }
+    .cart-total{
+      font-family:'Montserrat',sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing:.7px;
+      font-size:.95rem;
+    }
+    .cart-checkout{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: .95rem 1.2rem;
+      border-radius: 999px;
+      background: var(--primary-teal);
+      color:#0b0f14;
+      text-decoration:none;
+      font-weight: 900;
+      font-family:'Montserrat',sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .9px;
+      box-shadow: 0 22px 60px rgba(67,206,175,0.35);
+      border: 1px solid rgba(255,255,255,0.20);
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .cart-checkout:hover{background: var(--primary-teal-strong); transform: translateY(-1px)}
+    .cart-note{
+      margin-top: 10px;
+      color: rgba(255,255,255,0.75);
+      font-weight: 650;
+      font-size: .92rem;
+      line-height: 1.7;
+    }
+
     /* ===== Before/After section wrapper styling ===== */
     .hb-ba-section{
       background:
@@ -834,7 +1052,6 @@
     }
     .hb-ba-footnote span{font-weight: 900; color: rgba(67,206,175,0.95)}
 
-    /* Slider inner (wie dein Code, nur farblich passend) */
     .hb-ba-wrapper{margin-top: 26px; display:flex; justify-content:center;}
     .hb-ba-inner{
       position: relative;
@@ -926,8 +1143,8 @@
     /* ===== Responsive ===== */
     @media (max-width: 1100px){
       .thumbs{grid-template-columns: repeat(4,1fr)}
-      .buybox{position:relative; top:auto; min-height:auto}
-      .gallery-main{min-height: 520px}
+      .buybox{position:relative; top:auto}
+      .gallery-main{max-height: none}
     }
     @media (max-width: 900px){
       .pdp-grid{grid-template-columns: 1fr; gap: 18px}
@@ -938,14 +1155,13 @@
       .reviews-grid{grid-template-columns:1fr}
       .faq{grid-template-columns:1fr}
       .footer-grid{grid-template-columns:1fr}
-      .gallery-main{min-height: 420px}
+      .gallery-main{aspect-ratio: 4/3}
     }
     @media (max-width: 768px){
       .nav{display:none}
       .nav-toggle{display:block}
       .nav-drawer.show{display:block}
       .pdp-hero{padding-top: 96px}
-      .gallery-main{min-height: 360px}
       .section-title{font-size: 2.15rem}
       .title{font-size: 2.1rem}
     }
@@ -954,6 +1170,7 @@
       .gallery{padding: 12px}
       .thumbs{gap:8px}
     }
+
   </style>
 </head>
 
@@ -972,9 +1189,16 @@
       <a href="#kaufen" class="btn">Jetzt bestellen</a>
     </nav>
 
-    <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="nav-actions">
+      <button class="cart-btn" id="cartOpenBtn" aria-label="Warenkorb öffnen">
+        <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2S15.9 22 17 22s2-.9 2-2-.9-2-2-2zM7.2 6l.94 2h9.87c.75 0 1.3.72 1.09 1.44l-1.35 4.72c-.19.66-.8 1.12-1.49 1.12H9.1c-.66 0-1.24-.41-1.46-1.03L4.1 4H2V2h3.3c.46 0 .87.28 1.04.7L7.2 6z"/></svg>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </button>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </header>
 
   <div class="nav-drawer" id="navDrawer">
@@ -999,7 +1223,6 @@
           </div>
 
           <div class="thumbs" id="thumbs">
-            <!-- Reihenfolge exakt wie du vorgegeben hast -->
             <div class="thumb active" data-src="Haupt%20Produkt%20Bild.webp" data-alt="HeatBelt Pro™ – Hauptbild">
               <img src="Haupt%20Produkt%20Bild.webp" alt="Thumbnail 1" />
             </div>
@@ -1032,7 +1255,6 @@
 
           <div class="rating-row">
             <span class="stars" aria-label="Bewertung 4,4 von 5">
-              <!-- 4 volle + 1 halb -->
               <svg viewBox="0 0 24 24"><path d="M12 .9l3.1 6.3 7 .9-5.1 5 1.2 7-6.2-3.3-6.2 3.3 1.2-7-5.1-5 7-.9z"/></svg>
               <svg viewBox="0 0 24 24"><path d="M12 .9l3.1 6.3 7 .9-5.1 5 1.2 7-6.2-3.3-6.2 3.3 1.2-7-5.1-5 7-.9z"/></svg>
               <svg viewBox="0 0 24 24"><path d="M12 .9l3.1 6.3 7 .9-5.1 5 1.2 7-6.2-3.3-6.2 3.3 1.2-7-5.1-5 7-.9z"/></svg>
@@ -1043,7 +1265,7 @@
                       clip-path="inset(0 50% 0 0)"/>
               </svg>
             </span>
-            <span><b>4,4</b> / 5 • verifizierte Käufe</span>
+            <span><b>4,4</b> / 5 • <b>8.164</b> Kunden</span>
           </div>
 
           <div class="kicker">3-in-1: Wärme • Rotlicht • Massage</div>
@@ -1051,50 +1273,38 @@
           <h1 class="title">HeatBelt Pro™<br>Schmerzlinderung für Rücken & Bauch</h1>
 
           <p class="subtitle">
-            Entwickelt, um muskuläre Beschwerden spürbar zu entlasten: Wärme- und Vibrationsreize können die
-            Schmerzwahrnehmung beeinflussen und verspannte Muskulatur lockern – besonders effektiv als regelmäßige Routine.
+            Wärme- und Vibrationsreize können muskulär bedingtes Schmerzempfinden positiv beeinflussen – häufig durch Lockerung,
+            bessere lokale Durchwärmung und eine Modulation der Schmerzleitung.
           </p>
 
-          <!-- USPs (ersetzt Zoom-Hint-Idee) -->
-          <div class="usp-stack">
-            <div class="usp">
-              <div class="ic">
-                <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 017 7c0 5-7 13-7 13S5 14 5 9a7 7 0 017-7zm0 9a2 2 0 100-4 2 2 0 000 4z"/></svg>
+          <!-- ✅ Short USPs -->
+          <div class="usp-list">
+            <div class="usp-item">
+              <div class="check">
+                <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5 1.4-1.4L9 14.2 18.6 4.6z"/></svg>
               </div>
-              <div class="tx">
-                Schnelle, spürbare Entlastung im Moment der Anwendung
-                <small>Viele merken direkt ein “Locker-werden” durch Wärme & Impulse.</small>
-              </div>
+              <span>Schnelle &amp; <b>spürbare</b> Schmerzlinderung</span>
             </div>
 
-            <div class="usp">
-              <div class="ic">
-                <svg viewBox="0 0 24 24"><path d="M12 3l4 7h-8l4-7zm0 18a2 2 0 100-4 2 2 0 000 4zM4 12h16v2H4z"/></svg>
+            <div class="usp-item">
+              <div class="check">
+                <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5 1.4-1.4L9 14.2 18.6 4.6z"/></svg>
               </div>
-              <div class="tx">
-                3-in-1 Therapie: Wärme, Rotlicht & Massage
-                <small>Kombination aus thermischem + mechanischem Reiz.</small>
-              </div>
+              <span>3-in-1 Therapie: Wärme, Rotlicht &amp; Massage</span>
             </div>
 
-            <div class="usp">
-              <div class="ic">
-                <svg viewBox="0 0 24 24"><path d="M7 2h10v2H7V2zm10 4H7a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V9a3 3 0 00-3-3zm-5 3a5 5 0 110 10 5 5 0 010-10z"/></svg>
+            <div class="usp-item">
+              <div class="check">
+                <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5 1.4-1.4L9 14.2 18.6 4.6z"/></svg>
               </div>
-              <div class="tx">
-                Kabellos, bequem & überall anwendbar
-                <small>Routine zuhause, im Büro oder unterwegs.</small>
-              </div>
+              <span>Kabellos, bequem &amp; überall anwendbar</span>
             </div>
 
-            <div class="usp">
-              <div class="ic">
-                <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 109 9 9 9 0 00-9-9zm1 10H7v-2h4V7h2z"/></svg>
+            <div class="usp-item">
+              <div class="check">
+                <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5 1.4-1.4L9 14.2 18.6 4.6z"/></svg>
               </div>
-              <div class="tx">
-                Einstellbare Größe: 70–132cm Bauchumfang
-                <small>Sicherer Sitz ohne Einschneiden – für konstante Wirkung.</small>
-              </div>
+              <span>Einstellbare Größe: 70–132cm Bauchumfang</span>
             </div>
           </div>
 
@@ -1107,12 +1317,13 @@
           </div>
 
           <div class="cta-stack">
-            <!-- später Checkout-Link ersetzen -->
-            <a class="cta-primary" href="#" id="buyNowBtn">Jetzt schmerzfrei starten →</a>
-            <a class="cta-secondary" href="index.html#kontakt">Fragen? Kontakt</a>
+            <!-- primary still "buy" (placeholder) -->
+            <a class="cta-primary" href="#" id="buyNowBtn">Jetzt bestellen →</a>
+            <!-- ✅ swap secondary to Add to cart -->
+            <a class="cta-secondary" href="#" id="addToCartBtn">In den Warenkorb legen</a>
           </div>
 
-          <!-- Trust unter Button -->
+          <!-- Trust under button -->
           <div class="trust-row" style="margin-top:12px;">
             <div class="trust">
               <div class="ic">
@@ -1132,19 +1343,21 @@
               </div>
             </div>
 
+            <!-- ✅ Replace 2 years warranty with DE shipping -->
             <div class="trust">
               <div class="ic">
                 <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
               </div>
-              <div class="t">2 Jahre Garantie
-                <span>auf alle Artikel</span>
+              <div class="t">Sicherer Versand aus Deutschland
+                <span>Verpackt & versendet mit Tracking</span>
               </div>
             </div>
           </div>
 
           <div class="disclaimer">
-            Hinweis: HeatBelt Pro™ ist <b>kein Medizinprodukt</b> und ersetzt keine ärztliche Diagnose oder Therapie.
-            Die Aussagen beziehen sich auf bekannte Mechanismen von Wärme-/Vibrationsreizen und typische Anwender-Erfahrungen.
+            Hinweis: HeatBelt Pro™ ersetzt keine ärztliche Diagnose oder Therapie. Wenn Beschwerden neu, stark, ungewohnt
+            oder anhaltend sind, sollte die Ursache medizinisch abgeklärt werden. Die beschriebenen Effekte beziehen sich
+            auf typische Reaktionen auf Wärme- und Vibrationsreize und können individuell unterschiedlich ausfallen.
           </div>
 
         </div>
@@ -1194,7 +1407,7 @@
     </div>
   </section>
 
-  <!-- Vorher/Nachher (dein Slider, angepasst + neue Bilder) -->
+  <!-- Vorher/Nachher -->
   <section class="hb-ba-section" id="ba" aria-label="Vorher-Nachher-Vergleich mit HeatBelt Pro">
     <div class="hb-ba-shell">
       <div class="hb-ba-header">
@@ -1208,15 +1421,12 @@
 
       <div class="hb-ba-wrapper">
         <div class="hb-ba-inner" id="hbBaSlider">
-          <!-- Nachher-Bild im Hintergrund -->
           <img
             src="nacher%20bild.webp"
             alt="Nachher: entspannter Alltag mit HeatBelt Pro"
             class="hb-ba-img hb-ba-img--after"
             loading="lazy"
           >
-
-          <!-- Vorher-Bild links sichtbar -->
           <img
             src="task_01kbkcfa0decev8age4q07mvke_1764808548_img_1_800x800.webp"
             alt="Vorher: belastender Schmerz-Alltag"
@@ -1301,7 +1511,7 @@
           <h3>Sicherheits-Hinweise</h3>
           <p>
             Nicht im Schlaf nutzen. Bei Taubheit, Fieber, akuten Entzündungen, offenen Stellen oder ungewöhnlichen Schmerzen: stoppen
-            und ärztlich abklären.
+            und medizinisch abklären.
           </p>
           <div class="chips">
             <span class="chip">Auto-Off</span>
@@ -1382,8 +1592,8 @@
               <div class="stars">★★★★★</div>
             </div>
             <p>
-              Am Anfang waren die Effekte eher „okay“ – angenehm, aber noch nicht krass. Nach ca. 2–3 Wochen regelmäßiger Nutzung
-              kam dann der Unterschied: deutlich weniger Steifheit morgens und weniger Schmerzspitzen nach langem Sitzen.
+              Am Anfang waren die Effekte eher „okay“. Nach ca. 2–3 Wochen regelmäßiger Nutzung kam der Unterschied:
+              weniger Steifheit morgens und weniger Schmerzspitzen nach langem Sitzen.
             </p>
             <div class="meta">Anwendung: täglich 20 Min</div>
           </div>
@@ -1397,8 +1607,8 @@
               <div class="stars">★★★★★</div>
             </div>
             <p>
-              Ich dachte erst, das wäre nur Marketing. Aber die Kombination aus Wärme + Vibration hat mich überzeugt:
-              Während der Anwendung merke ich direkt Entlastung, und danach bleibt der Rücken „lockerer“.
+              Ich dachte erst, das wäre nur Marketing. Aber Wärme + Vibration hat mich überzeugt:
+              Während der Anwendung merke ich direkt Entlastung, danach bleibt der Rücken „lockerer“.
             </p>
             <div class="meta">Anwendung: nach Training</div>
           </div>
@@ -1412,8 +1622,8 @@
               <div class="stars">★★★★★</div>
             </div>
             <p>
-              Die ersten Tage waren die Effekte eher subtil. Ich habe dann konsequent eine Routine gemacht – nach ein paar Wochen
-              war es deutlich: weniger chronisches Ziehen im Lendenbereich und spürbar mehr Beweglichkeit.
+              Die ersten Tage waren die Effekte subtil. Nach ein paar Wochen Routine:
+              deutlich weniger chronisches Ziehen im Lendenbereich und mehr Beweglichkeit.
             </p>
             <div class="meta">Anwendung: 5×/Woche</div>
           </div>
@@ -1427,8 +1637,8 @@
               <div class="stars">★★★★☆</div>
             </div>
             <p>
-              Ich nutze den Gürtel vor allem abends. Wärme nimmt mir dieses „Blockade“-Gefühl, und die Vibration hilft, dass es sich
-              nicht wieder direkt zusetzt. Sehr stark, wenn man es regelmäßig macht.
+              Ich nutze den Gürtel abends. Wärme nimmt mir das „Blockade“-Gefühl, und die Vibration hilft,
+              dass es sich nicht wieder direkt zusetzt. Sehr stark, wenn man es regelmäßig macht.
             </p>
             <div class="meta">Anwendung: abends 15–30 Min</div>
           </div>
@@ -1465,25 +1675,25 @@
         <details>
           <summary>Ab wann merke ich Effekte? <span class="plus">+</span></summary>
           <p>
-            Viele spüren <b>direkt während der Anwendung</b> eine Entlastung (Wärme/Impulse). Der angestrebte Effekt ist aber
-            häufig der <b>Routine-Effekt</b>: nach mehreren Wochen regelmäßiger Nutzung berichten viele von deutlich weniger
-            Steifheit und weniger Schmerzspitzen.
+            Viele spüren <b>direkt während der Anwendung</b> eine Entlastung. Der angestrebte Effekt ist aber
+            häufig der <b>Routine-Effekt</b>: nach mehreren Wochen regelmäßiger Nutzung berichten viele von
+            weniger Steifheit und weniger Schmerzspitzen.
           </p>
         </details>
 
         <details>
           <summary>Ist HeatBelt Pro™ ein Medizinprodukt? <span class="plus">+</span></summary>
           <p>
-            Nein. HeatBelt Pro™ ist ein Wellness-/Anwendungsprodukt zur Unterstützung der Entspannung.
-            Bei starken, ungeklärten oder anhaltenden Schmerzen bitte ärztlich abklären.
+            Nein. HeatBelt Pro™ ersetzt keine ärztliche Diagnose oder Therapie. Bei starken, ungeklärten oder
+            anhaltenden Schmerzen bitte die Ursache medizinisch abklären lassen.
           </p>
         </details>
 
         <details>
           <summary>Kann ich Wärme & Vibration kombinieren? <span class="plus">+</span></summary>
           <p>
-            Ja. Viele starten mit Wärme (5–10 Minuten) und schalten dann Vibration dazu. Dadurch wirkt das Gewebe oft „weicher“,
-            und die Vibration wird als angenehmer empfunden.
+            Ja. Viele starten mit Wärme (5–10 Minuten) und schalten dann Vibration dazu. Dadurch wird die Vibration
+            häufig als angenehmer empfunden.
           </p>
         </details>
 
@@ -1538,6 +1748,19 @@
     </div>
   </div>
 
+  <!-- Cart Modal -->
+  <div class="cart-backdrop" id="cartBackdrop" aria-hidden="true">
+    <div class="cart-modal" role="dialog" aria-label="Warenkorb">
+      <div class="cart-head">
+        <h3>Warenkorb</h3>
+        <button class="cart-close" id="cartCloseBtn" aria-label="Warenkorb schließen">✕</button>
+      </div>
+      <div class="cart-body" id="cartBody">
+        <!-- filled by JS -->
+      </div>
+    </div>
+  </div>
+
   <script>
     // Footer year
     document.getElementById('year').textContent = new Date().getFullYear();
@@ -1588,11 +1811,160 @@
     lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
     document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeLightbox(); });
 
-    // Buy button placeholder guard
+    // Buy button placeholder
     document.getElementById('buyNowBtn').addEventListener('click', (e) => {
       e.preventDefault();
-      alert("Checkout-Link ist noch nicht hinterlegt. Sag mir, wohin der Button führen soll (PayPal.me / Stripe Checkout / Shopify Checkout / Mollie Link) – dann baue ich ihn direkt ein.");
+      alert("Checkout-Link ist noch nicht hinterlegt. Sag mir, wohin der Button führen soll (PayPal.me / Stripe Checkout / Mollie Link) – dann baue ich ihn direkt ein.");
     });
+
+    // ===== Cart (Popup) =====
+    const cartBackdrop = document.getElementById('cartBackdrop');
+    const cartBody = document.getElementById('cartBody');
+    const cartBadge = document.getElementById('cartBadge');
+    const cartOpenBtn = document.getElementById('cartOpenBtn');
+    const cartCloseBtn = document.getElementById('cartCloseBtn');
+    const addToCartBtn = document.getElementById('addToCartBtn');
+
+    const PRODUCT = {
+      id: "heatbelt-pro",
+      name: "HeatBelt Pro™",
+      variant: "3-in-1: Wärme • Rotlicht • Massage",
+      price: 95.00,
+      image: "Haupt%20Produkt%20Bild.webp"
+    };
+
+    let cart = {
+      items: [] // {id, qty}
+    };
+
+    function formatEUR(n){
+      return new Intl.NumberFormat('de-DE', { style:'currency', currency:'EUR' }).format(n);
+    }
+
+    function getItem(){
+      return cart.items.find(i => i.id === PRODUCT.id);
+    }
+
+    function setQty(qty){
+      qty = Math.max(0, Math.min(99, qty));
+      const item = getItem();
+      if(qty === 0){
+        cart.items = cart.items.filter(i => i.id !== PRODUCT.id);
+      } else if(item){
+        item.qty = qty;
+      } else {
+        cart.items.push({ id: PRODUCT.id, qty });
+      }
+      renderCart();
+    }
+
+    function cartCount(){
+      return cart.items.reduce((sum,i)=> sum + i.qty, 0);
+    }
+
+    function cartTotal(){
+      return cart.items.reduce((sum,i)=> sum + (i.qty * PRODUCT.price), 0);
+    }
+
+    function openCart(){
+      cartBackdrop.classList.add('show');
+      cartBackdrop.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCart(){
+      cartBackdrop.classList.remove('show');
+      cartBackdrop.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+    }
+
+    function renderCart(){
+      cartBadge.textContent = cartCount();
+
+      if(cart.items.length === 0){
+        cartBody.innerHTML = `
+          <div class="cart-empty">
+            Ihr Warenkorb ist noch leer.<br><br>
+            Legen Sie den <b>HeatBelt Pro™</b> in den Warenkorb, um fortzufahren.
+          </div>
+        `;
+        return;
+      }
+
+      const item = getItem();
+      const qty = item ? item.qty : 0;
+
+      cartBody.innerHTML = `
+        <div class="cart-item">
+          <img src="${PRODUCT.image}" alt="HeatBelt Pro Hauptbild">
+          <div>
+            <h4>${PRODUCT.name}</h4>
+            <div class="line">${PRODUCT.variant}</div>
+            <div class="line" style="margin-top:6px; font-weight:900; font-family:'Montserrat',sans-serif;">
+              ${formatEUR(PRODUCT.price)} <span style="opacity:.75; font-weight:800; font-family:'Inter',sans-serif;">/ Stück</span>
+            </div>
+
+            <div class="cart-controls">
+              <div class="qty" aria-label="Menge">
+                <button type="button" id="qtyMinus">−</button>
+                <input type="text" id="qtyInput" value="${qty}" inputmode="numeric" aria-label="Anzahl">
+                <button type="button" id="qtyPlus">+</button>
+              </div>
+
+              <button type="button" class="remove-btn" id="removeItem">Entfernen</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="cart-foot">
+          <div class="cart-total">Gesamt: ${formatEUR(cartTotal())}</div>
+          <a href="#" class="cart-checkout" id="cartCheckoutBtn">Jetzt bestellen →</a>
+        </div>
+
+        <div class="cart-note">
+          Versandkosten & eventuelle Rabatte werden im Checkout berechnet.
+        </div>
+      `;
+
+      // bind controls
+      const minus = document.getElementById('qtyMinus');
+      const plus = document.getElementById('qtyPlus');
+      const input = document.getElementById('qtyInput');
+      const remove = document.getElementById('removeItem');
+      const checkout = document.getElementById('cartCheckoutBtn');
+
+      minus.addEventListener('click', () => setQty(qty - 1));
+      plus.addEventListener('click', () => setQty(qty + 1));
+      remove.addEventListener('click', () => setQty(0));
+
+      input.addEventListener('change', () => {
+        const v = parseInt(input.value, 10);
+        setQty(isNaN(v) ? qty : v);
+      });
+
+      checkout.addEventListener('click', (e) => {
+        e.preventDefault();
+        alert("Checkout-Link ist noch nicht hinterlegt. Sag mir, wohin der Button führen soll (PayPal.me / Stripe Checkout / Mollie Link) – dann setze ich ihn im Warenkorb & bei 'Jetzt bestellen'.");
+      });
+    }
+
+    // open cart button
+    cartOpenBtn.addEventListener('click', openCart);
+    cartCloseBtn.addEventListener('click', closeCart);
+    cartBackdrop.addEventListener('click', (e) => { if(e.target === cartBackdrop) closeCart(); });
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && cartBackdrop.classList.contains('show')) closeCart(); });
+
+    // Add to cart -> open popup
+    addToCartBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const item = getItem();
+      const currentQty = item ? item.qty : 0;
+      setQty(currentQty + 1);
+      openCart();
+    });
+
+    // init
+    renderCart();
 
     // Before/After slider
     (function () {
