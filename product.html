@@ -1,214 +1,1129 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>WarmesHerz – Produkt</title>
-  <meta name="description" content="WarmesHerz Wärmegürtel – Produktseite mit PayPal & Karten-Zahlung." />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HeatBelt Pro™ | Produktseite</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@700;900&family=Montserrat:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#0b0f17;
-      --card:rgba(16,24,39,.62);
-      --line:rgba(255,255,255,.10);
-      --text:#e5e7eb;
-      --muted:#9ca3af;
-      --radius:18px;
+      --primary-teal:#43ceaf;
+      --accent-orange:#ff650f;
+
+      --text-dark:#1d1d1f;
+      --text-medium:#424245;
+
+      --glass-strong: rgba(255,255,255,0.18);
+      --glass-ultra: rgba(255,255,255,0.12);
+      --glass-border: rgba(255,255,255,0.70);
+
+      --bg-focus:#1d1d1f;
+      --bg-dark:#292929;
+
+      --radius-lg: 22px;
+      --radius-xl: 34px;
+
+      --shadow-glass: 0 26px 70px rgba(0,0,0,0.12);
+      --shadow-soft: 0 18px 55px rgba(0,0,0,0.08);
     }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0}
+
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
     body{
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background: radial-gradient(1100px 600px at 20% 10%, rgba(59,130,246,.18), transparent 55%),
-                  radial-gradient(900px 500px at 80% 30%, rgba(16,185,129,.14), transparent 55%),
-                  var(--bg);
-      color:var(--text);
+      font-family:'Inter',sans-serif;
+      color:var(--text-dark);
+      background:
+        radial-gradient(1100px 650px at 20% 0%, rgba(67,206,175,.10), transparent 60%),
+        radial-gradient(900px 600px at 85% 10%, rgba(255,101,15,.08), transparent 55%),
+        #fff;
+      overflow-x:hidden;
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
     }
-    a{color:inherit;text-decoration:none}
-    .wrap{max-width:1100px;margin:0 auto;padding:24px}
-    .top{
-      display:flex;align-items:center;justify-content:space-between;gap:16px;
-      border:1px solid var(--line);
-      background:var(--card);
-      backdrop-filter: blur(8px);
-      border-radius: var(--radius);
-      padding:14px 16px;
-    }
-    .brand{font-weight:800}
-    .nav{display:flex;flex-wrap:wrap;gap:12px}
-    .nav a{color:var(--muted);font-size:14px}
-    .nav a:hover{color:var(--text)}
+    a{color:inherit}
+    .container{max-width:1200px;margin:0 auto;padding:0 5%}
 
-    .hero{
+    /* ===== Header (match Startseite) ===== */
+    .nav-header{
+      position:fixed; top:0; width:100%; height:70px; z-index:1000;
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(34px) saturate(170%);
+      -webkit-backdrop-filter: blur(34px) saturate(170%);
+      border-bottom:1px solid rgba(255,255,255,0.65);
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 5%;
+    }
+    .logo{
+      font-family:'Montserrat',sans-serif;
+      font-size:1.35rem;
+      font-weight:900;
+      text-transform:uppercase;
+      text-decoration:none;
+      letter-spacing:-1px;
+      display:inline-flex; align-items:center; gap:0;
+      white-space:nowrap;
+    }
+    .logo span{color:var(--primary-teal)}
+    .nav{
+      display:flex; gap:18px; align-items:center;
+    }
+    .nav a{
+      text-decoration:none; font-weight:650; font-size:.92rem;
+      padding:10px 10px; border-radius:999px; transition:all .2s ease;
+    }
+    .nav a:hover{background:rgba(255,255,255,0.45); box-shadow:0 10px 30px rgba(0,0,0,0.06)}
+    .nav .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:.72rem 1.2rem; background:var(--text-dark); color:#fff;
+      border-radius:999px; font-weight:800; font-size:.86rem;
+      transition:all .25s ease; border:1px solid rgba(255,255,255,0.20);
+      text-transform:uppercase; letter-spacing:.6px;
+    }
+    .nav .btn:hover{background:var(--accent-orange); transform:translateY(-1px); box-shadow:0 14px 35px rgba(0,0,0,0.16)}
+
+    .nav-toggle{
+      display:none; width:44px;height:44px; border-radius:12px;
+      border:1px solid rgba(255,255,255,0.65);
+      background: rgba(255,255,255,0.22);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      cursor:pointer;
+    }
+    .nav-toggle span{display:block;width:18px;height:2px;background:var(--text-dark);margin:6px auto;border-radius:2px;opacity:.9}
+    .nav-drawer{
+      display:none; position:fixed; top:70px; left:0; right:0; z-index:999;
+      background: rgba(255,255,255,0.20);
+      backdrop-filter: blur(34px) saturate(170%);
+      -webkit-backdrop-filter: blur(34px) saturate(170%);
+      border-bottom:1px solid rgba(255,255,255,0.65);
+      padding:14px 5% 18px;
+    }
+    .nav-drawer a{
+      display:block; padding:12px 12px; border-radius:14px; text-decoration:none;
+      font-weight:800; margin-top:8px;
+      background: rgba(255,255,255,0.32); border:1px solid rgba(255,255,255,0.55);
+    }
+    .nav-drawer a.btn{background:var(--text-dark); color:#fff; border:1px solid rgba(255,255,255,0.20); text-align:center}
+
+    /* ===== Hero / Above-the-fold PDP ===== */
+    .pdp-hero{
+      padding-top: 100px;
+      padding-bottom: 44px;
+    }
+
+    .pdp-grid{
       display:grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap:18px;
-      margin-top:18px;
-    }
-    .panel{
-      border:1px solid var(--line);
-      background:var(--card);
-      backdrop-filter: blur(8px);
-      border-radius: var(--radius);
-      padding:18px;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 44px;
+      align-items: start;
     }
 
-    .media{
-      border:1px solid var(--line);
-      border-radius: var(--radius);
+    .glass-card{
+      background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(255,255,255,0.85);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(18px) saturate(170%);
+      -webkit-backdrop-filter: blur(18px) saturate(170%);
       overflow:hidden;
-      background: rgba(0,0,0,.18);
-      min-height: 460px;
       position:relative;
     }
-    .media img{width:100%;height:100%;object-fit:cover;display:block}
-    .placeholder{
-      position:absolute;inset:0;
-      display:grid;place-items:center;
-      color:var(--muted);
-      font-weight:700;
+    .glass-card::before{
+      content:"";
+      position:absolute; inset:-260px;
       background:
-        linear-gradient(135deg, rgba(255,255,255,.07), rgba(255,255,255,.02)),
-        repeating-linear-gradient(45deg, rgba(255,255,255,.06) 0 12px, rgba(255,255,255,.02) 12px 24px);
+        radial-gradient(circle at 18% 25%, rgba(67,206,175,.20), transparent 60%),
+        radial-gradient(circle at 82% 70%, rgba(255,101,15,.14), transparent 62%),
+        radial-gradient(circle at 50% 10%, rgba(255,255,255,.22), transparent 70%);
+      filter: blur(10px);
+      opacity:.75;
+      pointer-events:none;
+    }
+    .glass-card > *{position:relative; z-index:2}
+
+    /* Gallery */
+    .gallery{
+      padding: 16px;
+    }
+    .gallery-main{
+      border-radius: 26px;
+      overflow:hidden;
+      border:1px solid rgba(0,0,0,0.06);
+      background:#fff;
+      box-shadow: 0 18px 55px rgba(0,0,0,0.08);
+      position:relative;
+      aspect-ratio: 4 / 3;
+    }
+    .gallery-main img{
+      width:100%; height:100%;
+      object-fit: cover;
+      display:block;
+      transform: scale(1.01);
     }
 
-    h1{margin:0 0 8px;font-size:34px;line-height:1.05}
-    .sub{margin:0 0 14px;color:var(--muted);line-height:1.6}
-    .priceRow{display:flex;align-items:center;gap:10px;margin:10px 0 8px}
-    .price{font-size:28px;font-weight:900}
-    .badge{
-      font-size:12px;color:#d1fae5;
-      background:rgba(16,185,129,.12);
-      border:1px solid rgba(16,185,129,.28);
-      padding:6px 10px;border-radius:999px;
-    }
-
-    .bullets{margin:12px 0 16px;padding-left:18px}
-    .bullets li{margin:6px 0}
-
-    .checkout{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;
-      padding:12px 14px;border-radius:14px;
-      border:1px solid var(--line);
+    .zoom-hint{
+      position:absolute;
+      left:14px; bottom:14px;
+      padding:10px 12px;
+      border-radius:999px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(255,255,255,0.92);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.07);
+      font-family:'Montserrat',sans-serif;
       font-weight:900;
-      transition:transform .08s ease, filter .2s ease;
-      user-select:none;
+      font-size:.78rem;
+      letter-spacing:.7px;
+      text-transform:uppercase;
+      color: rgba(29,29,31,0.75);
     }
-    .btn:hover{filter:brightness(1.06);transform:translateY(-1px)}
-    .btn:active{transform:translateY(0)}
-    .btn.paypal{background:rgba(59,130,246,.18);border-color:rgba(59,130,246,.35)}
-    .btn.card{background:rgba(16,185,129,.14);border-color:rgba(16,185,129,.30)}
 
-    .fine{margin:10px 0 0;color:var(--muted);font-size:13px;line-height:1.5}
-
-    .grid{margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-    .card{
-      border:1px solid var(--line);
-      background:rgba(0,0,0,.18);
-      border-radius:16px;
-      padding:14px;
+    .thumbs{
+      display:grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 10px;
+      margin-top: 14px;
     }
-    .card h3{margin:0 0 8px;font-size:16px}
-    .card p{margin:0;color:var(--muted);font-size:14px;line-height:1.6}
+    .thumb{
+      border-radius: 14px;
+      overflow:hidden;
+      border:1px solid rgba(0,0,0,0.08);
+      background:#fff;
+      cursor:pointer;
+      aspect-ratio: 1 / 1;
+      position:relative;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .thumb img{
+      width:100%; height:100%;
+      object-fit: cover;
+      display:block;
+      filter: saturate(1.02);
+    }
+    .thumb.active{
+      border-color: rgba(255,101,15,0.55);
+      box-shadow: 0 18px 40px rgba(255,101,15,0.16);
+      transform: translateY(-1px);
+    }
+    .thumb:hover{transform: translateY(-1px); box-shadow: 0 16px 40px rgba(0,0,0,0.08)}
 
-    .footer{
-      margin-top:18px;
-      display:flex;flex-wrap:wrap;gap:10px;
+    /* Buy Box */
+    .buybox{
+      padding: 26px 26px 18px;
+      position: sticky;
+      top: 92px;
+    }
+
+    .kicker{
+      display:inline-flex; gap:10px; align-items:center;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.70);
+      border: 1px solid rgba(255,255,255,0.85);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+      color: rgba(29,29,31,0.70);
+      font-weight: 900;
+      font-size:.82rem;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      font-family:'Montserrat',sans-serif;
+    }
+
+    .title{
+      font-family:'Playfair Display',serif;
+      font-size: 2.55rem;
+      line-height: 1.06;
+      letter-spacing:-.6px;
+      margin-bottom: 10px;
+    }
+    .subtitle{
+      color: var(--text-medium);
+      font-size: 1.05rem;
+      line-height: 1.85;
+      margin-bottom: 18px;
+      max-width: 70ch;
+    }
+
+    .price-row{
+      display:flex;
+      align-items:baseline;
+      justify-content:space-between;
+      gap: 16px;
+      margin: 16px 0 18px;
+      padding: 14px 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.65);
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 14px 45px rgba(0,0,0,0.06);
+    }
+    .price{
+      display:flex; gap:10px; align-items:baseline; flex-wrap:wrap;
+    }
+    .price .now{
+      font-family:'Montserrat',sans-serif;
+      font-weight: 900;
+      font-size: 2.05rem;
+      letter-spacing:-.6px;
+    }
+    .price .was{
+      font-family:'Montserrat',sans-serif;
+      font-weight: 800;
+      font-size: .98rem;
+      color: rgba(66,66,69,0.70);
+      text-decoration: line-through;
+    }
+    .price-note{
+      font-size:.90rem;
+      color: rgba(66,66,69,0.78);
+      font-weight: 600;
+    }
+
+    .cta-stack{
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .cta-primary{
+      display:flex;
+      align-items:center;
       justify-content:center;
-      color:var(--muted);
-      font-size:14px;
+      gap: 10px;
+      padding: 1.05rem 1.2rem;
+      border-radius: 999px;
+      background: var(--accent-orange);
+      color:#fff;
+      text-decoration:none;
+      font-weight: 900;
+      font-family:'Montserrat',sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      transition: all .25s ease;
+      box-shadow: 0 22px 60px rgba(255,101,15,0.30);
+      border: 1px solid rgba(255,255,255,0.20);
     }
-    .sep{opacity:.5}
+    .cta-primary:hover{transform: translateY(-2px); box-shadow: 0 28px 70px rgba(255,101,15,0.36)}
+    .cta-secondary{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      padding: .95rem 1.1rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.62);
+      color: var(--text-dark);
+      text-decoration:none;
+      font-weight: 900;
+      font-family:'Montserrat',sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      transition: all .25s ease;
+      border: 1px solid rgba(29,29,31,0.10);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.06);
+    }
+    .cta-secondary:hover{transform: translateY(-1px); border-color: rgba(255,101,15,0.35)}
 
+    .micro-row{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .micro{
+      padding: 12px 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.62);
+      border: 1px solid rgba(29,29,31,0.08);
+      box-shadow: 0 12px 34px rgba(0,0,0,0.05);
+    }
+    .micro .h{
+      font-family:'Montserrat',sans-serif;
+      font-weight: 900;
+      font-size: .86rem;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      color: rgba(29,29,31,0.78);
+    }
+    .micro .t{
+      font-size: .92rem;
+      color: rgba(66,66,69,0.85);
+      line-height: 1.55;
+      font-weight: 600;
+    }
+
+    .disclaimer{
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(29,29,31,0.08);
+      color: rgba(66,66,69,0.86);
+      font-size: .90rem;
+      line-height: 1.65;
+      font-weight: 600;
+    }
+
+    /* ===== Section Styles ===== */
+    .section{padding: 80px 0}
+    .section.alt{
+      background: #fafafa;
+      border-top: 1px solid rgba(0,0,0,0.04);
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+    .section-title{
+      font-family:'Playfair Display',serif;
+      font-size: 2.6rem;
+      line-height: 1.08;
+      letter-spacing:-.6px;
+      margin-bottom: 12px;
+    }
+    .section-sub{
+      color: var(--text-medium);
+      font-size: 1.05rem;
+      line-height: 1.85;
+      font-weight: 600;
+      max-width: 85ch;
+      margin-bottom: 26px;
+    }
+
+    /* Feature split */
+    .split{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+    .feat{
+      padding: 26px 22px;
+      border-radius: var(--radius-xl);
+      background: rgba(255,255,255,0.65);
+      border: 1px solid rgba(255,255,255,0.90);
+      box-shadow: 0 18px 55px rgba(0,0,0,0.06);
+      position:relative;
+      overflow:hidden;
+    }
+    .feat::before{
+      content:"";
+      position:absolute; inset:-220px;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(67,206,175,.18), transparent 62%),
+        radial-gradient(circle at 80% 70%, rgba(255,101,15,.12), transparent 62%);
+      filter: blur(9px);
+      opacity:.75;
+      pointer-events:none;
+    }
+    .feat > *{position:relative; z-index:2}
+    .feat h3{
+      font-family:'Montserrat',sans-serif;
+      font-weight: 900;
+      font-size: 1.05rem;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .feat p{
+      color: rgba(66,66,69,0.88);
+      font-size: 1.02rem;
+      line-height: 1.9;
+      font-weight: 600;
+    }
+    .chips{
+      display:flex; flex-wrap:wrap; gap:10px; margin-top: 14px;
+    }
+    .chip{
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(29,29,31,0.10);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.04);
+      font-weight: 900;
+      font-size: .86rem;
+      color: rgba(29,29,31,0.78);
+      font-family:'Montserrat',sans-serif;
+    }
+
+    /* How-to steps */
+    .steps{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 18px;
+    }
+    .step{
+      border-radius: 26px;
+      background: rgba(255,255,255,0.65);
+      border: 1px solid rgba(255,255,255,0.90);
+      box-shadow: 0 18px 55px rgba(0,0,0,0.06);
+      padding: 18px 16px;
+      position:relative;
+      overflow:hidden;
+    }
+    .step::before{
+      content:"";
+      position:absolute; inset:-220px;
+      background:
+        radial-gradient(circle at 25% 30%, rgba(67,206,175,.14), transparent 62%),
+        radial-gradient(circle at 80% 70%, rgba(255,101,15,.10), transparent 62%);
+      filter: blur(9px);
+      opacity:.75;
+      pointer-events:none;
+    }
+    .step > *{position:relative; z-index:2}
+    .step .n{
+      width: 38px; height:38px; border-radius: 14px;
+      display:flex; align-items:center; justify-content:center;
+      background: rgba(29,29,31,0.92);
+      color:#fff;
+      font-family:'Montserrat',sans-serif;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+    .step h4{
+      font-family:'Montserrat',sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      font-size: .95rem;
+      margin-bottom: 6px;
+    }
+    .step p{
+      color: rgba(66,66,69,0.88);
+      font-weight: 650;
+      line-height: 1.8;
+      font-size: .98rem;
+    }
+
+    /* Specs table */
+    .specs{
+      border-radius: var(--radius-xl);
+      overflow:hidden;
+      border: 1px solid rgba(0,0,0,0.06);
+      background: rgba(255,255,255,0.70);
+      box-shadow: 0 18px 55px rgba(0,0,0,0.06);
+    }
+    .spec-row{
+      display:grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 16px;
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .spec-row:last-child{border-bottom:none}
+    .spec-k{
+      font-family:'Montserrat',sans-serif;
+      font-weight: 900;
+      font-size: .92rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(29,29,31,0.78);
+    }
+    .spec-v{
+      color: rgba(66,66,69,0.90);
+      font-weight: 650;
+      line-height: 1.7;
+      font-size: .98rem;
+    }
+
+    /* FAQ */
+    .faq{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 16px;
+    }
+    details{
+      background: rgba(255,255,255,0.70);
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 22px;
+      padding: 14px 14px;
+      box-shadow: 0 18px 55px rgba(0,0,0,0.06);
+    }
+    summary{
+      cursor:pointer;
+      list-style:none;
+      font-family:'Montserrat',sans-serif;
+      font-weight: 900;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      font-size: .92rem;
+      color: rgba(29,29,31,0.85);
+    }
+    summary::-webkit-details-marker{display:none}
+    details p{
+      margin-top: 10px;
+      color: rgba(66,66,69,0.90);
+      font-weight: 650;
+      line-height: 1.85;
+      font-size: .98rem;
+    }
+
+    /* Reviews placeholder */
+    .reviews-grid{
+      display:grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 14px;
+      margin-top: 16px;
+    }
+    .review{
+      padding: 16px 16px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.70);
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 18px 55px rgba(0,0,0,0.06);
+    }
+    .stars{letter-spacing:2px; font-size: 1.05rem}
+    .review h4{
+      margin-top: 8px;
+      font-family:'Montserrat',sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: .92rem;
+    }
+    .review p{
+      margin-top: 8px;
+      color: rgba(66,66,69,0.90);
+      font-weight: 650;
+      line-height: 1.85;
+      font-size: .98rem;
+    }
+    .review .meta{
+      margin-top: 10px;
+      color: rgba(66,66,69,0.72);
+      font-weight: 700;
+      font-size: .90rem;
+    }
+
+    /* ===== Footer (simple) ===== */
+    .footer{
+      background:#1a1a1a;
+      color:#fff;
+      padding: 70px 0 50px;
+      margin-top: 80px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-family:'Montserrat',sans-serif;
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      align-items:start;
+    }
+    .f-logo{
+      font-size:1.65rem; font-weight:900; letter-spacing:-1px;
+    }
+    .f-logo span{color:var(--accent-orange)}
+    .f-label{
+      display:block;
+      font-size:.8rem;
+      font-weight:800;
+      text-transform:uppercase;
+      margin-bottom: 16px;
+      color: var(--primary-teal);
+      letter-spacing:2px;
+    }
+    .f-list{list-style:none}
+    .f-list li{margin-bottom: 12px}
+    .f-list a{color:#bbb;text-decoration:none;font-weight:700;font-size:.92rem}
+    .f-list a:hover{color:#fff}
+
+    /* ===== Lightbox ===== */
+    .lightbox{
+      position:fixed; inset:0; z-index:2000;
+      background: rgba(0,0,0,0.68);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 24px;
+    }
+    .lightbox.show{display:flex}
+    .lightbox-inner{
+      width: min(1100px, 96vw);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 22px;
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+      box-shadow: 0 26px 90px rgba(0,0,0,0.35);
+      overflow:hidden;
+      position:relative;
+    }
+    .lightbox-inner img{
+      width:100%;
+      height:auto;
+      display:block;
+    }
+    .lb-close{
+      position:absolute; top:12px; right:12px;
+      width:44px; height:44px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,0.25);
+      background: rgba(0,0,0,0.35);
+      color:#fff;
+      font-weight: 900;
+      cursor:pointer;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 1100px){
+      .thumbs{grid-template-columns: repeat(4,1fr)}
+      .buybox{position:relative; top:auto}
+    }
     @media (max-width: 900px){
-      .hero{grid-template-columns:1fr}
-      .grid{grid-template-columns:1fr}
-      .checkout{grid-template-columns:1fr}
+      .pdp-grid{grid-template-columns: 1fr; gap: 18px}
+      .buybox{position:relative; top:auto}
+      .steps{grid-template-columns:1fr}
+      .split{grid-template-columns:1fr}
+      .reviews-grid{grid-template-columns:1fr}
+      .faq{grid-template-columns:1fr}
+      .footer-grid{grid-template-columns:1fr}
+    }
+    @media (max-width: 768px){
+      .nav{display:none}
+      .nav-toggle{display:block}
+      .nav-drawer.show{display:block}
+
+      .pdp-hero{padding-top: 96px}
+      .gallery-main{aspect-ratio: 1 / 1}
+      .title{font-size: 2.1rem}
+      .micro-row{grid-template-columns:1fr}
     }
   </style>
 </head>
 
-<body>
-  <div class="wrap">
-    <header class="top">
-      <div class="brand"><a href="./index.html">WarmesHerz</a></div>
-      <nav class="nav">
-        <a href="./produkt.html">Produkt</a>
-        <a href="./impressum.html">Impressum</a>
-        <a href="./datenschutz.html">Datenschutz</a>
-        <a href="./widerruf.html">Widerruf</a>
-      </nav>
-    </header>
+<body id="top">
 
-    <section class="hero">
-      <div class="media">
-        <!-- Später echtes Produktbild:
-        <img src="./assets/product.jpg" alt="WarmesHerz Wärmegürtel"> -->
-        <div class="placeholder">PRODUKTBILD (später einfügen)</div>
+  <!-- Header -->
+  <header class="nav-header">
+    <a href="index.html#top" class="logo">Warmes<span>H</span>erz</a>
+
+    <nav class="nav">
+      <a href="#vorteile">Vorteile</a>
+      <a href="#anwendung">Anwendung</a>
+      <a href="#details">Details</a>
+      <a href="#faq">FAQ</a>
+      <a href="#kaufen" class="btn">Jetzt sichern</a>
+    </nav>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <div class="nav-drawer" id="navDrawer">
+    <a href="#vorteile">Vorteile</a>
+    <a href="#anwendung">Anwendung</a>
+    <a href="#details">Details</a>
+    <a href="#faq">FAQ</a>
+    <a href="#kaufen" class="btn">Jetzt sichern</a>
+    <a href="index.html#top">Zur Startseite</a>
+  </div>
+
+  <!-- PDP Hero -->
+  <section class="pdp-hero">
+    <div class="container">
+      <div class="pdp-grid">
+        <!-- Gallery -->
+        <div class="glass-card gallery" aria-label="Produktbilder">
+          <div class="gallery-main" id="galleryMain" role="button" aria-label="Bild vergrößern">
+            <img id="mainImage" src="Haupt%20Produkt%20Bild.webp" alt="HeatBelt Pro™ – Hauptbild" />
+            <div class="zoom-hint">Tippen / Klicken zum Zoomen</div>
+          </div>
+
+          <div class="thumbs" id="thumbs">
+            <!-- Reihenfolge exakt wie du vorgegeben hast -->
+            <div class="thumb active" data-src="Haupt%20Produkt%20Bild.webp" data-alt="HeatBelt Pro™ – Hauptbild">
+              <img src="Haupt%20Produkt%20Bild.webp" alt="Thumbnail 1" />
+            </div>
+            <div class="thumb" data-src="Tragefoto%20Bedinunf%20Fernbedinung%20fokus.jpg" data-alt="Tragefoto – Bedienung / Fernbedienung">
+              <img src="Tragefoto%20Bedinunf%20Fernbedinung%20fokus.jpg" alt="Thumbnail 2" />
+            </div>
+            <div class="thumb" data-src="Tragefoto%20Infrarot%20fokus.jpg" data-alt="Tragefoto – Infrarot Fokus">
+              <img src="Tragefoto%20Infrarot%20fokus.jpg" alt="Thumbnail 3" />
+            </div>
+            <div class="thumb" data-src="Produkt%20Bild%20Hitze%20genau.jpg" data-alt="Produkt – Wärmebereich Detail">
+              <img src="Produkt%20Bild%20Hitze%20genau.jpg" alt="Thumbnail 4" />
+            </div>
+            <div class="thumb" data-src="S64a9a16806dd4be28b7bf4d6c58f38f6u.avif" data-alt="Akku – Kabellose Nutzung">
+              <img src="S64a9a16806dd4be28b7bf4d6c58f38f6u.avif" alt="Thumbnail 5" />
+            </div>
+            <div class="thumb" data-src="Ma%C3%9Fe%20fertig.jpg" data-alt="Maße – Passform">
+              <img src="Ma%C3%9Fe%20fertig.jpg" alt="Thumbnail 6" />
+            </div>
+            <div class="thumb" data-src="G%C3%BCrtel%20Tragefoto%20mann%20und%20frau.jpg" data-alt="Tragefoto – Mann und Frau">
+              <img src="G%C3%BCrtel%20Tragefoto%20mann%20und%20frau.jpg" alt="Thumbnail 7" />
+            </div>
+            <div class="thumb" data-src="Bild%20mit%20Inhalt%20und%20Verpackung.webp" data-alt="Lieferumfang & Verpackung">
+              <img src="Bild%20mit%20Inhalt%20und%20Verpackung.webp" alt="Thumbnail 8" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Buy Box -->
+        <div class="glass-card buybox" id="kaufen">
+          <div class="kicker">HeatBelt Pro™ • Wärme + Vibration</div>
+          <h1 class="title">Infrarot-Wärmegürtel<br>mit Massage-Funktion</h1>
+          <p class="subtitle">
+            Entwickelt für eine alltagstaugliche Entspannungs-Routine: sanfte Wärme (komfortabel dosierbar) kombiniert mit
+            rhythmischen Impulsen – ideal nach Sitzen, Stress oder körperlicher Belastung.
+          </p>
+
+          <div class="price-row">
+            <div class="price">
+              <div class="now">€ 95,00</div>
+              <div class="was">€ 129,00</div>
+            </div>
+            <div class="price-note">inkl. MwSt.<br/>zzgl. Versand</div>
+          </div>
+
+          <div class="cta-stack">
+            <!-- WICHTIG: Hier später echte Checkout-/PayPal-/Mollie-Links eintragen -->
+            <a class="cta-primary" href="#" id="buyNowBtn">Jetzt sichern →</a>
+            <a class="cta-secondary" href="index.html#kontakt">Fragen? Kontakt</a>
+          </div>
+
+          <div class="micro-row">
+            <div class="micro">
+              <div class="h">30-Min Auto-Off</div>
+              <div class="t">Zeitsteuerung für entspannte, sichere Routine.</div>
+            </div>
+            <div class="micro">
+              <div class="h">USB-C & Akku</div>
+              <div class="t">Flexibel zu Hause oder unterwegs – ohne Kabelstress.</div>
+            </div>
+          </div>
+
+          <div class="disclaimer">
+            Hinweis: HeatBelt Pro™ ist <b>kein Medizinprodukt</b> und ersetzt keine ärztliche Diagnostik oder Therapie.
+            Die Inhalte beschreiben allgemeine Mechanismen von Wärme-/Vibrationsreizen und subjektive Erfahrungen.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vorteile -->
+  <section class="section alt" id="vorteile">
+    <div class="container">
+      <h2 class="section-title">Warum HeatBelt Pro™ im Alltag überzeugt</h2>
+      <p class="section-sub">
+        Wärme- und Vibrationsreize werden oft genutzt, weil sie das Entspannungs- und Schmerzempfinden beeinflussen können.
+        Entscheidend ist eine angenehme Intensität und eine regelmäßige, komfortable Anwendung.
+      </p>
+
+      <div class="split">
+        <div class="feat">
+          <h3>Wärme: Entlastung über Muskeltonus & Durchblutung</h3>
+          <p>
+            Ein Wärmereiz aktiviert Thermorezeptoren und kann reflektorisch den Muskeltonus senken – viele erleben dadurch ein
+            „leichteres Loslassen“. Gleichzeitig kann Wärme eine Weitstellung kleiner Gefäße fördern (Vasodilatation), was
+            häufig als durchwärmend und entlastend wahrgenommen wird.
+          </p>
+          <div class="chips">
+            <span class="chip">Thermorezeptoren</span>
+            <span class="chip">Vasodilatation</span>
+            <span class="chip">Komfort-Dosierung</span>
+          </div>
+        </div>
+
+        <div class="feat">
+          <h3>Vibration: Mechanischer Reiz ohne Druck</h3>
+          <p>
+            Vibration stimuliert Mechanorezeptoren und kann die Wahrnehmung „fester“ Stellen verändern. Zusätzlich wird die
+            Körperwahrnehmung (Propriozeption) angeregt. Viele empfinden die Kombination aus vorheriger Wärme (weicheres Gewebe)
+            und anschließender Vibration als besonders angenehm.
+          </p>
+          <div class="chips">
+            <span class="chip">Mechanorezeptoren</span>
+            <span class="chip">Propriozeption</span>
+            <span class="chip">Massage-Effekt</span>
+          </div>
+        </div>
       </div>
 
-      <div class="panel" id="checkout">
-        <h1>WarmesHerz Wärmegürtel</h1>
-        <p class="sub">Angenehme Wärme für Komfort und Entspannung – einfach im Alltag.</p>
-
-        <div class="priceRow">
-          <div class="price">39,00 €</div>
-          <div class="badge">Schneller Versand</div>
+      <!-- Optionaler Bild-Spot (Platzhalter) -->
+      <div style="margin-top:22px; padding:16px; border-radius:var(--radius-xl); background:rgba(255,255,255,0.65); border:1px solid rgba(0,0,0,0.06); box-shadow: 0 18px 55px rgba(0,0,0,0.06);">
+        <div style="font-family:'Montserrat',sans-serif; font-weight:900; text-transform:uppercase; letter-spacing:1.2px; font-size:.92rem; color:rgba(29,29,31,0.8);">
+          Platzhalter-Bereich (optional)
         </div>
-
-        <ul class="bullets">
-          <li>Wärme auf Knopfdruck</li>
-          <li>30 Minuten Abschaltautomatik</li>
-          <li>Weich & angenehm zu tragen</li>
-        </ul>
-
-        <div class="checkout">
-          <a class="btn paypal" id="paypalBtn" href="#" target="_blank" rel="noopener">PayPal</a>
-          <a class="btn card" id="stripeBtn" href="#" target="_blank" rel="noopener">Karte / Apple Pay</a>
-        </div>
-
-        <p class="fine">
-          Du wirst zum sicheren Checkout weitergeleitet. Mit Kauf akzeptierst du unsere Hinweise in Impressum/Datenschutz/Widerruf.
-        </p>
-      </div>
-    </section>
-
-    <section class="panel" style="margin-top:18px">
-      <h2 style="margin:0 0 12px">Details</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>Lieferumfang</h3>
-          <p>Wärmegürtel, Kabel/Adapter (je nach Version), Kurzanleitung.</p>
-        </div>
-        <div class="card">
-          <h3>Hinweise</h3>
-          <p>Nur zur Anwendung für Komfort/Wärme. Nicht als medizinisches Heilversprechen.</p>
-        </div>
-        <div class="card">
-          <h3>Support</h3>
-          <p>Fragen? Schreib uns: <a href="mailto:deinemail@domain.de" style="text-decoration:underline">deinemail@domain.de</a></p>
+        <div style="margin-top:6px; color:rgba(66,66,69,0.88); font-weight:650; line-height:1.85;">
+          Wenn du hier später ein Visual einsetzen willst: <b>ein “vorher/nachher” Entspannungs-Visual</b> oder <b>eine saubere Infografik</b>
+          (z. B. Wärme + Vibration → Routine → Lockerheitsgefühl). Sag mir einfach, welches Bild du nutzen willst.
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <footer class="footer">
-      <span>© <span id="year"></span> WarmesHerz</span>
-      <span class="sep">·</span><a href="./impressum.html">Impressum</a>
-      <span class="sep">·</span><a href="./datenschutz.html">Datenschutz</a>
-      <span class="sep">·</span><a href="./widerruf.html">Widerruf</a>
-    </footer>
+  <!-- Anwendung -->
+  <section class="section" id="anwendung">
+    <div class="container">
+      <h2 class="section-title">Anwendung in 3 Schritten</h2>
+      <p class="section-sub">
+        Für das beste Erlebnis: angenehm warm statt „zu heiß“, lieber regelmäßig. Wenn du unsicher bist oder Beschwerden
+        neu/ungewöhnlich sind: medizinisch abklären lassen.
+      </p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="n">1</div>
+          <h4>Anlegen & Positionieren</h4>
+          <p>
+            Gürtel so anlegen, dass die Wärmezonen den gewünschten Bereich abdecken (z. B. Lendenbereich). Sitz fest, aber
+            nicht einschnürend.
+          </p>
+        </div>
+        <div class="step">
+          <div class="n">2</div>
+          <h4>Wärme sanft starten</h4>
+          <p>
+            Auf niedriger Stufe beginnen und steigern, bis es angenehm warm ist. Zu hohe Intensität ist nicht „besser“ –
+            Komfort steht im Vordergrund.
+          </p>
+        </div>
+        <div class="step">
+          <div class="n">3</div>
+          <h4>Vibration ergänzen</h4>
+          <p>
+            Wenn gewünscht: Vibration als sanften Massage-Reiz zuschalten. Viele empfinden die Kombination nach kurzer
+            Vorwärmphase als am angenehmsten.
+          </p>
+        </div>
+      </div>
+
+      <div style="margin-top:18px; display:grid; grid-template-columns: 1fr 1fr; gap:14px;">
+        <div class="feat">
+          <h3>Empfohlene Routine</h3>
+          <p>
+            15–30 Minuten pro Anwendung (Auto-Off unterstützt), 3–5× pro Woche oder nach Bedarf. Wichtig ist Regelmäßigkeit
+            – nicht maximale Hitze.
+          </p>
+        </div>
+        <div class="feat">
+          <h3>Sicherheits-Hinweise</h3>
+          <p>
+            Nicht im Schlaf benutzen. Bei Hautreizungen, starken Schmerzen, Taubheit, Fieber oder unklaren Beschwerden:
+            abbrechen und ärztlich abklären.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Details / Specs -->
+  <section class="section alt" id="details">
+    <div class="container">
+      <h2 class="section-title">Technische Details</h2>
+      <p class="section-sub">
+        Transparent und klar – damit du genau weißt, was du bekommst.
+      </p>
+
+      <div class="specs">
+        <div class="spec-row">
+          <div class="spec-k">Funktionen</div>
+          <div class="spec-v">Infrarot-Wärme (mehrstufig), Vibration (mehrstufig), Auto-Off (30 Min)</div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-k">Akku</div>
+          <div class="spec-v">Kabellose Nutzung (USB-C). <b>Hinweis:</b> Exakte Laufzeit hängt von Stufe/Modus ab.</div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-k">Passform</div>
+          <div class="spec-v">Verstellbarer Gurt + Verlängerung (siehe „Maße fertig.jpg“)</div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-k">Material</div>
+          <div class="spec-v">Komfort-Textil mit stabiler Gurtführung (hautnah, angenehm)</div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-k">Lieferumfang</div>
+          <div class="spec-v">Gürtel, Ladekabel, Anleitung, Verpackung (siehe „Bild mit Inhalt und Verpackung.webp“)</div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-k">Pflege</div>
+          <div class="spec-v">Mit leicht feuchtem Tuch reinigen. Nicht waschen, nicht eintauchen.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="section" id="bewertungen">
+    <div class="container">
+      <h2 class="section-title">Erfahrungen (Platzhalter)</h2>
+      <p class="section-sub">
+        Hier kannst du später echte Kundenbewertungen einfügen (Name abgekürzt, Datum, kurze Erfahrung).
+        Ich kann dir auch ein schönes Bewertungs-JSON/HTML-System bauen.
+      </p>
+
+      <div class="reviews-grid">
+        <div class="review">
+          <div class="stars">★★★★★</div>
+          <h4>Sehr angenehm</h4>
+          <p>Nutze es abends nach dem Büro. Wärme + leichte Vibration fühlt sich einfach „locker“ an.</p>
+          <div class="meta">M. • 2 Wochen Nutzung</div>
+        </div>
+        <div class="review">
+          <div class="stars">★★★★★</div>
+          <h4>Alltags-Routine</h4>
+          <p>Ich starte immer auf niedriger Stufe. Nach 10 Minuten fühlt sich der Bereich warm und entspannt an.</p>
+          <div class="meta">S. • 1 Monat</div>
+        </div>
+        <div class="review">
+          <div class="stars">★★★★☆</div>
+          <h4>Guter Sitz</h4>
+          <p>Passt gut, auch mit Verlängerung. Ich nutze es vor allem im unteren Rücken.</p>
+          <div class="meta">K. • 10 Tage</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section alt" id="faq">
+    <div class="container">
+      <h2 class="section-title">FAQ</h2>
+      <p class="section-sub">
+        Die wichtigsten Fragen – kurz und klar.
+      </p>
+
+      <div class="faq">
+        <details>
+          <summary>Ist HeatBelt Pro™ ein Medizinprodukt?</summary>
+          <p>
+            Nein. HeatBelt Pro™ ist ein Wellness-/Entspannungsprodukt. Es ersetzt keine Diagnose oder Therapie.
+          </p>
+        </details>
+
+        <details>
+          <summary>Wie lange sollte ich es nutzen?</summary>
+          <p>
+            Typisch sind 15–30 Minuten pro Anwendung. Die Auto-Off-Funktion unterstützt eine entspannte Routine.
+          </p>
+        </details>
+
+        <details>
+          <summary>Kann ich Wärme und Vibration kombinieren?</summary>
+          <p>
+            Ja. Viele empfinden eine kurze Vorwärmphase als angenehm und schalten dann die Vibration ergänzend dazu.
+          </p>
+        </details>
+
+        <details>
+          <summary>Wie funktioniert „Jetzt sichern“?</summary>
+          <p>
+            Aktuell ist der Button ein Platzhalter. Sobald du einen echten Checkout hast (PayPal-Link, Stripe, Shopify-Checkout,
+            WooCommerce etc.), trägst du hier den Link ein. Ich helfe dir dabei, das sauber zu verbinden.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="f-logo">WARMES<span>H</span>ERZ</div>
+          <p style="color:#bbb; font-weight:650; margin-top:10px; line-height:1.8;">
+            HeatBelt Pro™ – Wärme & sanfte Impulse für deine Wohlfühl-Routine.
+          </p>
+        </div>
+        <div>
+          <span class="f-label">Links</span>
+          <ul class="f-list">
+            <li><a href="index.html#top">Startseite</a></li>
+            <li><a href="#kaufen">Jetzt sichern</a></li>
+            <li><a href="index.html#kontakt">Kontakt</a></li>
+          </ul>
+        </div>
+        <div>
+          <span class="f-label">Rechtliches</span>
+          <ul class="f-list">
+            <li><a href="impressum.html">Impressum</a></li>
+            <li><a href="datenschutz.html">Datenschutz</a></li>
+          </ul>
+        </div>
+      </div>
+      <div style="margin-top:26px; color:#777; font-weight:700; font-size:.9rem;">
+        © <span id="year"></span> WarmesHerz
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox-inner">
+      <button class="lb-close" id="lbClose" aria-label="Schließen">✕</button>
+      <img id="lbImg" src="" alt="Zoom" />
+    </div>
   </div>
 
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    // TODO: HIER DEINE LINKS EINTRAGEN
-    const PAYPAL_LINK = "https://paypal.me/DEINNAME/39";
-    const STRIPE_LINK = "https://buy.stripe.com/DEINLINK";
+    // Mobile nav
+    const navToggle = document.getElementById('navToggle');
+    const navDrawer = document.getElementById('navDrawer');
+    navToggle.addEventListener('click', () => navDrawer.classList.toggle('show'));
+    navDrawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navDrawer.classList.remove('show')));
 
-    document.getElementById("paypalBtn").href = PAYPAL_LINK;
-    document.getElementById("stripeBtn").href = STRIPE_LINK;
+    // Gallery
+    const thumbs = document.querySelectorAll('.thumb');
+    const mainImage = document.getElementById('mainImage');
+
+    thumbs.forEach(t => {
+      t.addEventListener('click', () => {
+        thumbs.forEach(x => x.classList.remove('active'));
+        t.classList.add('active');
+        const src = t.getAttribute('data-src');
+        const alt = t.getAttribute('data-alt') || 'HeatBelt Pro™';
+        mainImage.src = src;
+        mainImage.alt = alt;
+
+        // preload next image for smoothness
+        const img = new Image();
+        img.src = src;
+      });
+    });
+
+    // Lightbox
+    const galleryMain = document.getElementById('galleryMain');
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbClose = document.getElementById('lbClose');
+
+    function openLightbox(){
+      lbImg.src = mainImage.src;
+      lbImg.alt = mainImage.alt;
+      lightbox.classList.add('show');
+      lightbox.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox(){
+      lightbox.classList.remove('show');
+      lightbox.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+    }
+
+    galleryMain.addEventListener('click', openLightbox);
+    lbClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      if(e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape') closeLightbox();
+    });
+
+    // Buy button placeholder guard
+    document.getElementById('buyNowBtn').addEventListener('click', (e) => {
+      e.preventDefault();
+      alert("Checkout-Link ist noch nicht hinterlegt. Sag mir, wohin der Button führen soll (z.B. PayPal.me Link, Stripe Checkout, Shopify Checkout), dann baue ich es direkt ein.");
+    });
   </script>
 </body>
 </html>
