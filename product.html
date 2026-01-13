@@ -1170,6 +1170,42 @@
       .gallery{padding: 12px}
       .thumbs{gap:8px}
     }
+    /* ===== Desktop Gallery fix: groß, formatgetreu, gleiche Höhe wie Buybox ===== */
+
+@media (min-width: 901px) {
+  .pdp-hero { padding-top: 98px; padding-bottom: 44px; }
+
+  .gallery{
+    position: sticky;
+    top: 92px;
+    align-self: start;
+    height: calc(100vh - 92px - 24px);
+    max-height: 860px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .gallery-main{
+    flex: 1 1 auto;
+    width: 100%;
+    max-height: none !important;
+    aspect-ratio: auto !important;
+    border-radius: 28px;
+  }
+
+  .gallery-main img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #fff;
+  }
+
+  .thumbs{
+    margin-top: 14px;
+    flex: 0 0 auto;
+  }
+}
+
 
   </style>
 </head>
