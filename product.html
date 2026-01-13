@@ -1156,6 +1156,41 @@
       .faq{grid-template-columns:1fr}
       .footer-grid{grid-template-columns:1fr}
       .gallery-main{aspect-ratio: 4/3}
+
+      /* ✅ Mobile: Galerie randlos & bildschirmbreit (Desktop bleibt wie es ist) */
+      .glass-card.gallery{
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border-radius: 0 !important;
+        overflow: visible !important;
+        padding: 0 !important;
+      }
+      .gallery{padding: 0 !important;}
+      .gallery-main{
+        border-radius: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        background: transparent !important;
+        width: 100vw;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+        aspect-ratio: auto !important;
+        max-height: none !important;
+        cursor: default;
+      }
+      .gallery-main img{
+        width: 100%;
+        height: auto !important;
+        object-fit: cover; /* simple standard look */
+        background: transparent !important;
+      }
+      .thumbs{
+        padding: 0 5%;
+        margin-top: 12px;
+      }
     }
     @media (max-width: 768px){
       .nav{display:none}
@@ -1205,8 +1240,6 @@
     flex: 0 0 auto;
   }
 }
-
-
   </style>
 </head>
 
@@ -1353,9 +1386,7 @@
           </div>
 
           <div class="cta-stack">
-            <!-- primary still "buy" (placeholder) -->
             <a class="cta-primary" href="#" id="buyNowBtn">Jetzt bestellen →</a>
-            <!-- ✅ swap secondary to Add to cart -->
             <a class="cta-secondary" href="#" id="addToCartBtn">In den Warenkorb legen</a>
           </div>
 
@@ -1379,7 +1410,6 @@
               </div>
             </div>
 
-            <!-- ✅ Replace 2 years warranty with DE shipping -->
             <div class="trust">
               <div class="ic">
                 <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
@@ -1801,6 +1831,9 @@
     // Footer year
     document.getElementById('year').textContent = new Date().getFullYear();
 
+    // ✅ PayPal Checkout URL (used for product button + cart button)
+    const CHECKOUT_URL = "https://www.paypal.com/ncp/payment/QUPGSWMD59ZSJ";
+
     // Mobile nav
     const navToggle = document.getElementById('navToggle');
     const navDrawer = document.getElementById('navDrawer');
@@ -1847,10 +1880,10 @@
     lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
     document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeLightbox(); });
 
-    // Buy button placeholder
+    // ✅ Buy button -> PayPal checkout
     document.getElementById('buyNowBtn').addEventListener('click', (e) => {
       e.preventDefault();
-      alert("Checkout-Link ist noch nicht hinterlegt. Sag mir, wohin der Button führen soll (PayPal.me / Stripe Checkout / Mollie Link) – dann baue ich ihn direkt ein.");
+      window.location.href = CHECKOUT_URL;
     });
 
     // ===== Cart (Popup) =====
@@ -1978,9 +2011,10 @@
         setQty(isNaN(v) ? qty : v);
       });
 
+      // ✅ Cart checkout -> PayPal checkout
       checkout.addEventListener('click', (e) => {
         e.preventDefault();
-        alert("Checkout-Link ist noch nicht hinterlegt. Sag mir, wohin der Button führen soll (PayPal.me / Stripe Checkout / Mollie Link) – dann setze ich ihn im Warenkorb & bei 'Jetzt bestellen'.");
+        window.location.href = CHECKOUT_URL;
       });
     }
 
