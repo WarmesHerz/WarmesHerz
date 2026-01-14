@@ -1156,6 +1156,14 @@
       .faq{grid-template-columns:1fr}
       .footer-grid{grid-template-columns:1fr}
       .gallery-main{aspect-ratio: 4/3}
+
+      /* ✅ NUR MOBILE MAIN IMAGE ANPASSUNG (gegen weißen Rand / seitliches rauswischen) */
+      .gallery-main{
+        width: calc(100% + 10%);
+        margin-left: -5%;
+        margin-right: -5%;
+        border-radius: 0;
+      }
     }
     @media (max-width: 768px){
       .nav{display:none}
@@ -1205,8 +1213,6 @@
     flex: 0 0 auto;
   }
 }
-
-
   </style>
 </head>
 
@@ -1353,9 +1359,8 @@
           </div>
 
           <div class="cta-stack">
-            <!-- primary still "buy" (placeholder) -->
+            <!-- ✅ LINKED -->
             <a class="cta-primary" href="#" id="buyNowBtn">Jetzt bestellen →</a>
-            <!-- ✅ swap secondary to Add to cart -->
             <a class="cta-secondary" href="#" id="addToCartBtn">In den Warenkorb legen</a>
           </div>
 
@@ -1379,7 +1384,6 @@
               </div>
             </div>
 
-            <!-- ✅ Replace 2 years warranty with DE shipping -->
             <div class="trust">
               <div class="ic">
                 <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
@@ -1798,6 +1802,14 @@
   </div>
 
   <script>
+    // ✅ SET YOUR CHECKOUT LINK HERE (ONE PLACE)
+    // Example:
+    // const CHECKOUT_URL = "https://yourdomain.com/checkout";
+    // const CHECKOUT_URL = "https://buy.stripe.com/xxxx";
+    // const CHECKOUT_URL = "https://www.paypal.com/checkoutnow?token=xxxx";
+    const CHECKOUT_URL = "https://www.paypal.com/ncp/payment/QUPGSWMD59ZSJ";
+
+
     // Footer year
     document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -1847,10 +1859,14 @@
     lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
     document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeLightbox(); });
 
-    // Buy button placeholder
-    document.getElementById('buyNowBtn').addEventListener('click', (e) => {
-      e.preventDefault();
-      alert("Checkout-Link ist noch nicht hinterlegt. Sag mir, wohin der Button führen soll (PayPal.me / Stripe Checkout / Mollie Link) – dann baue ich ihn direkt ein.");
+    // ✅ Buy button now goes to checkout link (no error popup)
+    const buyNowBtn = document.getElementById('buyNowBtn');
+    buyNowBtn.href = CHECKOUT_URL;
+    buyNowBtn.addEventListener('click', (e) => {
+      if (!CHECKOUT_URL || CHECKOUT_URL === "CHECKOUT_LINK_HIER_EINTRAGEN") {
+        e.preventDefault();
+        alert("Du musst unten im Script die Variable CHECKOUT_URL setzen.");
+      }
     });
 
     // ===== Cart (Popup) =====
@@ -1954,7 +1970,7 @@
 
         <div class="cart-foot">
           <div class="cart-total">Gesamt: ${formatEUR(cartTotal())}</div>
-          <a href="#" class="cart-checkout" id="cartCheckoutBtn">Jetzt bestellen →</a>
+          <a href="${CHECKOUT_URL}" class="cart-checkout" id="cartCheckoutBtn">Jetzt bestellen →</a>
         </div>
 
         <div class="cart-note">
@@ -1978,9 +1994,12 @@
         setQty(isNaN(v) ? qty : v);
       });
 
+      // ✅ checkout guard
       checkout.addEventListener('click', (e) => {
-        e.preventDefault();
-        alert("Checkout-Link ist noch nicht hinterlegt. Sag mir, wohin der Button führen soll (PayPal.me / Stripe Checkout / Mollie Link) – dann setze ich ihn im Warenkorb & bei 'Jetzt bestellen'.");
+        if (!CHECKOUT_URL || CHECKOUT_URL === "CHECKOUT_LINK_HIER_EINTRAGEN") {
+          e.preventDefault();
+          alert("Du musst unten im Script die Variable CHECKOUT_URL setzen.");
+        }
       });
     }
 
