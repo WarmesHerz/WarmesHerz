@@ -63,20 +63,25 @@
       align-items: start;
     }
 
-    /* no extra frame */
+    /* ============ LEFT (no extra frames) ============ */
     .media-block{
       padding: 0;
-      display: grid;
-      grid-template-columns: 96px 1fr;
-      gap: 18px;
-      align-items: start;
       background: transparent;
       border: 0;
       border-radius: 0;
     }
 
-    /* thumbs + arrows */
+    /* fixed height so main can be true 1:1 and fill vertically */
+    .left-stage{
+      height: 560px;                 /* ✅ +20px height */
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
     .thumb-rail{
+      height: 560px;
       display: grid;
       grid-template-rows: 34px 1fr 34px;
       gap: 10px;
@@ -84,7 +89,7 @@
     }
 
     .arrow-btn{
-      width: 100%;
+      width: 78px;                   /* ✅ same width as thumbnails */
       height: 34px;
       border-radius: 10px;
       border: 1px solid var(--arrow-border);
@@ -94,13 +99,13 @@
       place-items: center;
       transition: transform .08s ease, background .15s ease;
       user-select: none;
+      justify-self: center;          /* ✅ centered in rail */
     }
     .arrow-btn:hover{ transform: translateY(-1px); background: rgba(0,0,0,.075); }
     .arrow-btn:active{ transform: translateY(0); }
     .arrow-btn svg{ width: 16px; height: 16px; opacity: .85; }
 
     .thumb-strip{
-      height: 520px;
       overflow: auto;
       padding: 4px;
       border-radius: 14px;
@@ -139,11 +144,19 @@
       pointer-events:none;
     }
 
-    /* ✅ MAIN ALWAYS SQUARE */
+    .main-wrap{
+      height: 560px;
+      display: grid;
+      align-items: center;
+    }
+
+    /* ✅ main is truly square + fills vertically like the reference */
     .main-surface{
-      width: 100%;
-      max-height: 500px;         /* tune height */
-      aspect-ratio: 1 / 1;       /* ✅ square */
+      height: 100%;
+      aspect-ratio: 1 / 1;           /* ✅ square */
+      width: auto;                   /* ✅ width from height */
+      max-width: 100%;
+      justify-self: start;
       position: relative;
       overflow: hidden;
       border-radius: 16px;
@@ -155,11 +168,11 @@
       inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover; /* like Therabody */
+      object-fit: cover;
       display: block;
     }
 
-    /* right side */
+    /* ============ RIGHT ============ */
     .info{ padding: 16px 12px 10px; }
 
     .kicker{
@@ -278,7 +291,7 @@
     }
     .atc:hover{ transform: translateY(-1px); }
 
-    /* benefits */
+    /* ============ BENEFITS ============ */
     .benefits{
       margin-top: 12px;
       background: var(--block-bg);
@@ -342,13 +355,20 @@
     @media (max-width: 1180px){
       .grid{ grid-template-columns: 1fr; }
       h1{ font-size: 50px; }
-      .thumb-strip{ height: 420px; }
-      .main-surface{ max-height: 420px; }
+
+      .left-stage, .thumb-rail, .main-wrap{ height: 520px; }
     }
     @media (max-width: 620px){
-      .media-block{ grid-template-columns: 84px 1fr; }
+      .left-stage{
+        height: auto;
+        grid-template-columns: 84px 1fr;
+      }
       .thumb{ width: 66px; height: 66px; }
-      .thumb-strip{ height: 340px; }
+      .arrow-btn{ width: 66px; }
+      .thumb-rail{ height: 420px; }
+      .main-wrap{ height: 420px; }
+      .main-surface{ height: 100%; }
+
       .benefits-grid{ grid-template-columns: 1fr; }
       .divider{ display: none; }
       .benefit{
@@ -371,36 +391,39 @@
     <div class="grid">
       <!-- LEFT -->
       <div class="media-block">
-        <div class="thumb-rail">
-          <!-- ✅ arrows switch media -->
-          <button class="arrow-btn" id="prevMedia" type="button" aria-label="Vorheriges Bild">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M6 14l6-6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-
-          <div class="thumb-strip" id="thumbStrip" role="listbox" aria-label="Produktbilder">
-            <button class="thumb is-active" type="button" data-kind="video" data-file="HeatBelt Pro hinter Feuer.mp4" aria-selected="true">
-              <video muted playsinline preload="metadata"></video>
+        <div class="left-stage">
+          <div class="thumb-rail">
+            <button class="arrow-btn" id="prevMedia" type="button" aria-label="Vorheriges Bild">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M6 14l6-6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
             </button>
 
-            <button class="thumb" type="button" data-kind="image" data-file="Haupt Produkt Bild (1).png" aria-selected="false"><img alt="Haupt Produkt Bild (1)"></button>
-            <button class="thumb" type="button" data-kind="image" data-file="Tragefoto Infrarot fokus.jpg" aria-selected="false"><img alt="Tragefoto Infrarot fokus"></button>
-            <button class="thumb" type="button" data-kind="image" data-file="Tragefoto Bedinunf Fernbedinung fokus.jpg" aria-selected="false"><img alt="Tragefoto Fernbedienung fokus"></button>
-            <button class="thumb" type="button" data-kind="image" data-file="Produkt Bild Hitze genau.jpg" aria-selected="false"><img alt="Produkt Bild Hitze genau"></button>
-            <button class="thumb" type="button" data-kind="image" data-file="S64a9a16806dd4be28b7bf4d6c58f38f6u.avif" aria-selected="false"><img alt="S64a9a16806dd4be28b7bf4d6c58f38f6u"></button>
-            <button class="thumb" type="button" data-kind="image" data-file="Bild mit Inhalt und Verpackung.webp" aria-selected="false"><img alt="Bild mit Inhalt und Verpackung"></button>
-            <button class="thumb" type="button" data-kind="image" data-file="Tragebild Frau Qualitativ.webp" aria-selected="false"><img alt="Tragebild Frau Qualitativ"></button>
+            <div class="thumb-strip" id="thumbStrip" role="listbox" aria-label="Produktbilder">
+              <button class="thumb is-active" type="button" data-kind="video" data-file="HeatBelt Pro hinter Feuer.mp4" aria-selected="true">
+                <video muted playsinline preload="metadata"></video>
+              </button>
+
+              <button class="thumb" type="button" data-kind="image" data-file="Haupt Produkt Bild (1).png" aria-selected="false"><img alt="Haupt Produkt Bild (1)"></button>
+              <button class="thumb" type="button" data-kind="image" data-file="Tragefoto Infrarot fokus.jpg" aria-selected="false"><img alt="Tragefoto Infrarot fokus"></button>
+              <button class="thumb" type="button" data-kind="image" data-file="Tragefoto Bedinunf Fernbedinung fokus.jpg" aria-selected="false"><img alt="Tragefoto Fernbedienung fokus"></button>
+              <button class="thumb" type="button" data-kind="image" data-file="Produkt Bild Hitze genau.jpg" aria-selected="false"><img alt="Produkt Bild Hitze genau"></button>
+              <button class="thumb" type="button" data-kind="image" data-file="S64a9a16806dd4be28b7bf4d6c58f38f6u.avif" aria-selected="false"><img alt="S64a9a16806dd4be28b7bf4d6c58f38f6u"></button>
+              <button class="thumb" type="button" data-kind="image" data-file="Bild mit Inhalt und Verpackung.webp" aria-selected="false"><img alt="Bild mit Inhalt und Verpackung"></button>
+              <button class="thumb" type="button" data-kind="image" data-file="Tragebild Frau Qualitativ.webp" aria-selected="false"><img alt="Tragebild Frau Qualitativ"></button>
+            </div>
+
+            <button class="arrow-btn" id="nextMedia" type="button" aria-label="Nächstes Bild">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M6 10l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
           </div>
 
-          <button class="arrow-btn" id="nextMedia" type="button" aria-label="Nächstes Bild">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M6 10l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
+          <div class="main-wrap">
+            <div class="main-surface" id="mainSurface"></div>
+          </div>
         </div>
-
-        <div class="main-surface" id="mainSurface"></div>
       </div>
 
       <!-- RIGHT -->
@@ -571,7 +594,6 @@
 
       benefitIcon.src = await resolveUrl("Benefit_Icons_15.svg");
 
-      // load thumb media urls
       for (const btn of thumbs){
         const kind = btn.getAttribute("data-kind") || "image";
         const file = btn.getAttribute("data-file");
@@ -591,11 +613,9 @@
         }
       }
 
-      // option thumb = first image
       const firstImageBtn = thumbs.find(b => b.dataset.kind === "image");
       if (firstImageBtn) optionThumb.src = firstImageBtn.dataset.url;
 
-      // state
       let activeIndex = 0;
 
       function applyIndex(nextIndex){
@@ -607,19 +627,15 @@
         ensureVisible(thumbStrip, btn);
       }
 
-      // initial
       applyIndex(0);
 
-      // click thumb
       thumbs.forEach((btn, i) => {
         btn.addEventListener("click", () => applyIndex(i));
       });
 
-      // ✅ arrows switch media
       document.getElementById("prevMedia").addEventListener("click", () => applyIndex(activeIndex - 1));
       document.getElementById("nextMedia").addEventListener("click", () => applyIndex(activeIndex + 1));
 
-      // keyboard convenience
       window.addEventListener("keydown", (e) => {
         if (e.key === "ArrowUp") applyIndex(activeIndex - 1);
         if (e.key === "ArrowDown") applyIndex(activeIndex + 1);
