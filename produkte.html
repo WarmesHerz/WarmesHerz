@@ -11,9 +11,10 @@
 
   <style>
     :root{
-      /* ✅ deine exakten Farben */
       --page-bg: #fffcf5;
       --block-bg: #f7f3e9;
+
+      --device-bg: #f0e9db;
 
       --text: #111111;
       --muted: rgba(17,17,17,.68);
@@ -24,9 +25,6 @@
       --btn: #242424;
 
       --radius: 14px;
-
-      /* eher „Therabody Scale“ (nicht zu groß) */
-      --s: 1.0;
 
       --pill-bg: #f4d3ad;
       --pill-border: rgba(0,0,0,.12);
@@ -41,7 +39,7 @@
     }
 
     .wrap{
-      max-width: 1320px; /* ✅ näher an Therabody Breite */
+      max-width: 1360px; /* ✅ +breiter (vorher 1320) */
       margin: 0 auto;
       padding: 22px 18px 36px;
     }
@@ -57,37 +55,39 @@
     .breadcrumbs a{ color: inherit; text-decoration: underline; text-underline-offset: 2px; }
     .sep{ opacity: .7; }
 
-    /* Haupt-Card */
     .grid{
       background: var(--block-bg);
       border-radius: var(--radius);
-      padding: 18px;
+      padding: 20px; /* ✅ +20px feeling */
       display: grid;
-      grid-template-columns: 1.45fr .85fr; /* ✅ Thermabody: links deutlich breiter */
+      grid-template-columns: 1.48fr .86fr; /* links minimal breiter */
       gap: 26px;
       align-items: start;
     }
 
-    /* Gallery */
-    .gallery{
+    /* ✅ EIN großer Bild-Block (ohne “2. Box”) */
+    .media-block{
+      border-radius: 14px;
+      background: rgba(255,255,255,.14);
+      border: 1px solid var(--line-soft);
+      padding: 18px; /* großer Block Padding */
       display: grid;
-      grid-template-columns: 86px 1fr; /* links Strip */
+      grid-template-columns: 86px 1fr;
       gap: 16px;
       align-items: start;
     }
 
-    /* ✅ Thumbnail Strip wie Therabody: ein langer Streifen */
+    /* Thumbnail Strip (im selben Block) */
     .thumb-strip{
       border-radius: 12px;
-      background: rgba(255,255,255,.18);
-      border: 1px solid var(--line-soft);
-      padding: 10px 10px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(0,0,0,.08);
+      padding: 10px;
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
 
-    /* ✅ KEIN extra Kasten pro Thumb */
     .thumb{
       width: 64px;
       height: 64px;
@@ -109,37 +109,31 @@
     }
     .thumb.is-active{
       border-color: rgba(0,0,0,.45);
-      background: rgba(255,255,255,.22);
-    }
-
-    /* ✅ Main Frame wie Therabody */
-    .main-frame{
-      border-radius: 14px;
       background: rgba(255,255,255,.18);
-      border: 1px solid var(--line-soft);
-      padding: 18px;              /* ✅ Rahmen-Abstand */
     }
 
-    /* ✅ Das Bild soll exakt die Frame-Fläche füllen (wie Therabody) */
+    /* Main image area (direkt im großen Block, keine extra Box) */
     .main-surface{
-      position: relative;
       border-radius: 12px;
-      background: rgba(255,255,255,.12);
+      background: rgba(255,255,255,.10);
       border: 1px solid rgba(0,0,0,.08);
       aspect-ratio: 1 / 1;
       overflow: hidden;
+      position: relative;
     }
     .main-surface img{
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: contain;  /* kein Abschneiden */
+      object-fit: contain;
       display: block;
     }
 
-    /* Info */
-    .info{ padding: 4px 2px; }
+    /* Right info */
+    .info{
+      padding: 6px 4px;
+    }
 
     .kicker{
       font-size: 11px;
@@ -149,10 +143,9 @@
       margin-bottom: 10px;
     }
 
-    /* ✅ Title näher an Therabody */
     h1{
       font-family: "Playfair Display", ui-serif, Georgia, "Times New Roman", Times, serif;
-      font-size: 54px;     /* etwas kleiner als vorher */
+      font-size: 56px;
       line-height: 0.98;
       margin: 0 0 12px;
       font-weight: 500;
@@ -162,7 +155,6 @@
     .tm{
       font-size: 0.58em;
       vertical-align: super;
-      letter-spacing: 0;
     }
 
     .subtext{
@@ -170,11 +162,15 @@
       line-height: 1.35;
       color: var(--muted);
       max-width: 54ch;
-      margin: 0 0 12px;
+      margin: 0 0 14px;
     }
 
-    /* Klinisch erwiesen Pill */
-    .badge-row{ margin: 10px 0 12px; }
+    /* ✅ Abstände wie Original (mehr Luft zwischen Blöcken) */
+    .badge-row{ margin: 14px 0 18px; }
+    .rating{ margin: 0 0 22px; }
+    .opt-wrap{ margin: 0 0 18px; }
+    .btn-wrap{ margin-top: 14px; }
+
     .badge{
       display: inline-flex;
       align-items: center;
@@ -189,12 +185,10 @@
     }
     .badge svg{ width: 14px; height: 14px; }
 
-    /* Stars */
     .rating{
       display: flex;
       align-items: center;
       gap: 10px;
-      margin: 8px 0 18px;
     }
     .stars{ display: inline-flex; gap: 2px; transform: translateY(1px); }
     .stars svg{ width: 14px; height: 14px; color: #1a1a1a; }
@@ -208,6 +202,7 @@
       margin-bottom: 10px;
     }
 
+    /* ✅ device options Hintergrundfarbe */
     .option-card{
       display: flex;
       justify-content: space-between;
@@ -215,9 +210,8 @@
       gap: 14px;
       padding: 12px;
       border-radius: 10px;
-      background: rgba(255,255,255,.12);
+      background: var(--device-bg);
       border: 1px solid rgba(0,0,0,.32);
-      margin-bottom: 12px;
     }
     .option-left{
       display: flex;
@@ -262,7 +256,7 @@
     }
     .atc:hover{ transform: translateY(-1px); }
 
-    /* Benefits (ohne Border) */
+    /* Benefits */
     .benefits{
       margin-top: 14px;
       background: var(--block-bg);
@@ -287,12 +281,11 @@
       overflow: hidden;
       flex: 0 0 auto;
     }
-    /* ✅ weniger zoom als vorher */
     .benefit-icon img{
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transform: scale(1.12);
+      transform: scale(1.08);
       transform-origin: center;
       display: block;
     }
@@ -327,10 +320,12 @@
 
     @media (max-width: 1060px){
       .grid{ grid-template-columns: 1fr; }
-      h1{ font-size: 44px; }
-      .gallery{ grid-template-columns: 78px 1fr; }
+      .media-block{ grid-template-columns: 78px 1fr; }
+      h1{ font-size: 46px; }
     }
     @media (max-width: 620px){
+      .media-block{ grid-template-columns: 72px 1fr; padding: 14px; }
+      .thumb{ width: 56px; height: 56px; }
       .benefits-grid{ grid-template-columns: 1fr; }
       .divider{ display: none; }
       .benefit{
@@ -351,8 +346,8 @@
     </nav>
 
     <div class="grid">
-      <!-- LEFT -->
-      <div class="gallery">
+      <!-- LEFT: ONE big block -->
+      <div class="media-block">
         <div class="thumb-strip" role="listbox" aria-label="Produktbilder">
           <button class="thumb is-active" type="button" data-file="Haupt Produkt Bild.webp" aria-selected="true">
             <img alt="Haupt Produkt Bild" />
@@ -368,10 +363,8 @@
           </button>
         </div>
 
-        <div class="main-frame">
-          <div class="main-surface">
-            <img id="mainImage" alt="HeatBelt Pro™ – Hauptbild" loading="eager">
-          </div>
+        <div class="main-surface">
+          <img id="mainImage" alt="HeatBelt Pro™ – Hauptbild" loading="eager">
         </div>
       </div>
 
@@ -401,28 +394,31 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3l-6.2 3.7 1.7-7.1L2 8.9l7.2-.6L12 1.6l2.8 6.7 7.2.6-5.5 5 1.7 7.1z"/></svg>
             <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3l-6.2 3.7 1.7-7.1L2 8.9l7.2-.6L12 1.6l2.8 6.7 7.2.6-5.5 5 1.7 7.1z"/></svg>
             <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3l-6.2 3.7 1.7-7.1L2 8.9l7.2-.6L12 1.6l2.8 6.7 7.2.6-5.5 5 1.7 7.1z"/></svg>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3l-6.2 3.7 1.7-7.1L2 8.9l7.2-.6L12 1.6l2.8 6.7 7.2.6-5.5 5 1.7 7.1z"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3l-6.2 3.7 1.7-7.1L2 8.9l7.2-.6L12 1.6l2.8 6.7 7.2/.6-5.5 5 1.7 7.1z"/></svg>
           </div>
           <span class="rating-text">90 Bewertungen</span>
         </div>
 
-        <div class="opt-title">DEVICE OPTIONS</div>
+        <div class="opt-wrap">
+          <div class="opt-title">DEVICE OPTIONS</div>
 
-        <div class="option-card">
-          <div class="option-left">
-            <img id="optionThumb" class="option-img" alt="Option Thumbnail">
-            <div class="option-name">HeatBelt Pro™</div>
+          <div class="option-card">
+            <div class="option-left">
+              <img id="optionThumb" class="option-img" alt="Option Thumbnail">
+              <div class="option-name">HeatBelt Pro™</div>
+            </div>
+            <div class="option-price">€95</div>
           </div>
-          <div class="option-price">€95</div>
         </div>
 
-        <button class="atc" type="button" onclick="alert('Demo: In GitHub Pages ohne Shop-System.');">
-          In den Warenkorb legen
-        </button>
+        <div class="btn-wrap">
+          <button class="atc" type="button" onclick="alert('Demo: In GitHub Pages ohne Shop-System.');">
+            In den Warenkorb legen
+          </button>
+        </div>
       </div>
     </div>
 
-    <!-- Benefits -->
     <div class="benefits">
       <div class="benefits-head">
         <div class="benefit-icon" aria-hidden="true">
