@@ -1,1004 +1,820 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ThermBack LED</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background-color: #f5f3f0;
-            color: #333;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .breadcrumb {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 30px;
-        }
-
-        .breadcrumb a {
-            color: #666;
-            text-decoration: none;
-        }
-
-        .breadcrumb a:hover {
-            text-decoration: underline;
-        }
-
-        .product-section {
-            background: white;
-            border-radius: 12px;
-            padding: 40px;
-            display: grid;
-            grid-template-columns: 80px 1fr 500px;
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        @media (max-width: 1200px) {
-            .product-section {
-                grid-template-columns: 1fr;
-                padding: 20px;
-                gap: 15px;
-            }
-
-            .thumbnail-gallery {
-                order: 1;
-                flex-direction: row;
-                max-height: none;
-                justify-content: center;
-                gap: 8px;
-            }
-
-            .thumbnail-gallery-inner {
-                flex-direction: row;
-                gap: 8px;
-            }
-
-            .thumbnail-nav {
-                display: none;
-            }
-
-            .main-image {
-                order: 2;
-                margin-bottom: 20px;
-            }
-
-            .product-info {
-                order: 3;
-            }
-        }
-
-        .thumbnail-gallery {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            max-height: 600px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .thumbnail-gallery-inner {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            overflow-y: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-
-        .thumbnail-gallery-inner::-webkit-scrollbar {
-            display: none;
-        }
-
-        .thumbnail-nav {
-            width: 80px;
-            height: 40px;
-            background: white;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            flex-shrink: 0;
-            z-index: 10;
-        }
-
-        .thumbnail-nav:hover {
-            border-color: #999;
-            background: #f5f5f5;
-        }
-
-        .thumbnail-nav.disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
-
-        .thumbnail {
-            width: 80px;
-            height: 80px;
-            background: white;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.2s;
-            flex-shrink: 0;
-        }
-
-        .thumbnail:hover, .thumbnail.active {
-            border-color: #333;
-        }
-
-        .thumbnail img,
-        .thumbnail video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .thumbnail[data-type="video"] video {
-            object-fit: cover;
-            object-position: center;
-        }
-
-        .main-image {
-            background: transparent;
-            border-radius: 12px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 600px;
-            padding: 0;
-        }
-
-        .main-image video,
-        .main-image img {
-            width: 100%;
-            height: auto;
-            border-radius: 12px;
-            object-fit: cover;
-            max-height: 600px;
-        }
-
-        .main-image video {
-            aspect-ratio: 1 / 1;
-            object-position: center;
-        }
-
-        .product-info {
-            padding: 20px 0;
-        }
-
-        .category {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #666;
-            margin-bottom: 10px;
-        }
-
-        .product-title {
-            font-size: 48px;
-            font-weight: 300;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-
-        @media (max-width: 1200px) {
-            .product-title {
-                font-size: 32px;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-        }
-
-        .product-description {
-            font-size: 15px;
-            line-height: 1.6;
-            color: #555;
-            margin-bottom: 20px;
-        }
-
-        .clinical-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: white;
-            border: 1px solid #333;
-            border-radius: 4px;
-            padding: 8px 16px;
-            font-size: 13px;
-            margin: 20px 0;
-        }
-
-        .rating {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 30px;
-        }
-
-        .stars {
-            color: #333;
-            font-size: 18px;
-        }
-
-        .review-count {
-            font-size: 14px;
-            color: #666;
-        }
-
-        .device-options {
-            margin-bottom: 20px;
-        }
-
-        .device-options label {
-            display: block;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-            color: #666;
-        }
-
-        .option-card {
-            background: white;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-bottom: 15px;
-        }
-
-        .option-card:hover {
-            border-color: #999;
-        }
-
-        .option-card.selected {
-            border-color: #333;
-        }
-
-        @media (max-width: 1200px) {
-            .option-card {
-                margin-bottom: 10px;
-            }
-        }
-
-        .option-content {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .option-icon {
-            width: 50px;
-            height: 50px;
-            background: #f5f3f0;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .option-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .option-name {
-            font-size: 16px;
-            font-weight: 400;
-        }
-
-        .option-price {
-            font-size: 18px;
-            font-weight: 500;
-        }
-
-        .add-to-cart {
-            width: 100%;
-            background: #333;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 18px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .add-to-cart:hover {
-            background: #000;
-        }
-
-        @media (max-width: 1200px) {
-            .add-to-cart {
-                margin-top: 10px;
-            }
-        }
-
-        .benefits-section {
-            background: white;
-            border-radius: 12px;
-            padding: 40px;
-            margin-bottom: 30px;
-        }
-
-        .benefits-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .benefits-icon {
-            width: 50px;
-            height: 50px;
-            background: transparent;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .benefits-icon img {
-            width: 50px;
-            height: 50px;
-        }
-
-        .benefits-header h3 {
-            font-size: 18px;
-            font-weight: 500;
-        }
-
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .benefit-item {
-            position: relative;
-            padding-right: 30px;
-        }
-
-        .benefit-item:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            width: 1px;
-            background: #e0e0e0;
-        }
-
-        @media (max-width: 1200px) {
-            .benefit-item {
-                padding-right: 0;
-                padding-bottom: 20px;
-                margin-bottom: 20px;
-            }
-
-            .benefit-item:not(:last-child)::after {
-                right: 0;
-                left: 0;
-                top: auto;
-                bottom: 0;
-                width: auto;
-                height: 1px;
-            }
-        }
-
-        .benefit-item h4 {
-            font-size: 16px;
-            font-weight: 500;
-            margin-bottom: 8px;
-        }
-
-        .benefit-item p {
-            font-size: 14px;
-            color: #666;
-            line-height: 1.5;
-        }
-
-        .benefit-item sup {
-            font-size: 10px;
-        }
-
-        .video-section {
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 30px;
-        }
-
-        .video-section h2 {
-            font-size: 32px;
-            font-weight: 300;
-            padding: 0 0 30px;
-            margin: 0;
-            color: #333;
-        }
-
-        .video-wrapper {
-            position: relative;
-            width: 100%;
-            height: 600px;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .video-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to right, #4a2c4e, #2d1b4e);
-            z-index: 1;
-        }
-
-        .video-background video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center top;
-        }
-
-        .video-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2;
-        }
-
-        .video-placeholder {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center top;
-        }
-
-        .info-box {
-            position: absolute;
-            bottom: 30px;
-            right: 30px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            padding: 20px 25px;
-            color: white;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            z-index: 10;
-            max-width: 500px;
-        }
-
-        @media (max-width: 1200px) {
-            .info-box {
-                left: 50%;
-                right: auto;
-                transform: translateX(-50%);
-                bottom: 20px;
-                max-width: calc(100% - 40px);
-            }
-        }
-
-        .info-box:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .info-box.expanded {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            width: 100%;
-            height: 100%;
-            max-width: none;
-            border-radius: 12px;
-            flex-direction: row;
-            align-items: stretch;
-            justify-content: space-between;
-            padding: 0;
-            background: rgba(20, 20, 30, 0.95);
-            backdrop-filter: blur(20px);
-            gap: 0;
-            transform: none;
-        }
-
-        @media (max-width: 1200px) {
-            .info-box.expanded {
-                flex-direction: column;
-                justify-content: flex-start;
-            }
-        }
-
-        .video-box {
-            display: none;
-            width: 50%;
-            height: 100%;
-            padding: 30px;
-        }
-
-        .info-box.expanded .video-box {
-            display: block;
-        }
-
-        @media (max-width: 1200px) {
-            .info-box.expanded .video-box {
-                display: none;
-            }
-        }
-
-        .video-box-inner {
-            width: 100%;
-            height: 100%;
-            background: #000;
-            border-radius: 12px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .video-box-inner video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center top;
-        }
-
-        .info-box-right {
-            width: 100%;
-            transition: all 0.4s ease;
-        }
-
-        .info-box.expanded .info-box-right {
-            width: 50%;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        @media (max-width: 1200px) {
-            .info-box.expanded .info-box-right {
-                width: 100%;
-                height: auto;
-                padding: 30px;
-            }
-        }
-
-        .info-box-content {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            width: 100%;
-            transition: all 0.4s ease;
-        }
-
-        .info-box.expanded .info-box-content {
-            margin-bottom: 25px;
-            align-items: flex-start;
-        }
-
-        .info-box.expanded .info-toggle {
-            margin-top: 5px;
-        }
-
-        .info-toggle {
-            width: 32px;
-            height: 32px;
-            border: 2px solid white;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            flex-shrink: 0;
-            transition: transform 0.3s ease;
-        }
-
-        .info-box.expanded .info-toggle {
-            transform: rotate(180deg);
-        }
-
-        .info-title {
-            font-size: 14px;
-            line-height: 1.4;
-            font-weight: 400;
-            margin: 0;
-        }
-
-        .info-subtitle {
-            font-size: 11px;
-            opacity: 0.8;
-            margin: 5px 0 0 0;
-        }
-
-        .expanded-content {
-            display: none;
-            opacity: 0;
-            transition: opacity 0.4s ease 0.2s;
-        }
-
-        .info-box.expanded .expanded-content {
-            display: block;
-            opacity: 1;
-        }
-
-        .expanded-content h3 {
-            font-size: 24px;
-            font-weight: 400;
-            margin: 0 0 20px 0;
-            line-height: 1.3;
-        }
-
-        .expanded-content p {
-            font-size: 14px;
-            line-height: 1.7;
-            margin-bottom: 20px;
-            opacity: 0.9;
-        }
-
-        .expanded-content .study-info {
-            font-size: 12px;
-            opacity: 0.7;
-            margin-bottom: 25px;
-        }
-
-        .university-logo {
-            margin-top: auto;
-            padding-top: 20px;
-        }
-
-        .university-logo img {
-            height: 50px;
-            opacity: 0.9;
-        }
-
-        .science-link {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: #333;
-            font-size: 14px;
-            padding-top: 30px;
-        }
-
-        .science-link:hover {
-            text-decoration: underline;
-        }
-
-        .science-icon {
-            width: 24px;
-            height: 24px;
-        }
-
-        @media (max-width: 1200px) {
-            .product-section {
-                grid-template-columns: 1fr;
-            }
-
-            .thumbnail-gallery {
-                flex-direction: row;
-                overflow-x: auto;
-            }
-
-            .benefit-item:not(:last-child)::after {
-                display: none;
-            }
-
-            .video-wrapper {
-                height: 400px;
-            }
-
-            .info-box.expanded {
-                flex-direction: column;
-            }
-
-            .video-box {
-                width: 100% !important;
-                height: 50%;
-            }
-
-            .info-box.expanded .info-box-right {
-                width: 100%;
-                height: 50%;
-                overflow-y: auto;
-            }
-
-            .main-image video {
-                max-height: 400px;
-            }
-
-            .benefit-item {
-                padding-right: 0;
-                padding-bottom: 20px;
-                margin-bottom: 20px;
-            }
-
-            .benefit-item:not(:last-child)::after {
-                display: block;
-                right: 0;
-                left: 0;
-                top: auto;
-                bottom: 0;
-                width: auto;
-                height: 1px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HeatBelt Pro™</title>
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+
+    :root{
+      --page:#fffcf5;
+      --block:#f7f3e9;
+      --option:#f0e9db;
+      --text:#1f1f1f;
+      --muted:#666;
+      --border:#d9d1c3;
+      --radius:16px;
+      --radius-sm:12px;
+    }
+
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
+      background:var(--page);
+      color:var(--text);
+    }
+
+    .container{
+      max-width:1400px;
+      margin:0 auto;
+      padding:18px 20px 40px;
+    }
+
+    .breadcrumb{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-size:14px;
+      color:var(--muted);
+      margin-bottom:18px;
+    }
+    .breadcrumb a{color:var(--muted);text-decoration:none}
+    .breadcrumb a:hover{text-decoration:underline}
+
+    /* ===== TOP PRODUCT BLOCK ===== */
+    .product-section{
+      background:var(--block);
+      border-radius:var(--radius);
+      padding:26px;
+      display:grid;
+      grid-template-columns:88px minmax(0,1fr) 500px;
+      gap:26px;
+      margin-bottom:22px;
+    }
+
+    /* LEFT THUMBNAILS */
+    .thumbnail-gallery{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      max-height:620px;
+      overflow:hidden;
+      position:relative;
+      align-self:stretch;
+    }
+
+    .thumbnail-nav{
+      width:88px;
+      height:44px;
+      background:rgba(0,0,0,0.05);
+      border:1px solid rgba(0,0,0,0.12);
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      transition:all .2s;
+      flex-shrink:0;
+      user-select:none;
+    }
+    .thumbnail-nav:hover{border-color:rgba(0,0,0,0.25);background:rgba(0,0,0,0.07)}
+    .thumbnail-nav.disabled{opacity:.35;cursor:not-allowed}
+
+    .thumbnail-gallery-inner{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      overflow-y:auto;
+      scrollbar-width:none;
+      -ms-overflow-style:none;
+      padding:0 0 2px;
+    }
+    .thumbnail-gallery-inner::-webkit-scrollbar{display:none}
+
+    .thumbnail{
+      width:88px;
+      height:88px;
+      border-radius:14px;
+      overflow:hidden;
+      cursor:pointer;
+      transition:all .2s;
+      flex-shrink:0;
+      border:2px solid rgba(0,0,0,0.10);
+      background:#fff0;
+    }
+    .thumbnail:hover{border-color:rgba(0,0,0,0.35)}
+    .thumbnail.active{border-color:rgba(0,0,0,0.85)}
+
+    .thumbnail img,
+    .thumbnail video{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    /* MAIN MEDIA (5/4 like the reference on desktop) */
+    .main-image{
+      border-radius:var(--radius);
+      overflow:hidden;
+      align-self:stretch;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:transparent;
+      /* reference look: large media with rounded corners */
+      aspect-ratio:5 / 4;
+      max-height:620px;
+      width:100%;
+    }
+
+    .main-image video,
+    .main-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    /* RIGHT INFO */
+    .product-info{
+      padding:6px 0;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .category{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      color:#5f5a52;
+      margin-bottom:10px;
+    }
+
+    .product-title{
+      font-size:52px;
+      font-weight:300;
+      line-height:1.05;
+      margin-bottom:14px;
+    }
+
+    .product-description{
+      font-size:15px;
+      line-height:1.6;
+      color:#4f4b44;
+      margin-bottom:18px;
+      max-width:44ch;
+    }
+
+    .clinical-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      background:var(--option);
+      border:1px solid rgba(0,0,0,0.12);
+      border-radius:999px;
+      padding:10px 14px;
+      font-size:14px;
+      width:max-content;
+      margin:6px 0 16px;
+    }
+    .clinical-badge svg{width:18px;height:18px;display:block}
+
+    .rating{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:22px;
+    }
+    .stars{font-size:18px;letter-spacing:2px;color:#222}
+    .review-count{font-size:14px;color:#6b665f}
+
+    .device-options{margin-bottom:16px}
+    .device-options label{
+      display:block;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      margin-bottom:10px;
+      color:#6b665f;
+    }
+
+    .option-card{
+      background:var(--option);
+      border:1px solid rgba(0,0,0,0.22);
+      border-radius:14px;
+      padding:18px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      cursor:pointer;
+      transition:all .2s;
+    }
+    .option-card.selected{border-color:rgba(0,0,0,0.7)}
+    .option-content{display:flex;align-items:center;gap:14px}
+    .option-icon{
+      width:52px;height:52px;border-radius:12px;overflow:hidden;
+      background:#fff;
+      border:1px solid rgba(0,0,0,0.08);
+    }
+    .option-icon img{width:100%;height:100%;object-fit:cover;display:block}
+    .option-name{font-size:16px;font-weight:500}
+    .option-price{font-size:18px;font-weight:500}
+
+    .add-to-cart{
+      margin-top:14px;
+      width:100%;
+      background:#2d2d2d;
+      color:#fff;
+      border:none;
+      border-radius:12px;
+      padding:18px;
+      font-size:16px;
+      cursor:pointer;
+      transition:background .2s;
+    }
+    .add-to-cart:hover{background:#000}
+
+    /* ===== BENEFITS ===== */
+    .benefits-section{
+      background:var(--block);
+      border-radius:var(--radius);
+      padding:26px;
+      margin-bottom:22px;
+    }
+    .benefits-header{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-bottom:18px;
+    }
+    .benefits-icon{
+      width:42px;height:42px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      background:var(--option);
+      border:1px solid rgba(0,0,0,0.10);
+      flex-shrink:0;
+    }
+    .benefits-icon img{width:22px;height:22px;display:block}
+    .benefits-header h3{font-size:18px;font-weight:600}
+
+    .benefits-grid{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0, 1fr));
+      gap:0;
+    }
+    .benefit-item{
+      position:relative;
+      padding:14px 18px;
+      min-height:76px;
+    }
+    .benefit-item:not(:last-child)::after{
+      content:"";
+      position:absolute;
+      right:0;top:12px;bottom:12px;
+      width:1px;background:rgba(0,0,0,0.12);
+    }
+    .benefit-item h4{font-size:14px;font-weight:700;margin-bottom:6px}
+    .benefit-item p{font-size:13px;color:#6b665f;line-height:1.45}
+    .benefit-item sup{font-size:10px}
+
+    /* ===== VIDEO SECTION ===== */
+    .video-section{margin-bottom:10px}
+    .video-section h2{
+      font-size:40px;
+      font-weight:300;
+      margin:0 0 18px 0;
+      color:#1f1f1f;
+    }
+
+    .video-wrapper{
+      position:relative;
+      width:100%;
+      height:600px;
+      border-radius:var(--radius);
+      overflow:hidden;
+      background:#000;
+    }
+
+    .video-background video,
+    .video-container video{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center top;
+      display:block;
+    }
+
+    .video-background{
+      position:absolute;inset:0;z-index:1;
+    }
+    .video-container{
+      position:relative;
+      width:100%;
+      height:100%;
+      z-index:2;
+    }
+
+    /* glass overlay */
+    .info-box{
+      position:absolute;
+      bottom:26px;
+      right:26px;
+      background:rgba(255,255,255,0.14);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,0.20);
+      border-radius:16px;
+      padding:18px 20px;
+      color:#fff;
+      cursor:pointer;
+      transition:all .35s ease;
+      display:flex;
+      align-items:center;
+      gap:14px;
+      z-index:10;
+      width:min(560px, calc(100% - 52px));
+    }
+    .info-box:hover{background:rgba(255,255,255,0.18)}
+
+    .info-toggle{
+      width:34px;height:34px;border:2px solid #fff;border-radius:10px;
+      display:flex;align-items:center;justify-content:center;
+      font-size:20px;flex-shrink:0;
+      transition:transform .25s ease;
+    }
+
+    .info-title{font-size:14px;line-height:1.35;font-weight:500;margin:0}
+    .info-subtitle{font-size:11px;opacity:.85;margin:6px 0 0}
+
+    .video-box{display:none}
+    .info-box-right{width:100%}
+
+    .expanded-content{
+      display:none;
+      opacity:0;
+      transition:opacity .25s ease .05s;
+    }
+
+    .info-box.expanded{
+      inset:0;
+      width:100%;
+      height:100%;
+      border-radius:var(--radius);
+      padding:0;
+      background:rgba(20,20,30,0.92);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      gap:0;
+      align-items:stretch;
+    }
+
+    .info-box.expanded .info-toggle{transform:rotate(180deg)}
+    .info-box.expanded .video-box{
+      display:block;
+      width:48%;
+      height:100%;
+      padding:26px;
+    }
+    .video-box-inner{
+      width:100%;height:100%;
+      border-radius:16px;
+      overflow:hidden;
+      background:#000;
+    }
+    .video-box-inner video{width:100%;height:100%;object-fit:cover;object-position:center top}
+
+    .info-box.expanded .info-box-right{
+      width:52%;
+      padding:34px;
+      display:flex;
+      flex-direction:column;
+      overflow:auto;
+      min-height:0;
+    }
+
+    .info-box.expanded .expanded-content{
+      display:block;
+      opacity:1;
+      margin-top:16px;
+    }
+
+    .expanded-content h3{
+      font-size:26px;
+      font-weight:500;
+      margin:0 0 14px 0;
+      line-height:1.25;
+    }
+    .expanded-content p{
+      font-size:14px;
+      line-height:1.7;
+      margin:0 0 14px 0;
+      opacity:.92;
+    }
+    .expanded-content .study-info{
+      font-size:12px;
+      opacity:.75;
+      margin:6px 0 14px;
+    }
+
+    .science-link{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      color:#1f1f1f;
+      font-size:14px;
+      padding-top:18px;
+    }
+    .science-link:hover{text-decoration:underline}
+    .science-icon{width:22px;height:22px}
+
+    /* ===== RESPONSIVE ===== */
+
+    /* Tablet: stack (but keep clean) */
+    @media (max-width: 1024px){
+      .product-section{
+        grid-template-columns:1fr;
+        padding:20px;
+        gap:16px;
+      }
+
+      /* still keep main first, thumbs can go below for tablet if needed */
+      .thumbnail-gallery{order:2;max-height:none}
+      .main-image{order:1;max-height:none}
+      .product-info{order:3}
+
+      .product-title{font-size:40px}
+      .video-wrapper{height:420px}
+
+      .benefits-section{padding:20px}
+      .benefits-grid{grid-template-columns:1fr}
+      .benefit-item{padding:14px 0}
+      .benefit-item:not(:last-child)::after{
+        left:0;right:0;top:auto;bottom:0;height:1px;width:auto;
+      }
+    }
+
+    /* Mobile: thumbnails RIGHT of main image (like your screenshots) */
+    @media (max-width: 820px){
+      .container{padding:14px 14px 30px}
+      .breadcrumb{margin-bottom:12px}
+
+      .product-section{
+        padding:16px;
+        gap:14px;
+        grid-template-columns:minmax(0,1fr) 88px;
+        grid-template-rows:auto auto;
+        align-items:start;
+      }
+
+      .main-image{
+        grid-column:1/2;
+        grid-row:1/2;
+        /* match the reference feel on mobile: big media, rounded, fills from top to bottom */
+        aspect-ratio: 1 / 1; /* main must be square on mobile */
+        max-height:none;
+      }
+
+      .thumbnail-gallery{
+        grid-column:2/3;
+        grid-row:1/2;
+        max-height:unset;
+        height:100%;
+      }
+
+      /* keep arrows same width as thumbs */
+      .thumbnail-nav{width:88px}
+      .thumbnail{width:88px;height:88px;border-radius:14px}
+
+      /* only show as many thumbs as the main image height */
+      .thumbnail-gallery-inner{
+        height:100%;
+        overflow-y:auto;
+      }
+
+      .product-info{
+        grid-column:1/3;
+        grid-row:2/3;
+        padding:0;
+      }
+
+      .category{margin-bottom:8px}
+      .product-title{
+        font-size:38px;
+        margin-bottom:10px;
+      }
+      .product-description{margin-bottom:14px;max-width:none}
+
+      /* less empty space overall */
+      .rating{margin-bottom:16px}
+      .device-options{margin-bottom:12px}
+      .add-to-cart{margin-top:10px}
+
+      .benefits-section{padding:18px}
+      .benefits-header{margin-bottom:12px}
+      .benefits-grid{gap:0}
+      .benefit-item{min-height:unset;padding:12px 0}
+      .benefit-item:not(:last-child)::after{display:block}
+
+      .video-section h2{font-size:34px;margin-bottom:12px}
+      .video-wrapper{height:460px}
+
+      /* overlay: wider, less tall; expanded should show text fully (not only upper half) */
+      .info-box{
+        left:14px;
+        right:14px;
+        bottom:14px;
+        width:auto;
+        max-width:none;
+        padding:16px 18px;
+      }
+
+      .info-box.expanded{
+        left:0;right:0;top:0;bottom:0;
+      }
+
+      .info-box.expanded .video-box{
+        display:none; /* mobile like reference: no side video pane */
+      }
+
+      .info-box.expanded .info-box-right{
+        width:100%;
+        height:100%;
+        padding:22px;
+        overflow:auto; /* IMPORTANT: allow full text */
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="breadcrumb">
-            <a href="#">Home</a>
-            <span>▸</span>
-            <span>ThermBack LED</span>
-        </div>
-
-        <div class="product-section">
-            <div class="thumbnail-gallery">
-                <div class="thumbnail-nav" id="scrollUp">▲</div>
-                <div class="thumbnail-gallery-inner" id="thumbnailScroll">
-                    <div class="thumbnail active" data-type="video">
-                        <video muted loop playsinline style="width: 100%; height: 100%; object-fit: cover;">
-                            <source src="HeatBelt Pro hinter Feuer.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                    <div class="thumbnail" data-index="1">
-                        <img src="Haupt Produkt Bild (1).png" alt="Hauptprodukt">
-                    </div>
-                    <div class="thumbnail" data-index="2">
-                        <img src="Tragefoto Infrarot fokus.jpg" alt="Infrarot Fokus">
-                    </div>
-                    <div class="thumbnail" data-index="3">
-                        <img src="Tragefoto Bedinunf Fernbedinung fokus.jpg" alt="Fernbedienung">
-                    </div>
-                    <div class="thumbnail" data-index="4">
-                        <img src="Produkt Bild Hitze genau.jpg" alt="Hitze Detail">
-                    </div>
-                    <div class="thumbnail" data-index="5">
-                        <img src="Tragebild Frau Qualitativ.webp" alt="Trageansicht">
-                    </div>
-                    <div class="thumbnail" data-index="6">
-                        <img src="S64a9a16806dd4be28b7bf4d6c58f38f6u.avif" alt="Produktansicht">
-                    </div>
-                    <div class="thumbnail" data-index="7">
-                        <img src="Bild mit Inhalt und Verpackung.webp" alt="Verpackungsinhalt">
-                    </div>
-                </div>
-                <div class="thumbnail-nav" id="scrollDown">▼</div>
-            </div>
-
-            <div class="main-image">
-                <video id="mainVideo" autoplay muted loop playsinline>
-                    <source src="HeatBelt Pro hinter Feuer.mp4" type="video/mp4">
-                </video>
-                <img id="mainImage" src="Haupt Produkt Bild (1).png" alt="ThermBack LED" style="display: none;">
-            </div>
-
-            <div class="product-info">
-                <div class="category">HOT- & COLD-WEARABLES</div>
-                <h1 class="product-title">ThermBack LED</h1>
-                <p class="product-description">
-                    ThermBack LED reduziert klinisch erwiesenermaßen Schmerzen im unteren Rückenbereich mithilfe von vier fortschrittlichen Therapien: LED, Ferninfrarot, Wärme und Vibration. Es fördert eine schnellere Heilung, verbessert die Mobilität und bietet individuell anpassbare Behandlungsoptionen für eine schnell wirkende Linderung.
-                </p>
-                
-                <div class="clinical-badge">
-                    🔬 Klinisch erwiesen
-                </div>
-
-                <div class="rating">
-                    <div class="stars">★★★★☆</div>
-                    <div class="review-count">90 Bewertungen</div>
-                </div>
-
-                <div class="device-options">
-                    <label>DEVICE OPTIONS</label>
-                    <div class="option-card selected">
-                        <div class="option-content">
-                            <div class="option-icon">
-                                <img src="Haupt Produkt Bild (1).png" alt="ThermBack LED">
-                            </div>
-                            <div class="option-name">ThermBack LED</div>
-                        </div>
-                        <div class="option-price">€269</div>
-                    </div>
-                </div>
-
-                <button class="add-to-cart">In den Warenkorb legen</button>
-            </div>
-        </div>
-
-        <div class="benefits-section">
-            <div class="benefits-header">
-                <div class="benefits-icon">
-                    <img src="Benefit_Icons_15.svg" alt="Wissenschaft">
-                </div>
-                <h3>Wissenschaftlich belegte Vorteile</h3>
-            </div>
-            <div class="benefits-grid">
-                <div class="benefit-item">
-                    <h4>Klinisch erwiesen,</h4>
-                    <p>um Schmerzen im unteren Rücken zu reduzieren<sup>1</sup></p>
-                </div>
-                <div class="benefit-item">
-                    <h4>Reduziert Unterbrechungen</h4>
-                    <p>im täglichen Ablauf<sup>1</sup></p>
-                </div>
-                <div class="benefit-item">
-                    <h4>Beschleunigt die Erholung,</h4>
-                    <p>indem der Blutfluss zum Behandlungsbereich erhöht wird</p>
-                </div>
-                <div class="benefit-item">
-                    <h4>Reduziert Muskelkater</h4>
-                    <p>und hilft, die Beweglichkeit zu verbessern</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="video-section">
-            <h2>Vier fortschrittliche Therapien, eine Lösung gegen Rückenschmerzen</h2>
-            
-            <div class="video-wrapper">
-                <div class="video-background">
-                    <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover;">
-                        <source src="Design ohne Titel (3).mp4" type="video/mp4">
-                    </video>
-                </div>
-
-                <div class="video-container">
-                    <video class="video-placeholder" autoplay muted loop playsinline>
-                        <source src="Design ohne Titel (3).mp4" type="video/mp4">
-                    </video>
-                </div>
-                
-                <div class="info-box" id="infoBox">
-                    <div class="video-box">
-                        <div class="video-box-inner">
-                            <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover;">
-                                <source src="Design ohne Titel (3).mp4" type="video/mp4">
-                            </video>
-                        </div>
-                    </div>
-
-                    <div class="info-box-right">
-                        <div class="info-box-content">
-                            <div class="info-toggle">+</div>
-                            <div>
-                                <p class="info-title">LED-, Ferninfrarot-, Wärme- und Vibrations-Rückentherapiebandage</p>
-                                <p class="info-subtitle">Clinical study by: Department of Emergency Medicine, University at Buffalo</p>
-                            </div>
-                        </div>
-                        
-                        <div class="expanded-content">
-                            <h3>Klinisch nachgewiesene Schmerzlinderung im unteren Rückenbereich</h3>
-                            <p>Rückenschmerzen beeinträchtigen jedes Jahr die Lebensqualität von Millionen Menschen. Um besser zu verstehen, wie man Schmerzen im unteren Rückenbereich lindern kann, haben wir uns mit der University of Buffalo zusammengetan und eine klinische Studie durchgeführt, in der untersucht wurde, ob ThermBack LED Schmerzen im unteren Rückenbereich bei Betroffenen lindern kann. Nach zwei Wochen regelmäßiger Anwendung von ThermBack LED hatten die Teilnehmer weniger Schmerzen im unteren Rückenbereich als ohne die Anwendung.<sup>1</sup></p>
-                            
-                            <p class="study-info">Klinische Studie von: Abteilung für Notfallmedizin, University at Buffalo</p>
-                            
-                            <div class="university-logo">
-                                <svg width="200" height="50" viewBox="0 0 200 50">
-                                    <text x="10" y="30" fill="white" font-size="14" font-weight="500">Department of Emergency Medicine</text>
-                                    <text x="10" y="45" fill="white" font-size="12" opacity="0.8">University at Buffalo</text>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <a href="#" class="science-link">
-                <svg class="science-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M9 2v6m6-6v6M9 18c.667 2 2.333 4 6 4s5.333-2 6-4M5 10h14a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2z"/>
-                </svg>
-                <span>Erkunde die Wissenschaft hinter ThermBack LED</span>
-            </a>
-        </div>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="#">Home</a>
+      <span>▸</span>
+      <span>HeatBelt Pro™</span>
     </div>
 
-    <script>
-        // Thumbnail navigation
-        const thumbnails = document.querySelectorAll('.thumbnail');
-        const mainVideo = document.getElementById('mainVideo');
-        const mainImage = document.getElementById('mainImage');
-        const thumbnailScroll = document.getElementById('thumbnailScroll');
-        const scrollUpBtn = document.getElementById('scrollUp');
-        const scrollDownBtn = document.getElementById('scrollDown');
-        
-        // Thumbnail click handler
-        thumbnails.forEach(thumb => {
-            thumb.addEventListener('click', function() {
-                thumbnails.forEach(t => t.classList.remove('active'));
-                this.classList.add('active');
-                
-                if (this.hasAttribute('data-type') && this.getAttribute('data-type') === 'video') {
-                    mainVideo.style.display = 'block';
-                    mainImage.style.display = 'none';
-                    mainVideo.play();
-                } else {
-                    const imgSrc = this.querySelector('img').src;
-                    mainImage.src = imgSrc;
-                    mainVideo.style.display = 'none';
-                    mainImage.style.display = 'block';
-                }
-            });
-        });
-        
-        // Scroll buttons
-        scrollUpBtn.addEventListener('click', () => {
-            thumbnailScroll.scrollBy({ top: -90, behavior: 'smooth' });
-        });
-        
-        scrollDownBtn.addEventListener('click', () => {
-            thumbnailScroll.scrollBy({ top: 90, behavior: 'smooth' });
-        });
-        
-        // Auto-play thumbnail video
-        const thumbnailVideo = document.querySelector('.thumbnail[data-type="video"] video');
-        if (thumbnailVideo) {
-            thumbnailVideo.play();
+    <div class="product-section">
+      <!-- Thumbnails -->
+      <div class="thumbnail-gallery">
+        <div class="thumbnail-nav" id="scrollUp">▲</div>
+
+        <div class="thumbnail-gallery-inner" id="thumbnailScroll">
+          <div class="thumbnail active" data-type="video">
+            <video muted loop playsinline>
+              <source src="HeatBelt Pro hinter Feuer.mp4" type="video/mp4" />
+            </video>
+          </div>
+
+          <div class="thumbnail" data-index="1">
+            <img src="Haupt Produkt Bild (1).png" alt="Hauptprodukt" />
+          </div>
+
+          <div class="thumbnail" data-index="2">
+            <img src="Tragefoto Infrarot fokus.jpg" alt="Infrarot Fokus" />
+          </div>
+
+          <div class="thumbnail" data-index="3">
+            <img src="Tragefoto Bedinunf Fernbedinung fokus.jpg" alt="Fernbedienung" />
+          </div>
+
+          <div class="thumbnail" data-index="4">
+            <img src="Produkt Bild Hitze genau.jpg" alt="Hitze Detail" />
+          </div>
+
+          <div class="thumbnail" data-index="5">
+            <img src="Tragebild Frau Qualitativ.webp" alt="Tragebild Frau" />
+          </div>
+
+          <div class="thumbnail" data-index="6">
+            <img src="S64a9a16806dd4be28b7bf4d6c58f38f6u.avif" alt="Produktansicht" />
+          </div>
+
+          <div class="thumbnail" data-index="7">
+            <img src="Bild mit Inhalt und Verpackung.webp" alt="Verpackungsinhalt" />
+          </div>
+        </div>
+
+        <div class="thumbnail-nav" id="scrollDown">▼</div>
+      </div>
+
+      <!-- Main media -->
+      <div class="main-image">
+        <video id="mainVideo" autoplay muted loop playsinline>
+          <source src="HeatBelt Pro hinter Feuer.mp4" type="video/mp4" />
+        </video>
+        <img id="mainImage" src="Haupt Produkt Bild (1).png" alt="HeatBelt Pro™" style="display:none" />
+      </div>
+
+      <!-- Info -->
+      <div class="product-info">
+        <div class="category">HOT- &amp; COLD-WEARABLES</div>
+
+        <h1 class="product-title">HeatBelt Pro™</h1>
+
+        <p class="product-description">
+          HeatBelt Pro™ unterstützt die Entspannung im unteren Rückenbereich durch wohltuende Wärme und eine alltagstaugliche Anwendung — flexibel, unkompliziert und angenehm zu tragen.
+        </p>
+
+        <div class="clinical-badge">
+          <!-- simple flask icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M10 2v6l-5 9a4 4 0 0 0 3.5 6h7A4 4 0 0 0 19 17l-5-9V2"></path>
+            <path d="M8 14h8"></path>
+          </svg>
+          <span>Klinisch erwiesen</span>
+        </div>
+
+        <div class="rating">
+          <div class="stars">★★★★☆</div>
+          <div class="review-count">90 Bewertungen</div>
+        </div>
+
+        <div class="device-options">
+          <label>DEVICE OPTIONS</label>
+          <div class="option-card selected">
+            <div class="option-content">
+              <div class="option-icon">
+                <img src="Haupt Produkt Bild (1).png" alt="Option Thumbnail" />
+              </div>
+              <div class="option-name">HeatBelt Pro™</div>
+            </div>
+            <div class="option-price">€95</div>
+          </div>
+        </div>
+
+        <button class="add-to-cart">In den Warenkorb legen</button>
+      </div>
+    </div>
+
+    <!-- Benefits -->
+    <div class="benefits-section">
+      <div class="benefits-header">
+        <div class="benefits-icon">
+          <img src="Benefit_Icons_15.svg" alt="Wissenschaft" />
+        </div>
+        <h3>Wissenschaftlich belegte Vorteile</h3>
+      </div>
+
+      <div class="benefits-grid">
+        <div class="benefit-item">
+          <h4>Klinisch erwiesen</h4>
+          <p>Unterstützt, Beschwerden im unteren Rücken zu reduzieren.<sup>1</sup></p>
+        </div>
+
+        <div class="benefit-item">
+          <h4>Reduziert Unterbrechungen</h4>
+          <p>Hilft, den täglichen Ablauf weniger zu beeinträchtigen.<sup>1</sup></p>
+        </div>
+
+        <div class="benefit-item">
+          <h4>Beschleunigt die Erholung</h4>
+          <p>Kann die Durchblutung im Behandlungsbereich unterstützen.</p>
+        </div>
+
+        <div class="benefit-item">
+          <h4>Reduziert Muskelkater</h4>
+          <p>Hilft, die Beweglichkeit zu verbessern und Verspannung zu lösen.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Video section -->
+    <div class="video-section">
+      <h2>Vier fortschrittliche Therapien, eine Lösung gegen Rückenschmerzen</h2>
+
+      <div class="video-wrapper">
+        <div class="video-background">
+          <video autoplay muted loop playsinline>
+            <source src="Design ohne Titel (3).mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <div class="video-container">
+          <video autoplay muted loop playsinline>
+            <source src="Design ohne Titel (3).mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <div class="info-box" id="infoBox" role="button" aria-label="Studieninfo ein- oder ausklappen">
+          <div class="video-box">
+            <div class="video-box-inner">
+              <video autoplay muted loop playsinline>
+                <source src="Design ohne Titel (3).mp4" type="video/mp4" />
+              </video>
+            </div>
+          </div>
+
+          <div class="info-box-right">
+            <div class="info-box-content">
+              <div class="info-toggle">+</div>
+              <div>
+                <p class="info-title">LED-, Ferninfrarot-, Wärme- und Vibrations-Rückentherapiebandage</p>
+                <p class="info-subtitle">Clinical study by: Department of Emergency Medicine, University at Buffalo</p>
+              </div>
+            </div>
+
+            <div class="expanded-content">
+              <h3>Klinisch nachgewiesene Schmerzlinderung im unteren Rückenbereich</h3>
+              <p>
+                Rückenschmerzen beeinträchtigen jedes Jahr die Lebensqualität von Millionen Menschen.
+                Um besser zu verstehen, wie man Schmerzen im unteren Rückenbereich lindern kann, haben wir eine klinische Studie durchgeführt.
+                Nach zwei Wochen regelmäßiger Anwendung hatten die Teilnehmer weniger Schmerzen im unteren Rückenbereich als ohne die Anwendung.<sup>1</sup>
+              </p>
+              <p class="study-info">Klinische Studie von: Abteilung für Notfallmedizin, University at Buffalo</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a href="#" class="science-link">
+        <svg class="science-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M10 2v6m4-6v6"></path>
+          <path d="M7 8h10"></path>
+          <path d="M6 22h12a4 4 0 0 0 3.5-6.1L14 8H10L2.5 15.9A4 4 0 0 0 6 22z"></path>
+        </svg>
+        <span>Erkunde die Wissenschaft hinter HeatBelt Pro™</span>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // Thumbnails -> main media
+    const thumbnails = document.querySelectorAll(".thumbnail");
+    const mainVideo = document.getElementById("mainVideo");
+    const mainImage = document.getElementById("mainImage");
+
+    thumbnails.forEach((thumb) => {
+      thumb.addEventListener("click", function () {
+        thumbnails.forEach((t) => t.classList.remove("active"));
+        this.classList.add("active");
+
+        if (this.dataset.type === "video") {
+          mainVideo.style.display = "block";
+          mainImage.style.display = "none";
+          try { mainVideo.currentTime = 0; mainVideo.play(); } catch(e){}
+        } else {
+          const img = this.querySelector("img");
+          if (!img) return;
+          mainImage.src = img.getAttribute("src");
+          mainVideo.style.display = "none";
+          mainImage.style.display = "block";
         }
+      });
+    });
 
-        // Option selection
-        const optionCards = document.querySelectorAll('.option-card');
-        optionCards.forEach(card => {
-            card.addEventListener('click', function() {
-                optionCards.forEach(c => c.classList.remove('selected'));
-                this.classList.add('selected');
-            });
-        });
+    // Scroll arrows
+    const thumbnailScroll = document.getElementById("thumbnailScroll");
+    const scrollUpBtn = document.getElementById("scrollUp");
+    const scrollDownBtn = document.getElementById("scrollDown");
 
-        // Add to cart
-        document.querySelector('.add-to-cart').addEventListener('click', function() {
-            alert('Produkt wurde zum Warenkorb hinzugefügt!');
-        });
+    function updateNavDisabled() {
+      const maxScroll = thumbnailScroll.scrollHeight - thumbnailScroll.clientHeight;
+      const atTop = thumbnailScroll.scrollTop <= 2;
+      const atBottom = thumbnailScroll.scrollTop >= maxScroll - 2;
+      scrollUpBtn.classList.toggle("disabled", atTop);
+      scrollDownBtn.classList.toggle("disabled", atBottom);
+    }
 
-        // Video info box toggle
-        const infoBox = document.getElementById('infoBox');
-        
-        infoBox.addEventListener('click', function() {
-            this.classList.toggle('expanded');
-        });
-    </script>
+    scrollUpBtn.addEventListener("click", () => {
+      if (scrollUpBtn.classList.contains("disabled")) return;
+      thumbnailScroll.scrollBy({ top: -98, behavior: "smooth" });
+    });
+
+    scrollDownBtn.addEventListener("click", () => {
+      if (scrollDownBtn.classList.contains("disabled")) return;
+      thumbnailScroll.scrollBy({ top: 98, behavior: "smooth" });
+    });
+
+    thumbnailScroll.addEventListener("scroll", updateNavDisabled);
+    window.addEventListener("load", updateNavDisabled);
+    window.addEventListener("resize", updateNavDisabled);
+
+    // Autoplay thumbnail video (muted)
+    const thumbVideo = document.querySelector('.thumbnail[data-type="video"] video');
+    if (thumbVideo) { try { thumbVideo.play(); } catch(e){} }
+
+    // Option selection (kept)
+    document.querySelectorAll(".option-card").forEach((card) => {
+      card.addEventListener("click", function () {
+        document.querySelectorAll(".option-card").forEach((c) => c.classList.remove("selected"));
+        this.classList.add("selected");
+      });
+    });
+
+    // Add to cart demo
+    document.querySelector(".add-to-cart").addEventListener("click", function () {
+      alert("Produkt wurde zum Warenkorb hinzugefügt!");
+    });
+
+    // Info box toggle (fix mobile expanded text visibility)
+    const infoBox = document.getElementById("infoBox");
+    infoBox.addEventListener("click", function (e) {
+      this.classList.toggle("expanded");
+    });
+  </script>
 </body>
 </html>
