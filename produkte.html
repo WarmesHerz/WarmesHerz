@@ -53,7 +53,6 @@
     .breadcrumbs a{ color: inherit; text-decoration: underline; text-underline-offset: 2px; }
     .sep{ opacity: .7; }
 
-    /* ===== Top block ===== */
     .grid{
       background: var(--block-bg);
       border-radius: var(--radius);
@@ -64,7 +63,7 @@
       align-items: start;
     }
 
-    /* ✅ KEIN extra Rahmen mehr um thumbs+main */
+    /* no extra frame */
     .media-block{
       padding: 0;
       display: grid;
@@ -76,7 +75,7 @@
       border-radius: 0;
     }
 
-    /* ===== Thumbs (Therabody-like) ===== */
+    /* thumbs + arrows */
     .thumb-rail{
       display: grid;
       grid-template-rows: 34px 1fr 34px;
@@ -94,23 +93,22 @@
       display: grid;
       place-items: center;
       transition: transform .08s ease, background .15s ease;
+      user-select: none;
     }
     .arrow-btn:hover{ transform: translateY(-1px); background: rgba(0,0,0,.075); }
     .arrow-btn:active{ transform: translateY(0); }
-
     .arrow-btn svg{ width: 16px; height: 16px; opacity: .85; }
 
     .thumb-strip{
-      height: 540px;   /* ✅ Höhe etwas runter (und gleichmäßiger) */
+      height: 520px;
       overflow: auto;
       padding: 4px;
       border-radius: 14px;
-      background: rgba(255,255,255,.16); /* wie “soft panel”, aber ohne Rahmen */
+      background: rgba(255,255,255,.16);
       scrollbar-width: none;
     }
     .thumb-strip::-webkit-scrollbar{ display:none; }
 
-    /* ✅ größer + runde Ecken */
     .thumb{
       width: 78px;
       height: 78px;
@@ -125,7 +123,6 @@
       position: relative;
       margin: 10px 0;
     }
-
     .thumb img, .thumb video{
       width: 100%;
       height: 100%;
@@ -133,7 +130,6 @@
       display: block;
       border-radius: 14px;
     }
-
     .thumb.is-active::after{
       content:"";
       position:absolute;
@@ -143,32 +139,27 @@
       pointer-events:none;
     }
 
-    /* ===== Main media (Therabody-like) ===== */
+    /* ✅ MAIN ALWAYS SQUARE */
     .main-surface{
-      /* ✅ Noch 20px weniger Höhe: max-height runter */
-      max-height: 520px; /* vorher ~540 */
       width: 100%;
-      aspect-ratio: 16 / 10;   /* ✅ näher am Therabody-Look als 1:1 */
+      max-height: 500px;         /* tune height */
+      aspect-ratio: 1 / 1;       /* ✅ square */
       position: relative;
       overflow: hidden;
-
-      /* ✅ große runde Ecke, kein Innenrahmen */
       border-radius: 16px;
       background: rgba(255,255,255,.18);
     }
-
-    /* Medien füllen die Fläche wie Therabody (nicht klein in der Mitte) */
     .main-surface img,
     .main-surface video{
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover; /* ✅ wie Therabody, kein “klein in der Mitte” */
+      object-fit: cover; /* like Therabody */
       display: block;
     }
 
-    /* ===== Right side ===== */
+    /* right side */
     .info{ padding: 16px 12px 10px; }
 
     .kicker{
@@ -287,7 +278,7 @@
     }
     .atc:hover{ transform: translateY(-1px); }
 
-    /* ===== Benefits ===== */
+    /* benefits */
     .benefits{
       margin-top: 12px;
       background: var(--block-bg);
@@ -351,13 +342,13 @@
     @media (max-width: 1180px){
       .grid{ grid-template-columns: 1fr; }
       h1{ font-size: 50px; }
-      .thumb-strip{ height: 460px; }
-      .main-surface{ max-height: 480px; aspect-ratio: 4/3; }
+      .thumb-strip{ height: 420px; }
+      .main-surface{ max-height: 420px; }
     }
     @media (max-width: 620px){
       .media-block{ grid-template-columns: 84px 1fr; }
       .thumb{ width: 66px; height: 66px; }
-      .thumb-strip{ height: 360px; }
+      .thumb-strip{ height: 340px; }
       .benefits-grid{ grid-template-columns: 1fr; }
       .divider{ display: none; }
       .benefit{
@@ -381,7 +372,8 @@
       <!-- LEFT -->
       <div class="media-block">
         <div class="thumb-rail">
-          <button class="arrow-btn" id="thumbUp" type="button" aria-label="Nach oben">
+          <!-- ✅ arrows switch media -->
+          <button class="arrow-btn" id="prevMedia" type="button" aria-label="Vorheriges Bild">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M6 14l6-6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -398,12 +390,10 @@
             <button class="thumb" type="button" data-kind="image" data-file="Produkt Bild Hitze genau.jpg" aria-selected="false"><img alt="Produkt Bild Hitze genau"></button>
             <button class="thumb" type="button" data-kind="image" data-file="S64a9a16806dd4be28b7bf4d6c58f38f6u.avif" aria-selected="false"><img alt="S64a9a16806dd4be28b7bf4d6c58f38f6u"></button>
             <button class="thumb" type="button" data-kind="image" data-file="Bild mit Inhalt und Verpackung.webp" aria-selected="false"><img alt="Bild mit Inhalt und Verpackung"></button>
-
-            <!-- ✅ NEU -->
             <button class="thumb" type="button" data-kind="image" data-file="Tragebild Frau Qualitativ.webp" aria-selected="false"><img alt="Tragebild Frau Qualitativ"></button>
           </div>
 
-          <button class="arrow-btn" id="thumbDown" type="button" aria-label="Nach unten">
+          <button class="arrow-btn" id="nextMedia" type="button" aria-label="Nächstes Bild">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M6 10l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -416,7 +406,6 @@
       <!-- RIGHT -->
       <div class="info">
         <div class="kicker">HOT- &amp; COLD-WEARABLES</div>
-
         <h1>HeatBelt Pro<span class="tm">TM</span></h1>
 
         <p class="subtext">
@@ -551,6 +540,28 @@
       return img;
     }
 
+    function setActive(thumbs, idx){
+      thumbs.forEach((b,i) => {
+        b.classList.toggle("is-active", i === idx);
+        b.setAttribute("aria-selected", i === idx ? "true" : "false");
+      });
+    }
+
+    function ensureVisible(container, el){
+      const cTop = container.scrollTop;
+      const cBottom = cTop + container.clientHeight;
+      const eTop = el.offsetTop;
+      const eBottom = eTop + el.offsetHeight;
+      if (eTop < cTop) container.scrollTo({ top: eTop - 10, behavior: "smooth" });
+      else if (eBottom > cBottom) container.scrollTo({ top: eBottom - container.clientHeight + 10, behavior: "smooth" });
+    }
+
+    function renderMain(mainSurface, kind, url){
+      clearMain(mainSurface);
+      if (kind === "video") mainSurface.appendChild(makeMainVideo(url));
+      else mainSurface.appendChild(makeMainImage(url, "HeatBelt Pro™"));
+    }
+
     (async function init(){
       const thumbs = Array.from(document.querySelectorAll(".thumb"));
       const mainSurface = document.getElementById("mainSurface");
@@ -558,16 +569,9 @@
       const benefitIcon = document.getElementById("benefitIcon");
       const thumbStrip = document.getElementById("thumbStrip");
 
-      document.getElementById("thumbUp").addEventListener("click", () => {
-        thumbStrip.scrollBy({ top: -260, behavior: "smooth" });
-      });
-      document.getElementById("thumbDown").addEventListener("click", () => {
-        thumbStrip.scrollBy({ top: 260, behavior: "smooth" });
-      });
-
       benefitIcon.src = await resolveUrl("Benefit_Icons_15.svg");
 
-      // preload thumb media
+      // load thumb media urls
       for (const btn of thumbs){
         const kind = btn.getAttribute("data-kind") || "image";
         const file = btn.getAttribute("data-file");
@@ -587,36 +591,38 @@
         }
       }
 
-      // initial main = first thumb
-      const firstBtn = thumbs[0];
-      clearMain(mainSurface);
-      if (firstBtn.dataset.kind === "video"){
-        mainSurface.appendChild(makeMainVideo(firstBtn.dataset.url));
-      } else {
-        mainSurface.appendChild(makeMainImage(firstBtn.dataset.url, "HeatBelt Pro™"));
-      }
-
-      // option thumbnail = first IMAGE
+      // option thumb = first image
       const firstImageBtn = thumbs.find(b => b.dataset.kind === "image");
       if (firstImageBtn) optionThumb.src = firstImageBtn.dataset.url;
 
-      thumbs.forEach(btn => {
-        btn.addEventListener("click", () => {
-          const url = btn.dataset.url;
-          const kind = btn.dataset.kind;
-          if(!url) return;
+      // state
+      let activeIndex = 0;
 
-          clearMain(mainSurface);
-          if (kind === "video"){
-            mainSurface.appendChild(makeMainVideo(url));
-          } else {
-            mainSurface.appendChild(makeMainImage(url, "HeatBelt Pro™"));
-          }
+      function applyIndex(nextIndex){
+        const n = thumbs.length;
+        activeIndex = (nextIndex + n) % n;
+        const btn = thumbs[activeIndex];
+        renderMain(mainSurface, btn.dataset.kind, btn.dataset.url);
+        setActive(thumbs, activeIndex);
+        ensureVisible(thumbStrip, btn);
+      }
 
-          thumbs.forEach(b => { b.classList.remove("is-active"); b.setAttribute("aria-selected","false"); });
-          btn.classList.add("is-active");
-          btn.setAttribute("aria-selected","true");
-        });
+      // initial
+      applyIndex(0);
+
+      // click thumb
+      thumbs.forEach((btn, i) => {
+        btn.addEventListener("click", () => applyIndex(i));
+      });
+
+      // ✅ arrows switch media
+      document.getElementById("prevMedia").addEventListener("click", () => applyIndex(activeIndex - 1));
+      document.getElementById("nextMedia").addEventListener("click", () => applyIndex(activeIndex + 1));
+
+      // keyboard convenience
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowUp") applyIndex(activeIndex - 1);
+        if (e.key === "ArrowDown") applyIndex(activeIndex + 1);
       });
     })();
   </script>
