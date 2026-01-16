@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ThermBack LED – Produktseite</title>
+
+  <style>
+    :root{
+      --bg: #f6f2ea;
+      --panel: #f3efe6;
+      --panel-2: rgba(255,255,255,.52);
+      --line: rgba(0,0,0,.12);
+      --text: #1f1f1f;
+      --muted: rgba(0,0,0,.75);
+      --btn: #232323;
+      --radius: 14px;
+    }
+
+    *{ box-sizing: border-box; }
+    body{
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", Helvetica;
+    }
+
+    .wrap{
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 22px 18px 34px;
+    }
+
+    .breadcrumbs{
+      font-size: 12px;
+      opacity: .8;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .breadcrumbs a{
+      color: inherit;
+      text-decoration: none;
+    }
+    .sep{ opacity: .7; }
+
+    .grid{
+      background: var(--panel);
+      border-radius: var(--radius);
+      padding: 18px;
+      display: grid;
+      grid-template-columns: 1.25fr .9fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    /* Gallery */
+    .gallery{
+      display: grid;
+      grid-template-columns: 58px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .thumbs{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .thumb{
+      width: 58px;
+      height: 58px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.55);
+      padding: 0;
+      overflow: hidden;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+    }
+    .thumb img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .thumb.is-active{
+      outline: 2px solid rgba(0,0,0,.55);
+      border-color: transparent;
+    }
+
+    .main{
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.35);
+      border: 1px solid rgba(0,0,0,.10);
+      overflow: hidden;
+    }
+    .main-inner{
+      aspect-ratio: 16 / 10;
+      width: 100%;
+      display: grid;
+      place-items: center;
+    }
+    .main-inner img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Info */
+    .info{
+      padding: 6px 4px;
+    }
+    .kicker{
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      opacity: .75;
+      margin-bottom: 8px;
+    }
+    h1{
+      font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
+      font-size: 44px;
+      line-height: 1.02;
+      margin: 0 0 10px;
+      font-weight: 500;
+    }
+    .subtext{
+      font-size: 13px;
+      line-height: 1.35;
+      opacity: .85;
+      max-width: 46ch;
+      margin: 0 0 12px;
+    }
+
+    .badges{ margin: 10px 0 8px; }
+    .badge{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.55);
+    }
+
+    .rating{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 10px 0 18px;
+    }
+    .stars{ display: inline-flex; gap: 2px; }
+    .star{ font-size: 14px; opacity: .35; }
+    .star.is-full{ opacity: .95; }
+    .rating-text{ font-size: 12px; opacity: .75; }
+
+    .opt-title{
+      font-size: 10px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      opacity: .7;
+      margin-bottom: 10px;
+    }
+
+    .option-card{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 12px;
+      border-radius: 10px;
+      background: var(--panel-2);
+      border: 1px solid rgba(0,0,0,.15);
+      margin-bottom: 12px;
+    }
+    .option-left{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+    .option-img{
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid rgba(0,0,0,.10);
+      background: rgba(255,255,255,.6);
+    }
+    .option-name{
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 260px;
+    }
+    .option-price{
+      font-size: 13px;
+      font-weight: 600;
+      opacity: .9;
+    }
+
+    .atc{
+      width: 100%;
+      border: 0;
+      border-radius: 10px;
+      padding: 13px 14px;
+      background: var(--btn);
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform .08s ease, opacity .15s ease;
+    }
+    .atc:hover{ transform: translateY(-1px); }
+
+    /* Benefits */
+    .benefits{
+      margin-top: 14px;
+      background: var(--panel);
+      border-radius: var(--radius);
+      padding: 14px 16px 10px;
+      border: 1px solid rgba(0,0,0,.08);
+    }
+    .benefits-head{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 2px 12px;
+    }
+    .benefits-badge{
+      width: 34px; height: 34px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: rgba(255,255,255,.55);
+      border: 1px solid var(--line);
+      font-size: 16px;
+      user-select: none;
+    }
+    .benefits-title{
+      font-size: 13px;
+      font-weight: 700;
+      opacity: .9;
+    }
+
+    .benefits-grid{
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+      align-items: start;
+    }
+    .benefit{ padding: 12px 10px; }
+    .benefit-title{
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .benefit-text{
+      font-size: 12px;
+      line-height: 1.35;
+      opacity: .8;
+    }
+    .divider{
+      width: 1px;
+      height: 100%;
+      background: rgba(0,0,0,.10);
+      align-self: stretch;
+    }
+
+    /* Responsive */
+    @media (max-width: 960px){
+      .grid{ grid-template-columns: 1fr; }
+      h1{ font-size: 36px; }
+      .gallery{ grid-template-columns: 52px 1fr; }
+      .benefits-grid{ grid-template-columns: 1fr; }
+      .divider{ display: none; }
+      .benefit{
+        padding: 10px 6px;
+        border-top: 1px solid rgba(0,0,0,.08);
+      }
+      .benefit:first-child{ border-top: 0; }
+    }
+
+    @media (max-width: 520px){
+      .main-inner{ aspect-ratio: 4 / 3; }
+      .thumb{ width: 50px; height: 50px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="./index.html">Home</a>
+      <span class="sep">›</span>
+      <span>ThermBack LED</span>
+    </nav>
+
+    <div class="grid">
+      <!-- LEFT: Gallery -->
+      <div class="gallery">
+        <div class="thumbs" role="listbox" aria-label="Produktbilder">
+          <button class="thumb is-active" type="button" data-img="assets/Haupt%20Produkt%20Bild.webp" aria-selected="true">
+            <img src="assets/Haupt%20Produkt%20Bild.webp" alt="Haupt Produkt Bild">
+          </button>
+          <button class="thumb" type="button" data-img="assets/Tragefoto%20Infrarot%20fokus.jpg" aria-selected="false">
+            <img src="assets/Tragefoto%20Infrarot%20fokus.jpg" alt="Tragefoto Infrarot">
+          </button>
+          <button class="thumb" type="button" data-img="assets/Tragefoto%20Bedinunf%20Fernbedinung%20fokus.jpg" aria-selected="false">
+            <img src="assets/Tragefoto%20Bedinunf%20Fernbedinung%20fokus.jpg" alt="Tragefoto Fernbedienung">
+          </button>
+          <button class="thumb" type="button" data-img="assets/Maße%20fertig.jpg" aria-selected="false">
+            <img src="assets/Maße%20fertig.jpg" alt="Maße">
+          </button>
+        </div>
+
+        <div class="main">
+          <div class="main-inner">
+            <img id="mainImage" src="assets/Haupt%20Produkt%20Bild.webp" alt="ThermBack LED – Hauptbild" loading="eager">
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Info -->
+      <div class="info">
+        <div class="kicker">HOT- &amp; COLD-WEARABLES</div>
+        <h1>ThermBack LED</h1>
+
+        <p class="subtext">
+          ThermBack LED reduziert Schmerzen im unteren Rückenbereich mithilfe von fortschrittlicher LED,
+          Wärme, Vibration und smarten Einstellungen – für flexible Anwendung und spürbare Entlastung.
+        </p>
+
+        <div class="badges">
+          <span class="badge">Klinisch erwiesen</span>
+        </div>
+
+        <div class="rating">
+          <div class="stars" aria-label="Bewertung">
+            <span class="star is-full">★</span>
+            <span class="star is-full">★</span>
+            <span class="star is-full">★</span>
+            <span class="star is-full">★</span>
+            <span class="star is-full">★</span>
+          </div>
+          <span class="rating-text">90 Bewertungen</span>
+        </div>
+
+        <div class="opt-title">DEVICE OPTIONS</div>
+
+        <div class="option-card">
+          <div class="option-left">
+            <img class="option-img" src="assets/Haupt%20Produkt%20Bild.webp" alt="Option Thumbnail">
+            <div class="option-name">ThermBack LED</div>
+          </div>
+          <div class="option-price">€269</div>
+        </div>
+
+        <button class="atc" type="button" onclick="alert('Demo: In GitHub Pages ohne Shop-System.');">
+          In den Warenkorb legen
+        </button>
+      </div>
+    </div>
+
+    <!-- Benefits row -->
+    <div class="benefits">
+      <div class="benefits-head">
+        <div class="benefits-badge" aria-hidden="true">⚗</div>
+        <div class="benefits-title">Wissenschaftlich belegte Vorteile</div>
+      </div>
+
+      <div class="benefits-grid">
+        <div class="benefit">
+          <div class="benefit-title">Klinisch erwiesen</div>
+          <div class="benefit-text">Unterstützt die Linderung von Beschwerden im unteren Rücken.</div>
+        </div>
+        <div class="divider"></div>
+        <div class="benefit">
+          <div class="benefit-title">Alltagstauglich</div>
+          <div class="benefit-text">Für Routine, Arbeit &amp; Bewegung — ohne großen Aufwand.</div>
+        </div>
+        <div class="divider"></div>
+        <div class="benefit">
+          <div class="benefit-title">Regeneration</div>
+          <div class="benefit-text">Kann die Durchblutung im Behandlungsbereich unterstützen.</div>
+        </div>
+        <div class="divider"></div>
+        <div class="benefit">
+          <div class="benefit-title">Beweglichkeit</div>
+          <div class="benefit-text">Hilft, sich wieder freier zu bewegen und verspannte Bereiche zu entlasten.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    (function(){
+      const thumbs = Array.from(document.querySelectorAll('.thumb'));
+      const mainImage = document.getElementById('mainImage');
+      if(!thumbs.length || !mainImage) return;
+
+      thumbs.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const url = btn.getAttribute('data-img');
+          if(!url) return;
+
+          mainImage.src = url;
+
+          thumbs.forEach(b => {
+            b.classList.remove('is-active');
+            b.setAttribute('aria-selected', 'false');
+          });
+
+          btn.classList.add('is-active');
+          btn.setAttribute('aria-selected', 'true');
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
