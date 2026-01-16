@@ -13,15 +13,12 @@
     :root{
       --page-bg: #fffcf5;
       --block-bg: #f7f3e9;
-
       --device-bg: #f0e9db;
 
       --text: #111111;
       --muted: rgba(17,17,17,.68);
 
       --line-soft: rgba(0,0,0,.10);
-      --line: rgba(0,0,0,.14);
-
       --btn: #242424;
 
       --radius: 14px;
@@ -38,17 +35,17 @@
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", Helvetica;
     }
 
-    /* ✅ breiter wie Therabody */
+    /* ✅ Breite so lassen */
     .wrap{
       max-width: 1540px;
       margin: 0 auto;
-      padding: 22px 18px 36px;
+      padding: 22px 18px 28px;
     }
 
     .breadcrumbs{
       font-size: 12px;
       opacity: .85;
-      margin: 6px 0 14px;
+      margin: 6px 0 12px;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -56,42 +53,41 @@
     .breadcrumbs a{ color: inherit; text-decoration: underline; text-underline-offset: 2px; }
     .sep{ opacity: .7; }
 
+    /* ✅ Oberer Block niedriger: weniger Padding + kleineres Bildformat */
     .grid{
       background: var(--block-bg);
       border-radius: var(--radius);
-      padding: 22px;
+      padding: 18px;
       display: grid;
       grid-template-columns: 1.55fr .85fr;
-      gap: 28px;
+      gap: 22px;
       align-items: start;
     }
 
-    /* ✅ EIN großer Block links (wie Therabody) */
     .media-block{
       border-radius: 14px;
       background: rgba(255,255,255,.14);
-      border: 1px solid var(--line-soft); /* nur der große Außenrahmen */
-      padding: 18px;
+      border: 1px solid var(--line-soft);
+      padding: 14px;
       display: grid;
       grid-template-columns: 88px 1fr;
-      gap: 18px;
+      gap: 16px;
       align-items: start;
     }
 
-    /* ✅ Thumbnail-Leiste: keine Rahmen um die Bilder */
     .thumb-strip{
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      padding-top: 6px;
+      gap: 10px;
+      padding-top: 4px;
     }
 
     .thumb{
       width: 68px;
       height: 68px;
       border-radius: 12px;
-      border: 0;               /* ✅ kein Rahmen */
-      background: transparent; /* ✅ kein Kasten */
+      border: 0;
+      background: transparent;
       padding: 0;
       overflow: hidden;
       cursor: pointer;
@@ -99,14 +95,13 @@
       place-items: center;
       position: relative;
     }
-    .thumb img{
+    .thumb img, .thumb video{
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
       border-radius: 12px;
     }
-    /* ✅ active state wie Therabody: dunkler, dünner outline */
     .thumb.is-active::after{
       content:"";
       position:absolute;
@@ -116,15 +111,16 @@
       pointer-events:none;
     }
 
-    /* ✅ Großes Bild: ebenfalls ohne extra Rahmen-Box */
+    /* ✅ niedriger, damit Benefits mit drauf passt */
     .main-surface{
-      aspect-ratio: 1 / 1;
+      aspect-ratio: 16 / 11; /* war 1/1 -> jetzt deutlich niedriger */
       position: relative;
       overflow: hidden;
       border-radius: 12px;
       background: rgba(255,255,255,.10);
     }
-    .main-surface img{
+    .main-surface img,
+    .main-surface video{
       position: absolute;
       inset: 0;
       width: 100%;
@@ -133,13 +129,14 @@
       display: block;
     }
 
-    /* RIGHT INFO */
+    /* RIGHT */
     .info{
-      padding: 14px 10px 10px; /* ✅ mehr padding wie gewünscht */
+      padding: 16px 12px 10px;
     }
 
+    /* ✅ diese Aspekte etwas größer */
     .kicker{
-      font-size: 11px;
+      font-size: 12px;
       letter-spacing: .08em;
       text-transform: uppercase;
       color: var(--muted);
@@ -148,7 +145,7 @@
 
     h1{
       font-family: "Playfair Display", ui-serif, Georgia, "Times New Roman", Times, serif;
-      font-size: 58px;
+      font-size: 62px; /* etwas größer */
       line-height: 0.98;
       margin: 0 0 14px;
       font-weight: 500;
@@ -161,32 +158,31 @@
     }
 
     .subtext{
-      font-size: 13px;
-      line-height: 1.35;
+      font-size: 14px;  /* etwas größer */
+      line-height: 1.38;
       color: var(--muted);
       max-width: 56ch;
       margin: 0 0 18px;
     }
 
-    /* ✅ Spacing exakt “luftiger” wie Therabody */
-    .badge-row{ margin: 16px 0 22px; }
-    .rating{ margin: 0 0 24px; }
-    .opt-wrap{ margin: 0 0 20px; }
-    .btn-wrap{ margin-top: 18px; }
+    .badge-row{ margin: 14px 0 18px; }
+    .rating{ margin: 0 0 20px; }
+    .opt-wrap{ margin: 0 0 16px; }
+    .btn-wrap{ margin-top: 14px; }
 
     .badge{
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-size: 12px;
-      padding: 6px 10px;
+      font-size: 13px; /* größer */
+      padding: 7px 11px;
       border-radius: 999px;
       border: 1px solid var(--pill-border);
       background: var(--pill-bg);
       color: rgba(17,17,17,.92);
       font-weight: 600;
     }
-    .badge svg{ width: 14px; height: 14px; }
+    .badge svg{ width: 15px; height: 15px; }
 
     .rating{
       display: flex;
@@ -194,11 +190,11 @@
       gap: 10px;
     }
     .stars{ display: inline-flex; gap: 2px; transform: translateY(1px); }
-    .stars svg{ width: 14px; height: 14px; color: #1a1a1a; }
-    .rating-text{ font-size: 12px; color: rgba(17,17,17,.7); }
+    .stars svg{ width: 15px; height: 15px; color: #1a1a1a; }
+    .rating-text{ font-size: 13px; color: rgba(17,17,17,.7); }
 
     .opt-title{
-      font-size: 10px;
+      font-size: 11px; /* größer */
       letter-spacing: .08em;
       text-transform: uppercase;
       color: rgba(17,17,17,.68);
@@ -210,7 +206,7 @@
       justify-content: space-between;
       align-items: center;
       gap: 14px;
-      padding: 12px;
+      padding: 13px;
       border-radius: 10px;
       background: var(--device-bg);
       border: 1px solid rgba(0,0,0,.32);
@@ -222,8 +218,8 @@
       min-width: 0;
     }
     .option-img{
-      width: 34px;
-      height: 34px;
+      width: 36px;
+      height: 36px;
       border-radius: 10px;
       object-fit: cover;
       border: 1px solid rgba(0,0,0,.10);
@@ -231,7 +227,7 @@
       display: block;
     }
     .option-name{
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
       white-space: nowrap;
       overflow: hidden;
@@ -239,7 +235,7 @@
       max-width: 280px;
     }
     .option-price{
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
       opacity: .9;
     }
@@ -248,29 +244,29 @@
       width: 100%;
       border: 0;
       border-radius: 10px;
-      padding: 13px 14px;
+      padding: 14px 14px;
       background: var(--btn);
       color: #fff;
       font-weight: 700;
       cursor: pointer;
       transition: transform .08s ease, opacity .15s ease;
-      font-size: 13px;
+      font-size: 14px;
     }
     .atc:hover{ transform: translateY(-1px); }
 
     /* Benefits */
     .benefits{
-      margin-top: 14px;
+      margin-top: 12px;
       background: var(--block-bg);
       border-radius: var(--radius);
-      padding: 16px 16px 10px;
+      padding: 14px 16px 10px;
       border: 0;
     }
     .benefits-head{
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 4px 2px 14px;
+      padding: 4px 2px 12px;
     }
     .benefit-icon{
       width: 34px;
@@ -288,7 +284,6 @@
       height: 100%;
       object-fit: cover;
       transform: scale(1.08);
-      transform-origin: center;
       display: block;
     }
     .benefits-title{
@@ -302,7 +297,7 @@
       grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
       align-items: start;
     }
-    .benefit{ padding: 12px 10px; }
+    .benefit{ padding: 10px 10px; }
     .benefit-title{
       font-size: 12px;
       font-weight: 800;
@@ -322,11 +317,11 @@
 
     @media (max-width: 1180px){
       .grid{ grid-template-columns: 1fr; }
-      .media-block{ grid-template-columns: 78px 1fr; }
-      h1{ font-size: 46px; }
+      h1{ font-size: 50px; }
+      .main-surface{ aspect-ratio: 4 / 3; }
     }
     @media (max-width: 620px){
-      .media-block{ grid-template-columns: 72px 1fr; padding: 14px; }
+      .media-block{ grid-template-columns: 72px 1fr; }
       .thumb{ width: 58px; height: 58px; }
       .benefits-grid{ grid-template-columns: 1fr; }
       .divider{ display: none; }
@@ -351,21 +346,24 @@
       <!-- LEFT -->
       <div class="media-block">
         <div class="thumb-strip" role="listbox" aria-label="Produktbilder">
-          <!-- Thumbs filled by JS -->
-          <button class="thumb is-active" type="button" data-file="Haupt Produkt Bild.webp" aria-selected="true"><img alt="Haupt Produkt Bild"></button>
-          <button class="thumb" type="button" data-file="Tragefoto Infrarot fokus.jpg" aria-selected="false"><img alt="Tragefoto Infrarot fokus"></button>
-          <button class="thumb" type="button" data-file="Tragefoto Bedinunf Fernbedinung fokus.jpg" aria-selected="false"><img alt="Tragefoto Fernbedienung fokus"></button>
-          <button class="thumb" type="button" data-file="Maße fertig.jpg" aria-selected="false"><img alt="Maße fertig"></button>
+          <!-- ✅ 1) Video first -->
+          <button class="thumb is-active" type="button" data-kind="video" data-file="HeatBelt Pro hinter Feuer.mp4" aria-selected="true">
+            <video muted playsinline preload="metadata"></video>
+          </button>
 
-          <!-- ✅ Neue Bilder -->
-          <button class="thumb" type="button" data-file="Produkt Bild Hitze genau.jpg" aria-selected="false"><img alt="Produkt Bild Hitze genau"></button>
-          <button class="thumb" type="button" data-file="Gürtel Tragefoto mann und frau.jpg" aria-selected="false"><img alt="Gürtel Tragefoto mann und frau"></button>
-          <button class="thumb" type="button" data-file="S64a9a16806dd4be28b7bf4d6c58f38f6u.avif" aria-selected="false"><img alt="S64a9a16806dd4be28b7bf4d6c58f38f6u"></button>
-          <button class="thumb" type="button" data-file="Bild mit Inhalt und Verpackung.webp" aria-selected="false"><img alt="Bild mit Inhalt und Verpackung"></button>
+          <!-- ✅ Images -->
+          <button class="thumb" type="button" data-kind="image" data-file="Haupt Produkt Bild (1).png" aria-selected="false"><img alt="Haupt Produkt Bild (1)"></button>
+          <button class="thumb" type="button" data-kind="image" data-file="Tragefoto Infrarot fokus.jpg" aria-selected="false"><img alt="Tragefoto Infrarot fokus"></button>
+          <button class="thumb" type="button" data-kind="image" data-file="Tragefoto Bedinunf Fernbedinung fokus.jpg" aria-selected="false"><img alt="Tragefoto Fernbedienung fokus"></button>
+          <button class="thumb" type="button" data-kind="image" data-file="Maße fertig.jpg" aria-selected="false"><img alt="Maße fertig"></button>
+          <button class="thumb" type="button" data-kind="image" data-file="Produkt Bild Hitze genau.jpg" aria-selected="false"><img alt="Produkt Bild Hitze genau"></button>
+          <button class="thumb" type="button" data-kind="image" data-file="Gürtel Tragefoto mann und frau.jpg" aria-selected="false"><img alt="Gürtel Tragefoto mann und frau"></button>
+          <button class="thumb" type="button" data-kind="image" data-file="S64a9a16806dd4be28b7bf4d6c58f38f6u.avif" aria-selected="false"><img alt="S64a9a16806dd4be28b7bf4d6c58f38f6u"></button>
+          <button class="thumb" type="button" data-kind="image" data-file="Bild mit Inhalt und Verpackung.webp" aria-selected="false"><img alt="Bild mit Inhalt und Verpackung"></button>
         </div>
 
-        <div class="main-surface">
-          <img id="mainImage" alt="HeatBelt Pro™ – Hauptbild" loading="eager">
+        <div class="main-surface" id="mainSurface">
+          <!-- main media injected by JS -->
         </div>
       </div>
 
@@ -483,36 +481,88 @@
       return PREFIXES[0] + encoded;
     }
 
+    function clearMain(surface){
+      while (surface.firstChild) surface.removeChild(surface.firstChild);
+    }
+
+    function makeMainVideo(src){
+      const v = document.createElement("video");
+      v.src = src;
+      v.muted = true;
+      v.playsInline = true;
+      v.autoplay = true;
+      v.loop = true;
+      v.controls = false;
+      v.preload = "auto";
+      return v;
+    }
+
+    function makeMainImage(src, alt){
+      const img = document.createElement("img");
+      img.src = src;
+      img.alt = alt || "";
+      img.loading = "eager";
+      return img;
+    }
+
     (async function init(){
       const thumbs = Array.from(document.querySelectorAll(".thumb"));
-      const mainImage = document.getElementById("mainImage");
+      const mainSurface = document.getElementById("mainSurface");
       const optionThumb = document.getElementById("optionThumb");
       const benefitIcon = document.getElementById("benefitIcon");
 
-      // Reihenfolge = Thumbnails
-      const files = thumbs.map(b => b.getAttribute("data-file")).filter(Boolean);
-
       benefitIcon.src = await resolveUrl("Benefit_Icons_15.svg");
 
-      const first = await resolveUrl(files[0]);
-      mainImage.src = first;
-      optionThumb.src = first;
-
-      // set thumb srcs
+      // preload thumb media + attach resolved urls
       for (const btn of thumbs){
-        const f = btn.getAttribute("data-file");
-        const url = await resolveUrl(f);
-        btn.dataset.img = url;
-        const imgEl = btn.querySelector("img");
-        if (imgEl) imgEl.src = url;
+        const kind = btn.getAttribute("data-kind") || "image";
+        const file = btn.getAttribute("data-file");
+        const url = await resolveUrl(file);
+        btn.dataset.url = url;
+        btn.dataset.kind = kind;
+
+        const preview = btn.querySelector(kind === "video" ? "video" : "img");
+        if (preview){
+          preview.src = url;
+          if (kind === "video"){
+            preview.muted = true;
+            preview.playsInline = true;
+            preview.loop = true;
+            preview.autoplay = true;
+          }
+        }
       }
 
+      // set initial main = first thumb (video)
+      const firstBtn = thumbs[0];
+      const firstUrl = firstBtn.dataset.url;
+      const firstKind = firstBtn.dataset.kind;
+
+      clearMain(mainSurface);
+      if (firstKind === "video"){
+        mainSurface.appendChild(makeMainVideo(firstUrl));
+      } else {
+        mainSurface.appendChild(makeMainImage(firstUrl, "HeatBelt Pro™"));
+      }
+
+      // option thumbnail should be first IMAGE (not video)
+      const firstImageBtn = thumbs.find(b => (b.dataset.kind || b.getAttribute("data-kind")) === "image");
+      if (firstImageBtn) optionThumb.src = firstImageBtn.dataset.url;
+
+      // click handling
       thumbs.forEach(btn => {
         btn.addEventListener("click", () => {
-          const url = btn.dataset.img;
+          const url = btn.dataset.url;
+          const kind = btn.dataset.kind;
+
           if(!url) return;
 
-          mainImage.src = url;
+          clearMain(mainSurface);
+          if (kind === "video"){
+            mainSurface.appendChild(makeMainVideo(url));
+          } else {
+            mainSurface.appendChild(makeMainImage(url, "HeatBelt Pro™"));
+          }
 
           thumbs.forEach(b => {
             b.classList.remove("is-active");
