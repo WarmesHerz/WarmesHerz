@@ -7,646 +7,269 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 
   <style>
-    :root{
+    :root {
       --page-bg: #fffcf5;
       --block-bg: #f7f3e9;
       --device-bg: #f0e9db;
-
       --text: #111;
       --muted: rgba(17,17,17,.68);
-
-      --btn: #242424;
+      --accent: #242424;
       --radius: 14px;
-
       --pill-bg: #f4d3ad;
       --pill-border: rgba(0,0,0,.12);
-
-      --arrow-bg: rgba(0,0,0,.06);
-      --arrow-border: rgba(0,0,0,.10);
     }
 
-    *{ box-sizing: border-box; }
-    body{
+    * { box-sizing: border-box; }
+    body {
       margin: 0;
       background: var(--page-bg);
       color: var(--text);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", Helvetica;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
 
-    .wrap{
-      max-width: 1540px;
+    .wrap {
+      max-width: 1400px; /* Etwas schmaler für bessere Lesbarkeit */
       margin: 0 auto;
-      padding: 22px 18px 28px;
+      padding: 20px;
     }
 
-    .breadcrumbs{
-      font-size: 12px;
-      opacity: .85;
-      margin: 6px 0 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    /* BREADCRUMBS */
+    .breadcrumbs {
+      font-size: 13px;
+      margin-bottom: 20px;
+      color: var(--muted);
     }
-    .breadcrumbs a{ color: inherit; text-decoration: underline; text-underline-offset: 2px; }
-    .sep{ opacity: .7; }
+    .breadcrumbs a { color: inherit; text-decoration: none; }
+    .breadcrumbs a:hover { text-decoration: underline; }
 
-    .grid{
+    /* GRID SETUP */
+    .product-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 30px;
       background: var(--block-bg);
+      padding: 24px;
       border-radius: var(--radius);
-      padding: 18px;
-      display: grid;
-      grid-template-columns: 1.55fr .85fr;
-      gap: 22px;
-      align-items: start;
     }
 
-    /* ============ LEFT (no extra frames) ============ */
-    .media-block{
-      padding: 0;
-      background: transparent;
-      border: 0;
-      border-radius: 0;
+    /* LEFT SIDE: GALLERY */
+    .gallery-container {
+      display: flex;
+      gap: 16px;
+      height: 600px;
     }
 
-    /* ✅ height slightly higher so thumbs never overflow + looks closer to reference */
-    .left-stage{
-      height: 585px;                 /* ✅ +25px */
-      display: grid;
-      grid-template-columns: 96px 1fr;
-      gap: 18px;
-      align-items: stretch;
-      overflow: hidden;              /* ✅ prevents anything escaping the section */
+    .thumb-rail {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 80px;
     }
 
-    .thumb-rail{
-      height: 585px;                 /* ✅ match stage */
-      display: grid;
-      grid-template-rows: 34px 1fr 34px;
-      gap: 10px;
-      align-items: start;
-      overflow: hidden;              /* ✅ safety */
-    }
-
-    .arrow-btn{
-      width: 78px;
-      height: 34px;
-      border-radius: 10px;
-      border: 1px solid var(--arrow-border);
-      background: var(--arrow-bg);
-      cursor: pointer;
-      display: grid;
-      place-items: center;
-      transition: transform .08s ease, background .15s ease;
-      user-select: none;
-      justify-self: center;
-      flex: 0 0 auto;
-    }
-    .arrow-btn:hover{ transform: translateY(-1px); background: rgba(0,0,0,.075); }
-    .arrow-btn:active{ transform: translateY(0); }
-    .arrow-btn svg{ width: 16px; height: 16px; opacity: .85; }
-
-    .thumb-strip{
-      overflow: auto;                /* ✅ scroll inside rail instead of overflowing the section */
-      padding: 4px;
-      border-radius: 14px;
-      background: rgba(255,255,255,.16);
+    .thumb-strip {
+      flex: 1;
+      overflow-y: auto;
       scrollbar-width: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
-    .thumb-strip::-webkit-scrollbar{ display:none; }
+    .thumb-strip::-webkit-scrollbar { display: none; }
 
-    .thumb{
-      width: 78px;
-      height: 78px;
-      border-radius: 14px;
-      border: 0;
-      background: transparent;
+    .thumb {
+      width: 80px;
+      height: 80px;
+      border-radius: 10px;
+      border: 2px solid transparent;
+      overflow: hidden;
+      cursor: pointer;
+      background: #fff;
+      flex-shrink: 0;
       padding: 0;
-      overflow: hidden;
-      cursor: pointer;
-      display: grid;
-      place-items: center;
-      position: relative;
-      margin: 10px 0;
-      flex: 0 0 auto;
+      transition: border-color 0.2s;
     }
-    .thumb img, .thumb video{
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      border-radius: 14px;
-    }
-    .thumb.is-active::after{
-      content:"";
-      position:absolute;
-      inset: -2px;
-      border-radius: 16px;
-      border: 2px solid rgba(0,0,0,.45);
-      pointer-events:none;
-    }
+    .thumb img, .thumb video { width: 100%; height: 100%; object-fit: cover; }
+    .thumb.is-active { border-color: var(--accent); }
 
-    .main-wrap{
-      height: 585px;                 /* ✅ match stage */
-      display: grid;
-      align-items: center;
-      overflow: hidden;
-    }
-
-    /* ✅ MAIN now 5:4 like you asked (reference feels closer) */
-    .main-surface{
-      height: 100%;
-      aspect-ratio: 5 / 4;           /* ✅ 5:4 rectangle */
-      width: auto;
-      max-width: 100%;
-      justify-self: start;
-      position: relative;
-      overflow: hidden;
-      border-radius: 16px;
-      background: rgba(255,255,255,.18);
-    }
-    .main-surface img,
-    .main-surface video{
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* ============ RIGHT ============ */
-    .info{ padding: 16px 12px 10px; }
-
-    .kicker{
-      font-size: 12px;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 12px;
-    }
-
-    h1{
-      font-family: "Playfair Display", ui-serif, Georgia, "Times New Roman", Times, serif;
-      font-size: 62px;
-      line-height: 0.98;
-      margin: 0 0 14px;
-      font-weight: 500;
-      letter-spacing: -0.015em;
-      color: #101010;
-    }
-    .tm{ font-size: 0.58em; vertical-align: super; }
-
-    .subtext{
-      font-size: 14px;
-      line-height: 1.38;
-      color: var(--muted);
-      max-width: 56ch;
-      margin: 0 0 18px;
-    }
-
-    .badge-row{ margin: 14px 0 18px; }
-    .rating{ margin: 0 0 22px; }
-    .opt-wrap{ margin: 0 0 18px; }
-    .btn-wrap{ margin-top: 16px; }
-
-    .badge{
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      padding: 7px 11px;
-      border-radius: 999px;
-      border: 1px solid var(--pill-border);
-      background: var(--pill-bg);
-      color: rgba(17,17,17,.92);
-      font-weight: 600;
-    }
-    .badge svg{ width: 15px; height: 15px; }
-
-    .rating{
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .stars{ display: inline-flex; gap: 2px; transform: translateY(1px); }
-    .stars svg{ width: 15px; height: 15px; color: #1a1a1a; }
-    .rating-text{ font-size: 13px; color: rgba(17,17,17,.7); }
-
-    .opt-title{
-      font-size: 11px;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: rgba(17,17,17,.68);
-      margin-bottom: 10px;
-    }
-
-    .option-card{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 14px;
-      padding: 13px;
-      border-radius: 10px;
+    .nav-arrow {
       background: var(--device-bg);
-      border: 1px solid rgba(0,0,0,.32);
-    }
-    .option-left{
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
-    }
-    .option-img{
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      object-fit: cover;
-      border: 1px solid rgba(0,0,0,.10);
-      background: rgba(255,255,255,.6);
-      display: block;
-    }
-    .option-name{
-      font-size: 14px;
-      font-weight: 700;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 280px;
-    }
-    .option-price{
-      font-size: 14px;
-      font-weight: 700;
-      opacity: .9;
-    }
-
-    .atc{
-      width: 100%;
-      border: 0;
-      border-radius: 10px;
-      padding: 14px 14px;
-      background: var(--btn);
-      color: #fff;
-      font-weight: 700;
+      border: 1px solid var(--pill-border);
+      border-radius: 8px;
       cursor: pointer;
-      transition: transform .08s ease, opacity .15s ease;
-      font-size: 14px;
+      padding: 4px;
+      display: flex;
+      justify-content: center;
     }
-    .atc:hover{ transform: translateY(-1px); }
 
-    /* ============ BENEFITS ============ */
-    .benefits{
-      margin-top: 12px;
-      background: var(--block-bg);
-      border-radius: var(--radius);
-      padding: 14px 16px 10px;
-      border: 0;
-    }
-    .benefits-head{
+    .main-display {
+      flex: 1;
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 4px 2px 12px;
+      justify-content: center;
     }
-    .benefit-icon{
-      width: 34px;
-      height: 34px;
-      border-radius: 999px;
-      background: var(--pill-bg);
-      display: grid;
-      place-items: center;
-      border: 1px solid rgba(0,0,0,.06);
-      overflow: hidden;
-      flex: 0 0 auto;
-    }
-    .benefit-icon img{
+    .main-display img, .main-display video {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transform: scale(1.08);
-      display: block;
-    }
-    .benefits-title{
-      font-size: 13px;
-      font-weight: 800;
-      color: rgba(17,17,17,.92);
     }
 
-    .benefits-grid{
+    /* RIGHT SIDE: INFO */
+    .info-column { padding: 10px; }
+    .kicker { font-size: 12px; font-weight: 700; letter-spacing: 1px; color: var(--muted); margin-bottom: 8px; }
+    h1 { font-family: 'Playfair Display', serif; font-size: 48px; margin: 0 0 16px; line-height: 1.1; }
+    .price-tag { font-size: 24px; font-weight: 700; margin-bottom: 20px; }
+    
+    .atc-btn {
+      width: 100%;
+      padding: 18px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.1s, opacity 0.2s;
+    }
+    .atc-btn:hover { opacity: 0.9; }
+    .atc-btn:active { transform: scale(0.98); }
+
+    /* BENEFITS */
+    .benefits-bar {
+      margin-top: 20px;
       display: grid;
-      grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
-      align-items: start;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1px;
+      background: rgba(0,0,0,0.05);
+      border-radius: var(--radius);
+      overflow: hidden;
     }
-    .benefit{ padding: 10px 10px; }
-    .benefit-title{
-      font-size: 12px;
-      font-weight: 800;
-      margin-bottom: 6px;
-    }
-    .benefit-text{
-      font-size: 12px;
-      line-height: 1.35;
-      color: rgba(17,17,17,.74);
-    }
-    .divider{
-      width: 1px;
-      height: 100%;
-      background: rgba(0,0,0,.12);
-      align-self: stretch;
-    }
+    .benefit-item { background: var(--block-bg); padding: 20px; }
+    .benefit-item h4 { margin: 0 0 8px; font-size: 14px; }
+    .benefit-item p { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.4; }
 
-    @media (max-width: 1180px){
-      .grid{ grid-template-columns: 1fr; }
-      h1{ font-size: 50px; }
-
-      .left-stage, .thumb-rail, .main-wrap{ height: 520px; }
-    }
-    @media (max-width: 620px){
-      .left-stage{
-        height: auto;
-        grid-template-columns: 84px 1fr;
-        overflow: visible;
-      }
-      .thumb{ width: 66px; height: 66px; }
-      .arrow-btn{ width: 66px; }
-      .thumb-rail{ height: 420px; }
-      .main-wrap{ height: 420px; }
-      .main-surface{ height: 100%; aspect-ratio: 5/4; }
-
-      .benefits-grid{ grid-template-columns: 1fr; }
-      .divider{ display: none; }
-      .benefit{
-        padding: 10px 6px;
-        border-top: 1px solid rgba(0,0,0,.10);
-      }
-      .benefit:first-child{ border-top: 0; }
+    @media (max-width: 900px) {
+      .product-grid { grid-template-columns: 1fr; }
+      .gallery-container { height: 450px; }
     }
   </style>
 </head>
-
 <body>
-  <div class="wrap">
-    <nav class="breadcrumbs" aria-label="Breadcrumb">
-      <a href="./index.html">Home</a>
-      <span class="sep">›</span>
-      <span>HeatBelt Pro™</span>
-    </nav>
 
-    <div class="grid">
-      <!-- LEFT -->
-      <div class="media-block">
-        <div class="left-stage">
-          <div class="thumb-rail">
-            <button class="arrow-btn" id="prevMedia" type="button" aria-label="Vorheriges Bild">
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M6 14l6-6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
+<div class="wrap">
+  <nav class="breadcrumbs">Home / Wellness / HeatBelt Pro™</nav>
 
-            <div class="thumb-strip" id="thumbStrip" role="listbox" aria-label="Produktbilder">
-              <button class="thumb is-active" type="button" data-kind="video" data-file="HeatBelt Pro hinter Feuer.mp4" aria-selected="true">
-                <video muted playsinline preload="metadata"></video>
-              </button>
-
-              <button class="thumb" type="button" data-kind="image" data-file="Haupt Produkt Bild (1).png" aria-selected="false"><img alt="Haupt Produkt Bild (1)"></button>
-              <button class="thumb" type="button" data-kind="image" data-file="Tragefoto Infrarot fokus.jpg" aria-selected="false"><img alt="Tragefoto Infrarot fokus"></button>
-              <button class="thumb" type="button" data-kind="image" data-file="Tragefoto Bedinunf Fernbedinung fokus.jpg" aria-selected="false"><img alt="Tragefoto Fernbedienung fokus"></button>
-              <button class="thumb" type="button" data-kind="image" data-file="Produkt Bild Hitze genau.jpg" aria-selected="false"><img alt="Produkt Bild Hitze genau"></button>
-              <button class="thumb" type="button" data-kind="image" data-file="S64a9a16806dd4be28b7bf4d6c58f38f6u.avif" aria-selected="false"><img alt="S64a9a16806dd4be28b7bf4d6c58f38f6u"></button>
-              <button class="thumb" type="button" data-kind="image" data-file="Bild mit Inhalt und Verpackung.webp" aria-selected="false"><img alt="Bild mit Inhalt und Verpackung"></button>
-              <button class="thumb" type="button" data-kind="image" data-file="Tragebild Frau Qualitativ.webp" aria-selected="false"><img alt="Tragebild Frau Qualitativ"></button>
-            </div>
-
-            <button class="arrow-btn" id="nextMedia" type="button" aria-label="Nächstes Bild">
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M6 10l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
+  <main class="product-grid">
+    <section class="gallery-container">
+      <div class="thumb-rail">
+        <button class="nav-arrow" id="prev">↑</button>
+        <div class="thumb-strip" id="thumbStrip">
+          <button class="thumb is-active" data-kind="video" data-file="HeatBelt Pro hinter Feuer.mp4"><video src="assets/HeatBelt Pro hinter Feuer.mp4" muted></video></button>
+          <button class="thumb" data-kind="image" data-file="Haupt Produkt Bild (1).png"><img src="assets/Haupt Produkt Bild (1).png" alt="Produkt"></button>
+          <button class="thumb" data-kind="image" data-file="Tragefoto Infrarot fokus.jpg"><img src="assets/Tragefoto Infrarot fokus.jpg" alt="Fokus"></button>
           </div>
-
-          <div class="main-wrap">
-            <div class="main-surface" id="mainSurface"></div>
-          </div>
-        </div>
+        <button class="nav-arrow" id="next">↓</button>
       </div>
-
-      <!-- RIGHT -->
-      <div class="info">
-        <div class="kicker">HOT- &amp; COLD-WEARABLES</div>
-        <h1>HeatBelt Pro<span class="tm">TM</span></h1>
-
-        <p class="subtext">
-          HeatBelt Pro™ unterstützt die Entspannung im unteren Rückenbereich durch wohltuende Wärme und eine alltagstaugliche Anwendung — flexibel, unkompliziert und angenehm zu tragen.
-        </p>
-
-        <div class="badge-row">
-          <span class="badge">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M9.2 12.8l1.9 1.9 4.7-5.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M7 3h10a2 2 0 012 2v14a2 2 0 01-2 2H7a2 2 0 01-2-2V5a2 2 0 012-2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-            </svg>
-            Klinisch erwiesen
-          </span>
+      <div class="main-display" id="mainSurface">
         </div>
+    </section>
 
-        <div class="rating">
-          <div class="stars" aria-label="Bewertung">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3l-6.2 3.7 1.7-7.1L2 8.9l7.2-.6L12 1.6l2.8 6.7 7.2.6-5.5 5 1.7 7.1z"/></svg>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3l-6.2 3.7 1.7-7.1L2 8.9l7.2-.6L12 1.6l2.8 6.7 7.2.6-5.5 5 1.7 7.1z"/></svg>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3l-6.2 3.7 1.7-7.1L2 8.9l7.2-.6L12 1.6l2.8 6.7 7.2.6-5.5 5 1.7 7.1z"/></svg>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3l-6.2 3.7 1.7-7.1L2 8.9l7.2-.6L12 1.6l2.8 6.7 7.2.6-5.5 5 1.7 7.1z"/></svg>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3l-6.2 3.7 1.7-7.1L2 8.9l7.2-.6L12 1.6l2.8 6.7 7.2.6-5.5 5 1.7 7.1z"/></svg>
-          </div>
-          <span class="rating-text">90 Bewertungen</span>
-        </div>
+    <section class="info-column">
+      <div class="kicker">PREMIUM WELLNESS</div>
+      <h1>HeatBelt Pro™</h1>
+      <p class="price-tag">95,00 €</p>
+      <p style="color: var(--muted); margin-bottom: 30px;">
+        Erlebe gezielte Entspannung durch innovative Infrarot-Wärmetechnologie. 
+        Ideal für den unteren Rücken – kabellos und überall einsatzbereit.
+      </p>
 
-        <div class="opt-wrap">
-          <div class="opt-title">DEVICE OPTIONS</div>
+      <button class="atc-btn">In den Warenkorb</button>
 
-          <div class="option-card">
-            <div class="option-left">
-              <img id="optionThumb" class="option-img" alt="Option Thumbnail">
-              <div class="option-name">HeatBelt Pro™</div>
-            </div>
-            <div class="option-price">€95</div>
-          </div>
-        </div>
-
-        <div class="btn-wrap">
-          <button class="atc" type="button" onclick="alert('Demo: In GitHub Pages ohne Shop-System.');">
-            In den Warenkorb legen
-          </button>
-        </div>
+      <div style="margin-top: 20px; font-size: 13px; display: flex; align-items: center; gap: 8px;">
+        <span style="color: #27ae60;">●</span> Auf Lager - In 2-3 Werktagen bei dir
       </div>
+    </section>
+  </main>
+
+  <section class="benefits-bar">
+    <div class="benefit-item">
+      <h4>Klinisch geprüft</h4>
+      <p>Von Experten getestet zur effektiven Muskelentspannung.</p>
     </div>
-
-    <div class="benefits">
-      <div class="benefits-head">
-        <div class="benefit-icon" aria-hidden="true">
-          <img id="benefitIcon" alt="">
-        </div>
-        <div class="benefits-title">Wissenschaftlich belegte Vorteile</div>
-      </div>
-
-      <div class="benefits-grid">
-        <div class="benefit">
-          <div class="benefit-title">Klinisch erwiesen</div>
-          <div class="benefit-text">Unterstützt, Beschwerden im unteren Rücken zu reduzieren.</div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="benefit">
-          <div class="benefit-title">Reduziert Unterbrechungen</div>
-          <div class="benefit-text">Hilft, den täglichen Ablauf weniger zu beeinträchtigen.</div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="benefit">
-          <div class="benefit-title">Beschleunigt die Erholung</div>
-          <div class="benefit-text">Kann die Durchblutung im Behandlungsbereich unterstützen.</div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="benefit">
-          <div class="benefit-title">Reduziert Muskelkater</div>
-          <div class="benefit-text">Hilft, die Beweglichkeit zu verbessern und Verspannung zu lösen.</div>
-        </div>
-      </div>
+    <div class="benefit-item">
+      <h4>8h Akkulaufzeit</h4>
+      <p>Genug Power für den ganzen Tag ohne lästige Kabel.</p>
     </div>
-  </div>
+    <div class="benefit-item">
+      <h4>Smart-Heat Control</h4>
+      <p>3 Temperaturstufen für dein individuelles Wohlbefinden.</p>
+    </div>
+  </section>
+</div>
 
-  <script>
-    function encodeFileName(name){
-      return encodeURIComponent(name).replace(/%2F/g, "/");
+<script>
+  const mainSurface = document.getElementById('mainSurface');
+  const thumbs = document.querySelectorAll('.thumb');
+  const thumbStrip = document.getElementById('thumbStrip');
+  let activeIndex = 0;
+
+  function updateMainMedia(index) {
+    const btn = thumbs[index];
+    const kind = btn.dataset.kind;
+    const file = btn.dataset.file;
+    const path = `assets/${file}`; // Pfad-Logik vereinfacht
+
+    // Active Class
+    thumbs.forEach(t => t.classList.remove('is-active'));
+    btn.classList.add('is-active');
+
+    // Content Update
+    mainSurface.innerHTML = kind === 'video' 
+      ? `<video src="${path}" autoplay muted loop playsinline></video>`
+      : `<img src="${path}" alt="HeatBelt Pro">`;
+    
+    // Scroll Thumb into view
+    btn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    activeIndex = index;
+  }
+
+  // Event Listeners
+  thumbs.forEach((btn, i) => {
+    btn.addEventListener('click', () => updateMainMedia(i));
+  });
+
+  document.getElementById('next').addEventListener('click', () => {
+    activeIndex = (activeIndex + 1) % thumbs.length;
+    updateMainMedia(activeIndex);
+  });
+
+  document.getElementById('prev').addEventListener('click', () => {
+    activeIndex = (activeIndex - 1 + thumbs.length) % thumbs.length;
+    updateMainMedia(activeIndex);
+  });
+
+  // Keyboard Support
+  window.addEventListener('keydown', (e) => {
+    if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+      activeIndex = (activeIndex - 1 + thumbs.length) % thumbs.length;
+      updateMainMedia(activeIndex);
+    } else if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+      activeIndex = (activeIndex + 1) % thumbs.length;
+      updateMainMedia(activeIndex);
     }
-    const PREFIXES = ["./", "assets/", "./assets/"];
+  });
 
-    function tryLoad(url){
-      return new Promise((resolve) => {
-        const img = new Image();
-        img.onload = () => resolve(true);
-        img.onerror = () => resolve(false);
-        img.src = url;
-      });
-    }
+  // Init
+  updateMainMedia(0);
+</script>
 
-    async function resolveUrl(fileName){
-      const encoded = encodeFileName(fileName);
-      for (const p of PREFIXES){
-        const candidate = p + encoded;
-        const ok = await tryLoad(candidate);
-        if (ok) return candidate;
-      }
-      return PREFIXES[0] + encoded;
-    }
-
-    function clearMain(surface){
-      while (surface.firstChild) surface.removeChild(surface.firstChild);
-    }
-
-    function makeMainVideo(src){
-      const v = document.createElement("video");
-      v.src = src;
-      v.muted = true;
-      v.playsInline = true;
-      v.autoplay = true;
-      v.loop = true;
-      v.controls = false;
-      v.preload = "auto";
-      return v;
-    }
-
-    function makeMainImage(src, alt){
-      const img = document.createElement("img");
-      img.src = src;
-      img.alt = alt || "";
-      img.loading = "eager";
-      return img;
-    }
-
-    function setActive(thumbs, idx){
-      thumbs.forEach((b,i) => {
-        b.classList.toggle("is-active", i === idx);
-        b.setAttribute("aria-selected", i === idx ? "true" : "false");
-      });
-    }
-
-    function ensureVisible(container, el){
-      const cTop = container.scrollTop;
-      const cBottom = cTop + container.clientHeight;
-      const eTop = el.offsetTop;
-      const eBottom = eTop + el.offsetHeight;
-      if (eTop < cTop) container.scrollTo({ top: eTop - 10, behavior: "smooth" });
-      else if (eBottom > cBottom) container.scrollTo({ top: eBottom - container.clientHeight + 10, behavior: "smooth" });
-    }
-
-    function renderMain(mainSurface, kind, url){
-      clearMain(mainSurface);
-      if (kind === "video") mainSurface.appendChild(makeMainVideo(url));
-      else mainSurface.appendChild(makeMainImage(url, "HeatBelt Pro™"));
-    }
-
-    (async function init(){
-      const thumbs = Array.from(document.querySelectorAll(".thumb"));
-      const mainSurface = document.getElementById("mainSurface");
-      const optionThumb = document.getElementById("optionThumb");
-      const benefitIcon = document.getElementById("benefitIcon");
-      const thumbStrip = document.getElementById("thumbStrip");
-
-      benefitIcon.src = await resolveUrl("Benefit_Icons_15.svg");
-
-      for (const btn of thumbs){
-        const kind = btn.getAttribute("data-kind") || "image";
-        const file = btn.getAttribute("data-file");
-        const url = await resolveUrl(file);
-        btn.dataset.url = url;
-        btn.dataset.kind = kind;
-
-        const preview = btn.querySelector(kind === "video" ? "video" : "img");
-        if (preview){
-          preview.src = url;
-          if (kind === "video"){
-            preview.muted = true;
-            preview.playsInline = true;
-            preview.loop = true;
-            preview.autoplay = true;
-          }
-        }
-      }
-
-      const firstImageBtn = thumbs.find(b => b.dataset.kind === "image");
-      if (firstImageBtn) optionThumb.src = firstImageBtn.dataset.url;
-
-      let activeIndex = 0;
-
-      function applyIndex(nextIndex){
-        const n = thumbs.length;
-        activeIndex = (nextIndex + n) % n;
-        const btn = thumbs[activeIndex];
-        renderMain(mainSurface, btn.dataset.kind, btn.dataset.url);
-        setActive(thumbs, activeIndex);
-        ensureVisible(thumbStrip, btn);
-      }
-
-      applyIndex(0);
-
-      thumbs.forEach((btn, i) => {
-        btn.addEventListener("click", () => applyIndex(i));
-      });
-
-      document.getElementById("prevMedia").addEventListener("click", () => applyIndex(activeIndex - 1));
-      document.getElementById("nextMedia").addEventListener("click", () => applyIndex(activeIndex + 1));
-
-      window.addEventListener("keydown", (e) => {
-        if (e.key === "ArrowUp") applyIndex(activeIndex - 1);
-        if (e.key === "ArrowDown") applyIndex(activeIndex + 1);
-      });
-    })();
-  </script>
 </body>
 </html>
