@@ -1,557 +1,332 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>HeatBelt Pro™ – Produktseite</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HeatBelt Pro™ - Produktseite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f7f3ed;
+            --text-dark: #1a1a1a;
+            --text-light: #555;
+            --accent-color: #000;
+            --white: #ffffff;
+            /* Skalierung um ca. 30% erhöht (Basiseinheiten vergrößert) */
+            --base-unit: 1.3rem;
+            --border-radius: 8px;
+        }
 
-  <!-- Fonts (nah am Look) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <style>
-    :root{
-      --bg: #f7f2ea;
-      --panel: #f3eee4;
-      --panel-2: #efe8dc;
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 20px;
+        }
 
-      --line: rgba(0,0,0,.14);
-      --line-soft: rgba(0,0,0,.10);
+        .container {
+            max-width: 1600px; /* Breiter für die 30% Skalierung */
+            margin: 0 auto;
+            background-color: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            padding: 60px; /* Erhöhtes Padding */
+        }
 
-      --text: #171717;
-      --muted: rgba(23,23,23,.74);
+        /* Breadcrumb */
+        .breadcrumb {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            color: var(--text-light);
+        }
 
-      --btn: #242424;
+        /* Produkt-Sektion */
+        .product-main {
+            display: grid;
+            grid-template-columns: 100px 1.2fr 1fr;
+            gap: 50px;
+            margin-bottom: 80px;
+        }
 
-      --radius: 14px;
+        /* Thumbnail Galerie */
+        .thumbnail-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
 
-      /* ✅ global scale (≈ +30%) */
-      --s: 1.3;
-    }
+        .thumb {
+            width: 100px; /* 30% größer als Standard 70-80px */
+            height: 100px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            cursor: pointer;
+            object-fit: cover;
+            transition: border-color 0.3s;
+        }
 
-    *{ box-sizing: border-box; }
-    body{
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", Helvetica;
-    }
+        .thumb.active {
+            border: 2px solid var(--accent-color);
+        }
 
-    .wrap{
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: calc(18px * var(--s)) calc(18px * var(--s)) calc(34px * var(--s));
-    }
+        /* Hauptbild */
+        .main-image-container {
+            background-color: #f2ede6;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            height: 700px; /* Vergrößert */
+        }
 
-    /* Breadcrumb */
-    .breadcrumbs{
-      font-size: calc(12px * var(--s));
-      opacity: .85;
-      margin: calc(6px * var(--s)) 0 calc(14px * var(--s));
-      display: flex;
-      align-items: center;
-      gap: calc(8px * var(--s));
-    }
-    .breadcrumbs a{ color: inherit; text-decoration: underline; text-underline-offset: 2px; }
-    .sep{ opacity: .7; }
+        .main-image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
 
-    /* Main layout */
-    .grid{
-      background: var(--panel);
-      border-radius: calc(var(--radius) * var(--s));
-      padding: calc(18px * var(--s));
-      display: grid;
-      grid-template-columns: 1.25fr .95fr;
-      gap: calc(22px * var(--s));
-      align-items: start;
-    }
+        /* Produkt Details */
+        .product-details {
+            padding-left: 20px;
+        }
 
-    /* Gallery */
-    .gallery{
-      display: grid;
-      grid-template-columns: calc(76px * var(--s)) 1fr;
-      gap: calc(14px * var(--s));
-      align-items: start;
-    }
+        .category-tag {
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            display: block;
+        }
 
-    .thumbs-shell{
-      background: rgba(255,255,255,.35);
-      border: 1px solid var(--line-soft);
-      border-radius: calc(12px * var(--s));
-      padding: calc(10px * var(--s));
-      display: flex;
-      flex-direction: column;
-      gap: calc(10px * var(--s));
-    }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem; /* Stark vergrößert */
+            font-weight: 500;
+            margin-bottom: 25px;
+            line-height: 1.1;
+        }
 
-    .thumb{
-      width: calc(56px * var(--s));
-      height: calc(56px * var(--s));
-      border-radius: calc(12px * var(--s));
-      border: 1px solid var(--line-soft);
-      background: rgba(255,255,255,.65);
-      padding: 0;
-      overflow: hidden;
-      cursor: pointer;
-      display: grid;
-      place-items: center;
-      transition: transform .08s ease;
-    }
-    .thumb:hover{ transform: translateY(-1px); }
-    .thumb img{
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .thumb.is-active{
-      outline: 2px solid rgba(0,0,0,.55);
-      border-color: transparent;
-    }
+        .description {
+            font-size: 1.4rem; /* Skaliert */
+            color: var(--text-light);
+            margin-bottom: 30px;
+            max-width: 90%;
+        }
 
-    .main{
-      border-radius: calc(var(--radius) * var(--s));
-      background: rgba(255,255,255,.25);
-      border: 1px solid var(--line-soft);
-      overflow: hidden;
-    }
-    .main-inner{
-      height: calc(520px * var(--s)); /* ✅ größer */
-      width: 100%;
-      display: grid;
-      place-items: center;
-    }
-    .main-inner img{
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+        .clinical-badge {
+            display: inline-flex;
+            align-items: center;
+            background: #fdfaf5;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            border: 1px solid #e0dcd5;
+        }
 
-    /* Info */
-    .info{ padding: calc(6px * var(--s)); }
+        .clinical-badge span {
+            margin-right: 10px;
+        }
 
-    .kicker{
-      font-size: calc(11px * var(--s));
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: calc(10px * var(--s));
-    }
+        .rating {
+            margin-bottom: 40px;
+            font-size: 1.2rem;
+        }
 
-    h1{
-      font-family: "Playfair Display", ui-serif, Georgia, "Times New Roman", Times, serif;
-      font-size: calc(56px * var(--s));
-      line-height: 1.0;
-      margin: 0 0 calc(12px * var(--s));
-      font-weight: 500;
-      letter-spacing: -0.01em;
-    }
+        /* Kauf-Box */
+        .purchase-box {
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
 
-    .subtext{
-      font-size: calc(13px * var(--s));
-      line-height: 1.35;
-      color: var(--muted);
-      max-width: 52ch;
-      margin: 0 0 calc(12px * var(--s));
-    }
+        .purchase-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
 
-    /* Badge "Klinisch erwiesen" */
-    .badge-row{ margin: calc(10px * var(--s)) 0 calc(12px * var(--s)); }
-    .badge{
-      display: inline-flex;
-      align-items: center;
-      gap: calc(8px * var(--s));
-      font-size: calc(12px * var(--s));
-      padding: calc(6px * var(--s)) calc(10px * var(--s));
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.55);
-      color: rgba(23,23,23,.9);
-      font-weight: 500;
-    }
-    .badge svg{ width: calc(14px * var(--s)); height: calc(14px * var(--s)); opacity: .9; }
+        .purchase-info img {
+            width: 60px;
+            height: 60px;
+            background: #eee;
+            border-radius: 4px;
+        }
 
-    /* Stars */
-    .rating{
-      display: flex;
-      align-items: center;
-      gap: calc(10px * var(--s));
-      margin: calc(8px * var(--s)) 0 calc(18px * var(--s));
-    }
-    .stars{
-      display: inline-flex;
-      gap: calc(2px * var(--s));
-      transform: translateY(1px);
-    }
-    .stars svg{ width: calc(14px * var(--s)); height: calc(14px * var(--s)); }
-    .rating-text{
-      font-size: calc(12px * var(--s));
-      color: rgba(23,23,23,.72);
-    }
+        .price {
+            font-weight: 600;
+            font-size: 1.4rem;
+        }
 
-    .opt-title{
-      font-size: calc(10px * var(--s));
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: rgba(23,23,23,.7);
-      margin-bottom: calc(10px * var(--s));
-    }
+        .add-to-cart {
+            background-color: #222;
+            color: white;
+            width: 100%;
+            padding: 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
 
-    .option-card{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: calc(14px * var(--s));
-      padding: calc(12px * var(--s));
-      border-radius: calc(10px * var(--s));
-      background: var(--panel-2);
-      border: 1px solid rgba(0,0,0,.28);
-      margin-bottom: calc(12px * var(--s));
-    }
-    .option-left{
-      display: flex;
-      align-items: center;
-      gap: calc(10px * var(--s));
-      min-width: 0;
-    }
-    .option-img{
-      width: calc(34px * var(--s));
-      height: calc(34px * var(--s));
-      border-radius: calc(8px * var(--s));
-      object-fit: cover;
-      border: 1px solid rgba(0,0,0,.10);
-      background: rgba(255,255,255,.6);
-      display: block;
-    }
-    .option-name{
-      font-size: calc(13px * var(--s));
-      font-weight: 600;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 260px;
-    }
-    .option-price{
-      font-size: calc(13px * var(--s));
-      font-weight: 600;
-      opacity: .9;
-    }
+        .add-to-cart:hover {
+            background-color: #000;
+        }
 
-    .atc{
-      width: 100%;
-      border: 0;
-      border-radius: calc(10px * var(--s));
-      padding: calc(13px * var(--s)) calc(14px * var(--s));
-      background: var(--btn);
-      color: #fff;
-      font-weight: 600;
-      cursor: pointer;
-      transition: transform .08s ease, opacity .15s ease;
-      font-size: calc(13px * var(--s));
-    }
-    .atc:hover{ transform: translateY(-1px); }
+        /* Vorteile Sektion */
+        .benefits-section {
+            margin-top: 100px;
+            border-top: 1px solid #eee;
+            padding-top: 60px;
+        }
 
-    /* ✅ Benefits: KEINE Umrandung (wie Therabody) */
-    .benefits{
-      margin-top: calc(14px * var(--s));
-      background: var(--panel);
-      border-radius: calc(var(--radius) * var(--s));
-      padding: calc(16px * var(--s)) calc(16px * var(--s)) calc(10px * var(--s));
-      border: 0; /* <-- keine umrandung */
-    }
-    .benefits-head{
-      display: flex;
-      align-items: center;
-      gap: calc(10px * var(--s));
-      padding: calc(4px * var(--s)) calc(2px * var(--s)) calc(14px * var(--s));
-    }
-    .benefit-icon{
-      width: calc(34px * var(--s));
-      height: calc(34px * var(--s));
-      border-radius: 999px;
-      background: #f2d2ad;
-      display: grid;
-      place-items: center;
-      border: 1px solid rgba(0,0,0,.06);
-      overflow: hidden;
-      flex: 0 0 auto;
-    }
-    .benefit-icon img{
-      width: calc(18px * var(--s));
-      height: calc(18px * var(--s));
-      display: block;
-    }
-    .benefits-title{
-      font-size: calc(13px * var(--s));
-      font-weight: 700;
-      color: rgba(23,23,23,.92);
-    }
+        .benefits-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 50px;
+        }
 
-    .benefits-grid{
-      display: grid;
-      grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
-      align-items: start;
-    }
-    .benefit{ padding: calc(12px * var(--s)) calc(10px * var(--s)); }
-    .benefit-title{
-      font-size: calc(12px * var(--s));
-      font-weight: 700;
-      margin-bottom: calc(6px * var(--s));
-    }
-    .benefit-text{
-      font-size: calc(12px * var(--s));
-      line-height: 1.35;
-      color: rgba(23,23,23,.74);
-    }
-    .divider{
-      width: 1px;
-      height: 100%;
-      background: rgba(0,0,0,.12);
-      align-self: stretch;
-    }
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+        }
 
-    /* Responsive */
-    @media (max-width: 1020px){
-      .grid{ grid-template-columns: 1fr; }
-      h1{ font-size: calc(44px * var(--s)); }
-      .main-inner{ height: calc(460px * var(--s)); }
-    }
-    @media (max-width: 620px){
-      .gallery{ grid-template-columns: calc(70px * var(--s)) 1fr; }
-      .main-inner{ height: calc(380px * var(--s)); }
-      .benefits-grid{ grid-template-columns: 1fr; }
-      .divider{ display: none; }
-      .benefit{
-        padding: calc(10px * var(--s)) calc(6px * var(--s));
-        border-top: 1px solid rgba(0,0,0,.10);
-      }
-      .benefit:first-child{ border-top: 0; }
-    }
+        .benefit-item {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
 
-    /* kleine Debug-Zeile (falls du willst siehst du, welcher Pfad gefunden wurde) */
-    .path-debug{
-      margin-top: calc(10px * var(--s));
-      font-size: calc(11px * var(--s));
-      color: rgba(23,23,23,.55);
-    }
-  </style>
+        .benefit-title {
+            font-weight: 700;
+            font-size: 1.25rem;
+            line-height: 1.3;
+        }
+
+        .benefit-text {
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .product-main {
+                grid-template-columns: 1fr;
+            }
+            .thumbnail-gallery {
+                flex-direction: row;
+                order: 2;
+            }
+            .main-image-container {
+                order: 1;
+            }
+            .product-details {
+                order: 3;
+            }
+        }
+    </style>
 </head>
-
 <body>
-  <div class="wrap">
-    <nav class="breadcrumbs" aria-label="Breadcrumb">
-      <a href="./index.html">Home</a>
-      <span class="sep">›</span>
-      <span>HeatBelt Pro™</span>
-    </nav>
 
-    <div class="grid">
-      <!-- LEFT: Gallery -->
-      <div class="gallery">
-        <div class="thumbs-shell" role="listbox" aria-label="Produktbilder">
-          <!-- Thumbs werden per JS gesetzt -->
-          <button class="thumb is-active" type="button" data-file="Haupt Produkt Bild.webp" aria-selected="true">
-            <img alt="Haupt Produkt Bild" />
-          </button>
-          <button class="thumb" type="button" data-file="Tragefoto Infrarot fokus.jpg" aria-selected="false">
-            <img alt="Tragefoto Infrarot fokus" />
-          </button>
-          <button class="thumb" type="button" data-file="Tragefoto Bedinunf Fernbedinung fokus.jpg" aria-selected="false">
-            <img alt="Tragefoto Fernbedienung fokus" />
-          </button>
-          <button class="thumb" type="button" data-file="Maße fertig.jpg" aria-selected="false">
-            <img alt="Maße fertig" />
-          </button>
+<div class="container">
+    <nav class="breadcrumb">Home &nbsp; / &nbsp; HeatBelt Pro™</nav>
+
+    <main class="product-main">
+        <div class="thumbnail-gallery">
+            <img src="Haupt Produkt Bild.webp" class="thumb active" onclick="changeImage(this.src, this)" alt="Thumbnail 1">
+            <img src="Tragefoto Infrarot fokus.jpg" class="thumb" onclick="changeImage(this.src, this)" alt="Thumbnail 2">
+            <img src="Tragefoto Bedinunf Fernbedinung fokus.jpg" class="thumb" onclick="changeImage(this.src, this)" alt="Thumbnail 3">
+            <img src="Maße fertig.jpg" class="thumb" onclick="changeImage(this.src, this)" alt="Thumbnail 4">
         </div>
 
-        <div class="main">
-          <div class="main-inner">
-            <img id="mainImage" alt="HeatBelt Pro™ – Hauptbild" loading="eager">
-          </div>
-        </div>
-      </div>
-
-      <!-- RIGHT: Info -->
-      <div class="info">
-        <div class="kicker">HOT- &amp; COLD-WEARABLES</div>
-        <h1>HeatBelt Pro™</h1>
-
-        <p class="subtext">
-          HeatBelt Pro™ unterstützt die Entspannung im unteren Rückenbereich durch wohltuende Wärme und eine
-          alltagstaugliche Anwendung — flexibel, unkompliziert und angenehm zu tragen.
-        </p>
-
-        <div class="badge-row">
-          <span class="badge">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M9.2 12.8l1.9 1.9 4.7-5.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M7 3h10a2 2 0 012 2v14a2 2 0 01-2 2H7a2 2 0 01-2-2V5a2 2 0 012-2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-            </svg>
-            Klinisch erwiesen
-          </span>
+        <div class="main-image-container">
+            <img id="main-product-img" src="Haupt Produkt Bild.webp" alt="HeatBelt Pro™ Hauptbild">
         </div>
 
-        <div class="rating">
-          <div class="stars" aria-label="Bewertung">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3l-6.2 3.7 1.7-7.1L2 8.9l7.2-.6L12 1.6l2.8 6.7 7.2.6-5.5 5 1.7 7.1z"/></svg>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3l-6.2 3.7 1.7-7.1L2 8.9l7.2-.6L12 1.6l2.8 6.7 7.2.6-5.5 5 1.7 7.1z"/></svg>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3l-6.2 3.7 1.7-7.1L2 8.9l7.2-.6L12 1.6l2.8 6.7 7.2.6-5.5 5 1.7 7.1z"/></svg>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3l-6.2 3.7 1.7-7.1L2 8.9l7.2-.6L12 1.6l2.8 6.7 7.2.6-5.5 5 1.7 7.1z"/></svg>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17.3l-6.2 3.7 1.7-7.1L2 8.9l7.2-.6L12 1.6l2.8 6.7 7.2.6-5.5 5 1.7 7.1z"/></svg>
-          </div>
-          <span class="rating-text">90 Bewertungen</span>
+        <div class="product-details">
+            <span class="category-tag">Wärmetherapie & Wellness</span>
+            <h1>HeatBelt Pro™</h1>
+            <p class="description">
+                Der HeatBelt Pro™ kombiniert fortschrittliche Infrarottechnologie mit gezielter Kompression, 
+                um tiefsitzende Verspannungen zu lösen und die Regeneration im Lendenbereich nachhaltig zu fördern.
+            </p>
+            
+            <div class="clinical-badge">
+                <span>🧪</span> Klinisch getestete Technologie
+            </div>
+
+            <div class="rating">
+                ⭐⭐⭐⭐⭐ <span style="color: #666; font-size: 0.9em; margin-left: 10px;">90 Bewertungen</span>
+            </div>
+
+            <div class="purchase-box">
+                <div class="purchase-info">
+                    <img src="Haupt Produkt Bild.webp" alt="Mini">
+                    <span style="font-weight: 500; font-size: 1.2rem;">HeatBelt Pro™</span>
+                </div>
+                <span class="price">95 €</span>
+            </div>
+
+            <button class="add-to-cart">In den Warenkorb legen</button>
         </div>
+    </main>
 
-        <div class="opt-title">DEVICE OPTIONS</div>
-
-        <div class="option-card">
-          <div class="option-left">
-            <img id="optionThumb" class="option-img" alt="Option Thumbnail">
-            <div class="option-name">HeatBelt Pro™</div>
-          </div>
-          <div class="option-price">€95</div>
+    <section class="benefits-section">
+        <div class="benefits-header">
+            <span>🔬</span> Wissenschaftlich belegte Vorteile
         </div>
-
-        <button class="atc" type="button" onclick="alert('Demo: In GitHub Pages ohne Shop-System.');">
-          In den Warenkorb legen
-        </button>
-
-        <div id="pathDebug" class="path-debug"></div>
-      </div>
-    </div>
-
-    <!-- Benefits -->
-    <div class="benefits">
-      <div class="benefits-head">
-        <div class="benefit-icon" aria-hidden="true">
-          <img id="benefitIcon" alt="">
+        
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <div class="benefit-title">Effektive Schmerzlinderung</div>
+                <div class="benefit-text">Klinisch erwiesen, um Unbehagen im unteren Rückenbereich durch tiefenwirksame Wärme zu reduzieren.</div>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-title">Maximale Flexibilität</div>
+                <div class="benefit-text">Ermöglicht uneingeschränkte Bewegung im Alltag bei gleichzeitigem therapeutischen Nutzen.</div>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-title">Schnellere Regeneration</div>
+                <div class="benefit-text">Fördert die Durchblutung im Zielbereich und beschleunigt so die natürliche Erholung der Muskulatur.</div>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-title">Gezielte Entspannung</div>
+                <div class="benefit-text">Reduziert Muskelkater nach intensiven Einheiten und verbessert die Mobilität nachhaltig.</div>
+            </div>
         </div>
-        <div class="benefits-title">Wissenschaftlich belegte Vorteile</div>
-      </div>
+    </section>
+</div>
 
-      <div class="benefits-grid">
-        <div class="benefit">
-          <div class="benefit-title">Klinisch erwiesen</div>
-          <div class="benefit-text">Unterstützt, Beschwerden im unteren Rücken zu reduzieren.</div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="benefit">
-          <div class="benefit-title">Reduziert Unterbrechungen</div>
-          <div class="benefit-text">Hilft, den täglichen Ablauf weniger zu beeinträchtigen.</div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="benefit">
-          <div class="benefit-title">Beschleunigt die Erholung</div>
-          <div class="benefit-text">Kann die Durchblutung im Behandlungsbereich unterstützen.</div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="benefit">
-          <div class="benefit-title">Reduziert Muskelkater</div>
-          <div class="benefit-text">Hilft, die Beweglichkeit zu verbessern und Verspannung zu lösen.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // ✅ Encode auch ä/Leerzeichen korrekt:
-    // "Maße fertig.jpg" -> "Ma%C3%9Fe%20fertig.jpg"
-    function encodeFileName(name){
-      // encodeURIComponent encodet auch ä/ö/ü korrekt
-      return encodeURIComponent(name).replace(/%2F/g, "/");
+<script>
+    function changeImage(src, element) {
+        // Hauptbild tauschen
+        document.getElementById('main-product-img').src = src;
+        
+        // Active Klasse bei Thumbnails verwalten
+        const thumbs = document.querySelectorAll('.thumb');
+        thumbs.forEach(thumb => thumb.classList.remove('active'));
+        element.classList.add('active');
     }
+</script>
 
-    // Versucht Pfade in dieser Reihenfolge:
-    // - gleiche Ebene wie product.html
-    // - /assets/
-    const PREFIXES = ["./", "assets/", "./assets/"];
-
-    function tryLoad(url){
-      return new Promise((resolve) => {
-        const img = new Image();
-        img.onload = () => resolve(true);
-        img.onerror = () => resolve(false);
-        img.src = url;
-      });
-    }
-
-    async function resolveUrl(fileName){
-      const encoded = encodeFileName(fileName);
-      for (const p of PREFIXES){
-        const candidate = p + encoded;
-        const ok = await tryLoad(candidate);
-        if (ok) return { url: candidate, prefix: p };
-      }
-      return { url: PREFIXES[0] + encoded, prefix: null };
-    }
-
-    (async function init(){
-      const thumbs = Array.from(document.querySelectorAll(".thumb"));
-      const mainImage = document.getElementById("mainImage");
-      const optionThumb = document.getElementById("optionThumb");
-      const benefitIcon = document.getElementById("benefitIcon");
-      const debug = document.getElementById("pathDebug");
-
-      // Dateien exakt wie du sie genannt hast
-      const files = [
-        "Haupt Produkt Bild.webp",
-        "Tragefoto Infrarot fokus.jpg",
-        "Tragefoto Bedinunf Fernbedinung fokus.jpg",
-        "Maße fertig.jpg"
-      ];
-
-      // Benefit Icon
-      const benefit = await resolveUrl("Benefit_Icons_15.svg");
-      benefitIcon.src = benefit.url;
-
-      // Resolve erstes Bild (Main)
-      const first = await resolveUrl(files[0]);
-      mainImage.src = first.url;
-      optionThumb.src = first.url;
-
-      // Thumbs initialisieren
-      for (let i=0; i<thumbs.length; i++){
-        const btn = thumbs[i];
-        const f = btn.getAttribute("data-file") || files[i];
-        const r = await resolveUrl(f);
-        btn.dataset.img = r.url;
-
-        const imgEl = btn.querySelector("img");
-        imgEl.src = r.url;
-      }
-
-      // Debug: welcher Prefix wurde gefunden?
-      if(first.prefix){
-        debug.textContent = "Gefundener Bildpfad: " + first.prefix + "(Dateinamen automatisch encoded)";
-      } else {
-        debug.textContent = "Konnte keinen Bildpfad automatisch verifizieren. Prüfe Ordnername/Case-Sensitive.";
-      }
-
-      // Klicklogik
-      thumbs.forEach(btn => {
-        btn.addEventListener("click", () => {
-          const url = btn.dataset.img;
-          if(!url) return;
-
-          mainImage.src = url;
-
-          thumbs.forEach(b => {
-            b.classList.remove("is-active");
-            b.setAttribute("aria-selected", "false");
-          });
-          btn.classList.add("is-active");
-          btn.setAttribute("aria-selected", "true");
-        });
-      });
-    })();
-  </script>
 </body>
 </html>
