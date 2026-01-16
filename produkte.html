@@ -35,7 +35,6 @@
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", Helvetica;
     }
 
-    /* ✅ Breite so lassen */
     .wrap{
       max-width: 1540px;
       margin: 0 auto;
@@ -53,7 +52,6 @@
     .breadcrumbs a{ color: inherit; text-decoration: underline; text-underline-offset: 2px; }
     .sep{ opacity: .7; }
 
-    /* ✅ Oberer Block niedriger: weniger Padding + kleineres Bildformat */
     .grid{
       background: var(--block-bg);
       border-radius: var(--radius);
@@ -111,9 +109,12 @@
       pointer-events:none;
     }
 
-    /* ✅ niedriger, damit Benefits mit drauf passt */
+    /* ✅ FIX 1: Format wieder wie vorher (1:1), alle Medien passen sich an */
+    /* ✅ FIX 2: Zusätzlich 30px kleiner (via max-height) */
     .main-surface{
-      aspect-ratio: 16 / 11; /* war 1/1 -> jetzt deutlich niedriger */
+      aspect-ratio: 1 / 1;     /* <-- wieder Original-Format */
+      max-height: 540px;       /* <-- 30px kleiner als vorher (war 570/ähnlich) */
+      width: 100%;
       position: relative;
       overflow: hidden;
       border-radius: 12px;
@@ -125,16 +126,12 @@
       inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: contain;     /* Medien werden dem Format angepasst */
       display: block;
     }
 
-    /* RIGHT */
-    .info{
-      padding: 16px 12px 10px;
-    }
+    .info{ padding: 16px 12px 10px; }
 
-    /* ✅ diese Aspekte etwas größer */
     .kicker{
       font-size: 12px;
       letter-spacing: .08em;
@@ -145,20 +142,17 @@
 
     h1{
       font-family: "Playfair Display", ui-serif, Georgia, "Times New Roman", Times, serif;
-      font-size: 62px; /* etwas größer */
+      font-size: 62px;
       line-height: 0.98;
       margin: 0 0 14px;
       font-weight: 500;
       letter-spacing: -0.015em;
       color: #101010;
     }
-    .tm{
-      font-size: 0.58em;
-      vertical-align: super;
-    }
+    .tm{ font-size: 0.58em; vertical-align: super; }
 
     .subtext{
-      font-size: 14px;  /* etwas größer */
+      font-size: 14px;
       line-height: 1.38;
       color: var(--muted);
       max-width: 56ch;
@@ -174,7 +168,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-size: 13px; /* größer */
+      font-size: 13px;
       padding: 7px 11px;
       border-radius: 999px;
       border: 1px solid var(--pill-border);
@@ -194,7 +188,7 @@
     .rating-text{ font-size: 13px; color: rgba(17,17,17,.7); }
 
     .opt-title{
-      font-size: 11px; /* größer */
+      font-size: 11px;
       letter-spacing: .08em;
       text-transform: uppercase;
       color: rgba(17,17,17,.68);
@@ -254,7 +248,6 @@
     }
     .atc:hover{ transform: translateY(-1px); }
 
-    /* Benefits */
     .benefits{
       margin-top: 12px;
       background: var(--block-bg);
@@ -318,7 +311,7 @@
     @media (max-width: 1180px){
       .grid{ grid-template-columns: 1fr; }
       h1{ font-size: 50px; }
-      .main-surface{ aspect-ratio: 4 / 3; }
+      .main-surface{ max-height: 520px; } /* mobile ebenfalls etwas kleiner */
     }
     @media (max-width: 620px){
       .media-block{ grid-template-columns: 72px 1fr; }
@@ -343,15 +336,12 @@
     </nav>
 
     <div class="grid">
-      <!-- LEFT -->
       <div class="media-block">
         <div class="thumb-strip" role="listbox" aria-label="Produktbilder">
-          <!-- ✅ 1) Video first -->
           <button class="thumb is-active" type="button" data-kind="video" data-file="HeatBelt Pro hinter Feuer.mp4" aria-selected="true">
             <video muted playsinline preload="metadata"></video>
           </button>
 
-          <!-- ✅ Images -->
           <button class="thumb" type="button" data-kind="image" data-file="Haupt Produkt Bild (1).png" aria-selected="false"><img alt="Haupt Produkt Bild (1)"></button>
           <button class="thumb" type="button" data-kind="image" data-file="Tragefoto Infrarot fokus.jpg" aria-selected="false"><img alt="Tragefoto Infrarot fokus"></button>
           <button class="thumb" type="button" data-kind="image" data-file="Tragefoto Bedinunf Fernbedinung fokus.jpg" aria-selected="false"><img alt="Tragefoto Fernbedienung fokus"></button>
@@ -362,12 +352,9 @@
           <button class="thumb" type="button" data-kind="image" data-file="Bild mit Inhalt und Verpackung.webp" aria-selected="false"><img alt="Bild mit Inhalt und Verpackung"></button>
         </div>
 
-        <div class="main-surface" id="mainSurface">
-          <!-- main media injected by JS -->
-        </div>
+        <div class="main-surface" id="mainSurface"></div>
       </div>
 
-      <!-- RIGHT -->
       <div class="info">
         <div class="kicker">HOT- &amp; COLD-WEARABLES</div>
 
@@ -513,7 +500,6 @@
 
       benefitIcon.src = await resolveUrl("Benefit_Icons_15.svg");
 
-      // preload thumb media + attach resolved urls
       for (const btn of thumbs){
         const kind = btn.getAttribute("data-kind") || "image";
         const file = btn.getAttribute("data-file");
@@ -533,28 +519,21 @@
         }
       }
 
-      // set initial main = first thumb (video)
       const firstBtn = thumbs[0];
-      const firstUrl = firstBtn.dataset.url;
-      const firstKind = firstBtn.dataset.kind;
-
       clearMain(mainSurface);
-      if (firstKind === "video"){
-        mainSurface.appendChild(makeMainVideo(firstUrl));
+      if (firstBtn.dataset.kind === "video"){
+        mainSurface.appendChild(makeMainVideo(firstBtn.dataset.url));
       } else {
-        mainSurface.appendChild(makeMainImage(firstUrl, "HeatBelt Pro™"));
+        mainSurface.appendChild(makeMainImage(firstBtn.dataset.url, "HeatBelt Pro™"));
       }
 
-      // option thumbnail should be first IMAGE (not video)
-      const firstImageBtn = thumbs.find(b => (b.dataset.kind || b.getAttribute("data-kind")) === "image");
+      const firstImageBtn = thumbs.find(b => b.dataset.kind === "image");
       if (firstImageBtn) optionThumb.src = firstImageBtn.dataset.url;
 
-      // click handling
       thumbs.forEach(btn => {
         btn.addEventListener("click", () => {
           const url = btn.dataset.url;
           const kind = btn.dataset.kind;
-
           if(!url) return;
 
           clearMain(mainSurface);
@@ -564,12 +543,9 @@
             mainSurface.appendChild(makeMainImage(url, "HeatBelt Pro™"));
           }
 
-          thumbs.forEach(b => {
-            b.classList.remove("is-active");
-            b.setAttribute("aria-selected", "false");
-          });
+          thumbs.forEach(b => { b.classList.remove("is-active"); b.setAttribute("aria-selected","false"); });
           btn.classList.add("is-active");
-          btn.setAttribute("aria-selected", "true");
+          btn.setAttribute("aria-selected","true");
         });
       });
     })();
