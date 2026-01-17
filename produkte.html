@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ThermBack LED</title>
+    <title>HeatBelt Pro™</title>
     <style>
         * {
             margin: 0;
@@ -37,10 +37,6 @@
             text-decoration: none;
         }
 
-        .breadcrumb a:hover {
-            text-decoration: underline;
-        }
-
         .product-section {
             background: white;
             border-radius: 12px;
@@ -49,40 +45,6 @@
             grid-template-columns: 80px 1fr 500px;
             gap: 30px;
             margin-bottom: 30px;
-        }
-
-        @media (max-width: 1200px) {
-            .product-section {
-                grid-template-columns: 1fr;
-                padding: 20px;
-                gap: 15px;
-            }
-
-            .thumbnail-gallery {
-                order: 1;
-                flex-direction: row;
-                max-height: none;
-                justify-content: center;
-                gap: 8px;
-            }
-
-            .thumbnail-gallery-inner {
-                flex-direction: row;
-                gap: 8px;
-            }
-
-            .thumbnail-nav {
-                display: none;
-            }
-
-            .main-image {
-                order: 2;
-                margin-bottom: 20px;
-            }
-
-            .product-info {
-                order: 3;
-            }
         }
 
         .thumbnail-gallery {
@@ -127,11 +89,6 @@
             background: #f5f5f5;
         }
 
-        .thumbnail-nav.disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
-
         .thumbnail {
             width: 80px;
             height: 80px;
@@ -153,11 +110,6 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-        }
-
-        .thumbnail[data-type="video"] video {
-            object-fit: cover;
-            object-position: center;
         }
 
         .main-image {
@@ -202,15 +154,6 @@
             font-weight: 300;
             margin-bottom: 20px;
             line-height: 1.2;
-        }
-
-        @media (max-width: 1200px) {
-            .product-title {
-                font-size: 32px;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
         }
 
         .product-description {
@@ -283,12 +226,6 @@
             border-color: #333;
         }
 
-        @media (max-width: 1200px) {
-            .option-card {
-                margin-bottom: 10px;
-            }
-        }
-
         .option-content {
             display: flex;
             align-items: center;
@@ -336,12 +273,6 @@
 
         .add-to-cart:hover {
             background: #000;
-        }
-
-        @media (max-width: 1200px) {
-            .add-to-cart {
-                margin-top: 10px;
-            }
         }
 
         .benefits-section {
@@ -400,23 +331,6 @@
             background: #e0e0e0;
         }
 
-        @media (max-width: 1200px) {
-            .benefit-item {
-                padding-right: 0;
-                padding-bottom: 20px;
-                margin-bottom: 20px;
-            }
-
-            .benefit-item:not(:last-child)::after {
-                right: 0;
-                left: 0;
-                top: auto;
-                bottom: 0;
-                width: auto;
-                height: 1px;
-            }
-        }
-
         .benefit-item h4 {
             font-size: 16px;
             font-weight: 500;
@@ -462,7 +376,6 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to right, #4a2c4e, #2d1b4e);
             z-index: 1;
         }
 
@@ -509,16 +422,6 @@
             max-width: 500px;
         }
 
-        @media (max-width: 1200px) {
-            .info-box {
-                left: 50%;
-                right: auto;
-                transform: translateX(-50%);
-                bottom: 20px;
-                max-width: calc(100% - 40px);
-            }
-        }
-
         .info-box:hover {
             background: rgba(255, 255, 255, 0.2);
         }
@@ -543,13 +446,6 @@
             transform: none;
         }
 
-        @media (max-width: 1200px) {
-            .info-box.expanded {
-                flex-direction: column;
-                justify-content: flex-start;
-            }
-        }
-
         .video-box {
             display: none;
             width: 50%;
@@ -559,12 +455,6 @@
 
         .info-box.expanded .video-box {
             display: block;
-        }
-
-        @media (max-width: 1200px) {
-            .info-box.expanded .video-box {
-                display: none;
-            }
         }
 
         .video-box-inner {
@@ -595,14 +485,6 @@
             padding: 40px;
             display: flex;
             flex-direction: column;
-        }
-
-        @media (max-width: 1200px) {
-            .info-box.expanded .info-box-right {
-                width: 100%;
-                height: auto;
-                padding: 30px;
-            }
         }
 
         .info-box-content {
@@ -688,11 +570,6 @@
             padding-top: 20px;
         }
 
-        .university-logo img {
-            height: 50px;
-            opacity: 0.9;
-        }
-
         .science-link {
             display: flex;
             align-items: center;
@@ -712,41 +589,247 @@
             height: 24px;
         }
 
+        /* Slideshow Section */
+        .slideshow-section {
+            margin-bottom: 30px;
+            background: #f5f3f0;
+            padding: 60px 0;
+        }
+
+        .slideshow-section h2 {
+            font-size: 42px;
+            font-weight: 300;
+            margin-bottom: 50px;
+            text-align: left;
+            line-height: 1.3;
+        }
+
+        .slideshow-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slideshow-track {
+            display: flex;
+            gap: 20px;
+            transition: transform 0.5s ease;
+        }
+
+        .slide-card {
+            min-width: calc(25% - 15px);
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slide-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .slide-image {
+            width: 100%;
+            height: 350px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slide-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide-content {
+            padding: 20px;
+            background: #f5e6d3;
+        }
+
+        .slide-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .slide-title-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .slide-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .slide-title {
+            font-size: 18px;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .slide-toggle {
+            width: 28px;
+            height: 28px;
+            border: 2px solid #333;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .slide-card.expanded .slide-toggle {
+            transform: rotate(45deg);
+        }
+
+        .slide-description {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            margin-top: 0;
+        }
+
+        .slide-card.expanded .slide-description {
+            max-height: 200px;
+            margin-top: 15px;
+        }
+
+        .slide-description p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #555;
+            margin: 0;
+        }
+
+        .slideshow-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .nav-arrow {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nav-arrow:hover {
+            background: #333;
+            color: white;
+            border-color: #333;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            height: 500px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            max-width: 500px;
+            color: #333;
+        }
+
+        .hero-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-description {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* Mobile Styles */
         @media (max-width: 1200px) {
             .product-section {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr 100px;
+                grid-template-rows: auto auto;
+                padding: 20px;
+                gap: 15px;
+            }
+
+            .main-image {
+                order: 1;
+                grid-column: 1;
+                margin-bottom: 0;
+                min-height: 400px;
             }
 
             .thumbnail-gallery {
-                flex-direction: row;
-                overflow-x: auto;
-            }
-
-            .benefit-item:not(:last-child)::after {
-                display: none;
-            }
-
-            .video-wrapper {
-                height: 400px;
-            }
-
-            .info-box.expanded {
+                order: 2;
+                grid-column: 2;
+                grid-row: 1;
                 flex-direction: column;
-            }
-
-            .video-box {
-                width: 100% !important;
-                height: 50%;
-            }
-
-            .info-box.expanded .info-box-right {
-                width: 100%;
-                height: 50%;
-                overflow-y: auto;
-            }
-
-            .main-image video {
                 max-height: 400px;
+                gap: 8px;
+            }
+
+            .thumbnail-gallery-inner {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .thumbnail-nav {
+                display: flex;
+            }
+
+            .product-info {
+                order: 3;
+                grid-column: 1 / -1;
+            }
+
+            .product-title {
+                font-size: 32px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .add-to-cart {
+                margin-top: 10px;
+            }
+
+            .benefits-section {
+                padding: 30px 20px;
             }
 
             .benefit-item {
@@ -756,13 +839,83 @@
             }
 
             .benefit-item:not(:last-child)::after {
-                display: block;
                 right: 0;
                 left: 0;
                 top: auto;
                 bottom: 0;
                 width: auto;
                 height: 1px;
+            }
+
+            .video-wrapper {
+                height: 400px;
+            }
+
+            .info-box {
+                left: 50%;
+                right: auto;
+                transform: translateX(-50%);
+                bottom: 20px;
+                max-width: calc(100% - 60px);
+                width: auto;
+                padding: 15px 20px;
+            }
+
+            .info-box.expanded {
+                flex-direction: column;
+                justify-content: flex-start;
+                padding: 0;
+                max-width: none;
+                width: 100%;
+            }
+
+            .info-box.expanded .video-box {
+                display: none;
+            }
+
+            .info-box.expanded .info-box-right {
+                width: 100%;
+                height: 50%;
+                padding: 30px;
+            }
+
+            .main-image video {
+                max-height: 400px;
+            }
+
+            .slideshow-section h2 {
+                font-size: 32px;
+                padding: 0 20px;
+            }
+
+            .slide-card {
+                min-width: calc(100% - 40px);
+                margin: 0 20px;
+            }
+
+            .slideshow-track {
+                padding: 0;
+            }
+
+            .hero-section {
+                height: auto;
+            }
+
+            .hero-image {
+                position: relative;
+                height: 400px;
+            }
+
+            .hero-content {
+                position: relative;
+                top: 0;
+                left: 0;
+                padding: 30px 20px;
+                max-width: 100%;
+            }
+
+            .hero-title {
+                font-size: 36px;
             }
         }
     </style>
@@ -772,7 +925,7 @@
         <div class="breadcrumb">
             <a href="#">Home</a>
             <span>▸</span>
-            <span>ThermBack LED</span>
+            <span>HeatBelt Pro™</span>
         </div>
 
         <div class="product-section">
@@ -780,7 +933,7 @@
                 <div class="thumbnail-nav" id="scrollUp">▲</div>
                 <div class="thumbnail-gallery-inner" id="thumbnailScroll">
                     <div class="thumbnail active" data-type="video">
-                        <video muted loop playsinline style="width: 100%; height: 100%; object-fit: cover;">
+                        <video muted loop playsinline>
                             <source src="HeatBelt Pro hinter Feuer.mp4" type="video/mp4">
                         </video>
                     </div>
@@ -813,14 +966,14 @@
                 <video id="mainVideo" autoplay muted loop playsinline>
                     <source src="HeatBelt Pro hinter Feuer.mp4" type="video/mp4">
                 </video>
-                <img id="mainImage" src="Haupt Produkt Bild (1).png" alt="ThermBack LED" style="display: none;">
+                <img id="mainImage" src="Haupt Produkt Bild (1).png" alt="HeatBelt Pro™" style="display: none;">
             </div>
 
             <div class="product-info">
                 <div class="category">HOT- & COLD-WEARABLES</div>
-                <h1 class="product-title">ThermBack LED</h1>
+                <h1 class="product-title">HeatBelt Pro™</h1>
                 <p class="product-description">
-                    ThermBack LED reduziert klinisch erwiesenermaßen Schmerzen im unteren Rückenbereich mithilfe von vier fortschrittlichen Therapien: LED, Ferninfrarot, Wärme und Vibration. Es fördert eine schnellere Heilung, verbessert die Mobilität und bietet individuell anpassbare Behandlungsoptionen für eine schnell wirkende Linderung.
+                    HeatBelt Pro™ reduziert klinisch erwiesenermaßen Schmerzen im unteren Rückenbereich mithilfe von vier fortschrittlichen Therapien: LED, Ferninfrarot, Wärme und Vibration. Es fördert eine schnellere Heilung, verbessert die Mobilität und bietet individuell anpassbare Behandlungsoptionen für eine schnell wirkende Linderung.
                 </p>
                 
                 <div class="clinical-badge">
@@ -837,9 +990,9 @@
                     <div class="option-card selected">
                         <div class="option-content">
                             <div class="option-icon">
-                                <img src="Haupt Produkt Bild (1).png" alt="ThermBack LED">
+                                <img src="Haupt Produkt Bild (1).png" alt="HeatBelt Pro™">
                             </div>
-                            <div class="option-name">ThermBack LED</div>
+                            <div class="option-name">HeatBelt Pro™</div>
                         </div>
                         <div class="option-price">€269</div>
                     </div>
@@ -881,7 +1034,7 @@
             
             <div class="video-wrapper">
                 <div class="video-background">
-                    <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover;">
+                    <video autoplay muted loop playsinline>
                         <source src="Design ohne Titel (3).mp4" type="video/mp4">
                     </video>
                 </div>
@@ -895,7 +1048,7 @@
                 <div class="info-box" id="infoBox">
                     <div class="video-box">
                         <div class="video-box-inner">
-                            <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover;">
+                            <video autoplay muted loop playsinline>
                                 <source src="Design ohne Titel (3).mp4" type="video/mp4">
                             </video>
                         </div>
@@ -912,7 +1065,7 @@
                         
                         <div class="expanded-content">
                             <h3>Klinisch nachgewiesene Schmerzlinderung im unteren Rückenbereich</h3>
-                            <p>Rückenschmerzen beeinträchtigen jedes Jahr die Lebensqualität von Millionen Menschen. Um besser zu verstehen, wie man Schmerzen im unteren Rückenbereich lindern kann, haben wir uns mit der University of Buffalo zusammengetan und eine klinische Studie durchgeführt, in der untersucht wurde, ob ThermBack LED Schmerzen im unteren Rückenbereich bei Betroffenen lindern kann. Nach zwei Wochen regelmäßiger Anwendung von ThermBack LED hatten die Teilnehmer weniger Schmerzen im unteren Rückenbereich als ohne die Anwendung.<sup>1</sup></p>
+                            <p>Rückenschmerzen beeinträchtigen jedes Jahr die Lebensqualität von Millionen Menschen. Um besser zu verstehen, wie man Schmerzen im unteren Rückenbereich lindern kann, haben wir uns mit der University of Buffalo zusammengetan und eine klinische Studie durchgeführt, in der untersucht wurde, ob HeatBelt Pro™ Schmerzen im unteren Rückenbereich bei Betroffenen lindern kann. Nach zwei Wochen regelmäßiger Anwendung von HeatBelt Pro™ hatten die Teilnehmer weniger Schmerzen im unteren Rückenbereich als ohne die Anwendung.<sup>1</sup></p>
                             
                             <p class="study-info">Klinische Studie von: Abteilung für Notfallmedizin, University at Buffalo</p>
                             
@@ -931,8 +1084,123 @@
                 <svg class="science-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M9 2v6m6-6v6M9 18c.667 2 2.333 4 6 4s5.333-2 6-4M5 10h14a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2z"/>
                 </svg>
-                <span>Erkunde die Wissenschaft hinter ThermBack LED</span>
+                <span>Erkunde die Wissenschaft hinter HeatBelt Pro™</span>
             </a>
+        </div>
+
+        <div class="slideshow-section">
+            <div class="container">
+                <h2>Die Entlastung, die sich mit dir bewegt</h2>
+                
+                <div class="slideshow-container">
+                    <div class="slideshow-track" id="slideshowTrack">
+                        <div class="slide-card" data-slide="1">
+                            <div class="slide-image">
+                                <img src="Tragefoto Infrarot fokus.jpg" alt="Nahinfrarot-LED-Lichttherapie">
+                            </div>
+                            <div class="slide-content">
+                                <div class="slide-header">
+                                    <div class="slide-title-group">
+                                        <svg class="slide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="5"/>
+                                            <line x1="12" y1="1" x2="12" y2="3"/>
+                                            <line x1="12" y1="21" x2="12" y2="23"/>
+                                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                                            <line x1="1" y1="12" x2="3" y2="12"/>
+                                            <line x1="21" y1="12" x2="23" y2="12"/>
+                                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                                        </svg>
+                                        <h3 class="slide-title">Nahinfrarot-LED-Lichttherapie</h3>
+                                    </div>
+                                    <div class="slide-toggle">+</div>
+                                </div>
+                                <div class="slide-description">
+                                    <p>Dringt tief in die Muskeln und Gelenke ein, um Entzündungen zu reduzieren und den natürlichen Heilungsprozess des Körpers zu beschleunigen.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slide-card" data-slide="2">
+                            <div class="slide-image">
+                                <img src="Hitze Bild slideshow.webp" alt="Wärmetherapie">
+                            </div>
+                            <div class="slide-content">
+                                <div class="slide-header">
+                                    <div class="slide-title-group">
+                                        <svg class="slide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M12 2v10m0 0L8 8m4 4l4-4"/>
+                                            <path d="M12 12v10"/>
+                                        </svg>
+                                        <h3 class="slide-title">Wärmetherapie</h3>
+                                    </div>
+                                    <div class="slide-toggle">+</div>
+                                </div>
+                                <div class="slide-description">
+                                    <p>Sanfte Wärme fördert die Durchblutung, lindert Schmerzen, reduziert Steifheit und unterstützt die Muskelentspannung.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slide-card" data-slide="3">
+                            <div class="slide-image">
+                                <img src="Vibrationsbild slideshow.webp" alt="Vibrationstherapie">
+                            </div>
+                            <div class="slide-content">
+                                <div class="slide-header">
+                                    <div class="slide-title-group">
+                                        <svg class="slide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                            <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                                        </svg>
+                                        <h3 class="slide-title">Vibrationstherapie</h3>
+                                    </div>
+                                    <div class="slide-toggle">+</div>
+                                </div>
+                                <div class="slide-description">
+                                    <p>Die Vibrationsmassage bei Rückenschmerzen stimuliert die Muskeln, um Schmerzen, Verspannungen und Beschwerden zu lindern.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slide-card" data-slide="4">
+                            <div class="slide-image">
+                                <img src="Ferninfrarot slideshow bild.jpg" alt="Ferninfrarot-Therapie">
+                            </div>
+                            <div class="slide-content">
+                                <div class="slide-header">
+                                    <div class="slide-title-group">
+                                        <svg class="slide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                            <path d="M2 17l10 5 10-5"/>
+                                        </svg>
+                                        <h3 class="slide-title">Ferninfrarot-Therapie</h3>
+                                    </div>
+                                    <div class="slide-toggle">+</div>
+                                </div>
+                                <div class="slide-description">
+                                    <p>Liefert tief eindringende Wärme, um die Durchblutung zu verbessern und Schmerzen zu lindern.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slideshow-nav">
+                    <div class="nav-arrow" id="prevSlide">‹</div>
+                    <div class="nav-arrow" id="nextSlide">›</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-section">
+            <img src="image0.jpeg" alt="Therabody Unterschied" class="hero-image">
+            <div class="hero-content">
+                <div class="hero-label">DER THERABODY-UNTERSCHIED</div>
+                <h2 class="hero-title">Gezielte Entlastung, die über die Oberfläche hinausgeht</h2>
+                <p class="hero-description">Viele Behandlungen gegen Schmerzen im unteren Rückenbereich lindern nur oberflächlich, aber diese wirkt tiefer. Nahinfrarot-LED-Licht dringt tief in Muskeln und Gelenke ein, um Entzündungen zu lindern und den natürlichen Heilungsprozess des Körpers zu beschleunigen – für eine effektive und lang anhaltende Linderung.</p>
+            </div>
         </div>
     </div>
 
@@ -998,6 +1266,35 @@
         
         infoBox.addEventListener('click', function() {
             this.classList.toggle('expanded');
+        });
+
+        // Slideshow functionality
+        const slideCards = document.querySelectorAll('.slide-card');
+        const slideshowTrack = document.getElementById('slideshowTrack');
+        const prevSlide = document.getElementById('prevSlide');
+        const nextSlide = document.getElementById('nextSlide');
+        let currentSlide = 0;
+
+        slideCards.forEach(card => {
+            card.addEventListener('click', function(e) {
+                if (!e.target.closest('.slide-toggle')) return;
+                this.classList.toggle('expanded');
+            });
+        });
+
+        function updateSlidePosition() {
+            const slideWidth = slideCards[0].offsetWidth + 20;
+            slideshowTrack.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+        }
+
+        prevSlide.addEventListener('click', () => {
+            currentSlide = Math.max(0, currentSlide - 1);
+            updateSlidePosition();
+        });
+
+        nextSlide.addEventListener('click', () => {
+            currentSlide = Math.min(slideCards.length - 1, currentSlide + 1);
+            updateSlidePosition();
         });
     </script>
 </body>
