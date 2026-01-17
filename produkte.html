@@ -622,6 +622,7 @@
             overflow: hidden;
             cursor: pointer;
             transition: all 0.3s ease;
+            position: relative;
         }
 
         .slide-card:hover {
@@ -643,8 +644,12 @@
         }
 
         .slide-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
             padding: 20px;
-            background: #f5e6d3;
+            background: linear-gradient(to top, #f5e6d3 0%, #f5e6d3 100%);
         }
 
         .slide-header {
@@ -683,7 +688,7 @@
             justify-content: center;
             font-size: 18px;
             flex-shrink: 0;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .slide-card.expanded .slide-toggle {
@@ -693,13 +698,19 @@
         .slide-description {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease;
+            transition: max-height 0.3s ease, margin-top 0.3s ease;
             margin-top: 0;
         }
 
         .slide-card.expanded .slide-description {
-            max-height: 200px;
+            max-height: 300px;
             margin-top: 15px;
+        }
+
+        .slide-card.expanded .slide-content {
+            background: #f5e6d3;
+            transform: translateY(-150px);
+            transition: transform 0.3s ease;
         }
 
         .slide-description p {
@@ -755,6 +766,9 @@
             left: 40px;
             max-width: 500px;
             color: #333;
+            background: rgba(245, 243, 240, 0.95);
+            padding: 30px;
+            border-radius: 12px;
         }
 
         .hero-label {
@@ -778,10 +792,61 @@
             color: #555;
         }
 
+        /* Feature Sections */
+        .feature-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 12px;
+            padding: 60px;
+        }
+
+        .feature-section.reverse {
+            direction: rtl;
+        }
+
+        .feature-section.reverse > * {
+            direction: ltr;
+        }
+
+        .feature-video,
+        .feature-image-container {
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .feature-video video,
+        .feature-image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .feature-content h2 {
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .feature-content p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* Updated hero background */
+        .hero-section.deep-dive {
+            background: #f0eadc;
+        }
+
         /* Mobile Styles */
         @media (max-width: 1200px) {
             .product-section {
-                grid-template-columns: 1fr 100px;
+                grid-template-columns: 1fr 120px;
                 grid-template-rows: auto auto;
                 padding: 20px;
                 gap: 15px;
@@ -791,7 +856,13 @@
                 order: 1;
                 grid-column: 1;
                 margin-bottom: 0;
-                min-height: 400px;
+                min-height: 0;
+            }
+
+            .main-image video,
+            .main-image img {
+                max-height: 70vh;
+                width: 100%;
             }
 
             .thumbnail-gallery {
@@ -799,7 +870,7 @@
                 grid-column: 2;
                 grid-row: 1;
                 flex-direction: column;
-                max-height: 400px;
+                max-height: 70vh;
                 gap: 8px;
             }
 
@@ -808,7 +879,13 @@
                 gap: 8px;
             }
 
+            .thumbnail {
+                width: 100px;
+                height: 100px;
+            }
+
             .thumbnail-nav {
+                width: 100px;
                 display: flex;
             }
 
@@ -826,6 +903,11 @@
 
             .add-to-cart {
                 margin-top: 10px;
+            }
+
+            .clinical-badge {
+                font-size: 11px;
+                padding: 6px 12px;
             }
 
             .benefits-section {
@@ -858,7 +940,15 @@
                 bottom: 20px;
                 max-width: calc(100% - 60px);
                 width: auto;
-                padding: 15px 20px;
+                padding: 12px 16px;
+            }
+
+            .info-title {
+                font-size: 12px;
+            }
+
+            .info-subtitle {
+                font-size: 10px;
             }
 
             .info-box.expanded {
@@ -877,24 +967,64 @@
                 width: 100%;
                 height: 50%;
                 padding: 30px;
+                overflow-y: auto;
             }
 
             .main-image video {
-                max-height: 400px;
+                max-height: 70vh;
+            }
+
+            .slideshow-section {
+                padding: 40px 0;
             }
 
             .slideshow-section h2 {
-                font-size: 32px;
+                font-size: 28px;
                 padding: 0 20px;
+                margin-bottom: 30px;
             }
 
             .slide-card {
-                min-width: calc(100% - 40px);
-                margin: 0 20px;
+                min-width: calc(85vw);
+                margin: 0 7.5vw 0 0;
+            }
+
+            .slide-card:first-child {
+                margin-left: 7.5vw;
             }
 
             .slideshow-track {
                 padding: 0;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+
+            .slideshow-track::-webkit-scrollbar {
+                display: none;
+            }
+
+            .slide-card {
+                scroll-snap-align: center;
+            }
+
+            .slideshow-nav {
+                display: none;
+            }
+
+            .feature-section {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 40px 20px;
+            }
+
+            .feature-section.reverse {
+                direction: ltr;
+            }
+
+            .feature-content h2 {
+                font-size: 28px;
             }
 
             .hero-section {
@@ -912,10 +1042,12 @@
                 left: 0;
                 padding: 30px 20px;
                 max-width: 100%;
+                background: white;
+                border-radius: 0;
             }
 
             .hero-title {
-                font-size: 36px;
+                font-size: 28px;
             }
         }
     </style>
@@ -1194,12 +1326,34 @@
             </div>
         </div>
 
-        <div class="hero-section">
+        <div class="hero-section deep-dive">
             <img src="image0.jpeg" alt="Therabody Unterschied" class="hero-image">
             <div class="hero-content">
                 <div class="hero-label">DER THERABODY-UNTERSCHIED</div>
                 <h2 class="hero-title">Gezielte Entlastung, die über die Oberfläche hinausgeht</h2>
                 <p class="hero-description">Viele Behandlungen gegen Schmerzen im unteren Rückenbereich lindern nur oberflächlich, aber diese wirkt tiefer. Nahinfrarot-LED-Licht dringt tief in Muskeln und Gelenke ein, um Entzündungen zu lindern und den natürlichen Heilungsprozess des Körpers zu beschleunigen – für eine effektive und lang anhaltende Linderung.</p>
+            </div>
+        </div>
+
+        <div class="feature-section">
+            <div class="feature-video">
+                <video autoplay muted loop playsinline>
+                    <source src="Video HeatBelt Pro mann legt sich hin.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="feature-content">
+                <h2>Verbessertes Design für alle Formen und Größen</h2>
+                <p>Das schlanke, bequeme Design bleibt bei alltäglichen Bewegungen sicher an seinem Platz und passt sich dank verstellbarer Klettverschlüsse und eines zusätzlichen elastischen Kompressionsriemens für eine individuellere Passform allen Körperformen an.</p>
+            </div>
+        </div>
+
+        <div class="feature-section reverse">
+            <div class="feature-image-container">
+                <img src="Tragefoto Bedinunf Fernbedinung fokus.jpg" alt="Kontinuierliche Behandlung">
+            </div>
+            <div class="feature-content">
+                <h2>Kontinuierliche Behandlung, während das Gerät an die Stromversorgung angeschlossen ist</h2>
+                <p>HeatBelt Pro™ bietet eine lange Akkulaufzeit von bis zu 180 Minuten mit einer einzigen Ladung. Die automatische Abschaltfunktion wird nach 20 Minuten aktiviert, wenn der Akku verwendet wird, um sicherzustellen, dass du eine wissenschaftlich fundierte Behandlungsdosis erhalten hast. Außerdem kannst du, wenn das Gerät angeschlossen ist, eine kontinuierliche Behandlung ohne Unterbrechung genießen.</p>
             </div>
         </div>
     </div>
@@ -1234,11 +1388,11 @@
         
         // Scroll buttons
         scrollUpBtn.addEventListener('click', () => {
-            thumbnailScroll.scrollBy({ top: -90, behavior: 'smooth' });
+            thumbnailScroll.scrollBy({ top: -110, behavior: 'smooth' });
         });
         
         scrollDownBtn.addEventListener('click', () => {
-            thumbnailScroll.scrollBy({ top: 90, behavior: 'smooth' });
+            thumbnailScroll.scrollBy({ top: 110, behavior: 'smooth' });
         });
         
         // Auto-play thumbnail video
@@ -1276,9 +1430,11 @@
         let currentSlide = 0;
 
         slideCards.forEach(card => {
-            card.addEventListener('click', function(e) {
-                if (!e.target.closest('.slide-toggle')) return;
-                this.classList.toggle('expanded');
+            const toggle = card.querySelector('.slide-toggle');
+            toggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                card.classList.toggle('expanded');
+                this.textContent = card.classList.contains('expanded') ? '−' : '+';
             });
         });
 
@@ -1287,15 +1443,45 @@
             slideshowTrack.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
         }
 
-        prevSlide.addEventListener('click', () => {
-            currentSlide = Math.max(0, currentSlide - 1);
-            updateSlidePosition();
+        if (prevSlide) {
+            prevSlide.addEventListener('click', () => {
+                currentSlide = Math.max(0, currentSlide - 1);
+                updateSlidePosition();
+            });
+        }
+
+        if (nextSlide) {
+            nextSlide.addEventListener('click', () => {
+                currentSlide = Math.min(slideCards.length - 1, currentSlide + 1);
+                updateSlidePosition();
+            });
+        }
+
+        // Mobile swipe for slideshow
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        slideshowTrack.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
         });
 
-        nextSlide.addEventListener('click', () => {
-            currentSlide = Math.min(slideCards.length - 1, currentSlide + 1);
-            updateSlidePosition();
+        slideshowTrack.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
         });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                // Swipe left
+                currentSlide = Math.min(slideCards.length - 1, currentSlide + 1);
+                updateSlidePosition();
+            }
+            if (touchEndX > touchStartX + 50) {
+                // Swipe right
+                currentSlide = Math.max(0, currentSlide - 1);
+                updateSlidePosition();
+            }
+        }
     </script>
 </body>
 </html>
