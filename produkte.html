@@ -1358,23 +1358,24 @@
     padding: 0 6px;
   }
 
-  .hb-specs-imagebox{
-    background: rgba(255,255,255,0.55);   /* ✅ heller Kasten wie im Bild */
-    border-radius: 14px;
-    padding: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 260px;
-  }
+ .hb-specs-imagebox{
+  background: rgba(255,255,255,0.55);
+  border-radius: 14px;
+  padding: 0;                 /* ✅ kein Innenabstand mehr */
+  overflow: hidden;           /* ✅ Bild wird sauber auf Kasten-Corners gecroppt */
+  width: 100%;
+  height: 320px;              /* ✅ KASTEN-HÖHE (hier stellst du die Maße ein) */
+  display: block;
+}
 
-  .hb-specs-imagebox img{
-    width: 100%;
-    height: auto;
-    max-width: 360px;
-    object-fit: contain;
-    display: block;
-  }
+.hb-specs-imagebox img{
+  width: 100%;
+  height: 100%;               /* ✅ füllt den Kasten komplett */
+  object-fit: cover;          /* ✅ wie im Screenshot: Bild wird gecroppt */
+  display: block;
+  border-radius: 0;           /* ✅ Radius kommt vom Kasten */
+}
+
 
   .hb-specs-panel{
     display: none;
@@ -1420,7 +1421,7 @@
       grid-template-columns: 1fr;
       gap: 16px;
     }
-    .hb-specs-imagebox{ min-height: 220px; }
+    .hb-specs-imagebox{ min-height: 240px; }
     .hb-specs-imagebox img{ max-width: 320px; }
   }
 </style>
