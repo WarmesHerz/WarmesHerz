@@ -1316,225 +1316,189 @@
     </div>
   
 
-<!-- ================= LIEFERUMFANG / PRODUKTINFO (TABS) ================= -->
+<!-- ================= LIEFERUMFANG / PRODUKTINFO (THERABODY-STYLE) ================= -->
 <style>
-  :root{
-    /* ✅ Section-Farbe hier einstellen */
-    --liefer-bg: #f7f3e9;    /* <- wenn du eine andere Farbe meintest: hier ändern */
-    --card-bg: #ffffff;
-    --text: #1d1d1d;
-    --muted: #6b6b6b;
-    --line: rgba(0,0,0,0.10);
-    --pill: rgba(0,0,0,0.06);
-  }
-
-  .heat-tabs-wrap{
+  .hb-specs-wrap{
     margin: 40px 0;
-    background: var(--liefer-bg);
-    border-radius: 16px;
-    padding: 18px;
+    background: #fcd7b3;            /* ✅ großer farbiger Block */
+    border-radius: 14px;
+    padding: 18px 18px 22px;
   }
 
-  .heat-tabs-grid{
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 22px;
-    align-items: stretch;
-  }
-
-  /* LEFT: image */
-  .heat-tabs-media{
-    background: var(--card-bg);
-    border-radius: 16px;
-    overflow:hidden;
-    border: 1px solid var(--line);
-  }
-  .heat-tabs-media img{
-    width:100%;
-    height:100%;
-    display:block;
-    object-fit:cover;
-  }
-
-  /* RIGHT: content */
-  .heat-tabs-card{
-    background: var(--card-bg);
-    border-radius: 16px;
-    border: 1px solid var(--line);
-    padding: 18px;
-    display:flex;
-    flex-direction:column;
-    min-height: 100%;
-  }
-
-  .heat-tabs-top{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap: 14px;
-    margin-bottom: 14px;
-  }
-
-  .heat-tabs-title{
+  .hb-specs-tabs{
+    display: flex;
+    gap: 26px;
+    align-items: center;
+    padding: 0 6px 14px;
     font-size: 18px;
-    font-weight: 500;
-    color: var(--text);
-    margin: 0;
-    line-height:1.2;
   }
 
-  /* Tabs */
-  .heat-tabbar{
-    display:flex;
-    gap:10px;
-    background: var(--pill);
-    padding: 6px;
-    border-radius: 999px;
-    flex-wrap:wrap;
-  }
-  .heat-tab{
+  .hb-specs-tab{
+    appearance: none;
     border: 0;
     background: transparent;
-    padding: 10px 14px;
-    border-radius: 999px;
+    padding: 0;
+    font: inherit;
+    color: rgba(0,0,0,0.45);
+    cursor: pointer;
+  }
+
+  .hb-specs-tab.is-active{
+    color: rgba(0,0,0,0.82);
+    text-decoration: underline;
+    text-underline-offset: 10px;
+    text-decoration-thickness: 2px;
+  }
+
+  .hb-specs-grid{
+    display: grid;
+    grid-template-columns: 420px 1fr;  /* ✅ links Bild, rechts Text */
+    gap: 26px;
+    align-items: start;
+    padding: 0 6px;
+  }
+
+  .hb-specs-imagebox{
+    background: rgba(255,255,255,0.55);   /* ✅ heller Kasten wie im Bild */
+    border-radius: 14px;
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 260px;
+  }
+
+  .hb-specs-imagebox img{
+    width: 100%;
+    height: auto;
+    max-width: 360px;
+    object-fit: contain;
+    display: block;
+  }
+
+  .hb-specs-panel{
+    display: none;
+    color: #111;
+    padding-top: 6px;
+  }
+  .hb-specs-panel.is-active{ display:block; }
+
+  /* Right content typography */
+  .hb-specs-list{
+    margin: 0;
+    padding-left: 18px;      /* bullet indent */
     font-size: 13px;
-    color: var(--muted);
-    cursor:pointer;
-    transition: all .2s ease;
-    white-space:nowrap;
+    line-height: 1.9;
+    color: rgba(0,0,0,0.80);
   }
-  .heat-tab[aria-selected="true"]{
-    background:#fff;
-    color: var(--text);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  .hb-specs-list li{ margin: 0 0 2px; }
+
+  .hb-specs-blocktitle{
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.55);
+    margin: 0 0 10px;
   }
 
-  /* Panels */
-  .heat-panel{
-    display:none;
-    margin-top: 10px;
+  .hb-specs-specs{
+    font-size: 13px;
+    line-height: 1.7;
+    color: rgba(0,0,0,0.80);
   }
-  .heat-panel.is-active{ display:block; }
-
-  .heat-points{
-    display:grid;
-    gap: 12px;
-    margin-top: 8px;
+  .hb-specs-specs .label{
+    display:block;
+    margin: 14px 0 4px;
+    font-weight: 500;
+    color: rgba(0,0,0,0.82);
   }
-  .heat-point{
-    display:flex;
-    align-items:flex-start;
-    gap: 12px;
-    font-size: 15px;
-    color: var(--text);
-    line-height: 1.35;
-  }
-  .heat-check{
-    width: 24px;
-    height: 24px;
-    background: #f5e6d3;
-    border-radius: 8px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-shrink:0;
-    font-weight:700;
-  }
-
-  .heat-info{
-    color: var(--text);
-    font-size: 15px;
-    line-height: 1.6;
-  }
-  .heat-info p{ margin: 0 0 10px 0; color: var(--text); }
-  .heat-info ul{
-    margin: 10px 0 0 18px;
-    color: var(--text);
-  }
-  .heat-info li{ margin: 6px 0; }
 
   /* Mobile */
   @media (max-width: 1200px){
-    .heat-tabs-wrap{ padding: 14px; }
-    .heat-tabs-grid{ grid-template-columns: 1fr; }
-    .heat-tabs-media{ min-height: 240px; }
-    .heat-tabs-card{ padding: 16px; }
-    .heat-tabs-title{ font-size: 16px; }
-    .heat-tab{ font-size: 12px; padding: 9px 12px; }
-    .heat-point{ font-size: 14px; }
-    .heat-info{ font-size: 14px; }
+    .hb-specs-tabs{ font-size: 16px; gap: 18px; }
+    .hb-specs-grid{
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .hb-specs-imagebox{ min-height: 220px; }
+    .hb-specs-imagebox img{ max-width: 320px; }
   }
 </style>
 
-<section class="heat-tabs-wrap" aria-label="Lieferumfang und Produktinformation">
-  <div class="heat-tabs-grid">
+<section class="hb-specs-wrap" aria-label="Lieferumfang und Produktinformation">
+  <!-- Tabs -->
+  <div class="hb-specs-tabs" role="tablist" aria-label="Lieferumfang Tabs">
+    <button class="hb-specs-tab is-active" type="button" role="tab" aria-selected="true" data-hbtab="included">
+      Im Lieferumfang enthalten
+    </button>
+    <button class="hb-specs-tab" type="button" role="tab" aria-selected="false" data-hbtab="info">
+      Produktinformation
+    </button>
+  </div>
 
-    <!-- Bild -->
-    <div class="heat-tabs-media">
-      <img src="Lieferumfang.jpg" alt="HeatBelt Pro Lieferumfang">
+  <div class="hb-specs-grid">
+    <!-- LEFT: Image stays always -->
+    <div class="hb-specs-imagebox">
+      <img src="Lieferumfang.jpg" alt="Lieferumfang HeatBelt Pro">
     </div>
 
-    <!-- Inhalt -->
-    <div class="heat-tabs-card">
-      <div class="heat-tabs-top">
-        <h3 class="heat-tabs-title">HeatBelt Pro™</h3>
-
-        <div class="heat-tabbar" role="tablist" aria-label="Auswahl">
-          <button class="heat-tab" type="button" role="tab"
-                  aria-selected="true" data-tab="included">
-            Im Lieferumfang enthalten
-          </button>
-          <button class="heat-tab" type="button" role="tab"
-                  aria-selected="false" data-tab="info">
-            Produktinformation
-          </button>
-        </div>
+    <!-- RIGHT: Panels -->
+    <div>
+      <!-- Lieferumfang -->
+      <div class="hb-specs-panel is-active" role="tabpanel" data-hbpanel="included">
+        <ul class="hb-specs-list">
+          <li>HeatBelt Pro™ Hauptgerät</li>
+          <li>Verlängerungs-Streifen</li>
+          <li>USB-C Ladekabel</li>
+        </ul>
       </div>
 
-      <!-- Panel: Included -->
-      <div class="heat-panel is-active" role="tabpanel" data-panel="included">
-        <div class="heat-points">
-          <div class="heat-point"><div class="heat-check">✓</div><span>HeatBelt Pro™ Hauptgerät</span></div>
-          <div class="heat-point"><div class="heat-check">✓</div><span>Verlängerungs-Streifen für größere Passform</span></div>
-          <div class="heat-point"><div class="heat-check">✓</div><span>USB-C Ladekabel</span></div>
-          <div class="heat-point"><div class="heat-check">✓</div><span>Akkulaufzeit bis zu 120 Minuten</span></div>
-          <div class="heat-point"><div class="heat-check">✓</div><span>Bedienungsanleitung (DE)</span></div>
-        </div>
-      </div>
+      <!-- Produktinformation -->
+      <div class="hb-specs-panel" role="tabpanel" data-hbpanel="info">
+        <div class="hb-specs-blocktitle">PRODUKTSPEZIFIKATIONEN</div>
 
-      <!-- Panel: Info -->
-      <div class="heat-panel" role="tabpanel" data-panel="info">
-        <div class="heat-info">
-          <p><strong>Produktinformation</strong></p>
-          <p>HeatBelt Pro™ unterstützt die Entspannung im unteren Rückenbereich durch wohltuende Wärme und eine alltagstaugliche Anwendung — flexibel, unkompliziert und angenehm zu tragen.</p>
-          <ul>
-            <li>Vier Therapie-Modi: Nahinfrarot-Licht, Ferninfrarot, Wärme, Vibration</li>
-            <li>Verstellbare Passform mit zusätzlichem Verlängerungs-Streifen</li>
-            <li>Bedienung über integrierte Steuerung / Fernbedienung (je nach Setup)</li>
-          </ul>
+        <div class="hb-specs-specs">
+          <span class="label">3 Wärmestufen mit Infrarot:</span>
+          Niedrig, Mittel und Hoch (102 °F, 107 °F und 113 °F)
+
+          <span class="label">3 Vibrationsmuster:</span>
+          Tief, Hoch und Welle
+
+          <span class="label">LED:</span>
+          ein / aus
+
+          <span class="label">Akkulaufzeit:</span>
+          180 Minuten
+
+          <span class="label">Größe:</span>
+          Einheitsgröße
+
+          <span class="label">Material:</span>
+          Hergestellt aus hochwertigen, leicht zu reinigenden Materialien
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
 <script>
   (function(){
-    const wrap = document.querySelector('.heat-tabs-wrap');
-    if(!wrap) return;
+    const root = document.querySelector('.hb-specs-wrap');
+    if(!root) return;
 
-    const tabs = wrap.querySelectorAll('.heat-tab');
-    const panels = wrap.querySelectorAll('.heat-panel');
+    const tabs = root.querySelectorAll('[data-hbtab]');
+    const panels = root.querySelectorAll('[data-hbpanel]');
 
-    function activate(tabName){
-      tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.tab === tabName)));
-      panels.forEach(p => p.classList.toggle('is-active', p.dataset.panel === tabName));
+    function setActive(name){
+      tabs.forEach(t => {
+        const on = t.dataset.hbtab === name;
+        t.classList.toggle('is-active', on);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      panels.forEach(p => p.classList.toggle('is-active', p.dataset.hbpanel === name));
     }
 
-    tabs.forEach(t => {
-      t.addEventListener('click', () => activate(t.dataset.tab));
-    });
+    tabs.forEach(t => t.addEventListener('click', () => setActive(t.dataset.hbtab)));
   })();
 </script>
 <!-- ================= ENDE LIEFERUMFANG / PRODUKTINFO ================= -->
