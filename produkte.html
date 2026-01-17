@@ -1316,165 +1316,194 @@
     </div>
   
 
-<!-- ================= LIEFERUMFANG / PRODUKTINFO (THERABODY-STYLE) ================= -->
+<!-- ================= LIEFERUMFANG / PRODUKTINFO (THERABODY STYLE) ================= -->
 <style>
-  .hb-specs-wrap{
-    margin: 40px 0;
-    background: #fcd7b3;            /* ✅ großer farbiger Block */
-    border-radius: 14px;
-    padding: 18px 18px 22px;
+  .hb-tabsblock{
+    margin: 34px 0 10px;
+    background:#fcd7b3;
+    border-radius:16px;
+    padding:18px 18px 22px;
   }
 
-  .hb-specs-tabs{
-    display: flex;
-    gap: 26px;
-    align-items: center;
-    padding: 0 6px 14px;
-    font-size: 18px;
-  }
+  /* Tabs */
+  .hb-tabs{
+    display:flex;
+    gap:34px;
+    align-items:flex-end;
+    margin-bottom:16px;
 
-  .hb-specs-tab{
-    appearance: none;
-    border: 0;
-    background: transparent;
-    padding: 0;
+    /* ✅ mobile: einzeilig */
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .hb-tabs::-webkit-scrollbar{ display:none; }
+
+  .hb-tab{
+    appearance:none;
+    border:0;
+    background:transparent;
     font: inherit;
-    color: rgba(0,0,0,0.45);
-    cursor: pointer;
+    font-size:20px;
+    font-weight:500;
+    color:rgba(0,0,0,0.45);
+    padding:0 0 8px;
+    cursor:pointer;
+    white-space:nowrap; /* ✅ niemals umbrechen */
   }
-
-  .hb-specs-tab.is-active{
-    color: rgba(0,0,0,0.82);
+  .hb-tab.active{
+    color:#111;
     text-decoration: underline;
     text-underline-offset: 10px;
     text-decoration-thickness: 2px;
   }
 
-  .hb-specs-grid{
-    display: grid;
-    grid-template-columns: 420px 1fr;  /* ✅ links Bild, rechts Text */
-    gap: 26px;
-    align-items: start;
-    padding: 0 6px;
+  /* Layout */
+  .hb-tabpanel{
+    min-height:360px;             /* ✅ Boxhöhe bleibt gleich */
+    display:grid;
+    grid-template-columns: 560px 1fr;
+    gap:28px;
+    align-items:start;
   }
 
- .hb-specs-imagebox{
-  background: rgba(255,255,255,0.55);
-  border-radius: 14px;
-  padding: 0;                 /* ✅ kein Innenabstand mehr */
-  overflow: hidden;           /* ✅ Bild wird sauber auf Kasten-Corners gecroppt */
-  width: 100%;
-  height: 320px;              /* ✅ KASTEN-HÖHE (hier stellst du die Maße ein) */
-  display: block;
-}
-
-.hb-specs-imagebox img{
-  width: 100%;
-  height: 100%;               /* ✅ füllt den Kasten komplett */
-  object-fit: cover;          /* ✅ wie im Screenshot: Bild wird gecroppt */
-  display: block;
-  border-radius: 0;           /* ✅ Radius kommt vom Kasten */
-}
-
-
-  .hb-specs-panel{
-    display: none;
-    color: #111;
-    padding-top: 6px;
+  /* Linke Bildbox (nur bei Lieferumfang sichtbar) */
+  .hb-leftbox{
+    background: rgba(255,255,255,0.55);
+    border-radius:14px;
+    padding:18px;
+    height: 300px;               /* ✅ gleiche Maße/Form wie „Kasten drum“ */
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
   }
-  .hb-specs-panel.is-active{ display:block; }
+  .hb-leftbox img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    display:block;
+  }
 
-  /* Right content typography */
-  .hb-specs-list{
+  /* Rechte Inhalte */
+  .hb-right{
+    padding-top:6px;
+    font-size:14px;
+    line-height:1.55;
+    color:#111;
+  }
+  .hb-bullets{
     margin: 0;
-    padding-left: 18px;      /* bullet indent */
-    font-size: 13px;
-    line-height: 1.9;
-    color: rgba(0,0,0,0.80);
+    padding-left: 18px;
   }
-  .hb-specs-list li{ margin: 0 0 2px; }
+  .hb-bullets li{ margin: 0 0 10px; }
 
-  .hb-specs-blocktitle{
-    font-size: 11px;
-    letter-spacing: 1px;
+  .hb-specs-title{
+    font-size:10px;
+    letter-spacing: .08em;
     text-transform: uppercase;
     color: rgba(0,0,0,0.55);
-    margin: 0 0 10px;
+    margin-bottom: 12px;
+  }
+  .hb-specs{
+    display:grid;
+    gap:16px;
+    max-width: 520px;
+  }
+  .hb-specs b{
+    display:block;
+    font-weight:600;
+    margin-bottom:2px;
   }
 
-  .hb-specs-specs{
-    font-size: 13px;
-    line-height: 1.7;
-    color: rgba(0,0,0,0.80);
+  /* Produktinfo: Bild ausblenden, Text nutzt die volle Breite, Box bleibt gleich hoch */
+  .hb-tabpanel.productinfo{
+    grid-template-columns: 1fr;
   }
-  .hb-specs-specs .label{
-    display:block;
-    margin: 14px 0 4px;
-    font-weight: 500;
-    color: rgba(0,0,0,0.82);
-  }
+  .hb-tabpanel.productinfo .hb-leftcol{ display:none; }
 
   /* Mobile */
   @media (max-width: 1200px){
-    .hb-specs-tabs{ font-size: 16px; gap: 18px; }
-    .hb-specs-grid{
+    .hb-tabsblock{ padding:16px 14px 18px; }
+    .hb-tab{ font-size:18px; }
+
+    .hb-tabpanel{
+      min-height: 360px;         /* ✅ bleibt gleich */
       grid-template-columns: 1fr;
-      gap: 16px;
+      gap:16px;
     }
-    .hb-specs-imagebox{ min-height: 240px; }
-    .hb-specs-imagebox img{ max-width: 320px; }
+
+    .hb-leftbox{
+      height: 240px;             /* ✅ proportional, aber gleiche Form */
+      padding:14px;
+    }
+
+    .hb-right{ padding-top: 2px; }
+    .hb-specs{ max-width: none; }
   }
 </style>
 
-<section class="hb-specs-wrap" aria-label="Lieferumfang und Produktinformation">
-  <!-- Tabs -->
-  <div class="hb-specs-tabs" role="tablist" aria-label="Lieferumfang Tabs">
-    <button class="hb-specs-tab is-active" type="button" role="tab" aria-selected="true" data-hbtab="included">
+<section class="hb-tabsblock" id="hbTabsBlock">
+  <div class="hb-tabs" role="tablist" aria-label="Lieferumfang und Produktinformation">
+    <button class="hb-tab active" role="tab" aria-selected="true" data-tab="lieferumfang">
       Im Lieferumfang enthalten
     </button>
-    <button class="hb-specs-tab" type="button" role="tab" aria-selected="false" data-hbtab="info">
+    <button class="hb-tab" role="tab" aria-selected="false" data-tab="produktinfo">
       Produktinformation
     </button>
   </div>
 
-  <div class="hb-specs-grid">
-    <!-- LEFT: Image stays always -->
-    <div class="hb-specs-imagebox">
-      <img src="Lieferumfang.jpg" alt="Lieferumfang HeatBelt Pro">
+  <!-- PANEL: Lieferumfang -->
+  <div class="hb-tabpanel lieferumfang" data-panel="lieferumfang">
+    <div class="hb-leftcol">
+      <div class="hb-leftbox">
+        <img src="Lieferumfang.jpg" alt="Lieferumfang HeatBelt Pro">
+      </div>
     </div>
 
-    <!-- RIGHT: Panels -->
-    <div>
-      <!-- Lieferumfang -->
-      <div class="hb-specs-panel is-active" role="tabpanel" data-hbpanel="included">
-        <ul class="hb-specs-list">
-          <li>HeatBelt Pro™ Hauptgerät</li>
-          <li>Verlängerungs-Streifen</li>
-          <li>USB-C Ladekabel</li>
-        </ul>
-      </div>
+    <div class="hb-right">
+      <ul class="hb-bullets">
+        <li>HeatBelt Pro™ Hauptgerät</li>
+        <li>Verlängerungs-Streifen für größere Passform</li>
+        <li>USB-C Ladekabel</li>
+      </ul>
+    </div>
+  </div>
 
-      <!-- Produktinformation -->
-      <div class="hb-specs-panel" role="tabpanel" data-hbpanel="info">
-        <div class="hb-specs-blocktitle">PRODUKTSPEZIFIKATIONEN</div>
+  <!-- PANEL: Produktinformation -->
+  <div class="hb-tabpanel productinfo" data-panel="produktinfo" style="display:none;">
+    <div class="hb-right">
+      <div class="hb-specs-title">PRODUKTSPEZIFIKATIONEN</div>
 
-        <div class="hb-specs-specs">
-          <span class="label">3 Wärmestufen mit Infrarot:</span>
+      <div class="hb-specs">
+        <div>
+          <b>3 Wärmestufen mit Infrarot:</b>
           Niedrig, Mittel und Hoch (102 °F, 107 °F und 113 °F)
+        </div>
 
-          <span class="label">3 Vibrationsmuster:</span>
+        <div>
+          <b>3 Vibrationsmuster:</b>
           Tief, Hoch und Welle
+        </div>
 
-          <span class="label">LED:</span>
+        <div>
+          <b>LED:</b>
           ein / aus
+        </div>
 
-          <span class="label">Akkulaufzeit:</span>
+        <div>
+          <b>Akkulaufzeit:</b>
           180 Minuten
+        </div>
 
-          <span class="label">Größe:</span>
+        <div>
+          <b>Größe:</b>
           Einheitsgröße
+        </div>
 
-          <span class="label">Material:</span>
+        <div>
+          <b>Material:</b>
           Hergestellt aus hochwertigen, leicht zu reinigenden Materialien
         </div>
       </div>
@@ -1484,25 +1513,32 @@
 
 <script>
   (function(){
-    const root = document.querySelector('.hb-specs-wrap');
-    if(!root) return;
+    const block = document.getElementById('hbTabsBlock');
+    if(!block) return;
 
-    const tabs = root.querySelectorAll('[data-hbtab]');
-    const panels = root.querySelectorAll('[data-hbpanel]');
+    const tabs = block.querySelectorAll('.hb-tab');
+    const panels = block.querySelectorAll('.hb-tabpanel');
 
-    function setActive(name){
-      tabs.forEach(t => {
-        const on = t.dataset.hbtab === name;
-        t.classList.toggle('is-active', on);
-        t.setAttribute('aria-selected', on ? 'true' : 'false');
+    function show(tabName){
+      panels.forEach(p => {
+        const isActive = p.getAttribute('data-panel') === tabName;
+        p.style.display = isActive ? '' : 'none';
       });
-      panels.forEach(p => p.classList.toggle('is-active', p.dataset.hbpanel === name));
+
+      tabs.forEach(t => {
+        const isActive = t.getAttribute('data-tab') === tabName;
+        t.classList.toggle('active', isActive);
+        t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
     }
 
-    tabs.forEach(t => t.addEventListener('click', () => setActive(t.dataset.hbtab)));
+    tabs.forEach(t => {
+      t.addEventListener('click', () => show(t.getAttribute('data-tab')));
+    });
   })();
 </script>
 <!-- ================= ENDE LIEFERUMFANG / PRODUKTINFO ================= -->
+
 
 
 </div>
