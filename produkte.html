@@ -1314,8 +1314,122 @@
         </p>
       </div>
     </div>
-  </div>
+  
 
+<!-- ================= LIEFERUMFANG SECTION ================= -->
+<style>
+.heat-liefer-section {
+  margin: 40px 0;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.heat-liefer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: center;
+  padding: 30px;
+}
+
+.heat-liefer-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  object-fit: cover;
+}
+
+.heat-liefer-content h2 {
+  font-size: 32px;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.heat-points {
+  display: grid;
+  gap: 14px;
+}
+
+.heat-point {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+}
+
+.heat-check {
+  width: 24px;
+  height: 24px;
+  background: #f5e6d3;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* MOBILE */
+@media (max-width: 1200px) {
+  .heat-liefer-grid {
+    grid-template-columns: 1fr;
+    padding: 18px;
+  }
+
+  .heat-liefer-content h2 {
+    font-size: 26px;
+  }
+}
+</style>
+
+<section class="heat-liefer-section">
+  <div class="heat-liefer-grid">
+
+    <!-- BILD -->
+    <div class="heat-liefer-image">
+      <img src="Lieferumfang.jpg" alt="HeatBelt Pro Lieferumfang">
+    </div>
+
+    <!-- TEXT -->
+    <div class="heat-liefer-content">
+      <h2>Lieferumfang</h2>
+
+      <div class="heat-points">
+
+        <div class="heat-point">
+          <div class="heat-check">✓</div>
+          <span>HeatBelt Pro™ Hauptgerät</span>
+        </div>
+
+        <div class="heat-point">
+          <div class="heat-check">✓</div>
+          <span>Verlängerungs-Streifen für größere Passform</span>
+        </div>
+
+        <div class="heat-point">
+          <div class="heat-check">✓</div>
+          <span>USB-C Ladekabel</span>
+        </div>
+
+        <div class="heat-point">
+          <div class="heat-check">✓</div>
+          <span>Akkulaufzeit bis zu 120 Minuten</span>
+        </div>
+
+        <div class="heat-point">
+          <div class="heat-check">✓</div>
+          <span>Bedienungsanleitung (DE)</span>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- =============== ENDE LIEFERUMFANG SECTION =============== -->
+
+
+</div>
   <script>
     // Thumbnail navigation
     const thumbnails = document.querySelectorAll('.thumbnail');
