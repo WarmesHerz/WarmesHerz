@@ -9,841 +9,749 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root{
-      --bg: #f5f3f0;
-      --card: #ffffff;
-      --text: #333;
-      --muted: #666;
-      --line: #e0e0e0;
-      --peach: #f5e6d3;
-      --radius: 12px;
-      --radius-lg: 18px;
+      --bg:#f5f3f0;
+      --card:#fff;
+      --text:#333;
+      --muted:#666;
+      --line:#e0e0e0;
+      --peach:#f5e6d3;
+      --radius:12px;
+      --radius-lg:18px;
     }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
+      background:var(--bg);
+      color:var(--text);
     }
 
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 20px;
-    }
+    .container{ max-width:1400px; margin:0 auto; padding:20px; }
 
-    .breadcrumb {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 14px;
-      color: var(--muted);
-      margin-bottom: 18px;
+    .breadcrumb{
+      display:flex; align-items:center; gap:8px;
+      font-size:14px; color:var(--muted);
+      margin-bottom:18px;
     }
-    .breadcrumb a { color: var(--muted); text-decoration: none; }
-    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb a{ color:var(--muted); text-decoration:none; }
+    .breadcrumb a:hover{ text-decoration:underline; }
 
     /* ---------------- PRODUCT SECTION ---------------- */
-    .product-section {
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 34px;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 84px 500px; /* MAIN | THUMBS | INFO */
-      grid-template-areas: "main thumbs info";
-      gap: 26px;
-      margin-bottom: 30px;
-      align-items: start;
+    .product-section{
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:34px;
+      display:grid;
+      grid-template-columns:84px minmax(0,1fr) 500px; /* THUMBS (LEFT) | MAIN | INFO */
+      grid-template-areas:"thumbs main info";
+      gap:26px;
+      margin-bottom:30px;
+      align-items:start;
     }
 
-    .main-image { grid-area: main; }
-    .thumbnail-gallery { grid-area: thumbs; }
-    .product-info { grid-area: info; }
+    .thumbnail-gallery{ grid-area:thumbs; }
+    .main-image{ grid-area:main; }
+    .product-info{ grid-area:info; }
 
-    .thumbnail-gallery {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      max-height: 640px;
-      overflow: hidden;
-      position: relative;
-      align-items: stretch;
+    .thumbnail-gallery{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      max-height:640px;
+      overflow:hidden;
+      align-items:stretch;
+      position:relative;
     }
 
-    .thumbnail-gallery-inner {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      overflow-y: auto;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
+    .thumbnail-gallery-inner{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      overflow-y:auto;
+      scrollbar-width:none;
+      -ms-overflow-style:none;
     }
-    .thumbnail-gallery-inner::-webkit-scrollbar { display: none; }
+    .thumbnail-gallery-inner::-webkit-scrollbar{ display:none; }
 
-    .thumbnail-nav {
-      width: 100%;
-      height: 36px;
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.2s;
-      flex-shrink: 0;
-      z-index: 2;
-      user-select: none;
+    .thumbnail-nav{
+      width:100%;
+      height:36px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      transition:all .2s;
+      flex-shrink:0;
+      user-select:none;
+      z-index:2;
     }
-    .thumbnail-nav:hover { border-color: #999; background: #f5f5f5; }
+    .thumbnail-nav:hover{ border-color:#999; background:#f5f5f5; }
 
-    .thumbnail {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      background: #fff;
-      border: 2px solid var(--line);
-      border-radius: 12px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: all 0.2s;
-      flex-shrink: 0;
+    .thumbnail{
+      width:100%;
+      aspect-ratio:1/1;
+      background:#fff;
+      border:2px solid var(--line);
+      border-radius:12px;
+      overflow:hidden;
+      cursor:pointer;
+      transition:all .2s;
+      flex-shrink:0;
     }
-    .thumbnail:hover, .thumbnail.active { border-color: #333; }
+    .thumbnail:hover,.thumbnail.active{ border-color:#333; }
 
-    .thumbnail img,
-    .thumbnail video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .main-image {
-      background: transparent;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-      max-height: 640px;
+    .thumbnail img,.thumbnail video{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
     }
 
-    /* always square in mobile + consistent on desktop */
-    .main-image video,
-    .main-image img {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      height: auto;
-      border-radius: var(--radius-lg);
-      object-fit: cover;
-      display: block;
-      max-height: 640px;
+    .main-image{
+      background:transparent;
+      border-radius:var(--radius-lg);
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      max-height:640px;
+    }
+    .main-image video,.main-image img{
+      width:100%;
+      aspect-ratio:1/1;
+      height:auto;
+      border-radius:var(--radius-lg);
+      object-fit:cover;
+      display:block;
+      max-height:640px;
     }
 
-    .product-info { padding: 6px 0; }
+    .product-info{ padding:6px 0; }
 
-    .category {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--muted);
-      margin-bottom: 8px;
+    .category{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      color:var(--muted);
+      margin-bottom:8px;
     }
 
-    .product-title {
-      font-size: 44px;
-      font-weight: 300;
-      margin-bottom: 14px;
-      line-height: 1.15;
+    .product-title{
+      font-size:44px;
+      font-weight:300;
+      margin-bottom:14px;
+      line-height:1.15;
     }
 
-    .product-description {
-      font-size: 15px;
-      line-height: 1.6;
-      color: #555;
-      margin-bottom: 14px;
+    .product-description{
+      font-size:15px;
+      line-height:1.6;
+      color:#555;
+      margin-bottom:14px;
     }
 
-    .clinical-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: #fff;
-      border: 1px solid #333;
-      border-radius: 8px;
-      padding: 8px 14px;
-      font-size: 13px;
-      margin: 14px 0 14px;
+    .clinical-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      background:#fff;
+      border:1px solid #333;
+      border-radius:8px;
+      padding:8px 14px;
+      font-size:13px;
+      margin:14px 0;
     }
 
-    .rating {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-    .stars { color: #333; font-size: 18px; }
-    .review-count { font-size: 14px; color: var(--muted); }
+    .rating{ display:flex; align-items:center; gap:10px; margin-bottom:18px; }
+    .stars{ color:#333; font-size:18px; }
+    .review-count{ font-size:14px; color:var(--muted); }
 
-    .device-options { margin-bottom: 14px; }
-    .device-options label {
-      display: block;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 10px;
-      color: var(--muted);
+    .device-options{ margin-bottom:14px; }
+    .device-options label{
+      display:block;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      margin-bottom:10px;
+      color:var(--muted);
     }
 
-    .option-card {
-      background: #fff;
-      border: 2px solid var(--line);
-      border-radius: 14px;
-      padding: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      transition: all 0.2s;
-      margin-bottom: 12px;
+    .option-card{
+      background:#fff;
+      border:2px solid var(--line);
+      border-radius:14px;
+      padding:18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      cursor:pointer;
+      transition:all .2s;
+      margin-bottom:12px;
     }
-    .option-card:hover { border-color: #999; }
-    .option-card.selected { border-color: #333; }
+    .option-card:hover{ border-color:#999; }
+    .option-card.selected{ border-color:#333; }
 
-    .option-content { display: flex; align-items: center; gap: 14px; }
-    .option-icon {
-      width: 48px;
-      height: 48px;
-      background: var(--bg);
-      border-radius: 12px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .option-content{ display:flex; align-items:center; gap:14px; }
+    .option-icon{
+      width:48px; height:48px;
+      background:var(--bg);
+      border-radius:12px;
+      overflow:hidden;
+      display:flex; align-items:center; justify-content:center;
     }
-    .option-icon img { width: 100%; height: 100%; object-fit: cover; }
+    .option-icon img{ width:100%; height:100%; object-fit:cover; }
+    .option-name{ font-size:16px; font-weight:400; }
+    .option-price{ font-size:18px; font-weight:500; }
 
-    .option-name { font-size: 16px; font-weight: 400; }
-    .option-price { font-size: 18px; font-weight: 500; }
-
-    .add-to-cart {
-      width: 100%;
-      background: #333;
-      color: #fff;
-      border: none;
-      border-radius: 12px;
-      padding: 16px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background 0.2s;
+    .add-to-cart{
+      width:100%;
+      background:#333;
+      color:#fff;
+      border:none;
+      border-radius:12px;
+      padding:16px;
+      font-size:16px;
+      cursor:pointer;
+      transition:background .2s;
     }
-    .add-to-cart:hover { background: #000; }
+    .add-to-cart:hover{ background:#000; }
 
     /* ---------------- BENEFITS ---------------- */
-    .benefits-section {
-      background: #fff;
-      border-radius: var(--radius);
-      padding: 34px;
-      margin-bottom: 30px;
+    .benefits-section{
+      background:#fff;
+      border-radius:var(--radius);
+      padding:34px;
+      margin-bottom:30px;
     }
+    .benefits-header{ display:flex; align-items:center; gap:14px; margin-bottom:22px; }
+    .benefits-icon{ width:44px; height:44px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .benefits-icon img{ width:44px; height:44px; }
+    .benefits-header h3{ font-size:18px; font-weight:500; }
 
-    .benefits-header {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 22px;
+    .benefits-grid{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:24px;
     }
-
-    .benefits-icon {
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+    .benefit-item{ position:relative; padding-right:20px; }
+    .benefit-item:not(:last-child)::after{
+      content:"";
+      position:absolute; right:0; top:0; bottom:0;
+      width:1px; background:var(--line);
     }
-    .benefits-icon img { width: 44px; height: 44px; }
-
-    .benefits-header h3 { font-size: 18px; font-weight: 500; }
-
-    .benefits-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 24px;
-    }
-
-    .benefit-item { position: relative; padding-right: 20px; }
-    .benefit-item:not(:last-child)::after {
-      content: "";
-      position: absolute;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      width: 1px;
-      background: var(--line);
-    }
-
-    .benefit-item h4 { font-size: 16px; font-weight: 500; margin-bottom: 8px; }
-    .benefit-item p { font-size: 14px; color: var(--muted); line-height: 1.5; }
-    .benefit-item sup { font-size: 10px; }
+    .benefit-item h4{ font-size:16px; font-weight:500; margin-bottom:8px; }
+    .benefit-item p{ font-size:14px; color:var(--muted); line-height:1.5; }
+    .benefit-item sup{ font-size:10px; }
 
     /* ---------------- VIDEO SECTION ---------------- */
-    .video-section {
-      position: relative;
-      border-radius: var(--radius);
-      overflow: hidden;
-      margin-bottom: 60px;
+    .video-section{
+      position:relative;
+      border-radius:var(--radius);
+      overflow:hidden;
+      margin-bottom:34px; /* slideshow comes RIGHT after this */
+    }
+    .video-section h2{
+      font-size:26px;
+      font-weight:300;
+      padding:0 0 18px;
+      margin:0;
+      color:#333;
+    }
+    .video-wrapper{
+      position:relative;
+      width:100%;
+      height:560px;
+      border-radius:var(--radius);
+      overflow:hidden;
+    }
+    .video-background{ position:absolute; inset:0; z-index:1; }
+    .video-background video{
+      width:100%; height:100%;
+      object-fit:cover;
+      object-position:center top;
+    }
+    .video-container{
+      position:relative;
+      width:100%; height:100%;
+      display:flex; align-items:center; justify-content:center;
+      z-index:2;
+    }
+    .video-placeholder{
+      width:100%; height:100%;
+      object-fit:cover;
+      object-position:center top;
     }
 
-    /* smaller like Therabody */
-    .video-section h2 {
-      font-size: 26px;
-      font-weight: 300;
-      padding: 0 0 18px;
-      margin: 0;
-      color: #333;
+    /* collapsed glass smaller */
+    .info-box{
+      position:absolute;
+      bottom:22px; right:22px;
+      background:rgba(255,255,255,0.12);
+      backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,0.22);
+      border-radius:14px;
+      padding:12px 14px;
+      color:#fff;
+      cursor:pointer;
+      transition:all .35s ease;
+      display:flex; align-items:center; gap:12px;
+      z-index:10;
+      max-width:360px;
+    }
+    .info-box:hover{ background:rgba(255,255,255,0.16); }
+
+    .info-box.expanded{
+      top:0; left:0; right:0; bottom:0;
+      width:100%; height:100%;
+      max-width:none;
+      border-radius:var(--radius);
+      flex-direction:row;
+      align-items:stretch;
+      justify-content:space-between;
+      padding:0;
+      background:rgba(20,20,30,0.94);
+      backdrop-filter:blur(18px);
+      gap:0;
+      transform:none;
     }
 
-    .video-wrapper {
-      position: relative;
-      width: 100%;
-      height: 560px;
-      border-radius: var(--radius);
-      overflow: hidden;
+    .video-box{ display:none; width:50%; height:100%; padding:26px; }
+    .info-box.expanded .video-box{ display:block; }
+    .video-box-inner{
+      width:100%; height:100%;
+      background:#000;
+      border-radius:14px;
+      overflow:hidden;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .video-box-inner video{
+      width:100%; height:100%;
+      object-fit:cover;
+      object-position:center top;
+      display:block;
     }
 
-    .video-background {
-      position: absolute; inset: 0;
-      z-index: 1;
-    }
-    .video-background video {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: center top;
-    }
-
-    .video-container {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 2;
+    .info-box-right{ width:100%; transition:all .35s ease; }
+    .info-box.expanded .info-box-right{
+      width:50%;
+      padding:34px;
+      display:flex;
+      flex-direction:column;
+      min-height:0;
     }
 
-    .video-placeholder {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
+    .info-box-content{ display:flex; align-items:center; gap:12px; width:100%; }
+    .info-toggle{
+      width:30px; height:30px;
+      border:2px solid rgba(255,255,255,0.9);
+      border-radius:10px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:18px;
+      flex-shrink:0;
+      transition:transform .25s ease;
+    }
+    .info-box.expanded .info-toggle{ transform:rotate(180deg); }
+
+    .info-title{ font-size:13px; line-height:1.35; font-weight:400; margin:0; }
+    .info-subtitle{ display:none; }
+    .info-box.expanded .info-subtitle{
+      display:block;
+      font-size:11px;
+      opacity:.8;
+      margin:6px 0 0 0;
     }
 
-    /* collapsed glass smaller (less cover) */
-    .info-box {
-      position: absolute;
-      bottom: 22px;
-      right: 22px;
-      background: rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      border-radius: 14px;
-      padding: 12px 14px;
-      color: #fff;
-      cursor: pointer;
-      transition: all 0.35s ease;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      z-index: 10;
-      max-width: 360px;
+    .expanded-content{
+      display:none; opacity:0;
+      transition:opacity .3s ease .15s;
+      overflow:auto;
+      min-height:0;
+      padding-right:6px;
     }
-    .info-box:hover { background: rgba(255,255,255,0.16); }
+    .info-box.expanded .expanded-content{ display:block; opacity:1; }
 
-    /* expanded overlay */
-    .info-box.expanded {
-      top: 0; left: 0; right: 0; bottom: 0;
-      width: 100%; height: 100%;
-      max-width: none;
-      border-radius: var(--radius);
-      flex-direction: row;
-      align-items: stretch;
-      justify-content: space-between;
-      padding: 0;
-      background: rgba(20, 20, 30, 0.94);
-      backdrop-filter: blur(18px);
-      gap: 0;
-      transform: none;
+    .expanded-content h3{
+      font-size:22px;
+      font-weight:400;
+      margin:16px 0 14px;
+      line-height:1.25;
+      color:#fff;
     }
+    .expanded-content p{
+      font-size:14px;
+      line-height:1.7;
+      margin-bottom:14px;
+      opacity:.92;
+      color:#fff;
+    }
+    .expanded-content .study-info{
+      font-size:12px;
+      opacity:.75;
+      margin-bottom:14px;
+      color:#fff;
+    }
+    .university-logo{ margin-top:auto; padding-top:14px; }
 
-    .video-box {
-      display: none;
-      width: 50%;
-      height: 100%;
-      padding: 26px;
+    .science-link{
+      display:flex; align-items:center; gap:10px;
+      text-decoration:none;
+      color:#333;
+      font-size:14px;
+      padding-top:18px;
     }
-    .info-box.expanded .video-box { display: block; }
+    .science-link:hover{ text-decoration:underline; }
+    .science-icon{ width:24px; height:24px; }
 
-    .video-box-inner {
-      width: 100%;
-      height: 100%;
-      background: #000;
-      border-radius: 14px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .video-box-inner video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      display: block;
+    /* ---------------- SLIDESHOW (NOW DIRECTLY UNDER VIDEO) ---------------- */
+    .slideshow-section{ margin:0 0 54px; background:transparent; padding:0; }
+
+    .slideshow-title{
+      font-size:32px;
+      font-weight:300;
+      margin:0 0 18px;
+      line-height:1.15;
     }
 
-    .info-box-right { width: 100%; transition: all 0.35s ease; }
-    .info-box.expanded .info-box-right {
-      width: 50%;
-      padding: 34px;
-      display: flex;
-      flex-direction: column;
-      min-height: 0; /* allow inner scroll */
+    .slideshow-shell{
+      background:#efe9df;
+      border-radius:var(--radius);
+      padding:22px 22px 22px;
+      position:relative;
+      overflow:visible; /* arrows overlap */
     }
 
-    .info-box-content {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      width: 100%;
+    .slideshow-viewport{
+      overflow:hidden;
+      border-radius:14px;
     }
 
-    .info-toggle {
-      width: 30px;
-      height: 30px;
-      border: 2px solid rgba(255,255,255,0.9);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      flex-shrink: 0;
-      transition: transform 0.25s ease;
+    .slideshow-track{
+      display:flex;
+      gap:18px;
+      transition:transform .45s ease;
+      will-change:transform;
+      overflow-x:auto; /* allow arrows to scroll it */
+      scrollbar-width:none;
     }
-    .info-box.expanded .info-toggle { transform: rotate(180deg); }
+    .slideshow-track::-webkit-scrollbar{ display:none; }
 
-    .info-title { font-size: 13px; line-height: 1.35; font-weight: 400; margin: 0; }
-    .info-subtitle { display: none; } /* hidden when collapsed */
-    .info-box.expanded .info-subtitle {
-      display: block;
-      font-size: 11px;
-      opacity: 0.8;
-      margin: 6px 0 0 0;
+    /* desktop: larger cards, rightmost can be clipped */
+    .slide-card{
+      flex:0 0 34%;   /* bigger than before (2-3 visible, right clipped) */
+      border-radius:16px;
+      overflow:hidden;
+      position:relative;
+      background:#fff;
+      cursor:pointer;
+      user-select:none;
     }
 
-    .expanded-content {
-      display: none;
-      opacity: 0;
-      transition: opacity 0.3s ease 0.15s;
-      overflow: auto;
-      min-height: 0;
-      padding-right: 6px;
+    .slide-image{
+      width:100%;
+      height:360px;  /* taller */
+      overflow:hidden;
+      background:#ddd;
     }
-    .info-box.expanded .expanded-content { display: block; opacity: 1; }
-
-    .expanded-content h3 {
-      font-size: 22px;
-      font-weight: 400;
-      margin: 16px 0 14px 0;
-      line-height: 1.25;
-      color: #fff;
-    }
-    .expanded-content p {
-      font-size: 14px;
-      line-height: 1.7;
-      margin-bottom: 14px;
-      opacity: 0.92;
-      color: #fff;
-    }
-    .expanded-content .study-info {
-      font-size: 12px;
-      opacity: 0.75;
-      margin-bottom: 14px;
-      color: #fff;
+    .slide-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
     }
 
-    .university-logo { margin-top: auto; padding-top: 14px; }
+    .slide-panel{
+      position:absolute;
+      left:0; right:0; bottom:0;
+      background:var(--peach);
+      padding:14px 14px 12px;
+      border-top-left-radius:0;
+      border-top-right-radius:0;
+      overflow:hidden;
+      max-height:72px;
+      transition:max-height .35s ease;
+    }
+    .slide-card.expanded .slide-panel{ max-height:240px; }
 
-    .science-link {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: #333;
-      font-size: 14px;
-      padding-top: 18px;
+    .slide-header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
     }
-    .science-link:hover { text-decoration: underline; }
-    .science-icon { width: 24px; height: 24px; }
-
-    /* ---------------- HERO + FEATURES (no big white boxes) ---------------- */
-    .hero-section {
-      position: relative;
-      height: 520px;
-      border-radius: var(--radius);
-      overflow: hidden;
-      margin-bottom: 54px;
+    .slide-title-group{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
     }
-    .hero-image { width: 100%; height: 100%; object-fit: cover; display:block; }
-    .hero-content {
-      position: absolute;
-      top: 34px;
-      left: 34px;
-      max-width: 520px;
-      color: #333;
-      background: rgba(245, 243, 240, 0.95);
-      padding: 26px;
-      border-radius: 14px;
+    .slide-icon{ width:22px; height:22px; flex-shrink:0; }
+    .slide-title{
+      font-size:16px;
+      font-weight:600;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
-    .hero-label {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #666;
-      margin-bottom: 12px;
-    }
-    .hero-title {
-      font-size: 40px;
-      font-weight: 300;
-      line-height: 1.15;
-      margin-bottom: 14px;
-    }
-    .hero-description { font-size: 16px; line-height: 1.6; color: #555; }
-
-    .hero-section.deep-dive { background: #f0eadc; }
-
-    .feature-section {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 56px;
-      align-items: center;
-      margin-bottom: 64px;
-      padding: 0;           /* no box */
-      background: transparent;
-      border-radius: 0;
-    }
-    .feature-section.reverse { direction: rtl; }
-    .feature-section.reverse > * { direction: ltr; }
-
-    .feature-video,
-    .feature-image-container {
-      border-radius: var(--radius);
-      overflow: hidden;
-    }
-    .feature-video video,
-    .feature-image-container img {
-      width: 100%;
-      height: auto;
-      display: block;
+    .slide-toggle{
+      width:34px; height:34px;
+      border-radius:10px;
+      border:0;
+      background:rgba(255,255,255,0.35);
+      display:flex; align-items:center; justify-content:center;
+      font-size:22px;
+      color:#222;
+      flex-shrink:0;
+      cursor:pointer;
     }
 
-    .feature-content h2 {
-      font-size: 32px;
-      font-weight: 300;
-      margin-bottom: 14px;
-      line-height: 1.25;
+    .slide-description{
+      margin-top:10px;
+      font-size:13px;
+      line-height:1.55;
+      color:#333;
+      opacity:0;
+      transform:translateY(6px);
+      transition:opacity .25s ease, transform .25s ease;
     }
-    .feature-content p { font-size: 16px; line-height: 1.6; color: #555; }
-
-    /* ---------------- SLIDESHOW (LAST SECTION) ---------------- */
-    .slideshow-section {
-      margin: 0 0 40px;
-      background: transparent;
-      padding: 0;
-    }
-
-    /* smaller heading like target */
-    .slideshow-title {
-      font-size: 32px;
-      font-weight: 300;
-      margin-bottom: 18px;
-      line-height: 1.15;
+    .slide-card.expanded .slide-description{
+      opacity:1;
+      transform:translateY(0);
     }
 
-    .slideshow-shell {
-      background: #efe9df;
-      border-radius: var(--radius);
-      padding: 22px 22px 18px;
-      position: relative;
-      overflow: visible; /* arrows should not clip */
+    /* arrows: a bit lower + overlap into slides */
+    .slideshow-arrows{
+      position:absolute;
+      right:18px;
+      bottom:6px; /* lower so they overlap the slides above */
+      display:flex;
+      gap:10px;
+      z-index:5;
+    }
+    .nav-arrow{
+      width:44px; height:44px;
+      border:1px solid rgba(0,0,0,0.18);
+      border-radius:12px;
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer;
+      user-select:none;
+      background:rgba(255,255,255,0.35);
+      transition:all .2s ease;
+    }
+    .nav-arrow:hover{
+      background:rgba(255,255,255,0.55);
+      border-color:rgba(0,0,0,0.28);
     }
 
-    .slideshow-viewport {
-      overflow: hidden;
-      border-radius: 14px;
+    .slideshow-progress{
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      margin-top:16px;
     }
-
-    .slideshow-track {
-      display: flex;
-      gap: 18px;
-      transition: transform 0.45s ease;
-      will-change: transform;
-    }
-
-    .slide-card {
-      flex: 0 0 calc(25% - 14px);
-      border-radius: 16px;
-      overflow: hidden;
-      position: relative;
-      background: #fff;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .slide-image {
-      width: 100%;
-      height: 320px;
-      overflow: hidden;
-      background: #ddd;
-    }
-    .slide-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* bottom bar: straight top edge, expands upward */
-    .slide-panel {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: var(--peach);
-      padding: 14px 14px 12px;
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-      overflow: hidden;
-      max-height: 72px; /* collapsed height */
-      transition: max-height 0.35s ease;
-    }
-
-    .slide-card.expanded .slide-panel {
-      max-height: 220px; /* enough so desktop text never cuts */
-    }
-
-    .slide-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-    .slide-title-group {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
-    }
-    .slide-icon { width: 22px; height: 22px; flex-shrink: 0; }
-    .slide-title {
-      font-size: 16px;
-      font-weight: 600;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .slide-toggle {
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
-      border: 0;
-      background: rgba(255,255,255,0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      color: #222;
-      flex-shrink: 0;
-    }
-
-    .slide-description {
-      margin-top: 10px;
-      font-size: 13px;
-      line-height: 1.55;
-      color: #333;
-      opacity: 0;
-      transform: translateY(6px);
-      transition: opacity 0.25s ease, transform 0.25s ease;
-    }
-    .slide-card.expanded .slide-description {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* two progress bars */
-    .slideshow-progress {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin-top: 16px;
-      padding-bottom: 2px;
-    }
-    .progress-bar {
-      width: 120px;
-      height: 2px;
-      background: rgba(0,0,0,0.18);
-      border-radius: 999px;
-      overflow: hidden;
-      position: relative;
+    .progress-bar{
+      width:120px;
+      height:2px;
+      background:rgba(0,0,0,0.18);
+      border-radius:999px;
+      overflow:hidden;
+      position:relative;
     }
     .progress-bar::after{
       content:"";
       position:absolute;
       inset:0;
       background:#111;
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform .25s ease;
+      transform:scaleX(0);
+      transform-origin:left;
+      transition:transform .25s ease;
     }
-    .progress-bar.active::after{ transform: scaleX(1); }
+    .progress-bar.active::after{ transform:scaleX(1); }
 
-    /* arrows bottom-right like target; ensure visible */
-    .slideshow-arrows {
-      position: absolute;
-      right: 18px;
-      bottom: 14px;
-      display: flex;
-      gap: 10px;
-      z-index: 5;
+    /* ---------------- HERO + FEATURES (unchanged; no big boxes) ---------------- */
+    .hero-section{
+      position:relative;
+      height:520px;
+      border-radius:var(--radius);
+      overflow:hidden;
+      margin-bottom:54px;
     }
-    .nav-arrow {
-      width: 42px;
-      height: 42px;
-      border: 1px solid rgba(0,0,0,0.18);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      user-select: none;
-      background: rgba(255,255,255,0.35);
-      transition: all 0.2s ease;
+    .hero-image{ width:100%; height:100%; object-fit:cover; display:block; }
+    .hero-content{
+      position:absolute;
+      top:34px; left:34px;
+      max-width:520px;
+      color:#333;
+      background:rgba(245,243,240,0.95);
+      padding:26px;
+      border-radius:14px;
     }
-    .nav-arrow:hover { background: rgba(255,255,255,0.55); border-color: rgba(0,0,0,0.28); }
+    .hero-label{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      color:#666;
+      margin-bottom:12px;
+    }
+    .hero-title{
+      font-size:40px;
+      font-weight:300;
+      line-height:1.15;
+      margin-bottom:14px;
+    }
+    .hero-description{ font-size:16px; line-height:1.6; color:#555; }
+    .hero-section.deep-dive{ background:#f0eadc; }
+
+    .feature-section{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:56px;
+      align-items:center;
+      margin-bottom:64px;
+      padding:0;
+      background:transparent;
+      border-radius:0;
+    }
+    .feature-section.reverse{ direction:rtl; }
+    .feature-section.reverse > *{ direction:ltr; }
+
+    .feature-video,.feature-image-container{ border-radius:var(--radius); overflow:hidden; }
+    .feature-video video,.feature-image-container img{ width:100%; height:auto; display:block; }
+
+    .feature-content h2{
+      font-size:32px;
+      font-weight:300;
+      margin-bottom:14px;
+      line-height:1.25;
+    }
+    .feature-content p{ font-size:16px; line-height:1.6; color:#555; }
 
     /* ---------------- MOBILE ---------------- */
-    @media (max-width: 1200px) {
-      .product-section {
-        grid-template-columns: 1fr 88px; /* MAIN | THUMBS */
+    @media (max-width: 1200px){
+      /* thumbnails RIGHT on mobile like you want */
+      .product-section{
+        grid-template-columns: 1fr 96px; /* MAIN | THUMBS RIGHT */
         grid-template-areas:
           "main thumbs"
           "info info";
-        padding: 18px;
-        gap: 14px;
+        padding:18px;
+        gap:14px;
       }
 
-      /* main bigger, thumbs smaller + aligned (no overlap) */
-      .main-image {
-        max-height: none;
-      }
-      .main-image video,
-      .main-image img {
-        width: 100%;
-        aspect-ratio: 1 / 1; /* MUST be square */
-        max-height: none;
-        border-radius: 16px;
+      /* move thumbs to right visually */
+      .thumbnail-gallery{ grid-area:thumbs; }
+      .main-image{ grid-area:main; }
+
+      /* main stays square and fits */
+      .main-image{ max-height:none; }
+      .main-image video,.main-image img{
+        width:100%;
+        aspect-ratio:1/1;
+        max-height:none;
+        border-radius:16px;
       }
 
-      .thumbnail-gallery {
-        max-height: none;
-        gap: 8px;
+      /* show max 3 thumbs + down arrow total equals main height */
+      .thumbnail-gallery{
+        gap:8px;
+        max-height:none;
+        align-items:stretch;
       }
-      .thumbnail-nav { height: 40px; border-radius: 14px; }
-      .thumbnail { border-radius: 14px; }
-
-      .product-title { font-size: 30px; margin-bottom: 10px; }
-      .clinical-badge { font-size: 11px; padding: 6px 10px; border-radius: 10px; }
-      .product-description { font-size: 14px; }
-
-      .benefits-section { padding: 26px 18px; }
-      .benefits-grid { grid-template-columns: 1fr; gap: 0; }
-      .benefit-item { padding-right: 0; padding-bottom: 16px; margin-bottom: 16px; }
-      .benefit-item:not(:last-child)::after {
-        right: 0; left: 0; top: auto; bottom: 0;
-        width: auto; height: 1px;
+      .thumbnail-nav{
+        height:44px;
+        border-radius:14px;
       }
+      /* top arrow hidden on mobile (like target) */
+      #scrollUp{ display:none; }
 
-      .video-section h2 { font-size: 22px; padding-bottom: 12px; }
-      .video-wrapper { height: 420px; }
-
-      .info-box {
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%);
-        bottom: 16px;
-        max-width: calc(100% - 40px);
-        padding: 10px 12px;
-        border-radius: 14px;
+      /* 3 thumbs exactly fill remaining height */
+      .thumbnail-gallery-inner{
+        overflow:hidden; /* IMPORTANT: not all visible */
+        gap:8px;
+        flex: 1 1 auto;
       }
 
-      .info-title { font-size: 12px; }
-      .info-toggle { width: 28px; height: 28px; border-radius: 10px; }
-
-      .info-box.expanded {
-        flex-direction: column;
-        justify-content: flex-start;
-      }
-      .info-box.expanded .video-box { display: none; }
-      .info-box.expanded .info-box-right {
-        width: 100%;
-        padding: 22px;
-        height: 100%;
+      .thumbnail{
+        border-radius:14px;
+        /* fallback size, JS sets exact px height */
+        height: 72px;
+        aspect-ratio:auto;
       }
 
-      .hero-section { height: auto; }
-      .hero-image { height: 380px; }
-      .hero-content {
-        position: relative;
-        top: 0; left: 0;
-        max-width: 100%;
-        border-radius: 0;
-        background: #fff;
-        padding: 22px 18px;
-      }
-      .hero-title { font-size: 28px; }
-      .hero-description { font-size: 15px; }
+      .product-title{ font-size:30px; margin-bottom:10px; }
+      .clinical-badge{ font-size:11px; padding:6px 10px; border-radius:10px; }
+      .product-description{ font-size:14px; }
 
-      .feature-section {
-        grid-template-columns: 1fr;
-        gap: 22px;
-        margin-bottom: 48px;
+      .benefits-section{ padding:26px 18px; }
+      .benefits-grid{ grid-template-columns:1fr; gap:0; }
+      .benefit-item{ padding-right:0; padding-bottom:16px; margin-bottom:16px; }
+      .benefit-item:not(:last-child)::after{
+        right:0; left:0; top:auto; bottom:0;
+        width:auto; height:1px;
       }
-      .feature-section.reverse { direction: ltr; }
-      .feature-content h2 { font-size: 26px; }
 
-      /* slideshow mobile: show next card peeking on the right */
-      .slideshow-title { font-size: 26px; padding: 0 2px; }
-      .slideshow-shell { padding: 18px 14px 14px; }
-      .slideshow-viewport { overflow: visible; } /* allow peek */
-      .slideshow-track {
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        padding-left: 8px;
-        padding-right: 8px;
-        transition: none;
+      .video-section h2{ font-size:22px; padding-bottom:12px; }
+      .video-wrapper{ height:420px; }
+
+      .info-box{
+        left:50%;
+        right:auto;
+        transform:translateX(-50%);
+        bottom:16px;
+        max-width:calc(100% - 40px);
+        padding:10px 12px;
+        border-radius:14px;
       }
-      .slideshow-track::-webkit-scrollbar { display: none; }
-      .slide-card {
-        flex: 0 0 78vw; /* peek next card */
-        scroll-snap-align: start;
+      .info-title{ font-size:12px; }
+      .info-toggle{ width:28px; height:28px; border-radius:10px; }
+
+      .info-box.expanded{ flex-direction:column; justify-content:flex-start; }
+      .info-box.expanded .video-box{ display:none; }
+      .info-box.expanded .info-box-right{ width:100%; padding:22px; height:100%; }
+
+      /* slideshow mobile: more peek + taller (portrait-ish) */
+      .slideshow-title{ font-size:26px; }
+      .slideshow-shell{ padding:18px 14px 14px; }
+
+      .slideshow-viewport{ overflow:visible; } /* allow stronger peek */
+      .slideshow-track{
+        transition:none;
+        scroll-snap-type:x mandatory;
+        -webkit-overflow-scrolling:touch;
+        padding-left:6px;
+        padding-right:6px;
       }
-      .slide-image { height: 360px; }
-      .slideshow-arrows { display: none; } /* like target: no arrows on mobile */
-      .slideshow-progress { margin-top: 14px; }
-      .progress-bar { width: 92px; }
+      .slide-card{
+        flex:0 0 74vw;  /* stronger peek than before */
+        scroll-snap-align:start;
+      }
+      .slide-image{ height:420px; } /* taller */
+      .slideshow-arrows{ display:none; } /* no arrows on mobile */
+      .slideshow-progress{ margin-top:14px; }
+      .progress-bar{ width:92px; }
+
+      /* hero + feature mobile */
+      .hero-section{ height:auto; }
+      .hero-image{ height:380px; }
+      .hero-content{
+        position:relative;
+        top:0; left:0;
+        max-width:100%;
+        border-radius:0;
+        background:#fff;
+        padding:22px 18px;
+      }
+      .hero-title{ font-size:28px; }
+      .hero-description{ font-size:15px; }
+
+      .feature-section{
+        grid-template-columns:1fr;
+        gap:22px;
+        margin-bottom:48px;
+      }
+      .feature-section.reverse{ direction:ltr; }
+      .feature-content h2{ font-size:26px; }
     }
   </style>
 </head>
@@ -858,16 +766,8 @@
 
     <!-- PRODUCT -->
     <div class="product-section">
-      <!-- MAIN -->
-      <div class="main-image">
-        <video id="mainVideo" autoplay muted loop playsinline>
-          <source src="HeatBelt Pro hinter Feuer.mp4" type="video/mp4" />
-        </video>
-        <img id="mainImage" src="Haupt Produkt Bild (1).png" alt="HeatBelt Pro™" style="display:none;" />
-      </div>
-
-      <!-- THUMBS -->
-      <div class="thumbnail-gallery">
+      <!-- THUMBS (DESKTOP LEFT, MOBILE RIGHT via grid) -->
+      <div class="thumbnail-gallery" id="thumbGallery">
         <div class="thumbnail-nav" id="scrollUp">▲</div>
 
         <div class="thumbnail-gallery-inner" id="thumbnailScroll">
@@ -887,6 +787,14 @@
         </div>
 
         <div class="thumbnail-nav" id="scrollDown">▼</div>
+      </div>
+
+      <!-- MAIN -->
+      <div class="main-image" id="mainWrap">
+        <video id="mainVideo" autoplay muted loop playsinline>
+          <source src="HeatBelt Pro hinter Feuer.mp4" type="video/mp4" />
+        </video>
+        <img id="mainImage" src="Haupt Produkt Bild (1).png" alt="HeatBelt Pro™" style="display:none;" />
       </div>
 
       <!-- INFO -->
@@ -1018,50 +926,7 @@
       </a>
     </div>
 
-    <!-- HERO -->
-    <div class="hero-section deep-dive">
-      <img src="image0.jpeg" alt="Der Unterschied" class="hero-image" />
-      <div class="hero-content">
-        <div class="hero-label">DER THERABODY-UNTERSCHIED</div>
-        <h2 class="hero-title">Gezielte Entlastung, die über die Oberfläche hinausgeht</h2>
-        <p class="hero-description">
-          Viele Behandlungen gegen Schmerzen im unteren Rückenbereich lindern nur oberflächlich, aber diese wirkt tiefer. Nahinfrarot-LED-Licht dringt tief in Muskeln
-          und Gelenke ein, um Entzündungen zu lindern und den natürlichen Heilungsprozess des Körpers zu beschleunigen – für eine effektive und lang anhaltende Linderung.
-        </p>
-      </div>
-    </div>
-
-    <!-- FEATURES (no big boxes) -->
-    <div class="feature-section">
-      <div class="feature-video">
-        <video autoplay muted loop playsinline>
-          <source src="Video HeatBelt Pro mann legt sich hin.mp4" type="video/mp4" />
-        </video>
-      </div>
-      <div class="feature-content">
-        <h2>Verbessertes Design für alle Formen und Größen</h2>
-        <p>
-          Das schlanke, bequeme Design bleibt bei alltäglichen Bewegungen sicher an seinem Platz und passt sich dank verstellbarer Klettverschlüsse und eines zusätzlichen
-          elastischen Kompressionsriemens für eine individuellere Passform allen Körperformen an.
-        </p>
-      </div>
-    </div>
-
-    <div class="feature-section reverse">
-      <div class="feature-image-container">
-        <img src="Tragefoto Bedinunf Fernbedinung fokus.jpg" alt="Kontinuierliche Behandlung" />
-      </div>
-      <div class="feature-content">
-        <h2>Kontinuierliche Behandlung, während das Gerät an die Stromversorgung angeschlossen ist</h2>
-        <p>
-          HeatBelt Pro™ bietet eine lange Akkulaufzeit von bis zu 180 Minuten mit einer einzigen Ladung. Die automatische Abschaltfunktion wird nach 20 Minuten aktiviert,
-          wenn der Akku verwendet wird, um sicherzustellen, dass du eine wissenschaftlich fundierte Behandlungsdosis erhalten hast. Außerdem kannst du, wenn das Gerät
-          angeschlossen ist, eine kontinuierliche Behandlung ohne Unterbrechung genießen.
-        </p>
-      </div>
-    </div>
-
-    <!-- SLIDESHOW (LAST) -->
+    <!-- SLIDESHOW (NOW HERE, directly under video) -->
     <div class="slideshow-section">
       <div class="slideshow-shell">
         <h2 class="slideshow-title">Die Entlastung, die sich mit dir bewegt</h2>
@@ -1181,6 +1046,49 @@
         </div>
       </div>
     </div>
+
+    <!-- HERO -->
+    <div class="hero-section deep-dive">
+      <img src="image0.jpeg" alt="Der Unterschied" class="hero-image" />
+      <div class="hero-content">
+        <div class="hero-label">DER THERABODY-UNTERSCHIED</div>
+        <h2 class="hero-title">Gezielte Entlastung, die über die Oberfläche hinausgeht</h2>
+        <p class="hero-description">
+          Viele Behandlungen gegen Schmerzen im unteren Rückenbereich lindern nur oberflächlich, aber diese wirkt tiefer. Nahinfrarot-LED-Licht dringt tief in Muskeln
+          und Gelenke ein, um Entzündungen zu lindern und den natürlichen Heilungsprozess des Körpers zu beschleunigen – für eine effektive und lang anhaltende Linderung.
+        </p>
+      </div>
+    </div>
+
+    <!-- FEATURES (no big boxes) -->
+    <div class="feature-section">
+      <div class="feature-video">
+        <video autoplay muted loop playsinline>
+          <source src="Video HeatBelt Pro mann legt sich hin.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="feature-content">
+        <h2>Verbessertes Design für alle Formen und Größen</h2>
+        <p>
+          Das schlanke, bequeme Design bleibt bei alltäglichen Bewegungen sicher an seinem Platz und passt sich dank verstellbarer Klettverschlüsse und eines zusätzlichen
+          elastischen Kompressionsriemens für eine individuellere Passform allen Körperformen an.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-section reverse">
+      <div class="feature-image-container">
+        <img src="Tragefoto Bedinunf Fernbedinung fokus.jpg" alt="Kontinuierliche Behandlung" />
+      </div>
+      <div class="feature-content">
+        <h2>Kontinuierliche Behandlung, während das Gerät an die Stromversorgung angeschlossen ist</h2>
+        <p>
+          HeatBelt Pro™ bietet eine lange Akkulaufzeit von bis zu 180 Minuten mit einer einzigen Ladung. Die automatische Abschaltfunktion wird nach 20 Minuten aktiviert,
+          wenn der Akku verwendet wird, um sicherzustellen, dass du eine wissenschaftlich fundierte Behandlungsdosis erhalten hast. Außerdem kannst du, wenn das Gerät
+          angeschlossen ist, eine kontinuierliche Behandlung ohne Unterbrechung genießen.
+        </p>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -1191,6 +1099,8 @@
     const thumbnailScroll = document.getElementById("thumbnailScroll");
     const scrollUpBtn = document.getElementById("scrollUp");
     const scrollDownBtn = document.getElementById("scrollDown");
+    const mainWrap = document.getElementById("mainWrap");
+    const thumbGallery = document.getElementById("thumbGallery");
 
     thumbnails.forEach((thumb) => {
       thumb.addEventListener("click", function () {
@@ -1202,8 +1112,9 @@
           mainImage.style.display = "none";
           mainVideo.play();
         } else {
-          const imgSrc = this.querySelector("img").getAttribute("src");
-          mainImage.src = imgSrc;
+          const img = this.querySelector("img");
+          if (!img) return;
+          mainImage.src = img.getAttribute("src");
           mainVideo.style.display = "none";
           mainImage.style.display = "block";
         }
@@ -1219,6 +1130,36 @@
 
     const thumbVideo = document.querySelector('.thumbnail[data-type="video"] video');
     if (thumbVideo) thumbVideo.play();
+
+    // MOBILE: make exactly 3 thumbs visible + down arrow equals main image height
+    function fitMobileThumbs() {
+      const isMobile = window.matchMedia("(max-width: 1200px)").matches;
+      if (!isMobile) {
+        // restore desktop defaults
+        thumbnailScroll.style.height = "";
+        thumbnailScroll.style.overflow = "";
+        document.querySelectorAll(".thumbnail").forEach(t => { t.style.height = ""; });
+        return;
+      }
+
+      const mainH = mainWrap.getBoundingClientRect().height;
+      const downH = scrollDownBtn ? scrollDownBtn.getBoundingClientRect().height : 44;
+      const gap = 8; // matches CSS
+      const visibleArea = Math.max(0, mainH - downH - gap); // minus gap between list and arrow
+      const thumbH = Math.floor((visibleArea - (2 * gap)) / 3); // 3 thumbs + 2 gaps
+
+      thumbnailScroll.style.height = visibleArea + "px";
+      thumbnailScroll.style.overflow = "hidden";
+
+      const thumbs = thumbnailScroll.querySelectorAll(".thumbnail");
+      thumbs.forEach((t) => {
+        t.style.height = Math.max(54, thumbH) + "px";
+      });
+    }
+
+    window.addEventListener("resize", fitMobileThumbs);
+    window.addEventListener("load", fitMobileThumbs);
+    setTimeout(fitMobileThumbs, 50);
 
     // option selection
     document.querySelectorAll(".option-card").forEach((card) => {
@@ -1248,7 +1189,6 @@
     const prog0 = document.getElementById("prog0");
     const prog1 = document.getElementById("prog1");
 
-    // expand/collapse per card (only toggle button)
     document.querySelectorAll(".slide-card").forEach((card) => {
       const btn = card.querySelector(".slide-toggle");
       btn.addEventListener("click", (e) => {
@@ -1257,9 +1197,7 @@
         btn.textContent = expanded ? "−" : "+";
       });
 
-      // clicking card also toggles (like target)
       card.addEventListener("click", (e) => {
-        // avoid double when button clicked
         if (e.target.closest(".slide-toggle")) return;
         const expanded = card.classList.toggle("expanded");
         btn.textContent = expanded ? "−" : "+";
@@ -1267,7 +1205,6 @@
     });
 
     function setProgressByScroll() {
-      // two pages: start vs end
       const maxScroll = track.scrollWidth - track.clientWidth;
       const x = track.scrollLeft || 0;
       const page = maxScroll <= 0 ? 0 : (x / maxScroll > 0.5 ? 1 : 0);
@@ -1275,9 +1212,8 @@
       prog1.classList.toggle("active", page === 1);
     }
 
-    // Desktop arrows: scroll viewport width minus a bit
     function scrollSlides(dir) {
-      const amount = Math.max(280, Math.floor((viewport.clientWidth || track.clientWidth) * 0.75));
+      const amount = Math.max(320, Math.floor((viewport.clientWidth || track.clientWidth) * 0.78));
       track.scrollBy({ left: dir * amount, behavior: "smooth" });
     }
 
@@ -1286,12 +1222,7 @@
       next.addEventListener("click", () => scrollSlides(1));
     }
 
-    // make track scrollable on all sizes (desktop arrows rely on it)
-    track.style.overflowX = "auto";
-    track.style.scrollbarWidth = "none";
     track.addEventListener("scroll", () => setProgressByScroll(), { passive: true });
-
-    // init
     setProgressByScroll();
     window.addEventListener("resize", setProgressByScroll);
   </script>
