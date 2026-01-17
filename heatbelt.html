@@ -1185,6 +1185,13 @@
 </head>
 
 <body>
+  <div id="site-header"></div>
+<script>
+  fetch('header.html')
+    .then(r => r.text())
+    .then(html => document.getElementById('site-header').innerHTML = html);
+</script>
+
   <div class="container">
     <div class="breadcrumb">
       <a href="#">Home</a>
@@ -1993,6 +2000,26 @@
 
     updateTrack();
     updateTicks();
+    // Add-to-cart -> WarmesHerz Header Cart
+const addBtn = document.querySelector('.add-to-cart');
+if (addBtn) {
+  addBtn.addEventListener('click', () => {
+    // Header muss geladen sein (header.html)
+    if (!window.WHCart) {
+      alert("Warenkorb lädt noch – bitte kurz erneut klicken.");
+      return;
+    }
+
+    window.WHCart.add({
+      id: "heatbelt-pro",
+      title: "HeatBelt Pro™",
+      price: 269,
+      image: "Haupt Produkt Bild (1).png",
+      sku: "HB-PRO"
+    });
+  });
+}
+
   </script>
 </body>
 </html>
