@@ -72,9 +72,10 @@
     }
     .thumbnail-gallery-inner::-webkit-scrollbar{ display:none; }
 
+    /* smaller arrows (desktop too) */
     .thumbnail-nav{
       width:100%;
-      height:36px;
+      height:30px;                /* was 36 */
       background:#fff;
       border:1px solid var(--line);
       border-radius:10px;
@@ -86,6 +87,8 @@
       flex-shrink:0;
       user-select:none;
       z-index:2;
+      font-size:14px;             /* slightly smaller */
+      line-height:1;
     }
     .thumbnail-nav:hover{ border-color:#999; background:#f5f5f5; }
 
@@ -404,7 +407,7 @@
     .science-link:hover{ text-decoration:underline; }
     .science-icon{ width:24px; height:24px; }
 
-    /* ---------------- SLIDESHOW (NOW DIRECTLY UNDER VIDEO) ---------------- */
+    /* ---------------- SLIDESHOW ---------------- */
     .slideshow-section{ margin:0 0 54px; background:transparent; padding:0; }
 
     .slideshow-title{
@@ -419,7 +422,7 @@
       border-radius:var(--radius);
       padding:22px 22px 22px;
       position:relative;
-      overflow:visible; /* arrows overlap */
+      overflow:visible;
     }
 
     .slideshow-viewport{
@@ -432,14 +435,13 @@
       gap:18px;
       transition:transform .45s ease;
       will-change:transform;
-      overflow-x:auto; /* allow arrows to scroll it */
+      overflow-x:auto;
       scrollbar-width:none;
     }
     .slideshow-track::-webkit-scrollbar{ display:none; }
 
-    /* desktop: larger cards, rightmost can be clipped */
     .slide-card{
-      flex:0 0 34%;   /* bigger than before (2-3 visible, right clipped) */
+      flex:0 0 34%;
       border-radius:16px;
       overflow:hidden;
       position:relative;
@@ -450,7 +452,7 @@
 
     .slide-image{
       width:100%;
-      height:360px;  /* taller */
+      height:360px;
       overflow:hidden;
       background:#ddd;
     }
@@ -520,11 +522,10 @@
       transform:translateY(0);
     }
 
-    /* arrows: a bit lower + overlap into slides */
     .slideshow-arrows{
       position:absolute;
       right:18px;
-      bottom:6px; /* lower so they overlap the slides above */
+      bottom:6px;
       display:flex;
       gap:10px;
       z-index:5;
@@ -569,7 +570,7 @@
     }
     .progress-bar.active::after{ transform:scaleX(1); }
 
-    /* ---------------- HERO + FEATURES (unchanged; no big boxes) ---------------- */
+    /* ---------------- HERO + FEATURES ---------------- */
     .hero-section{
       position:relative;
       height:520px;
@@ -629,21 +630,19 @@
 
     /* ---------------- MOBILE ---------------- */
     @media (max-width: 1200px){
-      /* thumbnails RIGHT on mobile like you want */
+      /* make main bigger by shrinking thumbs column */
       .product-section{
-        grid-template-columns: 1fr 96px; /* MAIN | THUMBS RIGHT */
+        grid-template-columns: 1fr 82px; /* was 96 */
         grid-template-areas:
           "main thumbs"
           "info info";
         padding:18px;
-        gap:14px;
+        gap:12px;
       }
 
-      /* move thumbs to right visually */
       .thumbnail-gallery{ grid-area:thumbs; }
       .main-image{ grid-area:main; }
 
-      /* main stays square and fits */
       .main-image{ max-height:none; }
       .main-image video,.main-image img{
         width:100%;
@@ -652,31 +651,32 @@
         border-radius:16px;
       }
 
-      /* show max 3 thumbs + down arrow total equals main height */
+      /* SHOW BOTH arrows on mobile + smaller */
+      #scrollUp{ display:flex; }
+      .thumbnail-nav{
+        height:26px;          /* smaller */
+        border-radius:12px;
+        font-size:12px;
+      }
+
       .thumbnail-gallery{
         gap:8px;
         max-height:none;
         align-items:stretch;
       }
-      .thumbnail-nav{
-        height:44px;
-        border-radius:14px;
-      }
-      /* top arrow hidden on mobile (like target) */
-      #scrollUp{ display:none; }
 
-      /* 3 thumbs exactly fill remaining height */
       .thumbnail-gallery-inner{
-        overflow:hidden; /* IMPORTANT: not all visible */
+        overflow:hidden; /* not all visible */
         gap:8px;
         flex: 1 1 auto;
       }
 
+      /* thumbnails will be forced square via JS (width == height) */
       .thumbnail{
         border-radius:14px;
-        /* fallback size, JS sets exact px height */
-        height: 72px;
-        aspect-ratio:auto;
+        aspect-ratio:1/1;
+        width:100%;
+        height:auto; /* JS sets exact px */
       }
 
       .product-title{ font-size:30px; margin-bottom:10px; }
@@ -710,11 +710,10 @@
       .info-box.expanded .video-box{ display:none; }
       .info-box.expanded .info-box-right{ width:100%; padding:22px; height:100%; }
 
-      /* slideshow mobile: more peek + taller (portrait-ish) */
       .slideshow-title{ font-size:26px; }
       .slideshow-shell{ padding:18px 14px 14px; }
 
-      .slideshow-viewport{ overflow:visible; } /* allow stronger peek */
+      .slideshow-viewport{ overflow:visible; }
       .slideshow-track{
         transition:none;
         scroll-snap-type:x mandatory;
@@ -723,15 +722,14 @@
         padding-right:6px;
       }
       .slide-card{
-        flex:0 0 74vw;  /* stronger peek than before */
+        flex:0 0 74vw;
         scroll-snap-align:start;
       }
-      .slide-image{ height:420px; } /* taller */
-      .slideshow-arrows{ display:none; } /* no arrows on mobile */
+      .slide-image{ height:420px; }
+      .slideshow-arrows{ display:none; }
       .slideshow-progress{ margin-top:14px; }
       .progress-bar{ width:92px; }
 
-      /* hero + feature mobile */
       .hero-section{ height:auto; }
       .hero-image{ height:380px; }
       .hero-content{
@@ -926,14 +924,13 @@
       </a>
     </div>
 
-    <!-- SLIDESHOW (NOW HERE, directly under video) -->
+    <!-- SLIDESHOW -->
     <div class="slideshow-section">
       <div class="slideshow-shell">
         <h2 class="slideshow-title">Die Entlastung, die sich mit dir bewegt</h2>
 
         <div class="slideshow-viewport" id="slideshowViewport">
           <div class="slideshow-track" id="slideshowTrack">
-            <!-- 1 -->
             <div class="slide-card" data-slide="0">
               <div class="slide-image">
                 <img src="Tragefoto Infrarot fokus.jpg" alt="Nahinfrarot-LED-Lichttherapie" />
@@ -962,7 +959,6 @@
               </div>
             </div>
 
-            <!-- 2 -->
             <div class="slide-card" data-slide="1">
               <div class="slide-image">
                 <img src="Hitze Bild slideshow.webp" alt="Wärmetherapie" />
@@ -984,7 +980,6 @@
               </div>
             </div>
 
-            <!-- 3 -->
             <div class="slide-card" data-slide="2">
               <div class="slide-image">
                 <img src="Vibrationsbild slideshow.webp" alt="Vibrationstherapie" />
@@ -1008,7 +1003,6 @@
               </div>
             </div>
 
-            <!-- 4 -->
             <div class="slide-card" data-slide="3">
               <div class="slide-image">
                 <img src="Ferninfrarot slideshow bild.jpg" alt="Ferninfrarot-Therapie" />
@@ -1033,13 +1027,11 @@
           </div>
         </div>
 
-        <!-- desktop arrows -->
         <div class="slideshow-arrows" aria-hidden="false">
           <div class="nav-arrow" id="prevSlide">‹</div>
           <div class="nav-arrow" id="nextSlide">›</div>
         </div>
 
-        <!-- 2 progress bars -->
         <div class="slideshow-progress" aria-hidden="true">
           <div class="progress-bar active" id="prog0"></div>
           <div class="progress-bar" id="prog1"></div>
@@ -1060,7 +1052,7 @@
       </div>
     </div>
 
-    <!-- FEATURES (no big boxes) -->
+    <!-- FEATURES -->
     <div class="feature-section">
       <div class="feature-video">
         <video autoplay muted loop playsinline>
@@ -1100,7 +1092,6 @@
     const scrollUpBtn = document.getElementById("scrollUp");
     const scrollDownBtn = document.getElementById("scrollDown");
     const mainWrap = document.getElementById("mainWrap");
-    const thumbGallery = document.getElementById("thumbGallery");
 
     thumbnails.forEach((thumb) => {
       thumb.addEventListener("click", function () {
@@ -1122,20 +1113,20 @@
     });
 
     scrollUpBtn.addEventListener("click", () => {
-      thumbnailScroll.scrollBy({ top: -120, behavior: "smooth" });
+      thumbnailScroll.scrollBy({ top: -140, behavior: "smooth" });
     });
     scrollDownBtn.addEventListener("click", () => {
-      thumbnailScroll.scrollBy({ top: 120, behavior: "smooth" });
+      thumbnailScroll.scrollBy({ top: 140, behavior: "smooth" });
     });
 
     const thumbVideo = document.querySelector('.thumbnail[data-type="video"] video');
     if (thumbVideo) thumbVideo.play();
 
-    // MOBILE: make exactly 3 thumbs visible + down arrow equals main image height
-    function fitMobileThumbs() {
+    // MOBILE: thumbnails SQUARE + smaller, main becomes bigger by CSS column shrink.
+    // Make inner area exactly fit: up arrow + 3 squares + gaps + down arrow == main height
+    function fitMobileThumbsSquare() {
       const isMobile = window.matchMedia("(max-width: 1200px)").matches;
       if (!isMobile) {
-        // restore desktop defaults
         thumbnailScroll.style.height = "";
         thumbnailScroll.style.overflow = "";
         document.querySelectorAll(".thumbnail").forEach(t => { t.style.height = ""; });
@@ -1143,23 +1134,36 @@
       }
 
       const mainH = mainWrap.getBoundingClientRect().height;
-      const downH = scrollDownBtn ? scrollDownBtn.getBoundingClientRect().height : 44;
-      const gap = 8; // matches CSS
-      const visibleArea = Math.max(0, mainH - downH - gap); // minus gap between list and arrow
-      const thumbH = Math.floor((visibleArea - (2 * gap)) / 3); // 3 thumbs + 2 gaps
 
-      thumbnailScroll.style.height = visibleArea + "px";
+      const upH = scrollUpBtn.getBoundingClientRect().height;
+      const downH = scrollDownBtn.getBoundingClientRect().height;
+      const gap = 8; // css
+
+      // total gaps: between up & list (gap), between 3 thumbs (2*gap), between list & down (gap)
+      const totalGaps = gap + (2 * gap) + gap; // 4 gaps
+
+      // available for 3 square thumbs
+      const available = Math.max(0, mainH - upH - downH - totalGaps);
+
+      // square size = available / 3
+      const sq = Math.floor(available / 3);
+
+      // set list height so only 3 are visible (no matter scroll position)
+      const listH = (sq * 3) + (2 * gap);
+      thumbnailScroll.style.height = listH + "px";
       thumbnailScroll.style.overflow = "hidden";
 
+      // force each thumb square
       const thumbs = thumbnailScroll.querySelectorAll(".thumbnail");
       thumbs.forEach((t) => {
-        t.style.height = Math.max(54, thumbH) + "px";
+        const size = Math.max(52, sq); // safety minimum
+        t.style.height = size + "px";
       });
     }
 
-    window.addEventListener("resize", fitMobileThumbs);
-    window.addEventListener("load", fitMobileThumbs);
-    setTimeout(fitMobileThumbs, 50);
+    window.addEventListener("resize", fitMobileThumbsSquare);
+    window.addEventListener("load", fitMobileThumbsSquare);
+    setTimeout(fitMobileThumbsSquare, 60);
 
     // option selection
     document.querySelectorAll(".option-card").forEach((card) => {
