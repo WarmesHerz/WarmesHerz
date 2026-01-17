@@ -1937,10 +1937,7 @@
     window.addEventListener('touchstart', tryPlayThumbVideo, { once: true, passive: true });
     window.addEventListener('click', tryPlayThumbVideo, { once: true });
 
-    // Add to cart (demo)
-    document.querySelector('.add-to-cart').addEventListener('click', function () {
-      alert('Produkt wurde zum Warenkorb hinzugefügt!');
-    });
+    
 
     // Video info box toggle
     const infoBox = document.getElementById('infoBox');
@@ -2002,23 +1999,25 @@
     updateTicks();
     // Add-to-cart -> WarmesHerz Header Cart
 const addBtn = document.querySelector('.add-to-cart');
+
 if (addBtn) {
   addBtn.addEventListener('click', () => {
     // Header muss geladen sein (header.html)
-    if (!window.WHCart) {
-      alert("Warenkorb lädt noch – bitte kurz erneut klicken.");
-      return;
-    }
+    if (!window.WHCart) return;
 
     window.WHCart.add({
       id: "heatbelt-pro",
       title: "HeatBelt Pro™",
       price: 269,
       image: "Haupt Produkt Bild (1).png",
-      sku: "HB-PRO"
+      sku: "HB-PRO",
+      qty: 1
     });
-  });
+
+    window.WHCart.open(); // ✅ Popup öffnen
+  }, { passive: true });
 }
+
 
   </script>
 </body>
