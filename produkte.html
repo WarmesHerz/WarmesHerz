@@ -19,13 +19,13 @@
       --thumb:80px;
       --thumb-m:72px;
 
-      --media-h: 560px;      /* desktop */
-      --media-h-m: 420px;    /* mobile */
+      --media-h: 560px;      /* desktop main media height */
+      --media-h-m: 360px;    /* mobile base (we override to square) */
 
-      --therapy-card-w: 380px;
+      --therapy-card-w: 420px;
       --therapy-card-h: 360px;
       --therapy-strip-h: 78px;   /* collapsed bar height */
-      --therapy-open-h: 34%;     /* expanded overlay height */
+      --therapy-open-h: 42%;     /* expanded overlay height (desktop needs more room) */
     }
 
     body{
@@ -146,9 +146,7 @@
       display:block;
     }
 
-    .product-info{
-      padding: 8px 2px;
-    }
+    .product-info{ padding: 8px 2px; }
 
     .category{
       font-size: 12px;
@@ -339,9 +337,8 @@
     .benefit-item sup{ font-size: 10px; }
 
     /* ===== VIDEO SECTION ===== */
-    .video-section{
-      margin-bottom: 26px;
-    }
+    .video-section{ margin-bottom: 26px; }
+
     .video-section h2{
       font-family: Georgia, 'Times New Roman', Times, serif;
       font-size: 56px;
@@ -362,10 +359,7 @@
     }
 
     .video-background,
-    .video-container{
-      position:absolute;
-      inset:0;
-    }
+    .video-container{ position:absolute; inset:0; }
     .video-background video,
     .video-container video{
       width:100%;
@@ -457,10 +451,7 @@
       object-position: center;
     }
 
-    .info-box-right{
-      width: 100%;
-      padding: 0;
-    }
+    .info-box-right{ width: 100%; padding: 0; }
     .info-box.expanded .info-box-right{
       width: 50%;
       padding: 28px 28px 22px;
@@ -475,13 +466,9 @@
       align-items:flex-start;
       padding: 0;
     }
-    .expanded-content{
-      display:none;
-      margin-top: 18px;
-    }
-    .info-box.expanded .expanded-content{
-      display:block;
-    }
+    .expanded-content{ display:none; margin-top: 18px; }
+    .info-box.expanded .expanded-content{ display:block; }
+
     .expanded-content h3{
       font-size: 26px;
       font-weight: 600;
@@ -499,11 +486,7 @@
       opacity: .75;
       margin-top: 6px;
     }
-    .university-logo{
-      margin-top: auto;
-      padding-top: 14px;
-      opacity: .95;
-    }
+    .university-logo{ margin-top: auto; padding-top: 14px; opacity: .95; }
 
     .science-link{
       display:flex;
@@ -536,8 +519,7 @@
 
     .therapy-viewport{
       position:relative;
-      overflow:hidden;
-      border-radius: 18px;
+      overflow: visible; /* so arrows won't be cut */
     }
 
     .therapy-track{
@@ -549,6 +531,7 @@
       padding-bottom: 16px;
       scrollbar-width:none;
       -ms-overflow-style:none;
+      padding-right: 0; /* desktop: no peek */
     }
     .therapy-track::-webkit-scrollbar{ display:none; }
 
@@ -577,8 +560,9 @@
       right: 0;
       bottom: 0;
       background: #f3cda9;
-      border-top-left-radius: 18px;
-      border-top-right-radius: 18px;
+      /* IMPORTANT: top edge must be straight like Therabody */
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
       padding: 14px 14px 14px;
       height: var(--therapy-strip-h);
       transition: height .28s ease;
@@ -586,6 +570,9 @@
       display:flex;
       flex-direction:column;
       gap: 10px;
+      /* keep card rounding only on bottom */
+      border-bottom-left-radius: 18px;
+      border-bottom-right-radius: 18px;
     }
 
     .therapy-card.expanded .therapy-overlay{
@@ -640,6 +627,8 @@
       opacity: 0;
       transform: translateY(6px);
       transition: opacity .2s ease, transform .2s ease;
+      overflow: auto;
+      padding-right: 4px;
     }
     .therapy-card.expanded .therapy-text{
       opacity: 1;
@@ -656,13 +645,14 @@
       padding: 0 8px;
     }
 
+    /* DESKTOP: only two strokes */
     .therapy-dots{
       display:flex;
-      gap: 10px;
+      gap: 14px;
       align-items:center;
     }
     .therapy-dot{
-      width: 64px;
+      width: 160px;
       height: 3px;
       border-radius: 999px;
       background: rgba(0,0,0,0.18);
@@ -694,6 +684,7 @@
       .container{ padding: 12px 12px 26px; }
       .breadcrumb{ margin-bottom: 12px; }
 
+      /* keep thumbs right, main left */
       .product-section{
         grid-template-columns: 1fr 92px;
         grid-template-areas:
@@ -703,14 +694,48 @@
         padding: 18px;
       }
 
-      .main-image{ grid-area: main; height: var(--media-h-m); border-radius: 18px; }
-      .thumbnail-gallery{ grid-area: thumbs; max-height: var(--media-h-m); width: 92px; }
+      /* MOBILE MAIN MEDIA MUST BE SQUARE */
+      .main-image{
+        grid-area: main;
+        height: auto;                 /* use aspect-ratio instead */
+        aspect-ratio: 1 / 1;
+        max-height: none;
+        border-radius: 18px;
+      }
+      .main-image video,
+      .main-image img{
+        height: 100%;
+      }
+
+      .thumbnail-gallery{
+        grid-area: thumbs;
+        width: 92px;
+        max-height: none;
+        height: auto;
+        aspect-ratio: 92 / 360; /* visual hint; actual max-height handled below */
+      }
+
+      /* match thumb column height to square main */
+      .product-section{
+        align-items: stretch;
+      }
+      .product-section > .thumbnail-gallery{
+        align-self: stretch;
+      }
+      .product-section > .thumbnail-gallery,
+      .product-section > .main-image{
+        height: auto;
+      }
+
+      /* force thumb column max height equals main-image rendered height */
+      .thumbnail-gallery{
+        max-height: 100%;
+      }
 
       .thumbnail-nav{ height: 46px; border-radius: 14px; }
       .thumbnail{ height: var(--thumb-m); border-radius: 16px; }
 
       .product-info{ grid-area: info; padding: 4px 2px 0; }
-
       .product-title{ font-size: 44px; margin-bottom: 10px; }
 
       .benefits-section{ padding: 18px; }
@@ -738,21 +763,44 @@
       /* therapy section mobile */
       .therapy-section{ padding: 18px 18px 14px; }
       .therapy-title{ font-size: 56px; line-height: 1.03; }
-      .therapy-track{ gap: 16px; }
+
+      /* show next card "peek" on right */
+      .therapy-track{
+        gap: 16px;
+        padding-right: 18vw; /* makes the next card visible */
+        scroll-padding: 18px;
+      }
       .therapy-card{
         min-width: 84vw;
         max-width: 84vw;
         height: 520px;
         border-radius: 22px;
       }
+
       .therapy-overlay{
-        border-top-left-radius: 22px;
-        border-top-right-radius: 22px;
+        border-bottom-left-radius: 22px;
+        border-bottom-right-radius: 22px;
         height: 92px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
       }
       .therapy-card.expanded .therapy-overlay{ height: 34%; }
-      .therapy-name{ font-size: 26px; white-space: normal; }
+
+      .therapy-name{
+        font-size: 26px;
+        white-space: normal;
+      }
+
+      /* mobile dots: 4 small strokes (like screenshot) */
+      .therapy-dot{ width: 86px; }
       .therapy-arrows{ display:none; }
+    }
+
+    /* tighter mobile square behavior on very narrow screens */
+    @media (max-width: 520px){
+      .product-section{ grid-template-columns: 1fr 86px; }
+      .thumbnail-gallery{ width: 86px; }
+      .thumbnail{ height: 66px; }
     }
   </style>
 </head>
@@ -1049,6 +1097,7 @@
 
         <div class="therapy-controls">
           <div class="therapy-dots" id="therapyDots" aria-label="Slider Punkte">
+            <!-- desktop shows 2 (we update via JS) -->
             <div class="therapy-dot active" data-dot="0"></div>
             <div class="therapy-dot" data-dot="1"></div>
             <div class="therapy-dot" data-dot="2"></div>
@@ -1121,7 +1170,6 @@
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         const card = btn.closest('.therapy-card');
-
         const isOpen = card.classList.toggle('expanded');
         btn.textContent = isOpen ? '−' : '+';
       });
@@ -1141,9 +1189,30 @@
       return first.getBoundingClientRect().width + gap;
     }
 
+    function isMobile(){
+      return window.matchMedia('(max-width: 1200px)').matches;
+    }
+
+    function setDotsMode(){
+      // Desktop: show 2 strokes (like Therabody)
+      // Mobile: show 4 strokes
+      if (!dots.length) return;
+      if (isMobile()){
+        dots.forEach(d => d.style.display = '');
+      } else {
+        dots.forEach((d, i) => d.style.display = (i < 2 ? '' : 'none'));
+      }
+    }
+
     function setActiveDot(idx){
       dots.forEach(d => d.classList.remove('active'));
-      if (dots[idx]) dots[idx].classList.add('active');
+      if (isMobile()){
+        if (dots[idx]) dots[idx].classList.add('active');
+      } else {
+        // desktop: toggle between 2 strokes based on scroll half
+        const active = idx >= 2 ? 1 : 0;
+        if (dots[active]) dots[active].classList.add('active');
+      }
     }
 
     function currentIndex(){
@@ -1164,12 +1233,15 @@
     });
 
     if (nextBtn) nextBtn.addEventListener('click', () => {
-      const maxIdx = Math.max(0, dots.length - 1);
+      const maxIdx = 3;
       const idx = Math.min(maxIdx, currentIndex() + 1);
       scrollToIndex(idx);
     });
 
-    dots.forEach((d, i) => d.addEventListener('click', () => scrollToIndex(i)));
+    dots.forEach((d, i) => d.addEventListener('click', () => {
+      if (isMobile()) scrollToIndex(i);
+      else scrollToIndex(i === 0 ? 0 : 2);
+    }));
 
     let raf = null;
     therapyTrack.addEventListener('scroll', () => {
@@ -1177,6 +1249,12 @@
       raf = requestAnimationFrame(() => setActiveDot(currentIndex()));
     });
 
+    window.addEventListener('resize', () => {
+      setDotsMode();
+      setActiveDot(currentIndex());
+    });
+
+    setDotsMode();
     setActiveDot(0);
   </script>
 </body>
