@@ -1267,11 +1267,19 @@
               </div>
               <div class="option-name">HeatBelt Pro™</div>
             </div>
-            <div class="option-price">€269</div>
+            <div class="option-price">€95</div>
           </div>
         </div>
 
-        <button class="add-to-cart">In den Warenkorb legen</button>
+        <button class="add-to-cart"
+  data-id="heatbelt-pro"
+  data-title="HeatBelt Pro™"
+  data-price="95"
+  data-image="Haupt Produkt Bild (1).png"
+  data-sku="HB-PRO">
+  In den Warenkorb legen
+</button>
+
       </div>
     </div>
 
@@ -1997,26 +2005,25 @@
 
     updateTrack();
     updateTicks();
-    // Add-to-cart -> WarmesHerz Header Cart
-const addBtn = document.querySelector('.add-to-cart');
+    // ===== UNIVERSAL ADD TO CART (MULTI PRODUCT READY) =====
+document.querySelectorAll('.add-to-cart').forEach(btn => {
+  btn.addEventListener('click', () => {
 
-if (addBtn) {
-  addBtn.addEventListener('click', () => {
-    // Header muss geladen sein (header.html)
     if (!window.WHCart) return;
 
-    window.WHCart.add({
-      id: "heatbelt-pro",
-      title: "HeatBelt Pro™",
-      price: 269,
-      image: "Haupt Produkt Bild (1).png",
-      sku: "HB-PRO",
+    const product = {
+      id: btn.dataset.id,
+      title: btn.dataset.title,
+      price: parseFloat(btn.dataset.price),
+      image: btn.dataset.image,
+      sku: btn.dataset.sku || "",
       qty: 1
-    });
+    };
 
-    window.WHCart.open(); // ✅ Popup öffnen
-  }, { passive: true });
-}
+    window.WHCart.add(product);
+    window.WHCart.open();   // Popup direkt öffnen
+  });
+});
 
 
   </script>
