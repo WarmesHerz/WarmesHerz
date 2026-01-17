@@ -1,1487 +1,1299 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HeatBelt Pro™</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background-color: #f5f3f0;
-            color: #333;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .breadcrumb {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 30px;
-        }
-
-        .breadcrumb a {
-            color: #666;
-            text-decoration: none;
-        }
-
-        .product-section {
-            background: white;
-            border-radius: 12px;
-            padding: 40px;
-            display: grid;
-            grid-template-columns: 80px 1fr 500px;
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        .thumbnail-gallery {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            max-height: 600px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .thumbnail-gallery-inner {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            overflow-y: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-
-        .thumbnail-gallery-inner::-webkit-scrollbar {
-            display: none;
-        }
-
-        .thumbnail-nav {
-            width: 80px;
-            height: 40px;
-            background: white;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            flex-shrink: 0;
-            z-index: 10;
-        }
-
-        .thumbnail-nav:hover {
-            border-color: #999;
-            background: #f5f5f5;
-        }
-
-        .thumbnail {
-            width: 80px;
-            height: 80px;
-            background: white;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.2s;
-            flex-shrink: 0;
-        }
-
-        .thumbnail:hover, .thumbnail.active {
-            border-color: #333;
-        }
-
-        .thumbnail img,
-        .thumbnail video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .main-image {
-            background: transparent;
-            border-radius: 12px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 600px;
-            padding: 0;
-        }
-
-        .main-image video,
-        .main-image img {
-            width: 100%;
-            height: auto;
-            border-radius: 12px;
-            object-fit: cover;
-            max-height: 600px;
-        }
-
-        .main-image video {
-            aspect-ratio: 1 / 1;
-            object-position: center;
-        }
-
-        .product-info {
-            padding: 20px 0;
-        }
-
-        .category {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #666;
-            margin-bottom: 10px;
-        }
-
-        .product-title {
-            font-size: 48px;
-            font-weight: 300;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-
-        .product-description {
-            font-size: 15px;
-            line-height: 1.6;
-            color: #555;
-            margin-bottom: 20px;
-        }
-
-        .clinical-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: white;
-            border: 1px solid #333;
-            border-radius: 4px;
-            padding: 8px 16px;
-            font-size: 13px;
-            margin: 20px 0;
-        }
-
-        .rating {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 30px;
-        }
-
-        .stars {
-            color: #333;
-            font-size: 18px;
-        }
-
-        .review-count {
-            font-size: 14px;
-            color: #666;
-        }
-
-        .device-options {
-            margin-bottom: 20px;
-        }
-
-        .device-options label {
-            display: block;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-            color: #666;
-        }
-
-        .option-card {
-            background: white;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-bottom: 15px;
-        }
-
-        .option-card:hover {
-            border-color: #999;
-        }
-
-        .option-card.selected {
-            border-color: #333;
-        }
-
-        .option-content {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .option-icon {
-            width: 50px;
-            height: 50px;
-            background: #f5f3f0;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .option-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .option-name {
-            font-size: 16px;
-            font-weight: 400;
-        }
-
-        .option-price {
-            font-size: 18px;
-            font-weight: 500;
-        }
-
-        .add-to-cart {
-            width: 100%;
-            background: #333;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 18px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .add-to-cart:hover {
-            background: #000;
-        }
-
-        .benefits-section {
-            background: white;
-            border-radius: 12px;
-            padding: 40px;
-            margin-bottom: 30px;
-        }
-
-        .benefits-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .benefits-icon {
-            width: 50px;
-            height: 50px;
-            background: transparent;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .benefits-icon img {
-            width: 50px;
-            height: 50px;
-        }
-
-        .benefits-header h3 {
-            font-size: 18px;
-            font-weight: 500;
-        }
-
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .benefit-item {
-            position: relative;
-            padding-right: 30px;
-        }
-
-        .benefit-item:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            width: 1px;
-            background: #e0e0e0;
-        }
-
-        .benefit-item h4 {
-            font-size: 16px;
-            font-weight: 500;
-            margin-bottom: 8px;
-        }
-
-        .benefit-item p {
-            font-size: 14px;
-            color: #666;
-            line-height: 1.5;
-        }
-
-        .benefit-item sup {
-            font-size: 10px;
-        }
-
-        .video-section {
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 30px;
-        }
-
-        .video-section h2 {
-            font-size: 32px;
-            font-weight: 300;
-            padding: 0 0 30px;
-            margin: 0;
-            color: #333;
-        }
-
-        .video-wrapper {
-            position: relative;
-            width: 100%;
-            height: 600px;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .video-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        .video-background video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center top;
-        }
-
-        .video-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2;
-        }
-
-        .video-placeholder {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center top;
-        }
-
-        .info-box {
-            position: absolute;
-            bottom: 30px;
-            right: 30px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            padding: 20px 25px;
-            color: white;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            z-index: 10;
-            max-width: 500px;
-        }
-
-        .info-box:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .info-box.expanded {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            width: 100%;
-            height: 100%;
-            max-width: none;
-            border-radius: 12px;
-            flex-direction: row;
-            align-items: stretch;
-            justify-content: space-between;
-            padding: 0;
-            background: rgba(20, 20, 30, 0.95);
-            backdrop-filter: blur(20px);
-            gap: 0;
-            transform: none;
-        }
-
-        .video-box {
-            display: none;
-            width: 50%;
-            height: 100%;
-            padding: 30px;
-        }
-
-        .info-box.expanded .video-box {
-            display: block;
-        }
-
-        .video-box-inner {
-            width: 100%;
-            height: 100%;
-            background: #000;
-            border-radius: 12px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .video-box-inner video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center top;
-        }
-
-        .info-box-right {
-            width: 100%;
-            transition: all 0.4s ease;
-        }
-
-        .info-box.expanded .info-box-right {
-            width: 50%;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .info-box-content {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            width: 100%;
-            transition: all 0.4s ease;
-        }
-
-        .info-box.expanded .info-box-content {
-            margin-bottom: 25px;
-            align-items: flex-start;
-        }
-
-        .info-box.expanded .info-toggle {
-            margin-top: 5px;
-        }
-
-        .info-toggle {
-            width: 32px;
-            height: 32px;
-            border: 2px solid white;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            flex-shrink: 0;
-            transition: transform 0.3s ease;
-        }
-
-        .info-box.expanded .info-toggle {
-            transform: rotate(180deg);
-        }
-
-        .info-title {
-            font-size: 14px;
-            line-height: 1.4;
-            font-weight: 400;
-            margin: 0;
-        }
-
-        .info-subtitle {
-            font-size: 11px;
-            opacity: 0.8;
-            margin: 5px 0 0 0;
-        }
-
-        .expanded-content {
-            display: none;
-            opacity: 0;
-            transition: opacity 0.4s ease 0.2s;
-        }
-
-        .info-box.expanded .expanded-content {
-            display: block;
-            opacity: 1;
-        }
-
-        .expanded-content h3 {
-            font-size: 24px;
-            font-weight: 400;
-            margin: 0 0 20px 0;
-            line-height: 1.3;
-        }
-
-        .expanded-content p {
-            font-size: 14px;
-            line-height: 1.7;
-            margin-bottom: 20px;
-            opacity: 0.9;
-        }
-
-        .expanded-content .study-info {
-            font-size: 12px;
-            opacity: 0.7;
-            margin-bottom: 25px;
-        }
-
-        .university-logo {
-            margin-top: auto;
-            padding-top: 20px;
-        }
-
-        .science-link {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: #333;
-            font-size: 14px;
-            padding-top: 30px;
-        }
-
-        .science-link:hover {
-            text-decoration: underline;
-        }
-
-        .science-icon {
-            width: 24px;
-            height: 24px;
-        }
-
-        /* Slideshow Section */
-        .slideshow-section {
-            margin-bottom: 30px;
-            background: #f5f3f0;
-            padding: 60px 0;
-        }
-
-        .slideshow-section h2 {
-            font-size: 42px;
-            font-weight: 300;
-            margin-bottom: 50px;
-            text-align: left;
-            line-height: 1.3;
-        }
-
-        .slideshow-container {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .slideshow-track {
-            display: flex;
-            gap: 20px;
-            transition: transform 0.5s ease;
-        }
-
-        .slide-card {
-            min-width: calc(25% - 15px);
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .slide-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .slide-image {
-            width: 100%;
-            height: 350px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .slide-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .slide-content {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 20px;
-            background: linear-gradient(to top, #f5e6d3 0%, #f5e6d3 100%);
-        }
-
-        .slide-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-        }
-
-        .slide-title-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex: 1;
-        }
-
-        .slide-icon {
-            width: 24px;
-            height: 24px;
-            flex-shrink: 0;
-        }
-
-        .slide-title {
-            font-size: 18px;
-            font-weight: 500;
-            margin: 0;
-        }
-
-        .slide-toggle {
-            width: 28px;
-            height: 28px;
-            border: 2px solid #333;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            flex-shrink: 0;
-            transition: all 0.3s ease;
-        }
-
-        .slide-card.expanded .slide-toggle {
-            transform: rotate(45deg);
-        }
-
-        .slide-description {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease, margin-top 0.3s ease;
-            margin-top: 0;
-        }
-
-        .slide-card.expanded .slide-description {
-            max-height: 300px;
-            margin-top: 15px;
-        }
-
-        .slide-card.expanded .slide-content {
-            background: #f5e6d3;
-            transform: translateY(-150px);
-            transition: transform 0.3s ease;
-        }
-
-        .slide-description p {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #555;
-            margin: 0;
-        }
-
-        .slideshow-nav {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 30px;
-        }
-
-        .nav-arrow {
-            width: 40px;
-            height: 40px;
-            border: 1px solid #ccc;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .nav-arrow:hover {
-            background: #333;
-            color: white;
-            border-color: #333;
-        }
-
-        /* Hero Section */
-        .hero-section {
-            position: relative;
-            height: 500px;
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 30px;
-        }
-
-        .hero-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .hero-content {
-            position: absolute;
-            top: 40px;
-            left: 40px;
-            max-width: 500px;
-            color: #333;
-            background: rgba(245, 243, 240, 0.95);
-            padding: 30px;
-            border-radius: 12px;
-        }
-
-        .hero-label {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #666;
-            margin-bottom: 15px;
-        }
-
-        .hero-title {
-            font-size: 48px;
-            font-weight: 300;
-            line-height: 1.2;
-            margin-bottom: 20px;
-        }
-
-        .hero-description {
-            font-size: 16px;
-            line-height: 1.6;
-            color: #555;
-        }
-
-        /* Feature Sections */
-        .feature-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-            margin-bottom: 30px;
-            background: white;
-            border-radius: 12px;
-            padding: 60px;
-        }
-
-        .feature-section.reverse {
-            direction: rtl;
-        }
-
-        .feature-section.reverse > * {
-            direction: ltr;
-        }
-
-        .feature-video,
-        .feature-image-container {
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .feature-video video,
-        .feature-image-container img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .feature-content h2 {
-            font-size: 36px;
-            font-weight: 300;
-            margin-bottom: 20px;
-            line-height: 1.3;
-        }
-
-        .feature-content p {
-            font-size: 16px;
-            line-height: 1.6;
-            color: #555;
-        }
-
-        /* Updated hero background */
-        .hero-section.deep-dive {
-            background: #f0eadc;
-        }
-
-        /* Mobile Styles */
-        @media (max-width: 1200px) {
-            .product-section {
-                grid-template-columns: 1fr 120px;
-                grid-template-rows: auto auto;
-                padding: 20px;
-                gap: 15px;
-            }
-
-            .main-image {
-                order: 1;
-                grid-column: 1;
-                margin-bottom: 0;
-                min-height: 0;
-            }
-
-            .main-image video,
-            .main-image img {
-                max-height: 70vh;
-                width: 100%;
-            }
-
-            .thumbnail-gallery {
-                order: 2;
-                grid-column: 2;
-                grid-row: 1;
-                flex-direction: column;
-                max-height: 70vh;
-                gap: 8px;
-            }
-
-            .thumbnail-gallery-inner {
-                flex-direction: column;
-                gap: 8px;
-            }
-
-            .thumbnail {
-                width: 100px;
-                height: 100px;
-            }
-
-            .thumbnail-nav {
-                width: 100px;
-                display: flex;
-            }
-
-            .product-info {
-                order: 3;
-                grid-column: 1 / -1;
-            }
-
-            .product-title {
-                font-size: 32px;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-
-            .add-to-cart {
-                margin-top: 10px;
-            }
-
-            .clinical-badge {
-                font-size: 11px;
-                padding: 6px 12px;
-            }
-
-            .benefits-section {
-                padding: 30px 20px;
-            }
-
-            .benefit-item {
-                padding-right: 0;
-                padding-bottom: 20px;
-                margin-bottom: 20px;
-            }
-
-            .benefit-item:not(:last-child)::after {
-                right: 0;
-                left: 0;
-                top: auto;
-                bottom: 0;
-                width: auto;
-                height: 1px;
-            }
-
-            .video-wrapper {
-                height: 400px;
-            }
-
-            .info-box {
-                left: 50%;
-                right: auto;
-                transform: translateX(-50%);
-                bottom: 20px;
-                max-width: calc(100% - 60px);
-                width: auto;
-                padding: 12px 16px;
-            }
-
-            .info-title {
-                font-size: 12px;
-            }
-
-            .info-subtitle {
-                font-size: 10px;
-            }
-
-            .info-box.expanded {
-                flex-direction: column;
-                justify-content: flex-start;
-                padding: 0;
-                max-width: none;
-                width: 100%;
-            }
-
-            .info-box.expanded .video-box {
-                display: none;
-            }
-
-            .info-box.expanded .info-box-right {
-                width: 100%;
-                height: 50%;
-                padding: 30px;
-                overflow-y: auto;
-            }
-
-            .main-image video {
-                max-height: 70vh;
-            }
-
-            .slideshow-section {
-                padding: 40px 0;
-            }
-
-            .slideshow-section h2 {
-                font-size: 28px;
-                padding: 0 20px;
-                margin-bottom: 30px;
-            }
-
-            .slide-card {
-                min-width: calc(85vw);
-                margin: 0 7.5vw 0 0;
-            }
-
-            .slide-card:first-child {
-                margin-left: 7.5vw;
-            }
-
-            .slideshow-track {
-                padding: 0;
-                overflow-x: auto;
-                scroll-snap-type: x mandatory;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none;
-            }
-
-            .slideshow-track::-webkit-scrollbar {
-                display: none;
-            }
-
-            .slide-card {
-                scroll-snap-align: center;
-            }
-
-            .slideshow-nav {
-                display: none;
-            }
-
-            .feature-section {
-                grid-template-columns: 1fr;
-                gap: 30px;
-                padding: 40px 20px;
-            }
-
-            .feature-section.reverse {
-                direction: ltr;
-            }
-
-            .feature-content h2 {
-                font-size: 28px;
-            }
-
-            .hero-section {
-                height: auto;
-            }
-
-            .hero-image {
-                position: relative;
-                height: 400px;
-            }
-
-            .hero-content {
-                position: relative;
-                top: 0;
-                left: 0;
-                padding: 30px 20px;
-                max-width: 100%;
-                background: white;
-                border-radius: 0;
-            }
-
-            .hero-title {
-                font-size: 28px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HeatBelt Pro™</title>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root{
+      --bg: #f5f3f0;
+      --card: #ffffff;
+      --text: #333;
+      --muted: #666;
+      --line: #e0e0e0;
+      --peach: #f5e6d3;
+      --radius: 12px;
+      --radius-lg: 18px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+    .breadcrumb a { color: var(--muted); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+
+    /* ---------------- PRODUCT SECTION ---------------- */
+    .product-section {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 34px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 84px 500px; /* MAIN | THUMBS | INFO */
+      grid-template-areas: "main thumbs info";
+      gap: 26px;
+      margin-bottom: 30px;
+      align-items: start;
+    }
+
+    .main-image { grid-area: main; }
+    .thumbnail-gallery { grid-area: thumbs; }
+    .product-info { grid-area: info; }
+
+    .thumbnail-gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 640px;
+      overflow: hidden;
+      position: relative;
+      align-items: stretch;
+    }
+
+    .thumbnail-gallery-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow-y: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .thumbnail-gallery-inner::-webkit-scrollbar { display: none; }
+
+    .thumbnail-nav {
+      width: 100%;
+      height: 36px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      flex-shrink: 0;
+      z-index: 2;
+      user-select: none;
+    }
+    .thumbnail-nav:hover { border-color: #999; background: #f5f5f5; }
+
+    .thumbnail {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .thumbnail:hover, .thumbnail.active { border-color: #333; }
+
+    .thumbnail img,
+    .thumbnail video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .main-image {
+      background: transparent;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      max-height: 640px;
+    }
+
+    /* always square in mobile + consistent on desktop */
+    .main-image video,
+    .main-image img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      height: auto;
+      border-radius: var(--radius-lg);
+      object-fit: cover;
+      display: block;
+      max-height: 640px;
+    }
+
+    .product-info { padding: 6px 0; }
+
+    .category {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .product-title {
+      font-size: 44px;
+      font-weight: 300;
+      margin-bottom: 14px;
+      line-height: 1.15;
+    }
+
+    .product-description {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #555;
+      margin-bottom: 14px;
+    }
+
+    .clinical-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #fff;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 13px;
+      margin: 14px 0 14px;
+    }
+
+    .rating {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .stars { color: #333; font-size: 18px; }
+    .review-count { font-size: 14px; color: var(--muted); }
+
+    .device-options { margin-bottom: 14px; }
+    .device-options label {
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      color: var(--muted);
+    }
+
+    .option-card {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 14px;
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-bottom: 12px;
+    }
+    .option-card:hover { border-color: #999; }
+    .option-card.selected { border-color: #333; }
+
+    .option-content { display: flex; align-items: center; gap: 14px; }
+    .option-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--bg);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .option-icon img { width: 100%; height: 100%; object-fit: cover; }
+
+    .option-name { font-size: 16px; font-weight: 400; }
+    .option-price { font-size: 18px; font-weight: 500; }
+
+    .add-to-cart {
+      width: 100%;
+      background: #333;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 16px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .add-to-cart:hover { background: #000; }
+
+    /* ---------------- BENEFITS ---------------- */
+    .benefits-section {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 34px;
+      margin-bottom: 30px;
+    }
+
+    .benefits-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .benefits-icon {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .benefits-icon img { width: 44px; height: 44px; }
+
+    .benefits-header h3 { font-size: 18px; font-weight: 500; }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .benefit-item { position: relative; padding-right: 20px; }
+    .benefit-item:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: var(--line);
+    }
+
+    .benefit-item h4 { font-size: 16px; font-weight: 500; margin-bottom: 8px; }
+    .benefit-item p { font-size: 14px; color: var(--muted); line-height: 1.5; }
+    .benefit-item sup { font-size: 10px; }
+
+    /* ---------------- VIDEO SECTION ---------------- */
+    .video-section {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 60px;
+    }
+
+    /* smaller like Therabody */
+    .video-section h2 {
+      font-size: 26px;
+      font-weight: 300;
+      padding: 0 0 18px;
+      margin: 0;
+      color: #333;
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      height: 560px;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .video-background {
+      position: absolute; inset: 0;
+      z-index: 1;
+    }
+    .video-background video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+
+    .video-placeholder {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    /* collapsed glass smaller (less cover) */
+    .info-box {
+      position: absolute;
+      bottom: 22px;
+      right: 22px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 14px;
+      padding: 12px 14px;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.35s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 10;
+      max-width: 360px;
+    }
+    .info-box:hover { background: rgba(255,255,255,0.16); }
+
+    /* expanded overlay */
+    .info-box.expanded {
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: 100%; height: 100%;
+      max-width: none;
+      border-radius: var(--radius);
+      flex-direction: row;
+      align-items: stretch;
+      justify-content: space-between;
+      padding: 0;
+      background: rgba(20, 20, 30, 0.94);
+      backdrop-filter: blur(18px);
+      gap: 0;
+      transform: none;
+    }
+
+    .video-box {
+      display: none;
+      width: 50%;
+      height: 100%;
+      padding: 26px;
+    }
+    .info-box.expanded .video-box { display: block; }
+
+    .video-box-inner {
+      width: 100%;
+      height: 100%;
+      background: #000;
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .video-box-inner video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .info-box-right { width: 100%; transition: all 0.35s ease; }
+    .info-box.expanded .info-box-right {
+      width: 50%;
+      padding: 34px;
+      display: flex;
+      flex-direction: column;
+      min-height: 0; /* allow inner scroll */
+    }
+
+    .info-box-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .info-toggle {
+      width: 30px;
+      height: 30px;
+      border: 2px solid rgba(255,255,255,0.9);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+      transition: transform 0.25s ease;
+    }
+    .info-box.expanded .info-toggle { transform: rotate(180deg); }
+
+    .info-title { font-size: 13px; line-height: 1.35; font-weight: 400; margin: 0; }
+    .info-subtitle { display: none; } /* hidden when collapsed */
+    .info-box.expanded .info-subtitle {
+      display: block;
+      font-size: 11px;
+      opacity: 0.8;
+      margin: 6px 0 0 0;
+    }
+
+    .expanded-content {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease 0.15s;
+      overflow: auto;
+      min-height: 0;
+      padding-right: 6px;
+    }
+    .info-box.expanded .expanded-content { display: block; opacity: 1; }
+
+    .expanded-content h3 {
+      font-size: 22px;
+      font-weight: 400;
+      margin: 16px 0 14px 0;
+      line-height: 1.25;
+      color: #fff;
+    }
+    .expanded-content p {
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 14px;
+      opacity: 0.92;
+      color: #fff;
+    }
+    .expanded-content .study-info {
+      font-size: 12px;
+      opacity: 0.75;
+      margin-bottom: 14px;
+      color: #fff;
+    }
+
+    .university-logo { margin-top: auto; padding-top: 14px; }
+
+    .science-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #333;
+      font-size: 14px;
+      padding-top: 18px;
+    }
+    .science-link:hover { text-decoration: underline; }
+    .science-icon { width: 24px; height: 24px; }
+
+    /* ---------------- HERO + FEATURES (no big white boxes) ---------------- */
+    .hero-section {
+      position: relative;
+      height: 520px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 54px;
+    }
+    .hero-image { width: 100%; height: 100%; object-fit: cover; display:block; }
+    .hero-content {
+      position: absolute;
+      top: 34px;
+      left: 34px;
+      max-width: 520px;
+      color: #333;
+      background: rgba(245, 243, 240, 0.95);
+      padding: 26px;
+      border-radius: 14px;
+    }
+    .hero-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #666;
+      margin-bottom: 12px;
+    }
+    .hero-title {
+      font-size: 40px;
+      font-weight: 300;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .hero-description { font-size: 16px; line-height: 1.6; color: #555; }
+
+    .hero-section.deep-dive { background: #f0eadc; }
+
+    .feature-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+      margin-bottom: 64px;
+      padding: 0;           /* no box */
+      background: transparent;
+      border-radius: 0;
+    }
+    .feature-section.reverse { direction: rtl; }
+    .feature-section.reverse > * { direction: ltr; }
+
+    .feature-video,
+    .feature-image-container {
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .feature-video video,
+    .feature-image-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .feature-content h2 {
+      font-size: 32px;
+      font-weight: 300;
+      margin-bottom: 14px;
+      line-height: 1.25;
+    }
+    .feature-content p { font-size: 16px; line-height: 1.6; color: #555; }
+
+    /* ---------------- SLIDESHOW (LAST SECTION) ---------------- */
+    .slideshow-section {
+      margin: 0 0 40px;
+      background: transparent;
+      padding: 0;
+    }
+
+    /* smaller heading like target */
+    .slideshow-title {
+      font-size: 32px;
+      font-weight: 300;
+      margin-bottom: 18px;
+      line-height: 1.15;
+    }
+
+    .slideshow-shell {
+      background: #efe9df;
+      border-radius: var(--radius);
+      padding: 22px 22px 18px;
+      position: relative;
+      overflow: visible; /* arrows should not clip */
+    }
+
+    .slideshow-viewport {
+      overflow: hidden;
+      border-radius: 14px;
+    }
+
+    .slideshow-track {
+      display: flex;
+      gap: 18px;
+      transition: transform 0.45s ease;
+      will-change: transform;
+    }
+
+    .slide-card {
+      flex: 0 0 calc(25% - 14px);
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      background: #fff;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .slide-image {
+      width: 100%;
+      height: 320px;
+      overflow: hidden;
+      background: #ddd;
+    }
+    .slide-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* bottom bar: straight top edge, expands upward */
+    .slide-panel {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--peach);
+      padding: 14px 14px 12px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      overflow: hidden;
+      max-height: 72px; /* collapsed height */
+      transition: max-height 0.35s ease;
+    }
+
+    .slide-card.expanded .slide-panel {
+      max-height: 220px; /* enough so desktop text never cuts */
+    }
+
+    .slide-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .slide-title-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+    .slide-icon { width: 22px; height: 22px; flex-shrink: 0; }
+    .slide-title {
+      font-size: 16px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .slide-toggle {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      border: 0;
+      background: rgba(255,255,255,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: #222;
+      flex-shrink: 0;
+    }
+
+    .slide-description {
+      margin-top: 10px;
+      font-size: 13px;
+      line-height: 1.55;
+      color: #333;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .slide-card.expanded .slide-description {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* two progress bars */
+    .slideshow-progress {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 16px;
+      padding-bottom: 2px;
+    }
+    .progress-bar {
+      width: 120px;
+      height: 2px;
+      background: rgba(0,0,0,0.18);
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+    .progress-bar::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:#111;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .25s ease;
+    }
+    .progress-bar.active::after{ transform: scaleX(1); }
+
+    /* arrows bottom-right like target; ensure visible */
+    .slideshow-arrows {
+      position: absolute;
+      right: 18px;
+      bottom: 14px;
+      display: flex;
+      gap: 10px;
+      z-index: 5;
+    }
+    .nav-arrow {
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(0,0,0,0.18);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+      background: rgba(255,255,255,0.35);
+      transition: all 0.2s ease;
+    }
+    .nav-arrow:hover { background: rgba(255,255,255,0.55); border-color: rgba(0,0,0,0.28); }
+
+    /* ---------------- MOBILE ---------------- */
+    @media (max-width: 1200px) {
+      .product-section {
+        grid-template-columns: 1fr 88px; /* MAIN | THUMBS */
+        grid-template-areas:
+          "main thumbs"
+          "info info";
+        padding: 18px;
+        gap: 14px;
+      }
+
+      /* main bigger, thumbs smaller + aligned (no overlap) */
+      .main-image {
+        max-height: none;
+      }
+      .main-image video,
+      .main-image img {
+        width: 100%;
+        aspect-ratio: 1 / 1; /* MUST be square */
+        max-height: none;
+        border-radius: 16px;
+      }
+
+      .thumbnail-gallery {
+        max-height: none;
+        gap: 8px;
+      }
+      .thumbnail-nav { height: 40px; border-radius: 14px; }
+      .thumbnail { border-radius: 14px; }
+
+      .product-title { font-size: 30px; margin-bottom: 10px; }
+      .clinical-badge { font-size: 11px; padding: 6px 10px; border-radius: 10px; }
+      .product-description { font-size: 14px; }
+
+      .benefits-section { padding: 26px 18px; }
+      .benefits-grid { grid-template-columns: 1fr; gap: 0; }
+      .benefit-item { padding-right: 0; padding-bottom: 16px; margin-bottom: 16px; }
+      .benefit-item:not(:last-child)::after {
+        right: 0; left: 0; top: auto; bottom: 0;
+        width: auto; height: 1px;
+      }
+
+      .video-section h2 { font-size: 22px; padding-bottom: 12px; }
+      .video-wrapper { height: 420px; }
+
+      .info-box {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+        bottom: 16px;
+        max-width: calc(100% - 40px);
+        padding: 10px 12px;
+        border-radius: 14px;
+      }
+
+      .info-title { font-size: 12px; }
+      .info-toggle { width: 28px; height: 28px; border-radius: 10px; }
+
+      .info-box.expanded {
+        flex-direction: column;
+        justify-content: flex-start;
+      }
+      .info-box.expanded .video-box { display: none; }
+      .info-box.expanded .info-box-right {
+        width: 100%;
+        padding: 22px;
+        height: 100%;
+      }
+
+      .hero-section { height: auto; }
+      .hero-image { height: 380px; }
+      .hero-content {
+        position: relative;
+        top: 0; left: 0;
+        max-width: 100%;
+        border-radius: 0;
+        background: #fff;
+        padding: 22px 18px;
+      }
+      .hero-title { font-size: 28px; }
+      .hero-description { font-size: 15px; }
+
+      .feature-section {
+        grid-template-columns: 1fr;
+        gap: 22px;
+        margin-bottom: 48px;
+      }
+      .feature-section.reverse { direction: ltr; }
+      .feature-content h2 { font-size: 26px; }
+
+      /* slideshow mobile: show next card peeking on the right */
+      .slideshow-title { font-size: 26px; padding: 0 2px; }
+      .slideshow-shell { padding: 18px 14px 14px; }
+      .slideshow-viewport { overflow: visible; } /* allow peek */
+      .slideshow-track {
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-left: 8px;
+        padding-right: 8px;
+        transition: none;
+      }
+      .slideshow-track::-webkit-scrollbar { display: none; }
+      .slide-card {
+        flex: 0 0 78vw; /* peek next card */
+        scroll-snap-align: start;
+      }
+      .slide-image { height: 360px; }
+      .slideshow-arrows { display: none; } /* like target: no arrows on mobile */
+      .slideshow-progress { margin-top: 14px; }
+      .progress-bar { width: 92px; }
+    }
+  </style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="breadcrumb">
-            <a href="#">Home</a>
-            <span>▸</span>
-            <span>HeatBelt Pro™</span>
-        </div>
-
-        <div class="product-section">
-            <div class="thumbnail-gallery">
-                <div class="thumbnail-nav" id="scrollUp">▲</div>
-                <div class="thumbnail-gallery-inner" id="thumbnailScroll">
-                    <div class="thumbnail active" data-type="video">
-                        <video muted loop playsinline>
-                            <source src="HeatBelt Pro hinter Feuer.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                    <div class="thumbnail" data-index="1">
-                        <img src="Haupt Produkt Bild (1).png" alt="Hauptprodukt">
-                    </div>
-                    <div class="thumbnail" data-index="2">
-                        <img src="Tragefoto Infrarot fokus.jpg" alt="Infrarot Fokus">
-                    </div>
-                    <div class="thumbnail" data-index="3">
-                        <img src="Tragefoto Bedinunf Fernbedinung fokus.jpg" alt="Fernbedienung">
-                    </div>
-                    <div class="thumbnail" data-index="4">
-                        <img src="Produkt Bild Hitze genau.jpg" alt="Hitze Detail">
-                    </div>
-                    <div class="thumbnail" data-index="5">
-                        <img src="Tragebild Frau Qualitativ.webp" alt="Trageansicht">
-                    </div>
-                    <div class="thumbnail" data-index="6">
-                        <img src="S64a9a16806dd4be28b7bf4d6c58f38f6u.avif" alt="Produktansicht">
-                    </div>
-                    <div class="thumbnail" data-index="7">
-                        <img src="Bild mit Inhalt und Verpackung.webp" alt="Verpackungsinhalt">
-                    </div>
-                </div>
-                <div class="thumbnail-nav" id="scrollDown">▼</div>
-            </div>
-
-            <div class="main-image">
-                <video id="mainVideo" autoplay muted loop playsinline>
-                    <source src="HeatBelt Pro hinter Feuer.mp4" type="video/mp4">
-                </video>
-                <img id="mainImage" src="Haupt Produkt Bild (1).png" alt="HeatBelt Pro™" style="display: none;">
-            </div>
-
-            <div class="product-info">
-                <div class="category">HOT- & COLD-WEARABLES</div>
-                <h1 class="product-title">HeatBelt Pro™</h1>
-                <p class="product-description">
-                    HeatBelt Pro™ reduziert klinisch erwiesenermaßen Schmerzen im unteren Rückenbereich mithilfe von vier fortschrittlichen Therapien: LED, Ferninfrarot, Wärme und Vibration. Es fördert eine schnellere Heilung, verbessert die Mobilität und bietet individuell anpassbare Behandlungsoptionen für eine schnell wirkende Linderung.
-                </p>
-                
-                <div class="clinical-badge">
-                    🔬 Klinisch erwiesen
-                </div>
-
-                <div class="rating">
-                    <div class="stars">★★★★☆</div>
-                    <div class="review-count">90 Bewertungen</div>
-                </div>
-
-                <div class="device-options">
-                    <label>DEVICE OPTIONS</label>
-                    <div class="option-card selected">
-                        <div class="option-content">
-                            <div class="option-icon">
-                                <img src="Haupt Produkt Bild (1).png" alt="HeatBelt Pro™">
-                            </div>
-                            <div class="option-name">HeatBelt Pro™</div>
-                        </div>
-                        <div class="option-price">€269</div>
-                    </div>
-                </div>
-
-                <button class="add-to-cart">In den Warenkorb legen</button>
-            </div>
-        </div>
-
-        <div class="benefits-section">
-            <div class="benefits-header">
-                <div class="benefits-icon">
-                    <img src="Benefit_Icons_15.svg" alt="Wissenschaft">
-                </div>
-                <h3>Wissenschaftlich belegte Vorteile</h3>
-            </div>
-            <div class="benefits-grid">
-                <div class="benefit-item">
-                    <h4>Klinisch erwiesen,</h4>
-                    <p>um Schmerzen im unteren Rücken zu reduzieren<sup>1</sup></p>
-                </div>
-                <div class="benefit-item">
-                    <h4>Reduziert Unterbrechungen</h4>
-                    <p>im täglichen Ablauf<sup>1</sup></p>
-                </div>
-                <div class="benefit-item">
-                    <h4>Beschleunigt die Erholung,</h4>
-                    <p>indem der Blutfluss zum Behandlungsbereich erhöht wird</p>
-                </div>
-                <div class="benefit-item">
-                    <h4>Reduziert Muskelkater</h4>
-                    <p>und hilft, die Beweglichkeit zu verbessern</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="video-section">
-            <h2>Vier fortschrittliche Therapien, eine Lösung gegen Rückenschmerzen</h2>
-            
-            <div class="video-wrapper">
-                <div class="video-background">
-                    <video autoplay muted loop playsinline>
-                        <source src="Design ohne Titel (3).mp4" type="video/mp4">
-                    </video>
-                </div>
-
-                <div class="video-container">
-                    <video class="video-placeholder" autoplay muted loop playsinline>
-                        <source src="Design ohne Titel (3).mp4" type="video/mp4">
-                    </video>
-                </div>
-                
-                <div class="info-box" id="infoBox">
-                    <div class="video-box">
-                        <div class="video-box-inner">
-                            <video autoplay muted loop playsinline>
-                                <source src="Design ohne Titel (3).mp4" type="video/mp4">
-                            </video>
-                        </div>
-                    </div>
-
-                    <div class="info-box-right">
-                        <div class="info-box-content">
-                            <div class="info-toggle">+</div>
-                            <div>
-                                <p class="info-title">LED-, Ferninfrarot-, Wärme- und Vibrations-Rückentherapiebandage</p>
-                                <p class="info-subtitle">Clinical study by: Department of Emergency Medicine, University at Buffalo</p>
-                            </div>
-                        </div>
-                        
-                        <div class="expanded-content">
-                            <h3>Klinisch nachgewiesene Schmerzlinderung im unteren Rückenbereich</h3>
-                            <p>Rückenschmerzen beeinträchtigen jedes Jahr die Lebensqualität von Millionen Menschen. Um besser zu verstehen, wie man Schmerzen im unteren Rückenbereich lindern kann, haben wir uns mit der University of Buffalo zusammengetan und eine klinische Studie durchgeführt, in der untersucht wurde, ob HeatBelt Pro™ Schmerzen im unteren Rückenbereich bei Betroffenen lindern kann. Nach zwei Wochen regelmäßiger Anwendung von HeatBelt Pro™ hatten die Teilnehmer weniger Schmerzen im unteren Rückenbereich als ohne die Anwendung.<sup>1</sup></p>
-                            
-                            <p class="study-info">Klinische Studie von: Abteilung für Notfallmedizin, University at Buffalo</p>
-                            
-                            <div class="university-logo">
-                                <svg width="200" height="50" viewBox="0 0 200 50">
-                                    <text x="10" y="30" fill="white" font-size="14" font-weight="500">Department of Emergency Medicine</text>
-                                    <text x="10" y="45" fill="white" font-size="12" opacity="0.8">University at Buffalo</text>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <a href="#" class="science-link">
-                <svg class="science-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M9 2v6m6-6v6M9 18c.667 2 2.333 4 6 4s5.333-2 6-4M5 10h14a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2z"/>
-                </svg>
-                <span>Erkunde die Wissenschaft hinter HeatBelt Pro™</span>
-            </a>
-        </div>
-
-        <div class="slideshow-section">
-            <div class="container">
-                <h2>Die Entlastung, die sich mit dir bewegt</h2>
-                
-                <div class="slideshow-container">
-                    <div class="slideshow-track" id="slideshowTrack">
-                        <div class="slide-card" data-slide="1">
-                            <div class="slide-image">
-                                <img src="Tragefoto Infrarot fokus.jpg" alt="Nahinfrarot-LED-Lichttherapie">
-                            </div>
-                            <div class="slide-content">
-                                <div class="slide-header">
-                                    <div class="slide-title-group">
-                                        <svg class="slide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <circle cx="12" cy="12" r="5"/>
-                                            <line x1="12" y1="1" x2="12" y2="3"/>
-                                            <line x1="12" y1="21" x2="12" y2="23"/>
-                                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-                                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-                                            <line x1="1" y1="12" x2="3" y2="12"/>
-                                            <line x1="21" y1="12" x2="23" y2="12"/>
-                                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-                                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-                                        </svg>
-                                        <h3 class="slide-title">Nahinfrarot-LED-Lichttherapie</h3>
-                                    </div>
-                                    <div class="slide-toggle">+</div>
-                                </div>
-                                <div class="slide-description">
-                                    <p>Dringt tief in die Muskeln und Gelenke ein, um Entzündungen zu reduzieren und den natürlichen Heilungsprozess des Körpers zu beschleunigen.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="slide-card" data-slide="2">
-                            <div class="slide-image">
-                                <img src="Hitze Bild slideshow.webp" alt="Wärmetherapie">
-                            </div>
-                            <div class="slide-content">
-                                <div class="slide-header">
-                                    <div class="slide-title-group">
-                                        <svg class="slide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M12 2v10m0 0L8 8m4 4l4-4"/>
-                                            <path d="M12 12v10"/>
-                                        </svg>
-                                        <h3 class="slide-title">Wärmetherapie</h3>
-                                    </div>
-                                    <div class="slide-toggle">+</div>
-                                </div>
-                                <div class="slide-description">
-                                    <p>Sanfte Wärme fördert die Durchblutung, lindert Schmerzen, reduziert Steifheit und unterstützt die Muskelentspannung.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="slide-card" data-slide="3">
-                            <div class="slide-image">
-                                <img src="Vibrationsbild slideshow.webp" alt="Vibrationstherapie">
-                            </div>
-                            <div class="slide-content">
-                                <div class="slide-header">
-                                    <div class="slide-title-group">
-                                        <svg class="slide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                                            <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
-                                        </svg>
-                                        <h3 class="slide-title">Vibrationstherapie</h3>
-                                    </div>
-                                    <div class="slide-toggle">+</div>
-                                </div>
-                                <div class="slide-description">
-                                    <p>Die Vibrationsmassage bei Rückenschmerzen stimuliert die Muskeln, um Schmerzen, Verspannungen und Beschwerden zu lindern.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="slide-card" data-slide="4">
-                            <div class="slide-image">
-                                <img src="Ferninfrarot slideshow bild.jpg" alt="Ferninfrarot-Therapie">
-                            </div>
-                            <div class="slide-content">
-                                <div class="slide-header">
-                                    <div class="slide-title-group">
-                                        <svg class="slide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                                            <path d="M2 17l10 5 10-5"/>
-                                        </svg>
-                                        <h3 class="slide-title">Ferninfrarot-Therapie</h3>
-                                    </div>
-                                    <div class="slide-toggle">+</div>
-                                </div>
-                                <div class="slide-description">
-                                    <p>Liefert tief eindringende Wärme, um die Durchblutung zu verbessern und Schmerzen zu lindern.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="slideshow-nav">
-                    <div class="nav-arrow" id="prevSlide">‹</div>
-                    <div class="nav-arrow" id="nextSlide">›</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="hero-section deep-dive">
-            <img src="image0.jpeg" alt="Therabody Unterschied" class="hero-image">
-            <div class="hero-content">
-                <div class="hero-label">DER THERABODY-UNTERSCHIED</div>
-                <h2 class="hero-title">Gezielte Entlastung, die über die Oberfläche hinausgeht</h2>
-                <p class="hero-description">Viele Behandlungen gegen Schmerzen im unteren Rückenbereich lindern nur oberflächlich, aber diese wirkt tiefer. Nahinfrarot-LED-Licht dringt tief in Muskeln und Gelenke ein, um Entzündungen zu lindern und den natürlichen Heilungsprozess des Körpers zu beschleunigen – für eine effektive und lang anhaltende Linderung.</p>
-            </div>
-        </div>
-
-        <div class="feature-section">
-            <div class="feature-video">
-                <video autoplay muted loop playsinline>
-                    <source src="Video HeatBelt Pro mann legt sich hin.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="feature-content">
-                <h2>Verbessertes Design für alle Formen und Größen</h2>
-                <p>Das schlanke, bequeme Design bleibt bei alltäglichen Bewegungen sicher an seinem Platz und passt sich dank verstellbarer Klettverschlüsse und eines zusätzlichen elastischen Kompressionsriemens für eine individuellere Passform allen Körperformen an.</p>
-            </div>
-        </div>
-
-        <div class="feature-section reverse">
-            <div class="feature-image-container">
-                <img src="Tragefoto Bedinunf Fernbedinung fokus.jpg" alt="Kontinuierliche Behandlung">
-            </div>
-            <div class="feature-content">
-                <h2>Kontinuierliche Behandlung, während das Gerät an die Stromversorgung angeschlossen ist</h2>
-                <p>HeatBelt Pro™ bietet eine lange Akkulaufzeit von bis zu 180 Minuten mit einer einzigen Ladung. Die automatische Abschaltfunktion wird nach 20 Minuten aktiviert, wenn der Akku verwendet wird, um sicherzustellen, dass du eine wissenschaftlich fundierte Behandlungsdosis erhalten hast. Außerdem kannst du, wenn das Gerät angeschlossen ist, eine kontinuierliche Behandlung ohne Unterbrechung genießen.</p>
-            </div>
-        </div>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="#">Home</a>
+      <span>▸</span>
+      <span>HeatBelt Pro™</span>
     </div>
 
-    <script>
-        // Thumbnail navigation
-        const thumbnails = document.querySelectorAll('.thumbnail');
-        const mainVideo = document.getElementById('mainVideo');
-        const mainImage = document.getElementById('mainImage');
-        const thumbnailScroll = document.getElementById('thumbnailScroll');
-        const scrollUpBtn = document.getElementById('scrollUp');
-        const scrollDownBtn = document.getElementById('scrollDown');
-        
-        // Thumbnail click handler
-        thumbnails.forEach(thumb => {
-            thumb.addEventListener('click', function() {
-                thumbnails.forEach(t => t.classList.remove('active'));
-                this.classList.add('active');
-                
-                if (this.hasAttribute('data-type') && this.getAttribute('data-type') === 'video') {
-                    mainVideo.style.display = 'block';
-                    mainImage.style.display = 'none';
-                    mainVideo.play();
-                } else {
-                    const imgSrc = this.querySelector('img').src;
-                    mainImage.src = imgSrc;
-                    mainVideo.style.display = 'none';
-                    mainImage.style.display = 'block';
-                }
-            });
-        });
-        
-        // Scroll buttons
-        scrollUpBtn.addEventListener('click', () => {
-            thumbnailScroll.scrollBy({ top: -110, behavior: 'smooth' });
-        });
-        
-        scrollDownBtn.addEventListener('click', () => {
-            thumbnailScroll.scrollBy({ top: 110, behavior: 'smooth' });
-        });
-        
-        // Auto-play thumbnail video
-        const thumbnailVideo = document.querySelector('.thumbnail[data-type="video"] video');
-        if (thumbnailVideo) {
-            thumbnailVideo.play();
+    <!-- PRODUCT -->
+    <div class="product-section">
+      <!-- MAIN -->
+      <div class="main-image">
+        <video id="mainVideo" autoplay muted loop playsinline>
+          <source src="HeatBelt Pro hinter Feuer.mp4" type="video/mp4" />
+        </video>
+        <img id="mainImage" src="Haupt Produkt Bild (1).png" alt="HeatBelt Pro™" style="display:none;" />
+      </div>
+
+      <!-- THUMBS -->
+      <div class="thumbnail-gallery">
+        <div class="thumbnail-nav" id="scrollUp">▲</div>
+
+        <div class="thumbnail-gallery-inner" id="thumbnailScroll">
+          <div class="thumbnail active" data-type="video" title="Video">
+            <video muted loop playsinline>
+              <source src="HeatBelt Pro hinter Feuer.mp4" type="video/mp4" />
+            </video>
+          </div>
+
+          <div class="thumbnail" data-index="1"><img src="Haupt Produkt Bild (1).png" alt="Hauptprodukt" /></div>
+          <div class="thumbnail" data-index="2"><img src="Tragefoto Infrarot fokus.jpg" alt="Infrarot Fokus" /></div>
+          <div class="thumbnail" data-index="3"><img src="Tragefoto Bedinunf Fernbedinung fokus.jpg" alt="Fernbedienung" /></div>
+          <div class="thumbnail" data-index="4"><img src="Produkt Bild Hitze genau.jpg" alt="Hitze Detail" /></div>
+          <div class="thumbnail" data-index="5"><img src="Tragebild Frau Qualitativ.webp" alt="Trageansicht" /></div>
+          <div class="thumbnail" data-index="6"><img src="S64a9a16806dd4be28b7bf4d6c58f38f6u.avif" alt="Produktansicht" /></div>
+          <div class="thumbnail" data-index="7"><img src="Bild mit Inhalt und Verpackung.webp" alt="Verpackungsinhalt" /></div>
+        </div>
+
+        <div class="thumbnail-nav" id="scrollDown">▼</div>
+      </div>
+
+      <!-- INFO -->
+      <div class="product-info">
+        <div class="category">HOT- &amp; COLD-WEARABLES</div>
+        <h1 class="product-title">HeatBelt Pro™</h1>
+
+        <p class="product-description">
+          HeatBelt Pro™ reduziert klinisch erwiesenermaßen Schmerzen im unteren Rückenbereich mithilfe von vier fortschrittlichen Therapien:
+          LED, Ferninfrarot, Wärme und Vibration. Es fördert eine schnellere Heilung, verbessert die Mobilität und bietet individuell anpassbare
+          Behandlungsoptionen für eine schnell wirkende Linderung.
+        </p>
+
+        <div class="clinical-badge">🔬 Klinisch erwiesen</div>
+
+        <div class="rating">
+          <div class="stars">★★★★☆</div>
+          <div class="review-count">90 Bewertungen</div>
+        </div>
+
+        <div class="device-options">
+          <label>DEVICE OPTIONS</label>
+          <div class="option-card selected">
+            <div class="option-content">
+              <div class="option-icon">
+                <img src="Haupt Produkt Bild (1).png" alt="HeatBelt Pro™" />
+              </div>
+              <div class="option-name">HeatBelt Pro™</div>
+            </div>
+            <div class="option-price">€269</div>
+          </div>
+        </div>
+
+        <button class="add-to-cart">In den Warenkorb legen</button>
+      </div>
+    </div>
+
+    <!-- BENEFITS -->
+    <div class="benefits-section">
+      <div class="benefits-header">
+        <div class="benefits-icon">
+          <img src="Benefit_Icons_15.svg" alt="Wissenschaft" />
+        </div>
+        <h3>Wissenschaftlich belegte Vorteile</h3>
+      </div>
+
+      <div class="benefits-grid">
+        <div class="benefit-item">
+          <h4>Klinisch erwiesen,</h4>
+          <p>um Schmerzen im unteren Rücken zu reduzieren<sup>1</sup></p>
+        </div>
+        <div class="benefit-item">
+          <h4>Reduziert Unterbrechungen</h4>
+          <p>im täglichen Ablauf<sup>1</sup></p>
+        </div>
+        <div class="benefit-item">
+          <h4>Beschleunigt die Erholung,</h4>
+          <p>indem der Blutfluss zum Behandlungsbereich erhöht wird</p>
+        </div>
+        <div class="benefit-item">
+          <h4>Reduziert Muskelkater</h4>
+          <p>und hilft, die Beweglichkeit zu verbessern</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIDEO -->
+    <div class="video-section">
+      <h2>Vier fortschrittliche Therapien, eine Lösung gegen Rückenschmerzen</h2>
+
+      <div class="video-wrapper">
+        <div class="video-background">
+          <video autoplay muted loop playsinline>
+            <source src="Design ohne Titel (3).mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <div class="video-container">
+          <video class="video-placeholder" autoplay muted loop playsinline>
+            <source src="Design ohne Titel (3).mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <div class="info-box" id="infoBox">
+          <div class="video-box">
+            <div class="video-box-inner">
+              <video autoplay muted loop playsinline>
+                <source src="Design ohne Titel (3).mp4" type="video/mp4" />
+              </video>
+            </div>
+          </div>
+
+          <div class="info-box-right">
+            <div class="info-box-content">
+              <div class="info-toggle">+</div>
+              <div>
+                <p class="info-title">LED-, Ferninfrarot-, Wärme- und Vibrations-Rückentherapiebandage</p>
+                <p class="info-subtitle">Clinical study by: Department of Emergency Medicine, University at Buffalo</p>
+              </div>
+            </div>
+
+            <div class="expanded-content">
+              <h3>Klinisch nachgewiesene Schmerzlinderung im unteren Rückenbereich</h3>
+              <p>
+                Rückenschmerzen beeinträchtigen jedes Jahr die Lebensqualität von Millionen Menschen. Um besser zu verstehen, wie man Schmerzen im unteren
+                Rückenbereich lindern kann, haben wir uns mit der University of Buffalo zusammengetan und eine klinische Studie durchgeführt, in der untersucht
+                wurde, ob HeatBelt Pro™ Schmerzen im unteren Rückenbereich bei Betroffenen lindern kann. Nach zwei Wochen regelmäßiger Anwendung von HeatBelt Pro™
+                hatten die Teilnehmer weniger Schmerzen im unteren Rückenbereich als ohne die Anwendung.<sup>1</sup>
+              </p>
+
+              <p class="study-info">Klinische Studie von: Abteilung für Notfallmedizin, University at Buffalo</p>
+
+              <div class="university-logo">
+                <svg width="260" height="56" viewBox="0 0 260 56">
+                  <text x="10" y="30" fill="white" font-size="14" font-weight="500">Department of Emergency Medicine</text>
+                  <text x="10" y="48" fill="white" font-size="12" opacity="0.8">University at Buffalo</text>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a href="#" class="science-link">
+        <svg class="science-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 2v6m6-6v6M9 18c.667 2 2.333 4 6 4s5.333-2 6-4M5 10h14a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2z"/>
+        </svg>
+        <span>Erkunde die Wissenschaft hinter HeatBelt Pro™</span>
+      </a>
+    </div>
+
+    <!-- HERO -->
+    <div class="hero-section deep-dive">
+      <img src="image0.jpeg" alt="Der Unterschied" class="hero-image" />
+      <div class="hero-content">
+        <div class="hero-label">DER THERABODY-UNTERSCHIED</div>
+        <h2 class="hero-title">Gezielte Entlastung, die über die Oberfläche hinausgeht</h2>
+        <p class="hero-description">
+          Viele Behandlungen gegen Schmerzen im unteren Rückenbereich lindern nur oberflächlich, aber diese wirkt tiefer. Nahinfrarot-LED-Licht dringt tief in Muskeln
+          und Gelenke ein, um Entzündungen zu lindern und den natürlichen Heilungsprozess des Körpers zu beschleunigen – für eine effektive und lang anhaltende Linderung.
+        </p>
+      </div>
+    </div>
+
+    <!-- FEATURES (no big boxes) -->
+    <div class="feature-section">
+      <div class="feature-video">
+        <video autoplay muted loop playsinline>
+          <source src="Video HeatBelt Pro mann legt sich hin.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="feature-content">
+        <h2>Verbessertes Design für alle Formen und Größen</h2>
+        <p>
+          Das schlanke, bequeme Design bleibt bei alltäglichen Bewegungen sicher an seinem Platz und passt sich dank verstellbarer Klettverschlüsse und eines zusätzlichen
+          elastischen Kompressionsriemens für eine individuellere Passform allen Körperformen an.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-section reverse">
+      <div class="feature-image-container">
+        <img src="Tragefoto Bedinunf Fernbedinung fokus.jpg" alt="Kontinuierliche Behandlung" />
+      </div>
+      <div class="feature-content">
+        <h2>Kontinuierliche Behandlung, während das Gerät an die Stromversorgung angeschlossen ist</h2>
+        <p>
+          HeatBelt Pro™ bietet eine lange Akkulaufzeit von bis zu 180 Minuten mit einer einzigen Ladung. Die automatische Abschaltfunktion wird nach 20 Minuten aktiviert,
+          wenn der Akku verwendet wird, um sicherzustellen, dass du eine wissenschaftlich fundierte Behandlungsdosis erhalten hast. Außerdem kannst du, wenn das Gerät
+          angeschlossen ist, eine kontinuierliche Behandlung ohne Unterbrechung genießen.
+        </p>
+      </div>
+    </div>
+
+    <!-- SLIDESHOW (LAST) -->
+    <div class="slideshow-section">
+      <div class="slideshow-shell">
+        <h2 class="slideshow-title">Die Entlastung, die sich mit dir bewegt</h2>
+
+        <div class="slideshow-viewport" id="slideshowViewport">
+          <div class="slideshow-track" id="slideshowTrack">
+            <!-- 1 -->
+            <div class="slide-card" data-slide="0">
+              <div class="slide-image">
+                <img src="Tragefoto Infrarot fokus.jpg" alt="Nahinfrarot-LED-Lichttherapie" />
+              </div>
+              <div class="slide-panel">
+                <div class="slide-header">
+                  <div class="slide-title-group">
+                    <svg class="slide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="5"></circle>
+                      <line x1="12" y1="1" x2="12" y2="3"></line>
+                      <line x1="12" y1="21" x2="12" y2="23"></line>
+                      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                      <line x1="1" y1="12" x2="3" y2="12"></line>
+                      <line x1="21" y1="12" x2="23" y2="12"></line>
+                      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <div class="slide-title">Nahinfrarot-LED-Lichttherapie</div>
+                  </div>
+                  <button class="slide-toggle" type="button" aria-label="Aufklappen">+</button>
+                </div>
+                <div class="slide-description">
+                  Dringt tief in die Muskeln und Gelenke ein, um Entzündungen zu reduzieren und den natürlichen Heilungsprozess des Körpers zu beschleunigen.
+                </div>
+              </div>
+            </div>
+
+            <!-- 2 -->
+            <div class="slide-card" data-slide="1">
+              <div class="slide-image">
+                <img src="Hitze Bild slideshow.webp" alt="Wärmetherapie" />
+              </div>
+              <div class="slide-panel">
+                <div class="slide-header">
+                  <div class="slide-title-group">
+                    <svg class="slide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 2c2 2 2 4 0 6s-2 4 0 6 2 4 0 6"></path>
+                      <path d="M16 4c2 2 2 4 0 6s-2 4 0 6 2 4 0 6"></path>
+                    </svg>
+                    <div class="slide-title">Wärmetherapie</div>
+                  </div>
+                  <button class="slide-toggle" type="button" aria-label="Aufklappen">+</button>
+                </div>
+                <div class="slide-description">
+                  Sanfte Wärme fördert die Durchblutung, lindert Schmerzen, reduziert Steifheit und unterstützt die Muskelentspannung.
+                </div>
+              </div>
+            </div>
+
+            <!-- 3 -->
+            <div class="slide-card" data-slide="2">
+              <div class="slide-image">
+                <img src="Vibrationsbild slideshow.webp" alt="Vibrationstherapie" />
+              </div>
+              <div class="slide-panel">
+                <div class="slide-header">
+                  <div class="slide-title-group">
+                    <svg class="slide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M7 7c2 2 2 8 0 10"></path>
+                      <path d="M17 7c-2 2-2 8 0 10"></path>
+                      <path d="M10 9c1 1 1 5 0 6"></path>
+                      <path d="M14 9c-1 1-1 5 0 6"></path>
+                    </svg>
+                    <div class="slide-title">Vibrationstherapie</div>
+                  </div>
+                  <button class="slide-toggle" type="button" aria-label="Aufklappen">+</button>
+                </div>
+                <div class="slide-description">
+                  Die Vibrationsmassage bei Rückenschmerzen stimuliert die Muskeln, um Schmerzen, Verspannungen und Beschwerden zu lindern.
+                </div>
+              </div>
+            </div>
+
+            <!-- 4 -->
+            <div class="slide-card" data-slide="3">
+              <div class="slide-image">
+                <img src="Ferninfrarot slideshow bild.jpg" alt="Ferninfrarot-Therapie" />
+              </div>
+              <div class="slide-panel">
+                <div class="slide-header">
+                  <div class="slide-title-group">
+                    <svg class="slide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M4 12h16"></path>
+                      <path d="M7 9c1.5 1.5 1.5 4.5 0 6"></path>
+                      <path d="M17 9c-1.5 1.5-1.5 4.5 0 6"></path>
+                    </svg>
+                    <div class="slide-title">Ferninfrarot-Therapie</div>
+                  </div>
+                  <button class="slide-toggle" type="button" aria-label="Aufklappen">+</button>
+                </div>
+                <div class="slide-description">
+                  Liefert tief eindringende Wärme, um die Durchblutung zu verbessern und Schmerzen zu lindern.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- desktop arrows -->
+        <div class="slideshow-arrows" aria-hidden="false">
+          <div class="nav-arrow" id="prevSlide">‹</div>
+          <div class="nav-arrow" id="nextSlide">›</div>
+        </div>
+
+        <!-- 2 progress bars -->
+        <div class="slideshow-progress" aria-hidden="true">
+          <div class="progress-bar active" id="prog0"></div>
+          <div class="progress-bar" id="prog1"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ------- PRODUCT THUMBNAILS -------
+    const thumbnails = document.querySelectorAll(".thumbnail");
+    const mainVideo = document.getElementById("mainVideo");
+    const mainImage = document.getElementById("mainImage");
+    const thumbnailScroll = document.getElementById("thumbnailScroll");
+    const scrollUpBtn = document.getElementById("scrollUp");
+    const scrollDownBtn = document.getElementById("scrollDown");
+
+    thumbnails.forEach((thumb) => {
+      thumb.addEventListener("click", function () {
+        thumbnails.forEach((t) => t.classList.remove("active"));
+        this.classList.add("active");
+
+        if (this.getAttribute("data-type") === "video") {
+          mainVideo.style.display = "block";
+          mainImage.style.display = "none";
+          mainVideo.play();
+        } else {
+          const imgSrc = this.querySelector("img").getAttribute("src");
+          mainImage.src = imgSrc;
+          mainVideo.style.display = "none";
+          mainImage.style.display = "block";
         }
+      });
+    });
 
-        // Option selection
-        const optionCards = document.querySelectorAll('.option-card');
-        optionCards.forEach(card => {
-            card.addEventListener('click', function() {
-                optionCards.forEach(c => c.classList.remove('selected'));
-                this.classList.add('selected');
-            });
-        });
+    scrollUpBtn.addEventListener("click", () => {
+      thumbnailScroll.scrollBy({ top: -120, behavior: "smooth" });
+    });
+    scrollDownBtn.addEventListener("click", () => {
+      thumbnailScroll.scrollBy({ top: 120, behavior: "smooth" });
+    });
 
-        // Add to cart
-        document.querySelector('.add-to-cart').addEventListener('click', function() {
-            alert('Produkt wurde zum Warenkorb hinzugefügt!');
-        });
+    const thumbVideo = document.querySelector('.thumbnail[data-type="video"] video');
+    if (thumbVideo) thumbVideo.play();
 
-        // Video info box toggle
-        const infoBox = document.getElementById('infoBox');
-        
-        infoBox.addEventListener('click', function() {
-            this.classList.toggle('expanded');
-        });
+    // option selection
+    document.querySelectorAll(".option-card").forEach((card) => {
+      card.addEventListener("click", function () {
+        document.querySelectorAll(".option-card").forEach((c) => c.classList.remove("selected"));
+        this.classList.add("selected");
+      });
+    });
 
-        // Slideshow functionality
-        const slideCards = document.querySelectorAll('.slide-card');
-        const slideshowTrack = document.getElementById('slideshowTrack');
-        const prevSlide = document.getElementById('prevSlide');
-        const nextSlide = document.getElementById('nextSlide');
-        let currentSlide = 0;
+    // add to cart demo
+    document.querySelector(".add-to-cart").addEventListener("click", function () {
+      alert("Produkt wurde zum Warenkorb hinzugefügt!");
+    });
 
-        slideCards.forEach(card => {
-            const toggle = card.querySelector('.slide-toggle');
-            toggle.addEventListener('click', function(e) {
-                e.stopPropagation();
-                card.classList.toggle('expanded');
-                this.textContent = card.classList.contains('expanded') ? '−' : '+';
-            });
-        });
+    // ------- VIDEO INFO BOX -------
+    const infoBox = document.getElementById("infoBox");
+    infoBox.addEventListener("click", function () {
+      this.classList.toggle("expanded");
+    });
 
-        function updateSlidePosition() {
-            const slideWidth = slideCards[0].offsetWidth + 20;
-            slideshowTrack.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
-        }
+    // ------- SLIDESHOW -------
+    const track = document.getElementById("slideshowTrack");
+    const viewport = document.getElementById("slideshowViewport");
+    const prev = document.getElementById("prevSlide");
+    const next = document.getElementById("nextSlide");
 
-        if (prevSlide) {
-            prevSlide.addEventListener('click', () => {
-                currentSlide = Math.max(0, currentSlide - 1);
-                updateSlidePosition();
-            });
-        }
+    const prog0 = document.getElementById("prog0");
+    const prog1 = document.getElementById("prog1");
 
-        if (nextSlide) {
-            nextSlide.addEventListener('click', () => {
-                currentSlide = Math.min(slideCards.length - 1, currentSlide + 1);
-                updateSlidePosition();
-            });
-        }
+    // expand/collapse per card (only toggle button)
+    document.querySelectorAll(".slide-card").forEach((card) => {
+      const btn = card.querySelector(".slide-toggle");
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const expanded = card.classList.toggle("expanded");
+        btn.textContent = expanded ? "−" : "+";
+      });
 
-        // Mobile swipe for slideshow
-        let touchStartX = 0;
-        let touchEndX = 0;
+      // clicking card also toggles (like target)
+      card.addEventListener("click", (e) => {
+        // avoid double when button clicked
+        if (e.target.closest(".slide-toggle")) return;
+        const expanded = card.classList.toggle("expanded");
+        btn.textContent = expanded ? "−" : "+";
+      });
+    });
 
-        slideshowTrack.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
+    function setProgressByScroll() {
+      // two pages: start vs end
+      const maxScroll = track.scrollWidth - track.clientWidth;
+      const x = track.scrollLeft || 0;
+      const page = maxScroll <= 0 ? 0 : (x / maxScroll > 0.5 ? 1 : 0);
+      prog0.classList.toggle("active", page === 0);
+      prog1.classList.toggle("active", page === 1);
+    }
 
-        slideshowTrack.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
+    // Desktop arrows: scroll viewport width minus a bit
+    function scrollSlides(dir) {
+      const amount = Math.max(280, Math.floor((viewport.clientWidth || track.clientWidth) * 0.75));
+      track.scrollBy({ left: dir * amount, behavior: "smooth" });
+    }
 
-        function handleSwipe() {
-            if (touchEndX < touchStartX - 50) {
-                // Swipe left
-                currentSlide = Math.min(slideCards.length - 1, currentSlide + 1);
-                updateSlidePosition();
-            }
-            if (touchEndX > touchStartX + 50) {
-                // Swipe right
-                currentSlide = Math.max(0, currentSlide - 1);
-                updateSlidePosition();
-            }
-        }
-    </script>
+    if (prev && next) {
+      prev.addEventListener("click", () => scrollSlides(-1));
+      next.addEventListener("click", () => scrollSlides(1));
+    }
+
+    // make track scrollable on all sizes (desktop arrows rely on it)
+    track.style.overflowX = "auto";
+    track.style.scrollbarWidth = "none";
+    track.addEventListener("scroll", () => setProgressByScroll(), { passive: true });
+
+    // init
+    setProgressByScroll();
+    window.addEventListener("resize", setProgressByScroll);
+  </script>
 </body>
 </html>
