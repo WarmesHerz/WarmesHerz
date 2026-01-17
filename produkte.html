@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -778,11 +778,196 @@
     .hero-section.deep-dive { background: #f0eadc; }
 
     /* =========================
+       REVIEWS (Therabody-like)
+       ========================= */
+    .hb-reviews {
+      margin-top: 44px;
+      padding-top: 26px;
+      border-top: 1px solid rgba(0,0,0,0.12);
+    }
+
+    .hb-reviews h2 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 44px;
+      font-weight: 500;
+      margin: 0 0 22px;
+      color: #111;
+    }
+
+    .hb-reviews-summary {
+      display: grid;
+      grid-template-columns: 1fr 1px 1.2fr;
+      gap: 26px;
+      align-items: start;
+      padding: 14px 0 24px;
+    }
+
+    .hb-reviews-divider {
+      width: 1px;
+      height: 100%;
+      background: rgba(0,0,0,0.12);
+    }
+
+    .hb-score {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 64px;
+      line-height: 1;
+      font-weight: 600;
+      margin: 0 0 10px;
+      color: #111;
+    }
+
+    .hb-score-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .hb-stars {
+      letter-spacing: 2px;
+      color: #111;
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .hb-based {
+      font-size: 14px;
+      color: rgba(0,0,0,0.55);
+    }
+
+    .hb-reviews-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(0,0,0,0.65);
+      background: transparent;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .hb-bars {
+      display: grid;
+      gap: 10px;
+      margin-top: 6px;
+      max-width: 520px;
+    }
+
+    .hb-bar-row {
+      display: grid;
+      grid-template-columns: 18px 1fr 34px;
+      gap: 12px;
+      align-items: center;
+      font-size: 14px;
+      color: #111;
+    }
+
+    .hb-bar-track {
+      height: 4px;
+      background: rgba(0,0,0,0.12);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .hb-bar-fill {
+      height: 100%;
+      background: #111;
+      width: 0%;
+    }
+
+    .hb-reviews-list {
+      margin-top: 18px;
+    }
+
+    .hb-review {
+      padding: 18px 0 22px;
+      border-top: 1px solid rgba(0,0,0,0.12);
+    }
+
+    .hb-review-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 6px;
+    }
+
+    .hb-review-title {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 28px;
+      font-weight: 500;
+      margin: 0;
+      color: #111;
+    }
+
+    .hb-review-date {
+      font-size: 14px;
+      color: rgba(0,0,0,0.6);
+      white-space: nowrap;
+    }
+
+    .hb-review-stars {
+      margin: 6px 0 10px;
+      color: #111;
+      letter-spacing: 2px;
+      font-size: 16px;
+    }
+
+    .hb-review-text {
+      font-size: 16px;
+      line-height: 1.65;
+      color: rgba(0,0,0,0.8);
+      margin: 0 0 14px;
+      max-width: 980px;
+    }
+
+    .hb-helpful {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 14px;
+      color: rgba(0,0,0,0.75);
+    }
+
+    .hb-help-actions {
+      display: inline-flex;
+      gap: 12px;
+      align-items: center;
+      color: rgba(0,0,0,0.75);
+    }
+
+    .hb-help-actions span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hb-icon-btn {
+      width: 18px;
+      height: 18px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    /* Mobile reviews */
+    @media (max-width: 1200px) {
+      .hb-reviews h2 { font-size: 36px; }
+      .hb-reviews-summary {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+      .hb-reviews-divider { display: none; }
+      .hb-score { font-size: 54px; }
+      .hb-review-title { font-size: 24px; }
+    }
+
+    /* =========================
        MOBILE: ONLY the requested fixes
-       - bigger main media
-       - thumbs further right, smaller, square, max 3 visible
-       - restore video section mobile (collapsed smaller, expanded full width)
-       - restore slideshow mobile with peek (next slide visible)
+       - thumbnails column same height as main image
+       - ensure thumb video plays on mobile
+       - keep rest unchanged
        ========================= */
     @media (max-width: 1200px) {
       /* === product: main bigger + thumbs further right === */
@@ -791,7 +976,7 @@
         grid-template-rows: auto auto;
         padding: 18px;
         gap: 22px; /* push thumbs further right */
-        align-items: start;
+        align-items: stretch; /* ✅ make thumbs column match main height in row 1 */
       }
 
       .main-image {
@@ -800,14 +985,17 @@
         min-height: 0;
         align-items: flex-start;
         justify-content: flex-start;
+
+        /* ✅ enforce square box so row height is stable */
+        aspect-ratio: 1 / 1;
+        height: 100%;
       }
 
       /* square main media on mobile */
       .main-image video,
       .main-image img {
         width: 100%;
-        aspect-ratio: 1 / 1;
-        height: auto;
+        height: 100%;              /* ✅ fill the square container */
         max-height: none;
         object-fit: cover;
       }
@@ -820,6 +1008,9 @@
         gap: 6px;
         padding-left: 6px; /* nudge right */
         align-items: center;
+
+        height: 100%;             /* ✅ match the main-image height */
+        align-self: stretch;
       }
 
       /* ✅ square thumbs + smaller */
@@ -829,12 +1020,13 @@
         border-radius: 12px;
       }
 
-      /* ✅ show only 3 thumbs; remaining reachable via scroll buttons */
+      /* ✅ show only 3 thumbs; keep inner centered within the full height */
       .thumbnail-gallery-inner {
         max-height: calc((52px * 3) + (8px * 2));
         overflow: hidden;
         gap: 8px;
         align-items: center;
+        margin: auto 0;            /* ✅ centers the 3 thumbs block vertically */
       }
 
       /* ✅ ensure both arrows exist and are small */
@@ -1007,7 +1199,7 @@
 
         <div class="thumbnail-gallery-inner" id="thumbnailScroll">
           <div class="thumbnail active" data-type="video">
-            <video muted loop playsinline>
+            <video autoplay muted loop playsinline preload="metadata">
               <source src="HeatBelt Pro hinter Feuer.mp4" type="video/mp4">
             </video>
           </div>
@@ -1540,8 +1732,158 @@
 <!-- ================= ENDE LIEFERUMFANG / PRODUKTINFO ================= -->
 
 
+    <!-- ================= REVIEWS (LAST SECTION) ================= -->
+    <section class="hb-reviews" id="bewertungen">
+      <h2>Kundenbewertungen</h2>
 
-</div>
+      <div class="hb-reviews-summary">
+        <!-- Left: score -->
+        <div>
+          <div class="hb-score">4.4</div>
+          <div class="hb-score-row">
+            <div class="hb-stars">★★★★☆</div>
+            <div class="hb-based">Basierend auf 90 Bewertungen</div>
+          </div>
+          <button class="hb-reviews-btn" type="button">✦ Bewertungen zusammengefasst anzeigen</button>
+        </div>
+
+        <div class="hb-reviews-divider"></div>
+
+        <!-- Right: distribution -->
+        <div class="hb-bars" aria-label="Bewertungsverteilung">
+          <div class="hb-bar-row">
+            <div>5★</div>
+            <div class="hb-bar-track"><div class="hb-bar-fill" style="width:71.1%"></div></div>
+            <div>64</div>
+          </div>
+          <div class="hb-bar-row">
+            <div>4★</div>
+            <div class="hb-bar-track"><div class="hb-bar-fill" style="width:13.3%"></div></div>
+            <div>12</div>
+          </div>
+          <div class="hb-bar-row">
+            <div>3★</div>
+            <div class="hb-bar-track"><div class="hb-bar-fill" style="width:4.4%"></div></div>
+            <div>4</div>
+          </div>
+          <div class="hb-bar-row">
+            <div>2★</div>
+            <div class="hb-bar-track"><div class="hb-bar-fill" style="width:4.4%"></div></div>
+            <div>4</div>
+          </div>
+          <div class="hb-bar-row">
+            <div>1★</div>
+            <div class="hb-bar-track"><div class="hb-bar-fill" style="width:6.7%"></div></div>
+            <div>6</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hb-reviews-list">
+        <article class="hb-review">
+          <div class="hb-review-head">
+            <h3 class="hb-review-title">Tolles Produkt, rundum zufrieden</h3>
+            <div class="hb-review-date">10/25/25</div>
+          </div>
+          <div class="hb-review-stars">★★★★★</div>
+          <p class="hb-review-text">
+            Tolles Produkt, es erfüllt meine Bedürfnisse optimal. Bei anhaltenden Rückenschmerzen trage ich den Gürtel auch über mehrere Stunden
+            und spüre eine Erleichterung, die ich vorher nicht hatte. Ich bin wirklich sehr zufrieden – richtig, richtig gut.
+          </p>
+          <div class="hb-helpful">
+            <span><b>War diese Bewertung hilfreich?</b></span>
+            <div class="hb-help-actions" aria-label="Hilfreich Abstimmung">
+              <span>
+                <svg class="hb-icon-btn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 9V5a3 3 0 00-3-3l-1 7"></path>
+                  <path d="M7 9H4a2 2 0 00-2 2v9a2 2 0 002 2h3"></path>
+                  <path d="M7 22h9a2 2 0 002-1.7l1-7A2 2 0 0017 11H9"></path>
+                </svg>
+                0
+              </span>
+              <span>
+                <svg class="hb-icon-btn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M10 15v4a3 3 0 003 3l1-7"></path>
+                  <path d="M17 15h3a2 2 0 002-2V4a2 2 0 00-2-2h-3"></path>
+                  <path d="M17 2H8a2 2 0 00-2 1.7l-1 7A2 2 0 007 13h8"></path>
+                </svg>
+                0
+              </span>
+            </div>
+          </div>
+        </article>
+
+        <article class="hb-review">
+          <div class="hb-review-head">
+            <h3 class="hb-review-title">Gamechanger</h3>
+            <div class="hb-review-date">12/08/25</div>
+          </div>
+          <div class="hb-review-stars">★★★★★</div>
+          <p class="hb-review-text">
+            Mein Rücken war wie blockiert. Opioide machen mich sehr krank. Der HeatBelt ist SOFORTIGE Schmerzlinderung!
+            Und die Rotlicht-/LED-Therapie hilft, mein Weichgewebe zu regenerieren. Ein MUSS für alle, die mit Rückenschmerzen zu tun haben.
+          </p>
+          <div class="hb-helpful">
+            <span><b>War diese Bewertung hilfreich?</b></span>
+            <div class="hb-help-actions">
+              <span>
+                <svg class="hb-icon-btn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 9V5a3 3 0 00-3-3l-1 7"></path>
+                  <path d="M7 9H4a2 2 0 00-2 2v9a2 2 0 002 2h3"></path>
+                  <path d="M7 22h9a2 2 0 002-1.7l1-7A2 2 0 0017 11H9"></path>
+                </svg>
+                0
+              </span>
+              <span>
+                <svg class="hb-icon-btn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M10 15v4a3 3 0 003 3l1-7"></path>
+                  <path d="M17 15h3a2 2 0 002-2V4a2 2 0 00-2-2h-3"></path>
+                  <path d="M17 2H8a2 2 0 00-2 1.7l-1 7A2 2 0 007 13h8"></path>
+                </svg>
+                0
+              </span>
+            </div>
+          </div>
+        </article>
+
+        <article class="hb-review">
+          <div class="hb-review-head">
+            <h3 class="hb-review-title">Ein Traum für ernsthafte Golfer!</h3>
+            <div class="hb-review-date">10/07/25</div>
+          </div>
+          <div class="hb-review-stars">★★★★☆</div>
+          <p class="hb-review-text">
+            Schmerzen im unteren Rücken, verspannte Oberschenkelrückseite – alles weg! Wenn die Rückenschmerzen wiederkommen, Gürtel anlegen.
+            Vor dem Spiel lockert er die Wirbelsäule und die gesamte Lendenregion spürbar!
+          </p>
+          <div class="hb-helpful">
+            <span><b>War diese Bewertung hilfreich?</b></span>
+            <div class="hb-help-actions">
+              <span>
+                <svg class="hb-icon-btn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 9V5a3 3 0 00-3-3l-1 7"></path>
+                  <path d="M7 9H4a2 2 0 00-2 2v9a2 2 0 002 2h3"></path>
+                  <path d="M7 22h9a2 2 0 002-1.7l1-7A2 2 0 0017 11H9"></path>
+                </svg>
+                0
+              </span>
+              <span>
+                <svg class="hb-icon-btn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M10 15v4a3 3 0 003 3l1-7"></path>
+                  <path d="M17 15h3a2 2 0 002-2V4a2 2 0 00-2-2h-3"></path>
+                  <path d="M17 2H8a2 2 0 00-2 1.7l-1 7A2 2 0 007 13h8"></path>
+                </svg>
+                0
+              </span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+    <!-- ================= END REVIEWS ================= -->
+
+  </div>
+
   <script>
     // Thumbnail navigation
     const thumbnails = document.querySelectorAll('.thumbnail');
@@ -1579,7 +1921,14 @@
 
     // Auto-play thumbnail video
     const thumbnailVideo = document.querySelector('.thumbnail[data-type="video"] video');
-    if (thumbnailVideo) { thumbnailVideo.play().catch(()=>{}); }
+    function tryPlayThumbVideo(){
+      if (thumbnailVideo) thumbnailVideo.play().catch(()=>{});
+    }
+    tryPlayThumbVideo();
+
+    // ✅ Mobile browsers may require a user gesture: try again on first interaction
+    window.addEventListener('touchstart', tryPlayThumbVideo, { once: true, passive: true });
+    window.addEventListener('click', tryPlayThumbVideo, { once: true });
 
     // Add to cart (demo)
     document.querySelector('.add-to-cart').addEventListener('click', function () {
