@@ -1,0 +1,288 @@
+<!-- ===== WarmesHerz Header (single-file include) ===== -->
+<style>
+  :root{
+    --wh-topbar:#3c3c3a;
+    --wh-header:#fbfaf7;
+    --wh-text:#111;
+    --wh-muted:rgba(0,0,0,.55);
+    --wh-border:rgba(0,0,0,.12);
+  }
+
+  .wh-topbar{background:var(--wh-topbar);color:#fff;font-size:13px}
+  .wh-topbar-inner{max-width:1400px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;justify-content:center;gap:10px}
+  .wh-topbar b{font-weight:600}
+  .wh-header{background:var(--wh-header);border-bottom:1px solid var(--wh-border);position:sticky;top:0;z-index:999}
+  .wh-header-inner{max-width:1400px;margin:0 auto;padding:14px 20px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px}
+
+  .wh-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--wh-text);justify-self:start}
+  .wh-logo{width:28px;height:28px;object-fit:contain;display:block}
+  .wh-brand-name{font-size:18px;font-weight:600}
+
+  .wh-nav{display:flex;align-items:center;justify-content:center;gap:34px;justify-self:center}
+  .wh-nav-link{text-decoration:none;color:rgba(0,0,0,.7);font-size:14px;padding:6px 0;position:relative}
+  .wh-nav-link:hover{color:rgba(0,0,0,.92)}
+  .wh-nav-link.active{color:#111}
+  .wh-nav-link.active:after{content:"";position:absolute;left:0;right:0;bottom:-8px;height:2px;background:#111}
+
+  .wh-right{justify-self:end;display:flex;align-items:center;gap:14px}
+  .wh-lang{display:flex;align-items:center;gap:8px;border:1px solid transparent;background:transparent;color:rgba(0,0,0,.7);cursor:pointer;font-size:14px;padding:8px 10px;border-radius:10px}
+  .wh-lang:hover{background:rgba(0,0,0,.04);color:rgba(0,0,0,.9)}
+  .wh-cart-btn{display:flex;align-items:center;gap:10px;border:1px solid var(--wh-border);background:#fff;border-radius:12px;padding:9px 12px;cursor:pointer}
+  .wh-cart-icon svg{width:18px;height:18px;display:block}
+  .wh-cart-count{min-width:18px;height:18px;border-radius:999px;background:#111;color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;padding:0 6px}
+
+  /* Cart drawer */
+  .wh-cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .22s ease;z-index:1000}
+  .wh-cart-drawer{position:fixed;top:0;right:0;height:100%;width:390px;max-width:calc(100vw - 24px);background:#fff;transform:translateX(110%);transition:transform .26s ease;z-index:1001;display:flex;flex-direction:column;border-left:1px solid var(--wh-border)}
+  .wh-cart-open .wh-cart-overlay{opacity:1;pointer-events:auto}
+  .wh-cart-open .wh-cart-drawer{transform:translateX(0)}
+
+  .wh-cart-head{padding:18px 18px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--wh-border)}
+  .wh-cart-title{font-size:16px;font-weight:600}
+  .wh-cart-close{border:1px solid var(--wh-border);background:#fff;border-radius:10px;width:36px;height:36px;cursor:pointer}
+  .wh-cart-body{padding:14px 18px;overflow:auto;flex:1;display:flex;flex-direction:column;gap:12px}
+  .wh-cart-foot{padding:14px 18px 18px;border-top:1px solid var(--wh-border)}
+  .wh-cart-row{display:flex;align-items:center;justify-content:space-between;font-size:14px;margin-bottom:12px}
+  .wh-cart-checkout{width:100%;border:0;background:#111;color:#fff;border-radius:12px;padding:14px;cursor:pointer;font-size:14px}
+  .wh-cart-checkout:hover{background:#000}
+  .wh-cart-hint{margin-top:10px;color:var(--wh-muted);font-size:12px}
+
+  .wh-item{display:grid;grid-template-columns:56px 1fr auto;gap:12px;align-items:center;border:1px solid var(--wh-border);border-radius:14px;padding:10px}
+  .wh-item img{width:56px;height:56px;border-radius:12px;object-fit:cover;background:#eee}
+  .wh-item-title{font-size:13px;font-weight:600;line-height:1.25;margin-bottom:4px}
+  .wh-item-meta{font-size:12px;color:var(--wh-muted)}
+  .wh-item-actions{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+  .wh-qty{display:flex;align-items:center;gap:8px;border:1px solid var(--wh-border);border-radius:12px;padding:6px 8px}
+  .wh-qty button{width:26px;height:26px;border:1px solid var(--wh-border);background:#fff;border-radius:10px;cursor:pointer}
+  .wh-qty span{min-width:18px;text-align:center;font-size:13px}
+  .wh-remove{border:0;background:transparent;color:rgba(0,0,0,.65);cursor:pointer;font-size:12px;text-decoration:underline;text-underline-offset:3px}
+
+  @media (max-width:900px){
+    .wh-header-inner{grid-template-columns:1fr auto;grid-template-rows:auto auto}
+    .wh-nav{grid-column:1/-1;justify-content:flex-start;gap:18px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-top:8px}
+    .wh-nav::-webkit-scrollbar{display:none}
+  }
+</style>
+
+<div class="wh-topbar">
+  <div class="wh-topbar-inner">
+    <span><b>Kostenloser Versand</b> &amp; kostenlose Retouren bei allen Bestellungen</span>
+    <span style="opacity:.85">→</span>
+  </div>
+</div>
+
+<header class="wh-header">
+  <div class="wh-header-inner">
+    <a class="wh-brand" href="index.html" aria-label="WarmesHerz Startseite">
+      <img class="wh-logo" src="LOGO.jpg" alt="WarmesHerz Logo">
+      <span class="wh-brand-name">WarmesHerz</span>
+    </a>
+
+    <nav class="wh-nav" aria-label="Hauptnavigation">
+      <a class="wh-nav-link" href="index.html" data-nav="startseite">Startseite</a>
+      <a class="wh-nav-link" href="heatbelt.html" data-nav="heatbelt">HeatBelt Pro™</a>
+      <a class="wh-nav-link" href="thermogun.html" data-nav="thermogun">ThermoGun Pro™</a>
+    </nav>
+
+    <div class="wh-right">
+      <button class="wh-lang" type="button" aria-label="Sprache">
+        <span aria-hidden="true">🇩🇪</span><span>DE</span>
+      </button>
+
+      <button class="wh-cart-btn" type="button" id="whCartBtn" aria-label="Warenkorb öffnen">
+        <span class="wh-cart-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M6 8h12l-1 13H7L6 8z"></path>
+            <path d="M9 8a3 3 0 0 1 6 0"></path>
+          </svg>
+        </span>
+        <span class="wh-cart-count" id="whCartCount">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="wh-cart-overlay" id="whCartOverlay" aria-hidden="true"></div>
+
+<aside class="wh-cart-drawer" id="whCartDrawer" aria-label="Warenkorb" aria-hidden="true">
+  <div class="wh-cart-head">
+    <div class="wh-cart-title">Warenkorb</div>
+    <button class="wh-cart-close" id="whCartClose" aria-label="Warenkorb schließen">✕</button>
+  </div>
+
+  <div class="wh-cart-body" id="whCartItems"></div>
+
+  <div class="wh-cart-foot">
+    <div class="wh-cart-row">
+      <span>Zwischensumme</span>
+      <b id="whCartSubtotal">€0,00</b>
+    </div>
+    <button class="wh-cart-checkout" id="whCartCheckout" type="button">Zur Kasse</button>
+    <div class="wh-cart-hint">Kostenloser Versand &amp; 30 Tage Rückgabe</div>
+  </div>
+</aside>
+
+<script>
+(function(){
+  const KEY = "wh_cart_v1";
+
+  function loadCart(){
+    try { return JSON.parse(localStorage.getItem(KEY)) || []; }
+    catch(e){ return []; }
+  }
+  function saveCart(cart){ localStorage.setItem(KEY, JSON.stringify(cart)); }
+  function formatEUR(n){
+    return new Intl.NumberFormat("de-DE", { style:"currency", currency:"EUR" }).format(n);
+  }
+  function subtotal(cart){ return cart.reduce((s,it)=>s + it.price*it.qty, 0); }
+  function setCount(cart){
+    const el = document.getElementById("whCartCount");
+    if(!el) return;
+    el.textContent = String(cart.reduce((s,it)=>s+it.qty,0));
+  }
+
+  function render(){
+    const cart = loadCart();
+    setCount(cart);
+    const itemsEl = document.getElementById("whCartItems");
+    const subEl = document.getElementById("whCartSubtotal");
+    if(!itemsEl || !subEl) return;
+
+    itemsEl.innerHTML = "";
+    if(cart.length === 0){
+      const d = document.createElement("div");
+      d.style.color = "rgba(0,0,0,.55)";
+      d.style.fontSize = "14px";
+      d.style.padding = "10px 2px";
+      d.textContent = "Dein Warenkorb ist leer.";
+      itemsEl.appendChild(d);
+      subEl.textContent = formatEUR(0);
+      return;
+    }
+
+    cart.forEach((it, idx) => {
+      const row = document.createElement("div");
+      row.className = "wh-item";
+
+      const img = document.createElement("img");
+      img.src = it.image || "";
+      img.alt = it.title || "Produkt";
+
+      const mid = document.createElement("div");
+      const t = document.createElement("div");
+      t.className = "wh-item-title";
+      t.textContent = it.title;
+
+      const m = document.createElement("div");
+      m.className = "wh-item-meta";
+      m.textContent = (formatEUR(it.price) + (it.sku ? " · " + it.sku : ""));
+
+      mid.appendChild(t); mid.appendChild(m);
+
+      const right = document.createElement("div");
+      right.className = "wh-item-actions";
+
+      const qty = document.createElement("div");
+      qty.className = "wh-qty";
+
+      const minus = document.createElement("button");
+      minus.type = "button";
+      minus.textContent = "−";
+      minus.addEventListener("click", () => {
+        const c = loadCart();
+        c[idx].qty -= 1;
+        if(c[idx].qty <= 0) c.splice(idx, 1);
+        saveCart(c); render();
+      });
+
+      const qn = document.createElement("span");
+      qn.textContent = String(it.qty);
+
+      const plus = document.createElement("button");
+      plus.type = "button";
+      plus.textContent = "+";
+      plus.addEventListener("click", () => {
+        const c = loadCart();
+        c[idx].qty += 1;
+        saveCart(c); render();
+      });
+
+      qty.appendChild(minus); qty.appendChild(qn); qty.appendChild(plus);
+
+      const rm = document.createElement("button");
+      rm.className = "wh-remove";
+      rm.type = "button";
+      rm.textContent = "Entfernen";
+      rm.addEventListener("click", () => {
+        const c = loadCart();
+        c.splice(idx, 1);
+        saveCart(c); render();
+      });
+
+      right.appendChild(qty);
+      right.appendChild(rm);
+
+      row.appendChild(img);
+      row.appendChild(mid);
+      row.appendChild(right);
+
+      itemsEl.appendChild(row);
+    });
+
+    subEl.textContent = formatEUR(subtotal(cart));
+  }
+
+  function openCart(){
+    document.documentElement.classList.add("wh-cart-open");
+    document.getElementById("whCartDrawer")?.setAttribute("aria-hidden","false");
+    document.getElementById("whCartOverlay")?.setAttribute("aria-hidden","false");
+    render();
+  }
+
+  function closeCart(){
+    document.documentElement.classList.remove("wh-cart-open");
+    document.getElementById("whCartDrawer")?.setAttribute("aria-hidden","true");
+    document.getElementById("whCartOverlay")?.setAttribute("aria-hidden","true");
+  }
+
+  // expose global add() for product pages
+  window.WHCart = {
+    add({ id, title, price, image, sku }){
+      const cart = loadCart();
+      const found = cart.find(x => x.id === id);
+      if(found) found.qty += 1;
+      else cart.push({ id, title, price, image, sku, qty: 1 });
+      saveCart(cart);
+      render();
+      openCart();
+    },
+    open: openCart,
+    close: closeCart,
+    render
+  };
+
+  // bind UI
+  document.getElementById("whCartBtn")?.addEventListener("click", openCart);
+  document.getElementById("whCartClose")?.addEventListener("click", closeCart);
+  document.getElementById("whCartOverlay")?.addEventListener("click", closeCart);
+  document.getElementById("whCartCheckout")?.addEventListener("click", () => {
+    window.location.href = "checkout.html";
+  });
+
+  document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeCart(); });
+
+  // active nav highlight
+  const path = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+  const map = { "index.html":"startseite", "":"startseite", "heatbelt.html":"heatbelt", "thermogun.html":"thermogun" };
+  const active = map[path];
+  if(active){
+    document.querySelectorAll(".wh-nav-link").forEach(a=>{
+      a.classList.toggle("active", a.getAttribute("data-nav") === active);
+    });
+  }
+
+  // render count on load
+  render();
+})();
+</script>
+<!-- ===== /WarmesHerz Header ===== -->
