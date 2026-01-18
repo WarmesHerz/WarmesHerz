@@ -7,6 +7,8 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        html { scroll-behavior: smooth; }
+
         body {
             font-family: 'Georgia', serif;
             background-color: #f5f1ec;
@@ -36,16 +38,101 @@
         /* HEADER HOST */
         #site-header { width: 100%; }
 
-        /* HERO */
+        /* HERO (mit Text + CTA) */
         .hero {
             width: 100%;
             background: white;
+            position: relative;
+            overflow: hidden;
         }
-        .hero picture,
-        .hero img {
+
+        /* Hero darf oben/unten etwas abgeschnitten sein */
+        .hero-media {
+            width: 100%;
+            height: 62vh;
+            min-height: 420px;
+            max-height: 720px;
+            position: relative;
+        }
+
+        .hero-media picture,
+        .hero-media img {
             display: block;
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover; /* -> leichtes Abschneiden */
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            /* dezente Verdunklung nach unten für Lesbarkeit */
+            background: linear-gradient(to bottom,
+                rgba(255,255,255,0.00) 0%,
+                rgba(0,0,0,0.10) 45%,
+                rgba(0,0,0,0.55) 100%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 36px;
+            width: min(1100px, calc(100% - 60px));
+            color: white;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .hero-kicker {
+            font-size: 0.95rem;
+            letter-spacing: 0.02em;
+            opacity: 0.92;
+        }
+
+        .hero-title {
+            font-size: clamp(2rem, 3vw, 3.2rem);
+            font-weight: 400;
+            line-height: 1.1;
+            max-width: 900px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.05rem;
+            line-height: 1.5;
+            opacity: 0.92;
+            max-width: 720px;
+        }
+
+        .hero-actions {
+            margin-top: 6px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .hero-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 22px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border: 1px solid rgba(255,255,255,0.65);
+            background: rgba(255,255,255,0.12);
+            color: white;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+        }
+        .hero-btn:hover {
+            transform: translateY(-1px);
+            background: rgba(255,255,255,0.18);
+            border-color: rgba(255,255,255,0.85);
         }
 
         /* Section 1 Hintergrund = weiss */
@@ -55,48 +142,74 @@
             padding-bottom: 70px;
         }
 
+        /* Produktkacheln: größer + Bild vollständig sichtbar */
         .product-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-            margin-top: 40px;
+            gap: 34px;
+            margin-top: 44px;
         }
 
         .product-card {
             position: relative;
-            border-radius: 12px;
+            border-radius: 14px;
             overflow: hidden;
-            background-size: cover;
-            background-position: center;
-            min-height: 500px;
+            min-height: 620px;     /* größer */
             display: flex;
             flex-direction: column;
             color: white;
+            background-color: #111;
+        }
+
+        /* Bild-Layer als <img> (damit object-fit contain möglich ist) */
+        .product-media {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .product-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;   /* -> Bild vollständig sichtbar */
+            object-position: center;
+            transform: scale(1.02); /* minimal größer, ohne Crop */
+            background: #111;      /* falls Transparenz / Ränder */
+        }
+
+        /* Verdunklung/Verlauf nach unten (vergrauend/dunkler) */
+        .product-shade {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background: linear-gradient(to bottom,
+                rgba(0,0,0,0.05) 0%,
+                rgba(0,0,0,0.25) 45%,
+                rgba(0,0,0,0.72) 100%);
+            pointer-events: none;
         }
 
         .product-content {
-            padding: 40px;
+            position: relative;
+            z-index: 2;
+            padding: 46px;
             flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.6));
         }
 
-        .product-card.theragun { background-image: url('ThermoGun anwendung frau.webp'); }
-        .product-card.thermback { background-image: url('Tragefoto Infrarot fokus.jpg'); }
-
         .product-card h2 {
-            font-size: 2.2rem;
+            font-size: 2.35rem;
             font-weight: 400;
-            margin-bottom: 15px;
+            margin-bottom: 14px;
         }
 
         .product-card p {
             font-size: 1rem;
             line-height: 1.6;
-            margin-bottom: 25px;
-            max-width: 500px;
+            margin-bottom: 22px;
+            max-width: 560px;
         }
 
         .btn {
@@ -120,6 +233,8 @@
         }
 
         .feature-bar {
+            position: relative;
+            z-index: 2;
             background-color: rgba(255, 236, 220, 0.95);
             padding: 20px 30px;
             display: flex;
@@ -151,7 +266,7 @@
             line-height: 1.4;
         }
 
-        /* Wissenschafts-Section (vorher Gift) */
+        /* Wissenschafts-Section */
         .gift-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -438,7 +553,7 @@
             min-height: 50px;
         }
 
-        .comparison-features li:last-child confirm { border-bottom: none; }
+        .comparison-features li:last-child { border-bottom: none; }
 
         .feature-check-cell {
             background-color: #ffd4b8;
@@ -477,11 +592,20 @@
         }
 
         @media (max-width: 968px) {
-            .product-grid { grid-template-columns: 1fr; }
+            .hero-media { height: 56vh; min-height: 360px; }
+            .hero-content { bottom: 24px; width: calc(100% - 40px); }
+            .hero-subtitle { display: none; } /* sehr clean mobil */
+
+            .product-grid { grid-template-columns: 1fr; gap: 26px; }
+            .product-card { min-height: 560px; }
+            .product-content { padding: 34px; }
+
             .gift-section-content { grid-template-columns: 1fr; }
             .gift-grid { grid-template-columns: 1fr; }
             .gift-intro { position: static; }
+
             .form-row { grid-template-columns: 1fr; }
+
             h1 { font-size: 2rem; }
             .section { padding: 50px 20px; }
             .contact-section { padding: 50px 20px; }
@@ -493,7 +617,7 @@
 </head>
 <body>
 
-    <!-- HEADER (neu korrekt eingebaut) -->
+    <!-- HEADER -->
     <div id="site-header"></div>
     <script>
       async function loadHeader() {
@@ -504,12 +628,10 @@
         const tmp = document.createElement('div');
         tmp.innerHTML = html;
 
-        // 1) Erst alle NICHT-script Nodes rein
         const scripts = Array.from(tmp.querySelectorAll('script'));
         scripts.forEach(s => s.remove());
         host.innerHTML = tmp.innerHTML;
 
-        // 2) Dann scripts "neu" erstellen -> dadurch werden sie ausgeführt
         for (const s of scripts) {
           const ns = document.createElement('script');
           for (const attr of s.attributes) ns.setAttribute(attr.name, attr.value);
@@ -517,31 +639,48 @@
           document.body.appendChild(ns);
         }
       }
-
       loadHeader();
     </script>
 
-    <!-- HERO -->
+    <!-- HERO (mit Text + Button) -->
     <div class="hero" aria-label="Hero">
-        <picture>
-            <source media="(max-width: 968px)" srcset="Hero Mobile.png">
-            <img src="Hero Desktop.png" alt="ThermoGun Pro und HeatBelt Pro – Hero">
-        </picture>
+        <div class="hero-media">
+            <picture>
+                <source media="(max-width: 968px)" srcset="Hero Mobile.png">
+                <img src="Hero Desktop.png" alt="ThermoGun Pro und HeatBelt Pro – Hero">
+            </picture>
+            <div class="hero-overlay"></div>
+
+            <div class="hero-content">
+                <div class="hero-kicker">Regeneration, die du sofort spürst</div>
+                <div class="hero-title">Die beste Entlastung für deinen Körper – genau dann, wenn du sie brauchst.</div>
+                <div class="hero-subtitle">Wärme, Licht und Massage sind bewährte Methoden, um Spannung zu lösen und das Schmerzgefühl spürbar zu reduzieren – für ein freieres Körpergefühl im Alltag.</div>
+                <div class="hero-actions">
+                    <a class="hero-btn" href="#led-therapy">Produkte ansehen</a>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Section 1: LED-Therapie Produkte (Hintergrund weiss) -->
-    <div class="section-white">
+    <!-- Section 1: LED-Therapie Produkte -->
+    <div class="section-white" id="led-therapy">
         <div class="section">
             <h1>Schnellere Erholung dank LED-Therapie</h1>
-            <p class="subtitle">LED-Therapie kann die Regeneration unterstützen, indem sie gezielt auf Gewebeprozesse einwirkt und so Entspannung, Beweglichkeit und Wohlbefinden fördert – genau dort, wo du es brauchst.</p>
+            <p class="subtitle">LED-Therapie unterstützt Regeneration und Wohlbefinden, indem sie gezielt auf Gewebeprozesse einwirkt – genau dort, wo du Entlastung brauchst.</p>
 
             <div class="product-grid">
-                <div class="product-card theragun">
+                <div class="product-card">
+                    <div class="product-media">
+                        <img src="ThermoGun anwendung frau.webp" alt="ThermoGun Pro Anwendung">
+                    </div>
+                    <div class="product-shade"></div>
+
                     <div class="product-content">
                         <h2>ThermoGun Pro™</h2>
-                        <p>Erholung neu gedacht: Perkussion & Vibration – ideal, um Muskelverspannungen zu lösen, die Durchblutung anzuregen und Schmerzen spürbar zu reduzieren.</p>
+                        <p>Perkussion & Vibration, um Spannung zu lösen und Muskeln schnell zu entspannen.</p>
                         <a href="thermogun.html" class="btn">ThermoGun Pro shoppen</a>
                     </div>
+
                     <div class="feature-bar">
                         <div class="feature-icon">
                             <img src="Benefit_Icons_15.svg" alt="Icon">
@@ -550,12 +689,18 @@
                     </div>
                 </div>
 
-                <div class="product-card thermback">
+                <div class="product-card">
+                    <div class="product-media">
+                        <img src="Tragefoto Infrarot fokus.jpg" alt="HeatBelt Pro Anwendung">
+                    </div>
+                    <div class="product-shade"></div>
+
                     <div class="product-content">
                         <h2>HeatBelt Pro™</h2>
-                        <p>Wärme + Ferninfrarot + Vibration + Licht: entwickelt, um Schmerzen aktiv zu lindern, Muskeln zu entspannen und die Regeneration im unteren Rücken deutlich zu verbessern.</p>
+                        <p>Wärme & Lichtimpulse, um den Rücken zu entlasten und das Schmerzgefühl zu reduzieren.</p>
                         <a href="heatbelt.html" class="btn">HeatBelt Pro shoppen</a>
                     </div>
+
                     <div class="feature-bar">
                         <div class="feature-icon">
                             <img src="Benefit_Icons_15.svg" alt="Icon">
@@ -571,18 +716,16 @@
     <div class="section">
         <div class="gift-section-content">
             <div class="gift-intro">
-                <h1>Warum diese Therapien wirklich wirken</h1>
-                <p class="subtitle">Wärme, Infrarot/Rotlicht, Massage und Vibration sind seit Jahrzehnten etablierte Ansätze in Medizin und Physiotherapie – weil sie direkt in Schmerz- und Regenerationsprozesse eingreifen.</p>
+                <h1>Warum diese Therapien wirken</h1>
+                <p class="subtitle">Wärme, Infrarot/Rotlicht sowie Massage/Vibration greifen direkt in Entspannungs- und Schmerzprozesse ein – und genau deshalb werden sie so häufig genutzt.</p>
             </div>
 
             <div class="gift-grid">
                 <div class="gift-card">
                     <div class="gift-image heatlight"></div>
                     <div class="gift-content">
-                        <h2>Wärme & Infrarot: Schmerzen aktiv lindern</h2>
-                        <p>
-                            Wärme entspannt Muskulatur, verbessert die lokale Durchblutung und reduziert „Schutzspannung“ – einer der häufigsten Schmerzverstärker. (Nah-)Infrarot und Rotlicht können zusätzlich die Zellenergie-Prozesse unterstützen und Regeneration beschleunigen, wodurch Schmerzen spürbar abnehmen können.
-                        </p>
+                        <h2>Wärme & Infrarot</h2>
+                        <p>Entspannt Muskulatur, fördert Durchblutung und kann das Schmerzempfinden deutlich senken – besonders bei Verspannungen.</p>
                         <button class="btn btn-dark" onclick="openModal('modal1')">Mehr erfahren</button>
                     </div>
                 </div>
@@ -590,10 +733,8 @@
                 <div class="gift-card">
                     <div class="gift-image vibration"></div>
                     <div class="gift-content">
-                        <h2>Massage & Vibration: sofortiger Effekt auf Spannung</h2>
-                        <p>
-                            Mechanische Reize durch Massage/Vibration lösen Triggerpunkte, verbessern den Abtransport von Stoffwechselprodukten und „überschreiben“ Schmerzsignale im Nervensystem. In Kombination mit Wärme oder Kälte kann die Schmerzlinderung noch schneller und intensiver ausfallen.
-                        </p>
+                        <h2>Massage & Vibration</h2>
+                        <p>Löst Spannung, verbessert die Mikrozirkulation und kann Schmerzsignale im Nervensystem spürbar dämpfen.</p>
                         <button class="btn btn-dark" onclick="openModal('modal2')">Mehr erfahren</button>
                     </div>
                 </div>
@@ -601,7 +742,7 @@
         </div>
     </div>
 
-    <!-- Section 3: Produktvergleich -->
+    <!-- Produktvergleich -->
     <div class="comparison-section">
         <div class="comparison-container">
             <h1>Produktvergleich</h1>
@@ -656,7 +797,7 @@
         </div>
     </div>
 
-    <!-- Kontaktformular (nur 1x, nach Produktvergleich) -->
+    <!-- Kontaktformular -->
     <div class="contact-section">
         <div class="contact-container">
             <h1>Kontaktieren Sie uns</h1>
@@ -702,36 +843,24 @@
         </div>
     </div>
 
-    <!-- Modals (stärker/vorteilhafter) -->
+    <!-- Modals -->
     <div id="modal1" class="modal" onclick="closeModal('modal1')">
         <div class="modal-content" onclick="event.stopPropagation()">
             <button class="modal-close" onclick="closeModal('modal1')">&times;</button>
-            <h2>Wärme & (Nah-)Infrarot: bewährte Schmerzlinderung</h2>
-            <p>
-                <strong>Wärme ist eine der effektivsten Sofortmaßnahmen gegen muskuläre Schmerzen</strong>, weil sie den Muskeltonus senkt, die Durchblutung steigert und so die Versorgung des Gewebes verbessert. Dadurch lässt „Zug“ im Gewebe nach – und Schmerz nimmt oft innerhalb kurzer Zeit deutlich ab.
-            </p>
-            <p>
-                <strong>(Nah-)Infrarot/Rotlicht</strong> kann zusätzlich tiefer in Gewebe eindringen und dort biologische Reparatur- und Regenerationsprozesse unterstützen. Häufig diskutiert: verbesserte Zellenergie (ATP), schnellere Erholung, weniger Entzündungsreaktion und damit eine spürbar geringere Schmerzintensität.
-            </p>
-            <p>
-                Die Kombination ist besonders stark bei <strong>Verspannungen, Steifigkeit, Reizzuständen</strong> und allgemeinen Rücken-/Nackenbeschwerden – weil sie sowohl Ursache (Spannung/Durchblutung) als auch Schmerzsignal positiv beeinflusst.
-            </p>
+            <h2>Wärme & (Nah-)Infrarot</h2>
+            <p><strong>Wärme</strong> senkt Muskeltonus, steigert Durchblutung und kann Schmerzen schnell spürbar reduzieren.</p>
+            <p><strong>Infrarot/Rotlicht</strong> wird in Gewebe absorbiert und kann Regeneration sowie Entzündungsprozesse positiv beeinflussen.</p>
+            <p>Zusammen entsteht oft ein deutlich freieres, entspannteres Körpergefühl – besonders bei Verspannungen.</p>
         </div>
     </div>
 
     <div id="modal2" class="modal" onclick="closeModal('modal2')">
         <div class="modal-content" onclick="event.stopPropagation()">
             <button class="modal-close" onclick="closeModal('modal2')">&times;</button>
-            <h2>Massage & Vibration: direkte Wirkung auf Nerven & Muskulatur</h2>
-            <p>
-                <strong>Massage und Vibration wirken auf zwei Ebenen:</strong> Sie lösen mechanisch Muskelverhärtungen/Triggerpunkte und beeinflussen gleichzeitig das Nervensystem. Durch starke Reize wird die Schmerzverarbeitung „umgelenkt“ – das kann Schmerzen sofort fühlbar dämpfen.
-            </p>
-            <p>
-                Zusätzlich verbessert sich die <strong>Mikrozirkulation</strong>: Sauerstoff- und Nährstoffversorgung steigen, Stoffwechselprodukte werden schneller abtransportiert – ein wichtiger Grund, warum sich der behandelte Bereich danach oft „leichter“ und beweglicher anfühlt.
-            </p>
-            <p>
-                <strong>In Kombination mit Wärme oder Kälte</strong> kann der Effekt noch stärker werden: Wärme verstärkt Entspannung und Durchblutung, Kälte beruhigt akute Überreizung. So lässt sich die Anwendung je nach Schmerztyp optimal anpassen.
-            </p>
+            <h2>Massage & Vibration</h2>
+            <p>Mechanische Reize lösen Spannung, verbessern die Mikrozirkulation und können Schmerzsignale spürbar dämpfen.</p>
+            <p>Viele merken sofort: weniger „Zug“, mehr Beweglichkeit, angenehme Entlastung.</p>
+            <p>In Kombination mit Wärme oder Kälte lässt sich die Wirkung je nach Bedarf verstärken.</p>
         </div>
     </div>
 
