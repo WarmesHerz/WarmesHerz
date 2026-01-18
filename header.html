@@ -1,279 +1,158 @@
-<!-- ===== WarmesHerz Header (include) ===== -->
+<!-- ===== WARMESHERZ HEADER ===== -->
 <style>
-  :root{
-    --wh-topbar:#3c3c3a;
-    --wh-header:#fbfaf7;
-    --wh-text:#111;
-    --wh-muted:rgba(0,0,0,.55);
-    --wh-border:rgba(0,0,0,.12);
-    --wh-offset: 0px; /* wird von header.js gesetzt */
-  }
+:root{
+  --wh-topbar:#3c3c3a;
+  --wh-header:#fbfaf7;
+  --wh-text:#111;
+  --wh-muted:rgba(0,0,0,.55);
+  --wh-border:rgba(0,0,0,.12);
+}
 
-  /* sorgt dafür, dass Content nicht hinter dem fixed Header verschwindet */
-  body{ padding-top: var(--wh-offset); }
+/* ----- TOPBAR ----- */
+.wh-topbar{background:var(--wh-topbar);color:#fff;font-size:13px}
+.wh-topbar-inner{
+  max-width:1400px;margin:0 auto;padding:10px 20px;
+  display:flex;align-items:center;justify-content:center
+}
+.wh-topbar b{font-weight:600}
 
-  /* Fixed wrapper (Topbar + Header) */
-  .wh-wrap{
-    position:fixed;
-    top:0; left:0; right:0;
-    z-index:9999;
-    will-change:transform;
-    transition:transform .22s ease;
-    transform:translateY(0);
-  }
-  .wh-wrap.wh-hide{ transform:translateY(-110%); }
+/* ----- HEADER STICKY + HIDE ----- */
+.wh-header{
+  background:var(--wh-header);
+  border-bottom:1px solid var(--wh-border);
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:999;
+  transition:transform .22s ease;
+}
+.wh-header.wh-hide{ transform:translateY(-110%); }
 
-  /* Topbar */
-  .wh-topbar{background:var(--wh-topbar);color:#fff;font-size:13px}
-  .wh-topbar-inner{max-width:1400px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;justify-content:center;gap:10px}
-  .wh-topbar b{font-weight:600}
+.wh-header-spacer{ height:92px; }   /* verhindert das „Reinschneiden“ */
 
-  /* Header */
-  .wh-header{
-    background:var(--wh-header);
-    border-bottom:1px solid var(--wh-border);
-  }
-  .wh-header-inner{
-    max-width:1400px;
-    margin:0 auto;
-    padding:14px 20px;
-    display:grid;
-    grid-template-columns:1fr auto 1fr;
-    align-items:center;
-    gap:16px;
-  }
+.wh-header-inner{
+  max-width:1400px;margin:0 auto;
+  padding:14px 20px;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+}
 
-  /* Brand */
-  .wh-brand{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    text-decoration:none;
-    color:var(--wh-text);
-    justify-self:start;
-  }
-  .wh-logo{
-    width:48px; height:48px;          /* ✅ größer */
-    object-fit:contain;
-    display:block;
-  }
-  .wh-brand-name{
-    font-size:19px;
-    font-weight:300;                   /* ✅ dünn / edel */
-    letter-spacing:.2px;
-  }
+/* ----- BRAND ----- */
+.wh-brand{
+  display:flex;align-items:center;gap:12px;
+  text-decoration:none;color:#111;
+}
+.wh-logo{
+  width:52px;height:52px;
+  object-fit:contain;
+}
+.wh-brand-name{
+  font-size:20px;
+  font-weight:300;
+  letter-spacing:.4px;
+}
 
-  /* Desktop nav */
-  .wh-nav{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:34px;
-    justify-self:center;
-  }
-  .wh-nav-link{
-    text-decoration:none;
-    color:rgba(0,0,0,.72);
-    font-size:14px;
-    padding:6px 0;
-    position:relative;
-  }
-  .wh-nav-link:hover{color:rgba(0,0,0,.92)}
-  .wh-nav-link.active{color:#111}
-  .wh-nav-link.active:after{
-    content:"";
-    position:absolute;
-    left:0;right:0;bottom:-8px;
-    height:2px;background:#111;
-  }
+/* ----- NAV ----- */
+.wh-nav{
+  display:flex;gap:34px;justify-content:center
+}
+.wh-nav-link{
+  text-decoration:none;
+  color:rgba(0,0,0,.7);
+  font-size:14px;
+}
+.wh-nav-link.active{color:#111;font-weight:600}
 
-  .wh-right{
-    justify-self:end;
-    display:flex;
-    align-items:center;
-    gap:12px;
-  }
+/* ----- CART BUTTON (DEIN DESIGN) ----- */
+.wh-cart-btn{
+  width:52px;height:46px;
+  border:1px solid rgba(0,0,0,.14);
+  background:#fff;
+  border-radius:14px;
+  position:relative;
+  cursor:pointer;
+}
+.wh-cart-btn:hover{background:#f9f9f9}
 
-  /* ✅ Cart: kein blau, clean, premium */
-  .wh-cart-btn{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:54px;
-    height:46px;
-    cursor:pointer;
-    position:relative;
+.wh-cart-count{
+  position:absolute;
+  top:6px;right:6px;
+  background:#111;color:#fff;
+  border-radius:999px;
+  min-width:18px;height:18px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;
+}
 
-    border:1px solid rgba(0,0,0,.14);
-    background:rgba(255,255,255,.88);
-    border-radius:14px;
+/* ----- DRAWER (GENAU WIE VORHER) ----- */
+.wh-cart-overlay{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.35);
+  opacity:0;pointer-events:none;
+  transition:.22s;
+  z-index:1000
+}
+.wh-cart-drawer{
+  position:fixed;top:0;right:0;
+  height:100%;width:390px;
+  background:#fff;
+  transform:translateX(110%);
+  transition:.26s;
+  z-index:1001;
+  display:flex;flex-direction:column;
+}
 
-    box-shadow:0 6px 20px rgba(0,0,0,.06);
-    transition:transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
-  }
-  .wh-cart-btn:hover{
-    background:#fff;
-    border-color:rgba(0,0,0,.22);
-    box-shadow:0 10px 26px rgba(0,0,0,.09);
-    transform:translateY(-1px);
-  }
+.wh-cart-open .wh-cart-overlay{opacity:1;pointer-events:auto}
+.wh-cart-open .wh-cart-drawer{transform:translateX(0)}
 
-  /* ✅ Icon als Bild */
-  .wh-cart-icon-img{
-    width:26px;
-    height:26px;
-    display:block;
-    object-fit:contain;
-  }
-
-  .wh-cart-count{
-    position:absolute;
-    top:6px;right:6px;
-    min-width:18px;height:18px;border-radius:999px;
-    background:#111;color:#fff;
-    font-size:12px;
-    display:flex;align-items:center;justify-content:center;
-    padding:0 6px;
-    line-height:1;
-  }
-
-  /* Burger */
-  .wh-burger{
-    display:none;
-    width:54px;height:46px;
-    border:1px solid rgba(0,0,0,.14);
-    background:rgba(255,255,255,.88);
-    border-radius:14px;
-    align-items:center;justify-content:center;
-    cursor:pointer;
-    box-shadow:0 6px 20px rgba(0,0,0,.06);
-    transition:transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
-  }
-  .wh-burger:hover{
-    background:#fff;
-    border-color:rgba(0,0,0,.22);
-    box-shadow:0 10px 26px rgba(0,0,0,.09);
-    transform:translateY(-1px);
-  }
-  .wh-burger span{width:20px;height:2px;background:#111;display:block;position:relative}
-  .wh-burger span:before,.wh-burger span:after{content:"";position:absolute;left:0;width:20px;height:2px;background:#111}
-  .wh-burger span:before{top:-6px}
-  .wh-burger span:after{top:6px}
-
-  /* Mobile nav */
-  .wh-nav-mobile{
-    display:none;
-    border-top:1px solid var(--wh-border);
-    background:var(--wh-header);
-  }
-  .wh-nav-mobile-inner{
-    max-width:1400px;margin:0 auto;
-    padding:10px 20px 14px;
-    display:flex;flex-direction:column;gap:10px;
-  }
-  .wh-nav-mobile a{
-    text-decoration:none;color:#111;font-size:15px;
-    padding:10px 0;border-bottom:1px solid rgba(0,0,0,.06);
-  }
-  .wh-nav-mobile a:last-child{border-bottom:0}
-  .wh-nav-mobile a.active{font-weight:600}
-  .wh-nav-mobile.open{display:block}
-
-  /* Cart drawer */
-  .wh-cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .22s ease;z-index:10000}
-  .wh-cart-drawer{position:fixed;top:0;right:0;height:100%;width:390px;max-width:calc(100vw - 24px);background:#fff;transform:translateX(110%);transition:transform .26s ease;z-index:10001;display:flex;flex-direction:column;border-left:1px solid var(--wh-border)}
-  .wh-cart-open .wh-cart-overlay{opacity:1;pointer-events:auto}
-  .wh-cart-open .wh-cart-drawer{transform:translateX(0)}
-
-  .wh-cart-head{padding:18px 18px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--wh-border)}
-  .wh-cart-title{font-size:16px;font-weight:600}
-  .wh-cart-close{border:1px solid var(--wh-border);background:#fff;border-radius:12px;width:42px;height:42px;cursor:pointer}
-  .wh-cart-body{padding:14px 18px;overflow:auto;flex:1;display:flex;flex-direction:column;gap:12px}
-  .wh-cart-foot{padding:14px 18px 18px;border-top:1px solid var(--wh-border)}
-  .wh-cart-row{display:flex;align-items:center;justify-content:space-between;font-size:14px;margin-bottom:12px}
-  .wh-cart-checkout{width:100%;border:0;background:#111;color:#fff;border-radius:14px;padding:14px;cursor:pointer;font-size:14px}
-  .wh-cart-checkout:hover{background:#000}
-  .wh-cart-hint{margin-top:10px;color:var(--wh-muted);font-size:12px}
-
-  .wh-item{display:grid;grid-template-columns:56px 1fr auto;gap:12px;align-items:center;border:1px solid var(--wh-border);border-radius:14px;padding:10px}
-  .wh-item img{width:56px;height:56px;border-radius:12px;object-fit:cover;background:#eee}
-  .wh-item-title{font-size:13px;font-weight:600;line-height:1.25;margin-bottom:4px}
-  .wh-item-meta{font-size:12px;color:var(--wh-muted)}
-  .wh-item-actions{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
-  .wh-qty{display:flex;align-items:center;gap:8px;border:1px solid var(--wh-border);border-radius:12px;padding:6px 8px}
-  .wh-qty button{width:26px;height:26px;border:1px solid var(--wh-border);background:#fff;border-radius:10px;cursor:pointer}
-  .wh-qty span{min-width:18px;text-align:center;font-size:13px}
-  .wh-remove{border:0;background:transparent;color:rgba(0,0,0,.65);cursor:pointer;font-size:12px;text-decoration:underline;text-underline-offset:3px}
-
-  /* Mobile: one-row + burger */
-  @media (max-width:900px){
-    .wh-header-inner{grid-template-columns:1fr auto;gap:10px;padding:12px 16px}
-    .wh-nav{display:none}
-    .wh-burger{display:flex}
-    .wh-logo{width:40px;height:40px}
-    .wh-brand-name{font-size:18px}
-  }
+/* ----- MOBILE ----- */
+@media(max-width:900px){
+  .wh-header-inner{grid-template-columns:1fr auto}
+  .wh-nav{display:none}
+}
 </style>
 
-<div class="wh-wrap" id="whWrap">
-  <div class="wh-topbar">
-    <div class="wh-topbar-inner">
-      <span><b>Kostenloser Versand</b> auf alle Bestellungen</span>
-    </div>
+<div class="wh-topbar">
+  <div class="wh-topbar-inner">
+    <span><b>Kostenloser Versand</b> auf alle Bestellungen</span>
   </div>
-
-  <header class="wh-header" id="whHeader">
-    <div class="wh-header-inner">
-      <a class="wh-brand" href="index.html" aria-label="WarmesHerz Startseite">
-        <img class="wh-logo" src="LOGO.jpg" alt="WarmesHerz Logo">
-        <span class="wh-brand-name">WarmesHerz</span>
-      </a>
-
-      <nav class="wh-nav" aria-label="Hauptnavigation">
-        <a class="wh-nav-link" href="index.html" data-nav="startseite">Startseite</a>
-        <a class="wh-nav-link" href="heatbelt.html" data-nav="heatbelt">HeatBelt Pro™</a>
-        <a class="wh-nav-link" href="thermogun.html" data-nav="thermogun">ThermoGun Pro™</a>
-      </nav>
-
-      <div class="wh-right">
-        <button class="wh-cart-btn" type="button" id="whCartBtn" aria-label="Warenkorb öffnen">
-          <img class="wh-cart-icon-img" src="cart-icon.png" alt="" aria-hidden="true">
-          <span class="wh-cart-count" id="whCartCount">0</span>
-        </button>
-
-        <button class="wh-burger" id="whBurger" type="button" aria-label="Menü öffnen">
-          <span></span>
-        </button>
-      </div>
-    </div>
-
-    <div class="wh-nav-mobile" id="whMobileNav" aria-label="Mobile Navigation">
-      <div class="wh-nav-mobile-inner">
-        <a href="index.html" data-nav="startseite">Startseite</a>
-        <a href="heatbelt.html" data-nav="heatbelt">HeatBelt Pro™</a>
-        <a href="thermogun.html" data-nav="thermogun">ThermoGun Pro™</a>
-      </div>
-    </div>
-  </header>
 </div>
 
-<div class="wh-cart-overlay" id="whCartOverlay" aria-hidden="true"></div>
+<header class="wh-header" id="whHeader">
+  <div class="wh-header-inner">
 
-<aside class="wh-cart-drawer" id="whCartDrawer" aria-label="Warenkorb" aria-hidden="true">
-  <div class="wh-cart-head">
-    <div class="wh-cart-title">Warenkorb</div>
-    <button class="wh-cart-close" id="whCartClose" aria-label="Warenkorb schließen">✕</button>
+    <a class="wh-brand" href="index.html">
+      <img class="wh-logo" src="LOGO.jpg">
+      <span class="wh-brand-name">WarmesHerz</span>
+    </a>
+
+    <nav class="wh-nav">
+      <a class="wh-nav-link" href="index.html">Startseite</a>
+      <a class="wh-nav-link" href="heatbelt.html">HeatBelt Pro™</a>
+      <a class="wh-nav-link" href="thermogun.html">ThermoGun Pro™</a>
+    </nav>
+
+    <button class="wh-cart-btn" id="whCartBtn">
+      <!-- DEIN ICON AUS BILD -->
+      <img src="cart-icon.png" style="width:24px">
+      <span class="wh-cart-count" id="whCartCount">0</span>
+    </button>
+
   </div>
+</header>
 
+<div class="wh-header-spacer"></div>
+
+<div class="wh-cart-overlay" id="whCartOverlay"></div>
+
+<aside class="wh-cart-drawer" id="whCartDrawer">
   <div class="wh-cart-body" id="whCartItems"></div>
 
-  <div class="wh-cart-foot">
-    <div class="wh-cart-row">
-      <span>Zwischensumme</span>
-      <b id="whCartSubtotal">€0,00</b>
-    </div>
-    <button class="wh-cart-checkout" id="whCartCheckout" type="button">Zur Kasse</button>
-    <div class="wh-cart-hint">Kostenloser Versand &amp; 30 Tage Rückgabe</div>
+  <div style="padding:18px">
+    <button class="wh-cart-checkout" id="whCartCheckout">
+      Zur Kasse
+    </button>
   </div>
 </aside>
-<!-- ===== /WarmesHerz Header (include) ===== -->
+
+<script src="header.js"></script>
