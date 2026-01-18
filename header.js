@@ -1,218 +1,158 @@
-// header.js
-(function(){
-  const KEY = "wh_cart_v1";
-  const PAYPAL_CHECKOUT_URL = "https://www.paypal.com/ncp/payment/QUPGSWMD59ZSJ";
+<!-- ===== WARMESHERZ HEADER ===== -->
+<style>
+:root{
+  --wh-topbar:#3c3c3a;
+  --wh-header:#fbfaf7;
+  --wh-text:#111;
+  --wh-muted:rgba(0,0,0,.55);
+  --wh-border:rgba(0,0,0,.12);
+}
 
-  function loadCart(){
-    try { return JSON.parse(localStorage.getItem(KEY)) || []; }
-    catch(e){ return []; }
-  }
-  function saveCart(cart){ localStorage.setItem(KEY, JSON.stringify(cart)); }
-  function formatEUR(n){
-    return new Intl.NumberFormat("de-DE", { style:"currency", currency:"EUR" }).format(n);
-  }
-  function subtotal(cart){ return cart.reduce((s,it)=>s + (Number(it.price)||0) * (Number(it.qty)||0), 0); }
+/* ----- TOPBAR ----- */
+.wh-topbar{background:var(--wh-topbar);color:#fff;font-size:13px}
+.wh-topbar-inner{
+  max-width:1400px;margin:0 auto;padding:10px 20px;
+  display:flex;align-items:center;justify-content:center
+}
+.wh-topbar b{font-weight:600}
 
-  function setCount(cart){
-    const el = document.getElementById("whCartCount");
-    if(el) el.textContent = String(cart.reduce((s,it)=>s+(Number(it.qty)||0),0));
-  }
+/* ----- HEADER STICKY + HIDE ----- */
+.wh-header{
+  background:var(--wh-header);
+  border-bottom:1px solid var(--wh-border);
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:999;
+  transition:transform .22s ease;
+}
+.wh-header.wh-hide{ transform:translateY(-110%); }
 
-  function render(){
-    const cart = loadCart();
-    setCount(cart);
+.wh-header-spacer{ height:92px; }   /* verhindert das „Reinschneiden“ */
 
-    const itemsEl = document.getElementById("whCartItems");
-    const subEl = document.getElementById("whCartSubtotal");
-    if(!itemsEl || !subEl) return;
+.wh-header-inner{
+  max-width:1400px;margin:0 auto;
+  padding:14px 20px;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+}
 
-    itemsEl.innerHTML = "";
+/* ----- BRAND ----- */
+.wh-brand{
+  display:flex;align-items:center;gap:12px;
+  text-decoration:none;color:#111;
+}
+.wh-logo{
+  width:52px;height:52px;
+  object-fit:contain;
+}
+.wh-brand-name{
+  font-size:20px;
+  font-weight:300;
+  letter-spacing:.4px;
+}
 
-    if(cart.length === 0){
-      const d = document.createElement("div");
-      d.style.color = "rgba(0,0,0,.55)";
-      d.style.fontSize = "14px";
-      d.style.padding = "10px 2px";
-      d.textContent = "Dein Warenkorb ist leer.";
-      itemsEl.appendChild(d);
-      subEl.textContent = formatEUR(0);
-      return;
-    }
+/* ----- NAV ----- */
+.wh-nav{
+  display:flex;gap:34px;justify-content:center
+}
+.wh-nav-link{
+  text-decoration:none;
+  color:rgba(0,0,0,.7);
+  font-size:14px;
+}
+.wh-nav-link.active{color:#111;font-weight:600}
 
-    cart.forEach((it, idx) => {
-      const row = document.createElement("div");
-      row.className = "wh-item";
+/* ----- CART BUTTON (DEIN DESIGN) ----- */
+.wh-cart-btn{
+  width:52px;height:46px;
+  border:1px solid rgba(0,0,0,.14);
+  background:#fff;
+  border-radius:14px;
+  position:relative;
+  cursor:pointer;
+}
+.wh-cart-btn:hover{background:#f9f9f9}
 
-      const img = document.createElement("img");
-      img.src = it.image || "";
-      img.alt = it.title || "Produkt";
+.wh-cart-count{
+  position:absolute;
+  top:6px;right:6px;
+  background:#111;color:#fff;
+  border-radius:999px;
+  min-width:18px;height:18px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;
+}
 
-      const mid = document.createElement("div");
-      const t = document.createElement("div");
-      t.className = "wh-item-title";
-      t.textContent = it.title || "Produkt";
+/* ----- DRAWER (GENAU WIE VORHER) ----- */
+.wh-cart-overlay{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.35);
+  opacity:0;pointer-events:none;
+  transition:.22s;
+  z-index:1000
+}
+.wh-cart-drawer{
+  position:fixed;top:0;right:0;
+  height:100%;width:390px;
+  background:#fff;
+  transform:translateX(110%);
+  transition:.26s;
+  z-index:1001;
+  display:flex;flex-direction:column;
+}
 
-      const m = document.createElement("div");
-      m.className = "wh-item-meta";
-      m.textContent = formatEUR(Number(it.price)||0) + (it.sku ? " · " + it.sku : "");
+.wh-cart-open .wh-cart-overlay{opacity:1;pointer-events:auto}
+.wh-cart-open .wh-cart-drawer{transform:translateX(0)}
 
-      mid.appendChild(t); mid.appendChild(m);
+/* ----- MOBILE ----- */
+@media(max-width:900px){
+  .wh-header-inner{grid-template-columns:1fr auto}
+  .wh-nav{display:none}
+}
+</style>
 
-      const right = document.createElement("div");
-      right.className = "wh-item-actions";
+<div class="wh-topbar">
+  <div class="wh-topbar-inner">
+    <span><b>Kostenloser Versand</b> auf alle Bestellungen</span>
+  </div>
+</div>
 
-      const qty = document.createElement("div");
-      qty.className = "wh-qty";
+<header class="wh-header" id="whHeader">
+  <div class="wh-header-inner">
 
-      const minus = document.createElement("button");
-      minus.type = "button";
-      minus.textContent = "−";
-      minus.addEventListener("click", () => {
-        const c = loadCart();
-        c[idx].qty = (Number(c[idx].qty)||1) - 1;
-        if(c[idx].qty <= 0) c.splice(idx, 1);
-        saveCart(c); render();
-      });
+    <a class="wh-brand" href="index.html">
+      <img class="wh-logo" src="LOGO.jpg">
+      <span class="wh-brand-name">WarmesHerz</span>
+    </a>
 
-      const qn = document.createElement("span");
-      qn.textContent = String(Number(it.qty)||1);
+    <nav class="wh-nav">
+      <a class="wh-nav-link" href="index.html">Startseite</a>
+      <a class="wh-nav-link" href="heatbelt.html">HeatBelt Pro™</a>
+      <a class="wh-nav-link" href="thermogun.html">ThermoGun Pro™</a>
+    </nav>
 
-      const plus = document.createElement("button");
-      plus.type = "button";
-      plus.textContent = "+";
-      plus.addEventListener("click", () => {
-        const c = loadCart();
-        c[idx].qty = (Number(c[idx].qty)||1) + 1;
-        saveCart(c); render();
-      });
+    <button class="wh-cart-btn" id="whCartBtn">
+      <!-- DEIN ICON AUS BILD -->
+      <img src="cart-icon.png" style="width:24px">
+      <span class="wh-cart-count" id="whCartCount">0</span>
+    </button>
 
-      qty.appendChild(minus); qty.appendChild(qn); qty.appendChild(plus);
+  </div>
+</header>
 
-      const rm = document.createElement("button");
-      rm.className = "wh-remove";
-      rm.type = "button";
-      rm.textContent = "Entfernen";
-      rm.addEventListener("click", () => {
-        const c = loadCart();
-        c.splice(idx, 1);
-        saveCart(c); render();
-      });
+<div class="wh-header-spacer"></div>
 
-      right.appendChild(qty);
-      right.appendChild(rm);
+<div class="wh-cart-overlay" id="whCartOverlay"></div>
 
-      row.appendChild(img);
-      row.appendChild(mid);
-      row.appendChild(right);
+<aside class="wh-cart-drawer" id="whCartDrawer">
+  <div class="wh-cart-body" id="whCartItems"></div>
 
-      itemsEl.appendChild(row);
-    });
+  <div style="padding:18px">
+    <button class="wh-cart-checkout" id="whCartCheckout">
+      Zur Kasse
+    </button>
+  </div>
+</aside>
 
-    subEl.textContent = formatEUR(subtotal(cart));
-  }
-
-  function openCart(){
-    document.documentElement.classList.add("wh-cart-open");
-    document.getElementById("whCartDrawer")?.setAttribute("aria-hidden","false");
-    document.getElementById("whCartOverlay")?.setAttribute("aria-hidden","false");
-    render();
-  }
-  function closeCart(){
-    document.documentElement.classList.remove("wh-cart-open");
-    document.getElementById("whCartDrawer")?.setAttribute("aria-hidden","true");
-    document.getElementById("whCartOverlay")?.setAttribute("aria-hidden","true");
-  }
-
-  // Global API for product pages
-  window.WHCart = {
-    add({ id, title, price, image, sku, qty }){
-      const cart = loadCart();
-      const found = cart.find(x => x.id === id);
-      const addQty = Number(qty || 1);
-
-      if(found) found.qty = (Number(found.qty)||0) + addQty;
-      else cart.push({ id, title, price:Number(price)||0, image, sku, qty:addQty });
-
-      saveCart(cart);
-      render();
-      openCart();
-    },
-    open: openCart,
-    close: closeCart,
-    render
-  };
-
-  function setOffset(){
-    const wrap = document.getElementById("whWrap");
-    if(!wrap) return;
-    const h = wrap.getBoundingClientRect().height;
-    document.documentElement.style.setProperty("--wh-offset", `${Math.ceil(h)}px`);
-  }
-
-  function bindUI(){
-    document.getElementById("whCartBtn")?.addEventListener("click", openCart);
-    document.getElementById("whCartClose")?.addEventListener("click", closeCart);
-    document.getElementById("whCartOverlay")?.addEventListener("click", closeCart);
-
-    document.getElementById("whCartCheckout")?.addEventListener("click", () => {
-      window.location.href = PAYPAL_CHECKOUT_URL;
-    });
-
-    document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeCart(); });
-
-    // burger
-    const burger = document.getElementById("whBurger");
-    const mobileNav = document.getElementById("whMobileNav");
-    burger?.addEventListener("click", () => mobileNav?.classList.toggle("open"));
-
-    // active link highlight
-    const path = (location.pathname.split("/").pop() || "index.html").toLowerCase();
-    const map = { "index.html":"startseite", "":"startseite", "heatbelt.html":"heatbelt", "thermogun.html":"thermogun" };
-    const active = map[path];
-    if(active){
-      document.querySelectorAll("[data-nav]").forEach(a=>{
-        a.classList.toggle("active", a.getAttribute("data-nav") === active);
-      });
-    }
-
-    // hide on scroll down, show on scroll up
-    const wrap = document.getElementById("whWrap");
-    let lastY = window.scrollY || 0;
-    let ticking = false;
-
-    function onScroll(){
-      const y = window.scrollY || 0;
-      const delta = y - lastY;
-
-      if (Math.abs(delta) < 6) return;
-
-      if (y < 80) {
-        wrap?.classList.remove("wh-hide");
-        lastY = y;
-        return;
-      }
-
-      if (delta > 0) wrap?.classList.add("wh-hide");
-      else wrap?.classList.remove("wh-hide");
-
-      lastY = y;
-    }
-
-    window.addEventListener("scroll", () => {
-      if(!ticking){
-        requestAnimationFrame(() => { onScroll(); ticking = false; });
-        ticking = true;
-      }
-    }, { passive:true });
-
-    // keep offset correct
-    window.addEventListener("resize", setOffset, { passive:true });
-  }
-
-  // Init after header injected
-  window.initWHHeader = function(){
-    setOffset();
-    bindUI();
-    render();
-  };
-})();
+<script src="header.js"></script>
