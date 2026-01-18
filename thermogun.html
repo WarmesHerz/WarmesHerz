@@ -1182,6 +1182,16 @@
       .feature-section.reverse { direction: ltr; }
       .feature-content h2 { font-size: 28px; }
     }
+    .add-to-cart.sold-out {
+  background: #bfbfbf;
+  cursor: not-allowed;
+  opacity: 0.85;
+}
+
+.add-to-cart.sold-out:hover {
+  background: #bfbfbf;
+}
+
   </style>
 </head>
 
@@ -1292,14 +1302,15 @@
           </div>
         </div>
 
-        <button class="add-to-cart"
-          data-id="thermogun-pro"
-          data-title="ThermoGun Pro™"
-          data-price="109"
-          data-image="ThermoGun Main Image.webp"
-          data-sku="TG-PRO">
-          In den Warenkorb legen
-        </button>
+        <button class="add-to-cart sold-out" disabled
+  data-id="thermogun-pro"
+  data-title="ThermoGun Pro™"
+  data-price="109"
+  data-image="ThermoGun Main Image.webp"
+  data-sku="TG-PRO">
+  Ausverkauft
+</button>
+
       </div>
     </div>
 
