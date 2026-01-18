@@ -2064,5 +2064,35 @@
       });
     });
   </script>
+  <div id="site-footer"></div>
+
+<script>
+  async function loadFooter() {
+    const res = await fetch('footer.html', { cache: "no-cache" });
+    const html = await res.text();
+
+    const host = document.getElementById('site-footer');
+    const tmp = document.createElement('div');
+    tmp.innerHTML = html;
+
+    // 1) Erst alle NICHT-script Nodes rein
+    const scripts = Array.from(tmp.querySelectorAll('script'));
+    scripts.forEach(s => s.remove());
+    host.innerHTML = tmp.innerHTML;
+
+    // 2) Dann scripts "neu" erstellen -> dadurch werden sie ausgeführt
+    for (const s of scripts) {
+      const ns = document.createElement('script');
+      // Attribute kopieren (z.B. src, type)
+      for (const attr of s.attributes) ns.setAttribute(attr.name, attr.value);
+      // Inline-Code kopieren
+      ns.textContent = s.textContent;
+      document.body.appendChild(ns);
+    }
+  }
+
+  loadFooter();
+</script>
+
 </body>
 </html>
