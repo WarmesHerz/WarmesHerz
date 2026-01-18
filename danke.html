@@ -1,0 +1,19 @@
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  // Schutz gegen Mehrfach-Tracking beim Reload
+  if (!sessionStorage.getItem("fb_purchase_tracked")) {
+
+    fbq('track', 'Purchase', {
+      currency: 'EUR',
+      value: 109.00,
+      content_name: 'ThermoGun Pro',
+      content_ids: ['TG-PRO'],
+      content_type: 'product'
+    });
+
+    sessionStorage.setItem("fb_purchase_tracked", "true");
+  }
+
+});
+</script>
