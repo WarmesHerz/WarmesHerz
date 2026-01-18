@@ -1,883 +1,894 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Therabody - LED-Therapie</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: 'Georgia', serif;
-            background-color: #f5f1ec;
-            color: #333;
-        }
-
-        .section {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 80px 40px;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 400;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-
-        .subtitle {
-            font-size: 1.1rem;
-            color: #666;
-            margin-bottom: 50px;
-            max-width: 700px;
-        }
-
-        /* HEADER HOST */
-        #site-header { width: 100%; }
-
-        /* HERO (mit Text + CTA) */
-        .hero {
-            width: 100%;
-            background: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Hero darf oben/unten etwas abgeschnitten sein */
-        .hero-media {
-            width: 100%;
-            height: 62vh;
-            min-height: 420px;
-            max-height: 720px;
-            position: relative;
-        }
-
-        .hero-media picture,
-        .hero-media img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* -> leichtes Abschneiden */
-        }
-
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            /* dezente Verdunklung nach unten für Lesbarkeit */
-            background: linear-gradient(to bottom,
-                rgba(255,255,255,0.00) 0%,
-                rgba(0,0,0,0.10) 45%,
-                rgba(0,0,0,0.55) 100%);
-            pointer-events: none;
-        }
-
-        .hero-content {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: 36px;
-            width: min(1100px, calc(100% - 60px));
-            color: white;
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-
-        .hero-kicker {
-            font-size: 0.95rem;
-            letter-spacing: 0.02em;
-            opacity: 0.92;
-        }
-
-        .hero-title {
-            font-size: clamp(2rem, 3vw, 3.2rem);
-            font-weight: 400;
-            line-height: 1.1;
-            max-width: 900px;
-        }
-
-        .hero-subtitle {
-            font-size: 1.05rem;
-            line-height: 1.5;
-            opacity: 0.92;
-            max-width: 720px;
-        }
-
-        .hero-actions {
-            margin-top: 6px;
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-
-        .hero-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12px 22px;
-            border-radius: 999px;
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
-            border: 1px solid rgba(255,255,255,0.65);
-            background: rgba(255,255,255,0.12);
-            color: white;
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-        }
-        .hero-btn:hover {
-            transform: translateY(-1px);
-            background: rgba(255,255,255,0.18);
-            border-color: rgba(255,255,255,0.85);
-        }
-
-        /* Section 1 Hintergrund = weiss */
-        .section-white { background: white; }
-        .section-white .section {
-            padding-top: 70px;
-            padding-bottom: 70px;
-        }
-
-        /* Produktkacheln: größer + Bild vollständig sichtbar */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 34px;
-            margin-top: 44px;
-        }
-
-        .product-card {
-            position: relative;
-            border-radius: 14px;
-            overflow: hidden;
-            min-height: 620px;     /* größer */
-            display: flex;
-            flex-direction: column;
-            color: white;
-            background-color: #111;
-        }
-
-        /* Bild-Layer als <img> (damit object-fit contain möglich ist) */
-        .product-media {
-            position: absolute;
-            inset: 0;
-            z-index: 0;
-        }
-
-        .product-media img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;   /* -> Bild vollständig sichtbar */
-            object-position: center;
-            transform: scale(1.02); /* minimal größer, ohne Crop */
-            background: #111;      /* falls Transparenz / Ränder */
-        }
-
-        /* Verdunklung/Verlauf nach unten (vergrauend/dunkler) */
-        .product-shade {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            background: linear-gradient(to bottom,
-                rgba(0,0,0,0.05) 0%,
-                rgba(0,0,0,0.25) 45%,
-                rgba(0,0,0,0.72) 100%);
-            pointer-events: none;
-        }
-
-        .product-content {
-            position: relative;
-            z-index: 2;
-            padding: 46px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-        }
-
-        .product-card h2 {
-            font-size: 2.35rem;
-            font-weight: 400;
-            margin-bottom: 14px;
-        }
-
-        .product-card p {
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 22px;
-            max-width: 560px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 14px 32px;
-            background-color: white;
-            color: #333;
-            text-decoration: none;
-            border-radius: 6px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            align-self: flex-start;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background-color: #f0f0f0;
-            transform: translateY(-2px);
-        }
-
-        .feature-bar {
-            position: relative;
-            z-index: 2;
-            background-color: rgba(255, 236, 220, 0.95);
-            padding: 20px 30px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: #333;
-        }
-
-        .feature-icon {
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 140, 100, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            overflow: hidden;
-        }
-
-        .feature-icon img {
-            width: 24px;
-            height: 24px;
-            object-fit: contain;
-        }
-
-        .feature-bar span {
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-
-        /* Wissenschafts-Section */
-        .gift-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-
-        .gift-section-content {
-            display: grid;
-            grid-template-columns: 450px 1fr;
-            gap: 40px;
-            align-items: start;
-            margin-top: 40px;
-        }
-
-        .gift-intro {
-            position: sticky;
-            top: 100px;
-        }
-
-        .gift-intro h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-
-        .gift-intro .subtitle { margin-bottom: 0; }
-
-        .gift-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .gift-image {
-            width: 100%;
-            height: 300px;
-            background-size: cover;
-            background-position: center;
-            background-color: #f0f0f0;
-        }
-
-        .gift-image.heatlight { background-image: url('Hitzevisualisiert.jpg'); }
-        .gift-image.vibration { background-image: url('Vibrationsbild.jpg'); }
-
-        .gift-content {
-            padding: 35px;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-        }
-
-        .gift-card h2 {
-            font-size: 1.8rem;
-            font-weight: 400;
-            margin-bottom: 15px;
-        }
-
-        .gift-card p {
-            font-size: 0.95rem;
-            line-height: 1.7;
-            color: #666;
-            margin-bottom: 25px;
-            flex: 1;
-        }
-
-        .btn-dark {
-            background-color: #1a1a1a;
-            color: white;
-            width: 100%;
-            text-align: center;
-        }
-
-        .btn-dark:hover { background-color: #2a2a2a; }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal.active { display: flex; }
-
-        .modal-content {
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            max-width: 600px;
-            width: 90%;
-            position: relative;
-            color: #333;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 15px; right: 20px;
-            font-size: 2rem;
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #666;
-            line-height: 1;
-        }
-
-        .modal-close:hover { color: #333; }
-
-        .modal-content h2 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-        }
-
-        .modal-content p {
-            line-height: 1.7;
-            color: #666;
-            margin-bottom: 14px;
-        }
-
-        .contact-section {
-            background-color: white;
-            padding: 80px 40px;
-        }
-
-        .contact-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .contact-container h1 {
-            text-align: center;
-            margin-bottom: 15px;
-        }
-
-        .contact-container .subtitle {
-            text-align: center;
-            margin: 0 auto 50px;
-        }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .form-group label {
-            font-size: 0.9rem;
-            color: #333;
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            padding: 14px 16px;
-            border: 1px solid #d0d0d0;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-family: 'Georgia', serif;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #8b7a6f;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 150px;
-        }
-
-        .form-submit { margin-top: 10px; }
-
-        .form-submit .btn {
-            width: 100%;
-            background-color: #1a1a1a;
-            color: white;
-            padding: 16px 32px;
-            font-size: 1rem;
-        }
-
-        .form-submit .btn:hover { background-color: #2a2a2a; }
-
-        .comparison-section {
-            background-color: #f5f1ec;
-            padding: 60px 40px;
-        }
-
-        .comparison-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .comparison-container h1 {
-            font-size: 2rem;
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        .comparison-container .subtitle {
-            font-size: 1rem;
-            text-align: center;
-            margin: 0 auto 40px;
-        }
-
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-        }
-
-        .comparison-card { display: flex; flex-direction: column; }
-
-        .comparison-image-wrapper {
-            width: 85%;
-            max-width: 350px;
-            aspect-ratio: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 30px;
-        }
-
-        .comparison-image-wrapper img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-
-        .comparison-header {
-            text-align: left;
-            padding: 0 0 20px 0;
-            margin-bottom: 20px;
-        }
-
-        .comparison-header h2 {
-            font-size: 1.5rem;
-            font-weight: 400;
-            margin-bottom: 4px;
-            color: #1a1a1a;
-        }
-
-        .comparison-price {
-            font-size: 1.3rem;
-            color: #1a1a1a;
-            font-weight: 400;
-        }
-
-        .comparison-features-wrapper {
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .comparison-features { list-style: none; padding: 0; margin: 0; }
-
-        .comparison-features li {
-            display: grid;
-            grid-template-columns: 60px 1fr;
-            align-items: stretch;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            color: #1a1a1a;
-            border-bottom: 1px solid #e5e5e5;
-            min-height: 50px;
-        }
-
-        .comparison-features li:last-child { border-bottom: none; }
-
-        .feature-check-cell {
-            background-color: #ffd4b8;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px 0;
-        }
-
-        .feature-check, .feature-cross {
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .feature-check::before {
-            content: '✓';
-            color: #1a1a1a;
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-
-        .feature-cross::before {
-            content: '✕';
-            color: #1a1a1a;
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-
-        .feature-text {
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-        }
-
-        @media (max-width: 968px) {
-            .hero-media { height: 56vh; min-height: 360px; }
-            .hero-content { bottom: 24px; width: calc(100% - 40px); }
-            .hero-subtitle { display: none; } /* sehr clean mobil */
-
-            .product-grid { grid-template-columns: 1fr; gap: 26px; }
-            .product-card { min-height: 560px; }
-            .product-content { padding: 34px; }
-
-            .gift-section-content { grid-template-columns: 1fr; }
-            .gift-grid { grid-template-columns: 1fr; }
-            .gift-intro { position: static; }
-
-            .form-row { grid-template-columns: 1fr; }
-
-            h1 { font-size: 2rem; }
-            .section { padding: 50px 20px; }
-            .contact-section { padding: 50px 20px; }
-            .comparison-section { padding: 50px 20px; }
-            .comparison-grid { grid-template-columns: 1fr; }
-            .comparison-image-wrapper { padding: 40px; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Therabody - LED-Therapie</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Georgia', serif;
+      background-color: #f5f1ec;
+      color: #333;
+    }
+
+    .section {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 400;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 50px;
+      max-width: 700px;
+    }
+
+    /* HEADER HOST */
+    #site-header { width: 100%; }
+
+    /* HERO (mit Text + CTA) */
+    .hero {
+      width: 100%;
+      background: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-media {
+      width: 100%;
+      height: 62vh;
+      min-height: 420px;
+      max-height: 720px;
+      position: relative;
+    }
+
+    .hero-media picture,
+    .hero-media img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(255,255,255,0.00) 0%,
+        rgba(0,0,0,0.10) 45%,
+        rgba(0,0,0,0.55) 100%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 36px;
+      width: min(1100px, calc(100% - 60px));
+      color: white;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* Desktop: Hero Inhalt 20px weiter runter */
+    @media (min-width: 969px) {
+      .hero-content { bottom: 16px; } /* vorher 36px -> 20px tiefer */
+    }
+
+    .hero-kicker {
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+      opacity: 0.92;
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 3vw, 3.2rem);
+      font-weight: 400;
+      line-height: 1.1;
+      max-width: 900px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      line-height: 1.5;
+      opacity: 0.92;
+      max-width: 720px;
+    }
+
+    .hero-actions {
+      margin-top: 6px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 22px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      border: 1px solid rgba(255,255,255,0.65);
+      background: rgba(255,255,255,0.12);
+      color: white;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .hero-btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.18);
+      border-color: rgba(255,255,255,0.85);
+    }
+
+    /* Section 1 Hintergrund = weiss */
+    .section-white { background: white; }
+    .section-white .section {
+      padding-top: 70px;
+      padding-bottom: 70px;
+    }
+
+    /* Produktkacheln */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 34px;
+      margin-top: 44px;
+    }
+
+    .product-card {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      min-height: 620px;
+      display: flex;
+      flex-direction: column;
+      color: white;
+      background-color: #111;
+    }
+
+    .product-media {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      background: #111;
+    }
+
+    /* Randlos: cover + minimaler Zoom */
+    .product-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;     /* statt contain -> kein Rand */
+      object-position: center;
+      transform: scale(1.06); /* gegen minimale Ränder/Letterboxing */
+      transform-origin: center;
+    }
+
+    /* Mobile: nochmal minimal mehr Zoom gegen oberen Rand */
+    @media (max-width: 968px) {
+      .product-media img { transform: scale(1.10); }
+    }
+
+    /* Verdunklung/Verlauf nach unten */
+    .product-shade {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(to bottom,
+        rgba(0,0,0,0.05) 0%,
+        rgba(0,0,0,0.25) 45%,
+        rgba(0,0,0,0.72) 100%);
+      pointer-events: none;
+    }
+
+    .product-content {
+      position: relative;
+      z-index: 2;
+      padding: 46px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .product-card h2 {
+      font-size: 2.35rem;
+      font-weight: 400;
+      margin-bottom: 14px;
+    }
+
+    .product-card p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 22px;
+      max-width: 560px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      background-color: white;
+      color: #333;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      align-self: flex-start;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #f0f0f0;
+      transform: translateY(-2px);
+    }
+
+    .feature-bar {
+      position: relative;
+      z-index: 2;
+      background-color: rgba(255, 236, 220, 0.95);
+      padding: 20px 30px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #333;
+    }
+
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 140, 100, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .feature-icon img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+
+    .feature-bar span {
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    /* Wissenschafts-Section */
+    .gift-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    .gift-section-content {
+      display: grid;
+      grid-template-columns: 450px 1fr;
+      gap: 40px;
+      align-items: start;
+      margin-top: 40px;
+    }
+
+    .gift-intro {
+      position: sticky;
+      top: 100px;
+    }
+
+    .gift-intro h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .gift-intro .subtitle { margin-bottom: 0; }
+
+    .gift-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .gift-image {
+      width: 100%;
+      height: 300px;
+      background-size: cover;
+      background-position: center;
+      background-color: #f0f0f0;
+    }
+
+    .gift-image.heatlight { background-image: url('Hitzevisualisiert.jpg'); }
+    .gift-image.vibration { background-image: url('Vibrationsbild.jpg'); }
+
+    .gift-content {
+      padding: 35px;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .gift-card h2 {
+      font-size: 1.8rem;
+      font-weight: 400;
+      margin-bottom: 15px;
+    }
+
+    .gift-card p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #666;
+      margin-bottom: 25px;
+      flex: 1;
+    }
+
+    .btn-dark {
+      background-color: #1a1a1a;
+      color: white;
+      width: 100%;
+      text-align: center;
+    }
+
+    .btn-dark:hover { background-color: #2a2a2a; }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal.active { display: flex; }
+
+    .modal-content {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      max-width: 600px;
+      width: 90%;
+      position: relative;
+      color: #333;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px; right: 20px;
+      font-size: 2rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #666;
+      line-height: 1;
+    }
+
+    .modal-close:hover { color: #333; }
+
+    .modal-content h2 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+
+    .modal-content p {
+      line-height: 1.7;
+      color: #666;
+      margin-bottom: 14px;
+    }
+
+    .contact-section {
+      background-color: white;
+      padding: 80px 40px;
+    }
+
+    .contact-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .contact-container h1 {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .contact-container .subtitle {
+      text-align: center;
+      margin: 0 auto 50px;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-size: 0.9rem;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      padding: 14px 16px;
+      border: 1px solid #d0d0d0;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-family: 'Georgia', serif;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #8b7a6f;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 150px;
+    }
+
+    .form-submit { margin-top: 10px; }
+
+    .form-submit .btn {
+      width: 100%;
+      background-color: #1a1a1a;
+      color: white;
+      padding: 16px 32px;
+      font-size: 1rem;
+    }
+
+    .form-submit .btn:hover { background-color: #2a2a2a; }
+
+    .comparison-section {
+      background-color: #f5f1ec;
+      padding: 60px 40px;
+    }
+
+    .comparison-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .comparison-container h1 {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .comparison-container .subtitle {
+      font-size: 1rem;
+      text-align: center;
+      margin: 0 auto 40px;
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+
+    .comparison-card { display: flex; flex-direction: column; }
+
+    .comparison-image-wrapper {
+      width: 85%;
+      max-width: 350px;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 30px;
+    }
+
+    .comparison-image-wrapper img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .comparison-header {
+      text-align: left;
+      padding: 0 0 20px 0;
+      margin-bottom: 20px;
+    }
+
+    .comparison-header h2 {
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 4px;
+      color: #1a1a1a;
+    }
+
+    .comparison-price {
+      font-size: 1.3rem;
+      color: #1a1a1a;
+      font-weight: 400;
+    }
+
+    .comparison-features-wrapper {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .comparison-features { list-style: none; padding: 0; margin: 0; }
+
+    .comparison-features li {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      align-items: stretch;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #1a1a1a;
+      border-bottom: 1px solid #e5e5e5;
+      min-height: 56px;
+    }
+
+    .comparison-features li:last-child { border-bottom: none; }
+
+    .feature-check-cell {
+      background-color: #ffd4b8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 0;
+    }
+
+    .feature-check {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .feature-check::before {
+      content: '✓';
+      color: #1a1a1a;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .feature-text {
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    @media (max-width: 968px) {
+      .hero-media { height: 56vh; min-height: 360px; }
+      .hero-content { bottom: 24px; width: calc(100% - 40px); }
+      .hero-subtitle { display: none; }
+
+      .product-grid { grid-template-columns: 1fr; gap: 26px; }
+      .product-card { min-height: 560px; }
+      .product-content { padding: 34px; }
+
+      .gift-section-content { grid-template-columns: 1fr; }
+      .gift-grid { grid-template-columns: 1fr; }
+      .gift-intro { position: static; }
+
+      .form-row { grid-template-columns: 1fr; }
+
+      h1 { font-size: 2rem; }
+      .section { padding: 50px 20px; }
+      .contact-section { padding: 50px 20px; }
+      .comparison-section { padding: 50px 20px; }
+      .comparison-grid { grid-template-columns: 1fr; }
+      .comparison-image-wrapper { padding: 40px; }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- HEADER -->
-    <div id="site-header"></div>
-    <script>
-      async function loadHeader() {
-        const res = await fetch('header.html', { cache: "no-cache" });
-        const html = await res.text();
+  <!-- HEADER -->
+  <div id="site-header"></div>
+  <script>
+    async function loadHeader() {
+      const res = await fetch('header.html', { cache: "no-cache" });
+      const html = await res.text();
 
-        const host = document.getElementById('site-header');
-        const tmp = document.createElement('div');
-        tmp.innerHTML = html;
+      const host = document.getElementById('site-header');
+      const tmp = document.createElement('div');
+      tmp.innerHTML = html;
 
-        const scripts = Array.from(tmp.querySelectorAll('script'));
-        scripts.forEach(s => s.remove());
-        host.innerHTML = tmp.innerHTML;
+      const scripts = Array.from(tmp.querySelectorAll('script'));
+      scripts.forEach(s => s.remove());
+      host.innerHTML = tmp.innerHTML;
 
-        for (const s of scripts) {
-          const ns = document.createElement('script');
-          for (const attr of s.attributes) ns.setAttribute(attr.name, attr.value);
-          ns.textContent = s.textContent;
-          document.body.appendChild(ns);
-        }
+      for (const s of scripts) {
+        const ns = document.createElement('script');
+        for (const attr of s.attributes) ns.setAttribute(attr.name, attr.value);
+        ns.textContent = s.textContent;
+        document.body.appendChild(ns);
       }
-      loadHeader();
-    </script>
+    }
+    loadHeader();
+  </script>
 
-    <!-- HERO (mit Text + Button) -->
-    <div class="hero" aria-label="Hero">
-        <div class="hero-media">
-            <picture>
-                <source media="(max-width: 968px)" srcset="Hero Mobile.png">
-                <img src="Hero Desktop.png" alt="ThermoGun Pro und HeatBelt Pro – Hero">
-            </picture>
-            <div class="hero-overlay"></div>
+  <!-- HERO -->
+  <div class="hero" aria-label="Hero">
+    <div class="hero-media">
+      <picture>
+        <source media="(max-width: 968px)" srcset="Hero Mobile.png">
+        <img src="Hero Desktop.png" alt="ThermoGun Pro und HeatBelt Pro – Hero">
+      </picture>
+      <div class="hero-overlay"></div>
 
-            <div class="hero-content">
-                <div class="hero-kicker">Regeneration, die du sofort spürst</div>
-                <div class="hero-title">Die beste Entlastung für deinen Körper – genau dann, wenn du sie brauchst.</div>
-                <div class="hero-subtitle">Wärme, Licht und Massage sind bewährte Methoden, um Spannung zu lösen und das Schmerzgefühl spürbar zu reduzieren – für ein freieres Körpergefühl im Alltag.</div>
-                <div class="hero-actions">
-                    <a class="hero-btn" href="#led-therapy">Produkte ansehen</a>
-                </div>
-            </div>
+      <div class="hero-content">
+        <div class="hero-kicker">Regeneration, die du sofort spürst</div>
+        <div class="hero-title">Die beste Entlastung für deinen Körper – genau dann, wenn du sie brauchst.</div>
+        <div class="hero-subtitle">Wärme, Licht und Massage sind bewährte Methoden, um Spannung zu lösen und das Schmerzgefühl spürbar zu reduzieren – für ein freieres Körpergefühl im Alltag.</div>
+        <div class="hero-actions">
+          <a class="hero-btn" href="#led-therapy">Produkte ansehen</a>
         </div>
+      </div>
     </div>
+  </div>
 
-    <!-- Section 1: LED-Therapie Produkte -->
-    <div class="section-white" id="led-therapy">
-        <div class="section">
-            <h1>Schnellere Erholung dank LED-Therapie</h1>
-            <p class="subtitle">LED-Therapie unterstützt Regeneration und Wohlbefinden, indem sie gezielt auf Gewebeprozesse einwirkt – genau dort, wo du Entlastung brauchst.</p>
-
-            <div class="product-grid">
-                <div class="product-card">
-                    <div class="product-media">
-                        <img src="ThermoGun anwendung frau.webp" alt="ThermoGun Pro Anwendung">
-                    </div>
-                    <div class="product-shade"></div>
-
-                    <div class="product-content">
-                        <h2>ThermoGun Pro™</h2>
-                        <p>Perkussion & Vibration, um Spannung zu lösen und Muskeln schnell zu entspannen.</p>
-                        <a href="thermogun.html" class="btn">ThermoGun Pro shoppen</a>
-                    </div>
-
-                    <div class="feature-bar">
-                        <div class="feature-icon">
-                            <img src="Benefit_Icons_15.svg" alt="Icon">
-                        </div>
-                        <span>Schnellere und effektivere Erholung mit allen Vorteilen einer 15-minütigen Massage in nur zwei Minuten²</span>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-media">
-                        <img src="Tragefoto Infrarot fokus.jpg" alt="HeatBelt Pro Anwendung">
-                    </div>
-                    <div class="product-shade"></div>
-
-                    <div class="product-content">
-                        <h2>HeatBelt Pro™</h2>
-                        <p>Wärme & Lichtimpulse, um den Rücken zu entlasten und das Schmerzgefühl zu reduzieren.</p>
-                        <a href="heatbelt.html" class="btn">HeatBelt Pro shoppen</a>
-                    </div>
-
-                    <div class="feature-bar">
-                        <div class="feature-icon">
-                            <img src="Benefit_Icons_15.svg" alt="Icon">
-                        </div>
-                        <span>Wissenschaftlich belegte Schmerzlinderung im unteren Rückenbereich³</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Section 2: Wissenschaft hinter den Produkten -->
+  <!-- Section 1 -->
+  <div class="section-white" id="led-therapy">
     <div class="section">
-        <div class="gift-section-content">
-            <div class="gift-intro">
-                <h1>Warum diese Therapien wirken</h1>
-                <p class="subtitle">Wärme, Infrarot/Rotlicht sowie Massage/Vibration greifen direkt in Entspannungs- und Schmerzprozesse ein – und genau deshalb werden sie so häufig genutzt.</p>
+      <h1>Schnellere Erholung dank LED-Therapie</h1>
+      <p class="subtitle">LED-Therapie unterstützt Regeneration und Wohlbefinden, indem sie gezielt auf Gewebeprozesse einwirkt – genau dort, wo du Entlastung brauchst.</p>
+
+      <div class="product-grid">
+        <div class="product-card">
+          <div class="product-media">
+            <img src="ThermoGun anwendung frau.webp" alt="ThermoGun Pro Anwendung">
+          </div>
+          <div class="product-shade"></div>
+
+          <div class="product-content">
+            <h2>ThermoGun Pro™</h2>
+            <p>Perkussion & Vibration, um Spannung zu lösen und Muskeln schnell zu entspannen.</p>
+            <a href="thermogun.html" class="btn">ThermoGun Pro shoppen</a>
+          </div>
+
+          <div class="feature-bar">
+            <div class="feature-icon">
+              <img src="Benefit_Icons_15.svg" alt="Icon">
             </div>
+            <span>Schnellere und effektivere Erholung mit allen Vorteilen einer 15-minütigen Massage in nur zwei Minuten²</span>
+          </div>
+        </div>
 
-            <div class="gift-grid">
-                <div class="gift-card">
-                    <div class="gift-image heatlight"></div>
-                    <div class="gift-content">
-                        <h2>Wärme & Infrarot</h2>
-                        <p>Entspannt Muskulatur, fördert Durchblutung und kann das Schmerzempfinden deutlich senken – besonders bei Verspannungen.</p>
-                        <button class="btn btn-dark" onclick="openModal('modal1')">Mehr erfahren</button>
-                    </div>
-                </div>
+        <div class="product-card">
+          <div class="product-media">
+            <img src="Tragefoto Infrarot fokus.jpg" alt="HeatBelt Pro Anwendung">
+          </div>
+          <div class="product-shade"></div>
 
-                <div class="gift-card">
-                    <div class="gift-image vibration"></div>
-                    <div class="gift-content">
-                        <h2>Massage & Vibration</h2>
-                        <p>Löst Spannung, verbessert die Mikrozirkulation und kann Schmerzsignale im Nervensystem spürbar dämpfen.</p>
-                        <button class="btn btn-dark" onclick="openModal('modal2')">Mehr erfahren</button>
-                    </div>
-                </div>
+          <div class="product-content">
+            <h2>HeatBelt Pro™</h2>
+            <p>Wärme & Lichtimpulse, um den Rücken zu entlasten und das Schmerzgefühl zu reduzieren.</p>
+            <a href="heatbelt.html" class="btn">HeatBelt Pro shoppen</a>
+          </div>
+
+          <div class="feature-bar">
+            <div class="feature-icon">
+              <img src="Benefit_Icons_15.svg" alt="Icon">
             </div>
+            <span>Wissenschaftlich belegte Schmerzlinderung im unteren Rückenbereich³</span>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 
-    <!-- Produktvergleich -->
-    <div class="comparison-section">
-        <div class="comparison-container">
-            <h1>Produktvergleich</h1>
-            <p class="subtitle">Vergleichen Sie die wichtigsten Funktionen unserer Premium-Produkte</p>
+  <!-- Section 2: Warum diese Therapien wirken -->
+  <div class="section">
+    <div class="gift-section-content">
+      <div class="gift-intro">
+        <h1>Warum diese Therapien wirken</h1>
+        <p class="subtitle">Wärme, Infrarot/Rotlicht sowie Massage/Vibration greifen direkt in Entspannungs- und Schmerzprozesse ein – und genau deshalb werden sie so häufig genutzt.</p>
+      </div>
 
-            <div class="comparison-grid">
-                <div class="comparison-card">
-                    <div class="comparison-image-wrapper">
-                        <img src="Massagegun dreieck image.png" alt="ThermoGun Pro">
-                    </div>
-                    <div class="comparison-header">
-                        <h2>ThermoGun Pro™</h2>
-                        <p class="comparison-price">€109</p>
-                    </div>
-                    <div class="comparison-features-wrapper">
-                        <ul class="comparison-features">
-                            <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">Perkussive Therapie</div></li>
-                            <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">5 Massagegeschwindigkeiten</div></li>
-                            <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">Bluetooth-Konnektivität und App-Routinen (abhängig vom Setup)</div></li>
-                            <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">Visuell geführte Routinen (produkt-/appabhängig)</div></li>
-                            <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">LCD-Display</div></li>
-                            <li><div class="feature-check-cell"><span class="feature-cross"></span></div><div class="feature-text">Wärmende perkussive Therapie</div></li>
-                            <li><div class="feature-check-cell"><span class="feature-cross"></span></div><div class="feature-text">Cold Plus-Aufsatz (separat erhältlich)</div></li>
-                            <li><div class="feature-check-cell"><span class="feature-cross"></span></div><div class="feature-text">Vibration Plus-Aufsatz (separat erhältlich)</div></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="comparison-card">
-                    <div class="comparison-image-wrapper">
-                        <img src="Dreieck Belt image.png" alt="HeatBelt Pro">
-                    </div>
-                    <div class="comparison-header">
-                        <h2>HeatBelt Pro™</h2>
-                        <p class="comparison-price">€95</p>
-                    </div>
-                    <div class="comparison-features-wrapper">
-                        <ul class="comparison-features">
-                            <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">Vibrationstherapie</div></li>
-                            <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">Mehrere Intensitätsstufen</div></li>
-                            <li><div class="feature-check-cell"><span class="feature-cross"></span></div><div class="feature-text">Bluetooth/App-Integration</div></li>
-                            <li><div class="feature-check-cell"><span class="feature-cross"></span></div><div class="feature-text">Integrierte Routinen</div></li>
-                            <li><div class="feature-check-cell"><span class="feature-cross"></span></div><div class="feature-text">LCD-Display</div></li>
-                            <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">Wärmetherapie</div></li>
-                            <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">Optional: Kälteanwendung (abhängig von Setup/Zubehör)</div></li>
-                            <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">Kombinierbar: Wärme + Vibration + Licht (modellabhängig)</div></li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
+      <div class="gift-grid">
+        <div class="gift-card">
+          <div class="gift-image heatlight"></div>
+          <div class="gift-content">
+            <h2>Wärme & Infrarot</h2>
+            <p>Entspannt Muskulatur, fördert Durchblutung und kann das Schmerzempfinden deutlich senken.</p>
+            <button class="btn btn-dark" onclick="openModal('modal1')">Mehr erfahren</button>
+          </div>
         </div>
-    </div>
 
-    <!-- Kontaktformular -->
-    <div class="contact-section">
-        <div class="contact-container">
-            <h1>Kontaktieren Sie uns</h1>
-            <p class="subtitle">Fragen zu den Produkten, Anwendung oder Versand? Schreiben Sie uns – wir helfen schnell und unkompliziert weiter.</p>
-
-            <form class="contact-form" onsubmit="handleSubmit(event)">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="firstname">Vorname *</label>
-                        <input type="text" id="firstname" name="firstname" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="lastname">Nachname *</label>
-                        <input type="text" id="lastname" name="lastname" required>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="email">E-Mail-Adresse *</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Telefonnummer</label>
-                        <input type="tel" id="phone" name="phone">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="subject">Betreff *</label>
-                    <input type="text" id="subject" name="subject" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="message">Ihre Nachricht *</label>
-                    <textarea id="message" name="message" required></textarea>
-                </div>
-
-                <div class="form-submit">
-                    <button type="submit" class="btn">Nachricht senden</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Modals -->
-    <div id="modal1" class="modal" onclick="closeModal('modal1')">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <button class="modal-close" onclick="closeModal('modal1')">&times;</button>
-            <h2>Wärme & (Nah-)Infrarot</h2>
-            <p><strong>Wärme</strong> senkt Muskeltonus, steigert Durchblutung und kann Schmerzen schnell spürbar reduzieren.</p>
-            <p><strong>Infrarot/Rotlicht</strong> wird in Gewebe absorbiert und kann Regeneration sowie Entzündungsprozesse positiv beeinflussen.</p>
-            <p>Zusammen entsteht oft ein deutlich freieres, entspannteres Körpergefühl – besonders bei Verspannungen.</p>
-        </div>
-    </div>
-
-    <div id="modal2" class="modal" onclick="closeModal('modal2')">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <button class="modal-close" onclick="closeModal('modal2')">&times;</button>
+        <div class="gift-card">
+          <div class="gift-image vibration"></div>
+          <div class="gift-content">
             <h2>Massage & Vibration</h2>
-            <p>Mechanische Reize lösen Spannung, verbessern die Mikrozirkulation und können Schmerzsignale spürbar dämpfen.</p>
-            <p>Viele merken sofort: weniger „Zug“, mehr Beweglichkeit, angenehme Entlastung.</p>
-            <p>In Kombination mit Wärme oder Kälte lässt sich die Wirkung je nach Bedarf verstärken.</p>
+            <p>Löst Spannung, verbessert die Mikrozirkulation und kann Schmerzsignale spürbar dämpfen.</p>
+            <button class="btn btn-dark" onclick="openModal('modal2')">Mehr erfahren</button>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 
-    <script>
-        function openModal(id) {
-            document.getElementById(id).classList.add('active');
-        }
+  <!-- Produktvergleich (Inhalt ersetzt, alles Häkchen) -->
+  <div class="comparison-section">
+    <div class="comparison-container">
+      <h1>Produktvergleich</h1>
+      <p class="subtitle">Vergleichen Sie die wichtigsten Funktionen unserer Premium-Produkte</p>
 
-        function closeModal(id) {
-            document.getElementById(id).classList.remove('active');
-        }
+      <div class="comparison-grid">
+        <!-- ThermoGun -->
+        <div class="comparison-card">
+          <div class="comparison-image-wrapper">
+            <img src="Massagegun dreieck image.png" alt="ThermoGun Pro">
+          </div>
+          <div class="comparison-header">
+            <h2>ThermoGun Pro™</h2>
+            <p class="comparison-price">€109</p>
+          </div>
+          <div class="comparison-features-wrapper">
+            <ul class="comparison-features">
+              <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">Perkussive Tiefenmassage zur gezielten Lockerung von Muskeln und Faszien</div></li>
+              <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">Wärme- & Kältefunktion integriert für flexible Hot- und Cold-Therapie</div></li>
+              <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">Mehrere Massagegeschwindigkeiten für individuelle Intensität</div></li>
+              <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">Austauschbare Aufsätze für verschiedene Muskelgruppen und Anwendungen</div></li>
+              <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">Kompaktes, ergonomisches Design für einfache Einhandbedienung</div></li>
+              <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">Leiser Hochleistungsmotor für entspannende Anwendung ohne störende Geräusche</div></li>
+            </ul>
+          </div>
+        </div>
 
-        function handleSubmit(event) {
-            event.preventDefault();
-            alert('Vielen Dank für Ihre Nachricht! Wir werden uns in Kürze bei Ihnen melden.');
-            event.target.reset();
-        }
-    </script>
+        <!-- HeatBelt -->
+        <div class="comparison-card">
+          <div class="comparison-image-wrapper">
+            <img src="Dreieck Belt image.png" alt="HeatBelt Pro">
+          </div>
+          <div class="comparison-header">
+            <h2>HeatBelt Pro™</h2>
+            <p class="comparison-price">€95</p>
+          </div>
+          <div class="comparison-features-wrapper">
+            <ul class="comparison-features">
+              <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">Vierfach-Therapie in einem Gerät: LED, Ferninfrarot, Wärme & Vibration zur gezielten Linderung im unteren Rücken</div></li>
+              <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">3 Wärmestufen mit Infrarot: Niedrig, Mittel, Hoch (102 °F, 107 °F, 113 °F)</div></li>
+              <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">3 Vibrationsmuster: Tief, Hoch und Welle</div></li>
+              <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">LED-Funktion: ein / aus</div></li>
+              <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">Akkulaufzeit bis zu 180 Minuten</div></li>
+              <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">Einheitsgröße mit verstellbaren Klettverschlüssen für flexible Passform</div></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Kontaktformular -->
+  <div class="contact-section">
+    <div class="contact-container">
+      <h1>Kontaktieren Sie uns</h1>
+      <p class="subtitle">Fragen zu den Produkten, Anwendung oder Versand? Schreiben Sie uns – wir helfen schnell und unkompliziert weiter.</p>
+
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstname">Vorname *</label>
+            <input type="text" id="firstname" name="firstname" required>
+          </div>
+          <div class="form-group">
+            <label for="lastname">Nachname *</label>
+            <input type="text" id="lastname" name="lastname" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">E-Mail-Adresse *</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Telefonnummer</label>
+            <input type="tel" id="phone" name="phone">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="subject">Betreff *</label>
+          <input type="text" id="subject" name="subject" required>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Ihre Nachricht *</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+
+        <div class="form-submit">
+          <button type="submit" class="btn">Nachricht senden</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modals (wieder lang) -->
+  <div id="modal1" class="modal" onclick="closeModal('modal1')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal('modal1')">&times;</button>
+      <h2>Wärme & (Nah-)Infrarot: bewährte Schmerzlinderung</h2>
+      <p>
+        <strong>Wärme zählt zu den effektivsten Methoden gegen muskuläre Schmerzen</strong>, weil sie den Muskeltonus senken, die Durchblutung steigern und dadurch das „Ziehen“ im Gewebe reduzieren kann. Viele spüren schon nach kurzer Zeit spürbar weniger Spannung, mehr Beweglichkeit und ein deutlich entspannteres Körpergefühl.
+      </p>
+      <p>
+        <strong>(Nah-)Infrarot/Rotlicht</strong> kann zusätzlich tiefer in das Gewebe wirken. In der Forschung wird häufig beschrieben, dass Lichtenergie zelluläre Prozesse unterstützt, die mit Regeneration, Gewebestoffwechsel und Entzündungsmodulation zusammenhängen. Dadurch kann sich das Schmerzempfinden weiter reduzieren – vor allem bei Steifigkeit, Verspannungen oder chronisch überlasteten Bereichen.
+      </p>
+      <p>
+        Die Kombination aus Wärme und Licht ist besonders beliebt, weil sie <strong>nicht nur „angenehm“ ist</strong>, sondern oft auch spürbar dabei hilft, Beschwerden nachhaltig zu beruhigen – ohne dass man lange „einarbeiten“ muss.
+      </p>
+    </div>
+  </div>
+
+  <div id="modal2" class="modal" onclick="closeModal('modal2')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal('modal2')">&times;</button>
+      <h2>Massage & Vibration: direkte Wirkung auf Nerven & Muskulatur</h2>
+      <p>
+        <strong>Massage und Vibration wirken gleichzeitig mechanisch und neurologisch.</strong> Mechanisch können sie verspannte Muskelstränge lockern, Triggerpunkte entspannen und die lokale Durchblutung ankurbeln. Neurologisch können kräftige Reize die Schmerzverarbeitung beeinflussen – viele empfinden dadurch eine schnelle Dämpfung von Schmerzsignalen und ein unmittelbares Gefühl von Entlastung.
+      </p>
+      <p>
+        Zusätzlich verbessert sich die <strong>Mikrozirkulation</strong>: Sauerstoff und Nährstoffe erreichen das Gewebe effizienter, Stoffwechselprodukte werden schneller abtransportiert. Das erklärt, warum sich Bereiche nach einer Anwendung häufig „leichter“, beweglicher und weniger gereizt anfühlen.
+      </p>
+      <p>
+        <strong>In Kombination mit Wärme oder Kälte</strong> lässt sich die Wirkung gezielt verstärken: Wärme verstärkt Entspannung und Durchblutung, Kälte kann akute Reizung beruhigen. So kann man je nach Beschwerdebild sehr präzise das erreichen, was der Körper gerade am meisten braucht.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    function openModal(id) {
+      document.getElementById(id).classList.add('active');
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+    }
+    function handleSubmit(event) {
+      event.preventDefault();
+      alert('Vielen Dank für Ihre Nachricht! Wir werden uns in Kürze bei Ihnen melden.');
+      event.target.reset();
+    }
+  </script>
 </body>
 </html>
