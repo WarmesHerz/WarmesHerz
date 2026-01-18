@@ -37,6 +37,27 @@
             max-width: 700px;
         }
 
+        /* HERO (neu) */
+        .hero {
+            width: 100%;
+            background: white;
+        }
+        .hero picture,
+        .hero img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* Section 1 Hintergrund = weiss (neu) */
+        .section-white {
+            background: white;
+        }
+        .section-white .section {
+            padding-top: 70px;
+            padding-bottom: 70px;
+        }
+
         .product-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -138,6 +159,7 @@
             line-height: 1.4;
         }
 
+        /* Section 2 (vorher Geschenke) */
         .gift-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -175,19 +197,21 @@
             flex-direction: column;
         }
 
+        /* Statt Gradient jetzt echte Bilder (neu) */
         .gift-image {
             width: 100%;
             height: 300px;
             background-size: cover;
             background-position: center;
+            background-color: #f0f0f0;
         }
 
-        .gift-image.personal {
-            background: linear-gradient(135deg, #f4e4d7 0%, #e8d5c4 100%);
+        .gift-image.heatlight {
+            background-image: url('Hitzevisualisiert.jpg');
         }
 
-        .gift-image.business {
-            background: linear-gradient(135deg, #8b7a6f 0%, #5a4d44 100%);
+        .gift-image.vibration {
+            background-image: url('Vibrationsbild.jpg');
         }
 
         .gift-content {
@@ -274,6 +298,7 @@
         .modal-content p {
             line-height: 1.7;
             color: #666;
+            margin-bottom: 14px;
         }
 
         .contact-section {
@@ -545,65 +570,80 @@
     </style>
 </head>
 <body>
-    <!-- Section 1: LED-Therapie Produkte -->
-    <div class="section">
-        <h1>Schnellere Erholung dank LED-Therapie</h1>
-        <p class="subtitle">LED-Therapie reduziert Beschwerden und beschleunigt die Erholung, indem sie gezielte Linderung genau dort bietet, wo du sie am meisten brauchst.</p>
 
-        <div class="product-grid">
-            <div class="product-card theragun">
-                <div class="product-content">
-                    <h2>ThermoGun Pro™</h2>
-                    <p>Erreiche schnellere Erholung dank LED-, wärmender Perkussions- und Vibrationstherapie.</p>
-                    <a href="#" class="btn">PRO Plus shoppen</a>
-                </div>
-                <div class="feature-bar">
-                    <div class="feature-icon">
-                        <img src="Benefit_Icons_15.svg" alt="Icon">
-                    </div>
-                    <span>Schnellere und effektivere Erholung mit allen Vorteilen einer 15-minütigen Massage in nur zwei Minuten²</span>
-                </div>
-            </div>
+    <!-- HERO (neu) -->
+    <div class="hero" aria-label="Hero">
+        <picture>
+            <source media="(max-width: 968px)" srcset="Hero Mobile.png">
+            <img src="Hero Desktop.png" alt="ThermoGun Pro und HeatBelt Pro – Hero">
+        </picture>
+    </div>
 
-            <div class="product-card thermback">
-                <div class="product-content">
-                    <h2>HeatBelt Pro™</h2>
-                    <p>Die fortschrittlichste Rückenbandage, die Wärme, Ferninfrarot, Vibration und LED-Licht kombiniert, für klinisch erwiesene Linderung im unteren Rückenbereich.</p>
-                    <a href="#" class="btn">Shop HeatBelt Pro</a>
-                </div>
-                <div class="feature-bar">
-                    <div class="feature-icon">
-                        <img src="Benefit_Icons_15.svg" alt="Icon">
+    <!-- Section 1: LED-Therapie Produkte (Hintergrund weiss) -->
+    <div class="section-white">
+        <div class="section">
+            <h1>Schnellere Erholung dank LED-Therapie</h1>
+            <p class="subtitle">LED-Therapie kann die Regeneration unterstützen, indem sie gezielt auf Gewebeprozesse einwirkt und so Entspannung, Beweglichkeit und Wohlbefinden fördert – genau dort, wo du es brauchst.</p>
+
+            <div class="product-grid">
+                <div class="product-card theragun">
+                    <div class="product-content">
+                        <h2>ThermoGun Pro™</h2>
+                        <p>Erholung neu gedacht: Perkussion & Vibration – für lockere Muskulatur, bessere Durchblutung und schnelleres „Reset“-Gefühl nach Belastung.</p>
+                        <a href="#" class="btn">ThermoGun Pro shoppen</a>
                     </div>
-                    <span>Klinisch erwiesene Schmerzlinderung im unteren Rückenbereich³</span>
+                    <div class="feature-bar">
+                        <div class="feature-icon">
+                            <img src="Benefit_Icons_15.svg" alt="Icon">
+                        </div>
+                        <span>Gezielte Muskelstimulation für spürbar weniger Spannung – in kurzer Zeit in den Alltag integrierbar.</span>
+                    </div>
+                </div>
+
+                <div class="product-card thermback">
+                    <div class="product-content">
+                        <h2>HeatBelt Pro™</h2>
+                        <p>Wärme + Ferninfrarot + Vibration + Licht: entwickelt, um den unteren Rücken zu entlasten und Wohlbefinden im Alltag zu unterstützen.</p>
+                        <a href="#" class="btn">HeatBelt Pro shoppen</a>
+                    </div>
+                    <div class="feature-bar">
+                        <div class="feature-icon">
+                            <img src="Benefit_Icons_15.svg" alt="Icon">
+                        </div>
+                        <span>Wärme- & Lichtimpulse können Entspannung fördern und das subjektive Schmerzempfinden positiv beeinflussen.</span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Section 2: Geschenke -->
+    <!-- Section 2: Wissenschaft hinter den Produkten (ersetzt Geschenke) -->
     <div class="section">
         <div class="gift-section-content">
             <div class="gift-intro">
-                <h1>Therabody-Geschenke für jeden Anlass</h1>
-                <p class="subtitle">Überrasche einen geliebten Menschen, belohne dein Team und beeindrucke Kundinnen mit Geschenken, die zu ihrem Wohlbefinden beitragen.</p>
+                <h1>Die Wissenschaft hinter der Wirkung</h1>
+                <p class="subtitle">Zwei Ansätze, ein Ziel: bessere Regeneration. Hier siehst du, welche biologischen Prozesse durch Wärme & Rotlicht sowie durch Vibration & Massage unterstützt werden können.</p>
             </div>
 
             <div class="gift-grid">
                 <div class="gift-card">
-                    <div class="gift-image personal"></div>
+                    <div class="gift-image heatlight"></div>
                     <div class="gift-content">
-                        <h2>Unser Geschenke-Center erkunden</h2>
-                        <p>Finde das passende Geschenk für deine Freundinnen, deine Familie und deine Liebsten, damit sie ihr Workout optimieren, tiefer schlafen und sich an strahlender Haut erfreuen können.</p>
+                        <h2>Wärme & Rotlicht: biologische Vorteile</h2>
+                        <p>
+                            Wärme kann die lokale Durchblutung steigern, Gewebe elastischer machen und Muskeltonus senken. Rot-/Nah-Infrarot-Licht wird in der Tiefe absorbiert und kann zelluläre Prozesse unterstützen, die mit Regeneration und Entzündungsmodulation in Verbindung stehen.
+                        </p>
                         <button class="btn btn-dark" onclick="openModal('modal1')">Mehr erfahren</button>
                     </div>
                 </div>
 
                 <div class="gift-card">
-                    <div class="gift-image business"></div>
+                    <div class="gift-image vibration"></div>
                     <div class="gift-content">
-                        <h2>Firmengeschenke für dein Team oder dein Unternehmen</h2>
-                        <p>Wissenschaftlich fundierte Wellness-Geschenke, die Teams neue Energie spenden, Kundinnen beeindrucken und einen bleibenden Eindruck hinterlassen.</p>
+                        <h2>Vibration & Massage: medizinische Mechanismen</h2>
+                        <p>
+                            Perkussion/Vibration kann Muskelspannung reduzieren, die Mikrozirkulation fördern und die Wahrnehmung von Beschwerden über neuromuskuläre Reize beeinflussen. In Kombination mit Wärme oder Kälte lassen sich Entspannung und subjektive Schmerzlinderung zusätzlich unterstützen.
+                        </p>
                         <button class="btn btn-dark" onclick="openModal('modal2')">Mehr erfahren</button>
                     </div>
                 </div>
@@ -611,53 +651,7 @@
         </div>
     </div>
 
-    <!-- Section 3: Kontaktformular -->
-    <div class="contact-section">
-        <div class="contact-container">
-            <h1>Kontaktieren Sie uns</h1>
-            <p class="subtitle">Haben Sie Fragen zu unseren Produkten oder möchten Sie mehr erfahren? Wir sind für Sie da und helfen Ihnen gerne weiter.</p>
-
-            <form class="contact-form" onsubmit="handleSubmit(event)">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="firstname">Vorname *</label>
-                        <input type="text" id="firstname" name="firstname" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="lastname">Nachname *</label>
-                        <input type="text" id="lastname" name="lastname" required>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="email">E-Mail-Adresse *</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Telefonnummer</label>
-                        <input type="tel" id="phone" name="phone">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="subject">Betreff *</label>
-                    <input type="text" id="subject" name="subject" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="message">Ihre Nachricht *</label>
-                    <textarea id="message" name="message" required></textarea>
-                </div>
-
-                <div class="form-submit">
-                    <button type="submit" class="btn">Nachricht senden</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Section 4: Produktvergleich -->
+    <!-- Section 3: Produktvergleich -->
     <div class="comparison-section">
         <div class="comparison-container">
             <h1>Produktvergleich</h1>
@@ -675,52 +669,36 @@
                     <div class="comparison-features-wrapper">
                         <ul class="comparison-features">
                             <li>
-                                <div class="feature-check-cell">
-                                    <span class="feature-check"></span>
-                                </div>
+                                <div class="feature-check-cell"><span class="feature-check"></span></div>
                                 <div class="feature-text">Perkussive Therapie</div>
                             </li>
                             <li>
-                                <div class="feature-check-cell">
-                                    <span class="feature-check"></span>
-                                </div>
+                                <div class="feature-check-cell"><span class="feature-check"></span></div>
                                 <div class="feature-text">5 Massagegeschwindigkeiten</div>
                             </li>
                             <li>
-                                <div class="feature-check-cell">
-                                    <span class="feature-check"></span>
-                                </div>
-                                <div class="feature-text">Bluetooth-Konnektivität und Integration von Wearables mit Coach in der Therabody-App für KI-gestützte Erholungsempfehlungen</div>
+                                <div class="feature-check-cell"><span class="feature-check"></span></div>
+                                <div class="feature-text">Bluetooth-Konnektivität und App-Routinen (abhängig vom Setup)</div>
                             </li>
                             <li>
-                                <div class="feature-check-cell">
-                                    <span class="feature-check"></span>
-                                </div>
-                                <div class="feature-text">Integrierte, visuell geführte Routinen</div>
+                                <div class="feature-check-cell"><span class="feature-check"></span></div>
+                                <div class="feature-text">Visuell geführte Routinen (produkt-/appabhängig)</div>
                             </li>
                             <li>
-                                <div class="feature-check-cell">
-                                    <span class="feature-check"></span>
-                                </div>
+                                <div class="feature-check-cell"><span class="feature-check"></span></div>
                                 <div class="feature-text">LCD-Display</div>
                             </li>
                             <li>
-                                <div class="feature-check-cell">
-                                    <span class="feature-cross"></span>
-                                </div>
+                                <div class="feature-check-cell"><span class="feature-cross"></span></div>
                                 <div class="feature-text">Wärmende perkussive Therapie</div>
                             </li>
                             <li>
-                                <div class="feature-check-cell">
-                                    <span class="feature-cross"></span>
-                                </div>
-                                <div class="feature-text">Kompatibel mit dem Cold Plus-Aufsatz zur Linderung von Schmerzen und Beschwerden (separat erhältlich)</div>
+                                <div class="feature-check-cell"><span class="feature-cross"></span></div>
+                                <div class="feature-text">Cold Plus-Aufsatz (separat erhältlich)</div>
                             </li>
                             <li>
-                                <div class="feature-check-cell">
-                                    <span class="feature-cross"></span>
-                                </div>
-                                <div class="feature-text">Kompatibel mit dem Vibration Plus-Aufsatz zur Linderung von schmerzenden, empfindlichen Gelenken und Muskeln (separat erhältlich)</div>
+                                <div class="feature-check-cell"><span class="feature-cross"></span></div>
+                                <div class="feature-text">Vibration Plus-Aufsatz (separat erhältlich)</div>
                             </li>
                         </ul>
                     </div>
@@ -737,65 +715,50 @@
                     <div class="comparison-features-wrapper">
                         <ul class="comparison-features">
                             <li>
-                                <div class="feature-check-cell">
-                                    <span class="feature-check"></span>
-                                </div>
-                                <div class="feature-text">Perkussive Therapie</div>
+                                <div class="feature-check-cell"><span class="feature-check"></span></div>
+                                <div class="feature-text">Vibrationstherapie</div>
                             </li>
                             <li>
-                                <div class="feature-check-cell">
-                                    <span class="feature-check"></span>
-                                </div>
-                                <div class="feature-text">5 Massagegeschwindigkeiten</div>
+                                <div class="feature-check-cell"><span class="feature-check"></span></div>
+                                <div class="feature-text">Mehrere Intensitätsstufen</div>
                             </li>
                             <li>
-                                <div class="feature-check-cell">
-                                    <span class="feature-check"></span>
-                                </div>
-                                <div class="feature-text">Bluetooth-Konnektivität und Integration von Wearables mit Coach in der Therabody-App für KI-gestützte Erholungsempfehlungen</div>
+                                <div class="feature-check-cell"><span class="feature-cross"></span></div>
+                                <div class="feature-text">Bluetooth/App-Integration</div>
                             </li>
                             <li>
-                                <div class="feature-check-cell">
-                                    <span class="feature-cross"></span>
-                                </div>
-                                <div class="feature-text">Integrierte, visuell geführte Routinen</div>
+                                <div class="feature-check-cell"><span class="feature-cross"></span></div>
+                                <div class="feature-text">Integrierte Routinen</div>
                             </li>
                             <li>
-                                <div class="feature-check-cell">
-                                    <span class="feature-cross"></span>
-                                </div>
+                                <div class="feature-check-cell"><span class="feature-cross"></span></div>
                                 <div class="feature-text">LCD-Display</div>
                             </li>
                             <li>
-                                <div class="feature-check-cell">
-                                    <span class="feature-check"></span>
-                                </div>
-                                <div class="feature-text">Wärmende perkussive Therapie</div>
+                                <div class="feature-check-cell"><span class="feature-check"></span></div>
+                                <div class="feature-text">Wärmetherapie</div>
                             </li>
                             <li>
-                                <div class="feature-check-cell">
-                                    <span class="feature-check"></span>
-                                </div>
-                                <div class="feature-text">Kompatibel mit dem Cold Plus-Aufsatz zur Linderung von Schmerzen und Beschwerden (separat erhältlich)</div>
+                                <div class="feature-check-cell"><span class="feature-check"></span></div>
+                                <div class="feature-text">Optional: Kälteanwendung (abhängig von Setup/Zubehör)</div>
                             </li>
                             <li>
-                                <div class="feature-check-cell">
-                                    <span class="feature-check"></span>
-                                </div>
-                                <div class="feature-text">Kompatibel mit dem Vibration Plus-Aufsatz zur Linderung von schmerzenden, empfindlichen Gelenken und Muskeln (separat erhältlich)</div>
+                                <div class="feature-check-cell"><span class="feature-check"></span></div>
+                                <div class="feature-text">Kombinierbar: Wärme + Vibration + Licht (modellabhängig)</div>
                             </li>
                         </ul>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
 
-    <!-- Modals -->
+    <!-- Kontaktformular (nur EINMAL, nach Produktvergleich) -->
     <div class="contact-section">
         <div class="contact-container">
             <h1>Kontaktieren Sie uns</h1>
-            <p class="subtitle">Haben Sie Fragen zu unseren Produkten oder möchten Sie mehr erfahren? Wir sind für Sie da und helfen Ihnen gerne weiter.</p>
+            <p class="subtitle">Fragen zu den Produkten, Anwendung oder Versand? Schreiben Sie uns – wir helfen schnell und unkompliziert weiter.</p>
 
             <form class="contact-form" onsubmit="handleSubmit(event)">
                 <div class="form-row">
@@ -837,22 +800,36 @@
         </div>
     </div>
 
-    <!-- Modals -->
+    <!-- Modals (Inhalte angepasst) -->
     <div id="modal1" class="modal" onclick="closeModal('modal1')">
         <div class="modal-content" onclick="event.stopPropagation()">
             <button class="modal-close" onclick="closeModal('modal1')">&times;</button>
-            <h2>Unser Geschenke-Center</h2>
-            <p>Hier finden Sie bald weitere Informationen zu unseren persönlichen Geschenkoptionen. Entdecken Sie eine Auswahl an Produkten, die perfekt für Ihre Liebsten geeignet sind.</p>
-            <p>Ob für Fitness-Enthusiasten, Wellness-Liebhaber oder Menschen, die einfach mehr Entspannung in ihrem Alltag brauchen – wir haben das richtige Geschenk.</p>
+            <h2>Wärme & Rotlicht – was im Körper passiert</h2>
+            <p>
+                <strong>Wärme</strong> kann die Gefäße lokal erweitern (Vasodilatation). Das unterstützt die Durchblutung, kann Gewebe „weicher“ wirken lassen und die Muskelspannung senken – dadurch fühlen sich viele Anwendungen entspannend an.
+            </p>
+            <p>
+                <strong>Rot-/Nah-Infrarot-Licht</strong> wird je nach Wellenlänge und Gewebe tiefer absorbiert. In der Forschung wird diskutiert, dass Lichtenergie in den Zellen Prozesse unterstützt, die mit Energiehaushalt (z. B. mitochondrial) und Regenerationssignalen zusammenhängen.
+            </p>
+            <p>
+                In Kombination kann das subjektive Wohlbefinden steigen – besonders bei Steifigkeit, Muskelverspannungen oder „müden“ Bereichen nach Belastung.
+            </p>
         </div>
     </div>
 
     <div id="modal2" class="modal" onclick="closeModal('modal2')">
         <div class="modal-content" onclick="event.stopPropagation()">
             <button class="modal-close" onclick="closeModal('modal2')">&times;</button>
-            <h2>Firmengeschenke</h2>
-            <p>Entdecken Sie unsere maßgeschneiderten Lösungen für Firmengeschenke. Wir bieten spezielle Pakete und Konditionen für Unternehmen, die ihre Mitarbeiter oder Kunden mit hochwertigen Wellness-Produkten beschenken möchten.</p>
-            <p>Kontaktieren Sie unser Team für individuelle Beratung und Großbestellungen.</p>
+            <h2>Vibration & Massage – Mechanismen der Regeneration</h2>
+            <p>
+                <strong>Perkussion/Vibration</strong> setzt mechanische Reize im Gewebe. Das kann die lokale Mikrozirkulation unterstützen und über neuromuskuläre Rückkopplung das Gefühl von Spannung reduzieren.
+            </p>
+            <p>
+                Zusätzlich spielt die <strong>Schmerzmodulation</strong> eine Rolle: Mechanische Reize können die Wahrnehmung von Beschwerden beeinflussen, weil im Nervensystem konkurrierende Signale verarbeitet werden (ähnlich wie bei Massage).
+            </p>
+            <p>
+                <strong>Kombination mit Wärme oder Kälte:</strong> Wärme kann Entspannung verstärken, Kälte wird häufig für ein „Beruhigen“ nach intensiver Belastung genutzt. Je nach Ziel kann die Kombi die Anwendung spürbar effektiver machen.
+            </p>
         </div>
     </div>
 
