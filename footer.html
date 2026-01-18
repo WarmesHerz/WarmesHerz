@@ -1,0 +1,96 @@
+<footer class="site-footer">
+  <div class="footer-container">
+
+    <div class="footer-col">
+      <h4>Rechtliches</h4>
+      <ul>
+        <li><a href="impressum.html">Impressum</a></li>
+        <li><a href="datenschutz.html">Datenschutz</a></li>
+        <li><a href="widerruf.html">Widerrufsrecht</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Produkte</h4>
+      <ul>
+        <li><a href="heatbelt.html">HeatBelt Pro™</a></li>
+        <li><a href="thermogun.html">ThermoGun Pro™</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Kontakt</h4>
+      <ul>
+        <li>E-Mail: info.warmesherz@web.de</li>
+        <li>Antwort innerhalb 24h</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © <span id="year"></span> WarmesHerz – Alle Rechte vorbehalten
+  </div>
+</footer>
+
+<style>
+.site-footer {
+  background: #111;
+  color: white;
+  padding: 60px 20px 20px;
+  margin-top: 60px;
+  font-size: 14px;
+}
+
+.footer-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+}
+
+.footer-col h4 {
+  margin-bottom: 14px;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-col li {
+  margin-bottom: 8px;
+}
+
+.footer-col a {
+  color: #ccc;
+  text-decoration: none;
+}
+
+.footer-col a:hover {
+  color: white;
+}
+
+.footer-bottom {
+  max-width: 1300px;
+  margin: 40px auto 0;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,.15);
+  text-align: center;
+  color: #aaa;
+}
+
+@media (max-width: 900px) {
+  .site-footer {
+    padding: 40px 14px 14px;
+  }
+}
+</style>
+
+<script>
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+</script>
