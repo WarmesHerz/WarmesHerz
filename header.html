@@ -1,4 +1,4 @@
-<!-- ===== WarmesHerz Header (single-file include) ===== -->
+<!-- ===== WarmesHerz Header (include) ===== -->
 <style>
   :root{
     --wh-topbar:#3c3c3a;
@@ -6,27 +6,33 @@
     --wh-text:#111;
     --wh-muted:rgba(0,0,0,.55);
     --wh-border:rgba(0,0,0,.12);
+    --wh-offset: 0px; /* wird von header.js gesetzt */
   }
+
+  /* sorgt dafür, dass Content nicht hinter dem fixed Header verschwindet */
+  body{ padding-top: var(--wh-offset); }
+
+  /* Fixed wrapper (Topbar + Header) */
+  .wh-wrap{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:9999;
+    will-change:transform;
+    transition:transform .22s ease;
+    transform:translateY(0);
+  }
+  .wh-wrap.wh-hide{ transform:translateY(-110%); }
 
   /* Topbar */
   .wh-topbar{background:var(--wh-topbar);color:#fff;font-size:13px}
   .wh-topbar-inner{max-width:1400px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;justify-content:center;gap:10px}
   .wh-topbar b{font-weight:600}
 
-  /* Sticky header wrapper + hide/reveal */
+  /* Header */
   .wh-header{
     background:var(--wh-header);
     border-bottom:1px solid var(--wh-border);
-    position:sticky;
-    top:0;
-    z-index:999;
-    will-change:transform;
-    transition:transform .22s ease;
   }
-  .wh-header.wh-hide{
-    transform:translateY(-110%);
-  }
-
   .wh-header-inner{
     max-width:1400px;
     margin:0 auto;
@@ -47,14 +53,13 @@
     justify-self:start;
   }
   .wh-logo{
-    width:44px;              /* ✅ größer */
-    height:44px;
+    width:48px; height:48px;          /* ✅ größer */
     object-fit:contain;
     display:block;
   }
   .wh-brand-name{
     font-size:19px;
-    font-weight:300;          /* ✅ dünner / edler */
+    font-weight:300;                   /* ✅ dünn / edel */
     letter-spacing:.2px;
   }
 
@@ -68,7 +73,7 @@
   }
   .wh-nav-link{
     text-decoration:none;
-    color:rgba(0,0,0,.7);
+    color:rgba(0,0,0,.72);
     font-size:14px;
     padding:6px 0;
     position:relative;
@@ -79,7 +84,7 @@
     content:"";
     position:absolute;
     left:0;right:0;bottom:-8px;
-    height:2px;background:#111
+    height:2px;background:#111;
   }
 
   .wh-right{
@@ -89,18 +94,18 @@
     gap:12px;
   }
 
-  /* ✅ Cart button: premium, no blue */
+  /* ✅ Cart: kein blau, clean, premium */
   .wh-cart-btn{
     display:flex;
     align-items:center;
     justify-content:center;
-    width:52px;
-    height:44px;
+    width:54px;
+    height:46px;
     cursor:pointer;
     position:relative;
 
     border:1px solid rgba(0,0,0,.14);
-    background:rgba(255,255,255,.85);
+    background:rgba(255,255,255,.88);
     border-radius:14px;
 
     box-shadow:0 6px 20px rgba(0,0,0,.06);
@@ -112,7 +117,14 @@
     box-shadow:0 10px 26px rgba(0,0,0,.09);
     transform:translateY(-1px);
   }
-  .wh-cart-icon svg{width:24px;height:24px;display:block;color:#111}
+
+  /* ✅ Icon als Bild */
+  .wh-cart-icon-img{
+    width:26px;
+    height:26px;
+    display:block;
+    object-fit:contain;
+  }
 
   .wh-cart-count{
     position:absolute;
@@ -125,12 +137,12 @@
     line-height:1;
   }
 
-  /* ✅ Burger */
+  /* Burger */
   .wh-burger{
     display:none;
-    width:52px;height:44px;
+    width:54px;height:46px;
     border:1px solid rgba(0,0,0,.14);
-    background:rgba(255,255,255,.85);
+    background:rgba(255,255,255,.88);
     border-radius:14px;
     align-items:center;justify-content:center;
     cursor:pointer;
@@ -143,17 +155,12 @@
     box-shadow:0 10px 26px rgba(0,0,0,.09);
     transform:translateY(-1px);
   }
-  .wh-burger span{
-    width:20px;height:2px;background:#111;display:block;position:relative
-  }
-  .wh-burger span:before,
-  .wh-burger span:after{
-    content:"";position:absolute;left:0;width:20px;height:2px;background:#111
-  }
+  .wh-burger span{width:20px;height:2px;background:#111;display:block;position:relative}
+  .wh-burger span:before,.wh-burger span:after{content:"";position:absolute;left:0;width:20px;height:2px;background:#111}
   .wh-burger span:before{top:-6px}
   .wh-burger span:after{top:6px}
 
-  /* Mobile nav drawer */
+  /* Mobile nav */
   .wh-nav-mobile{
     display:none;
     border-top:1px solid var(--wh-border);
@@ -162,21 +169,19 @@
   .wh-nav-mobile-inner{
     max-width:1400px;margin:0 auto;
     padding:10px 20px 14px;
-    display:flex;flex-direction:column;gap:10px
+    display:flex;flex-direction:column;gap:10px;
   }
   .wh-nav-mobile a{
-    text-decoration:none;
-    color:#111;
-    font-size:15px;
-    padding:10px 0;
-    border-bottom:1px solid rgba(0,0,0,.06)
+    text-decoration:none;color:#111;font-size:15px;
+    padding:10px 0;border-bottom:1px solid rgba(0,0,0,.06);
   }
   .wh-nav-mobile a:last-child{border-bottom:0}
   .wh-nav-mobile a.active{font-weight:600}
+  .wh-nav-mobile.open{display:block}
 
   /* Cart drawer */
-  .wh-cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .22s ease;z-index:1000}
-  .wh-cart-drawer{position:fixed;top:0;right:0;height:100%;width:390px;max-width:calc(100vw - 24px);background:#fff;transform:translateX(110%);transition:transform .26s ease;z-index:1001;display:flex;flex-direction:column;border-left:1px solid var(--wh-border)}
+  .wh-cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .22s ease;z-index:10000}
+  .wh-cart-drawer{position:fixed;top:0;right:0;height:100%;width:390px;max-width:calc(100vw - 24px);background:#fff;transform:translateX(110%);transition:transform .26s ease;z-index:10001;display:flex;flex-direction:column;border-left:1px solid var(--wh-border)}
   .wh-cart-open .wh-cart-overlay{opacity:1;pointer-events:auto}
   .wh-cart-open .wh-cart-drawer{transform:translateX(0)}
 
@@ -186,19 +191,8 @@
   .wh-cart-body{padding:14px 18px;overflow:auto;flex:1;display:flex;flex-direction:column;gap:12px}
   .wh-cart-foot{padding:14px 18px 18px;border-top:1px solid var(--wh-border)}
   .wh-cart-row{display:flex;align-items:center;justify-content:space-between;font-size:14px;margin-bottom:12px}
-
-  .wh-cart-checkout{
-    width:100%;
-    border:0;
-    background:#111;
-    color:#fff;
-    border-radius:14px;
-    padding:14px;
-    cursor:pointer;
-    font-size:14px;
-    transition:transform .15s ease, background .15s ease;
-  }
-  .wh-cart-checkout:hover{background:#000;transform:translateY(-1px)}
+  .wh-cart-checkout{width:100%;border:0;background:#111;color:#fff;border-radius:14px;padding:14px;cursor:pointer;font-size:14px}
+  .wh-cart-checkout:hover{background:#000}
   .wh-cart-hint{margin-top:10px;color:var(--wh-muted);font-size:12px}
 
   .wh-item{display:grid;grid-template-columns:56px 1fr auto;gap:12px;align-items:center;border:1px solid var(--wh-border);border-radius:14px;padding:10px}
@@ -211,73 +205,57 @@
   .wh-qty span{min-width:18px;text-align:center;font-size:13px}
   .wh-remove{border:0;background:transparent;color:rgba(0,0,0,.65);cursor:pointer;font-size:12px;text-decoration:underline;text-underline-offset:3px}
 
-  /* ✅ Mobile: one-row header + burger menu */
+  /* Mobile: one-row + burger */
   @media (max-width:900px){
-    .wh-header-inner{
-      grid-template-columns:1fr auto;
-      gap:10px;
-      padding:12px 16px;
-    }
-
+    .wh-header-inner{grid-template-columns:1fr auto;gap:10px;padding:12px 16px}
     .wh-nav{display:none}
     .wh-burger{display:flex}
-
-    .wh-logo{width:38px;height:38px}     /* slightly smaller for mobile */
+    .wh-logo{width:40px;height:40px}
     .wh-brand-name{font-size:18px}
-
-    .wh-right{gap:10px}
-    .wh-nav-mobile.open{display:block}
   }
 </style>
 
-<div class="wh-topbar">
-  <div class="wh-topbar-inner">
-    <span><b>Kostenloser Versand</b> auf alle Bestellungen</span>
+<div class="wh-wrap" id="whWrap">
+  <div class="wh-topbar">
+    <div class="wh-topbar-inner">
+      <span><b>Kostenloser Versand</b> auf alle Bestellungen</span>
+    </div>
   </div>
+
+  <header class="wh-header" id="whHeader">
+    <div class="wh-header-inner">
+      <a class="wh-brand" href="index.html" aria-label="WarmesHerz Startseite">
+        <img class="wh-logo" src="LOGO.jpg" alt="WarmesHerz Logo">
+        <span class="wh-brand-name">WarmesHerz</span>
+      </a>
+
+      <nav class="wh-nav" aria-label="Hauptnavigation">
+        <a class="wh-nav-link" href="index.html" data-nav="startseite">Startseite</a>
+        <a class="wh-nav-link" href="heatbelt.html" data-nav="heatbelt">HeatBelt Pro™</a>
+        <a class="wh-nav-link" href="thermogun.html" data-nav="thermogun">ThermoGun Pro™</a>
+      </nav>
+
+      <div class="wh-right">
+        <button class="wh-cart-btn" type="button" id="whCartBtn" aria-label="Warenkorb öffnen">
+          <img class="wh-cart-icon-img" src="cart-icon.png" alt="" aria-hidden="true">
+          <span class="wh-cart-count" id="whCartCount">0</span>
+        </button>
+
+        <button class="wh-burger" id="whBurger" type="button" aria-label="Menü öffnen">
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="wh-nav-mobile" id="whMobileNav" aria-label="Mobile Navigation">
+      <div class="wh-nav-mobile-inner">
+        <a href="index.html" data-nav="startseite">Startseite</a>
+        <a href="heatbelt.html" data-nav="heatbelt">HeatBelt Pro™</a>
+        <a href="thermogun.html" data-nav="thermogun">ThermoGun Pro™</a>
+      </div>
+    </div>
+  </header>
 </div>
-
-<header class="wh-header" id="whHeader">
-  <div class="wh-header-inner">
-    <a class="wh-brand" href="index.html" aria-label="WarmesHerz Startseite">
-      <img class="wh-logo" src="LOGO.jpg" alt="WarmesHerz Logo">
-      <span class="wh-brand-name">WarmesHerz</span>
-    </a>
-
-    <!-- Desktop center nav -->
-    <nav class="wh-nav" aria-label="Hauptnavigation">
-      <a class="wh-nav-link" href="index.html" data-nav="startseite">Startseite</a>
-      <a class="wh-nav-link" href="heatbelt.html" data-nav="heatbelt">HeatBelt Pro™</a>
-      <a class="wh-nav-link" href="thermogun.html" data-nav="thermogun">ThermoGun Pro™</a>
-    </nav>
-
-    <div class="wh-right">
-      <!-- Cart icon only -->
-      <button class="wh-cart-btn" type="button" id="whCartBtn" aria-label="Warenkorb öffnen">
-        <span class="wh-cart-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M6 8h12l-1 13H7L6 8z"></path>
-            <path d="M9 8a3 3 0 0 1 6 0"></path>
-          </svg>
-        </span>
-        <span class="wh-cart-count" id="whCartCount">0</span>
-      </button>
-
-      <!-- Burger (mobile) -->
-      <button class="wh-burger" id="whBurger" type="button" aria-label="Menü öffnen">
-        <span></span>
-      </button>
-    </div>
-  </div>
-
-  <!-- Mobile dropdown nav -->
-  <div class="wh-nav-mobile" id="whMobileNav" aria-label="Mobile Navigation">
-    <div class="wh-nav-mobile-inner">
-      <a href="index.html" data-nav="startseite">Startseite</a>
-      <a href="heatbelt.html" data-nav="heatbelt">HeatBelt Pro™</a>
-      <a href="thermogun.html" data-nav="thermogun">ThermoGun Pro™</a>
-    </div>
-  </div>
-</header>
 
 <div class="wh-cart-overlay" id="whCartOverlay" aria-hidden="true"></div>
 
@@ -298,214 +276,4 @@
     <div class="wh-cart-hint">Kostenloser Versand &amp; 30 Tage Rückgabe</div>
   </div>
 </aside>
-
-<script>
-(function(){
-  const KEY = "wh_cart_v1";
-  const PAYPAL_CHECKOUT_URL = "https://www.paypal.com/ncp/payment/QUPGSWMD59ZSJ";
-
-  function loadCart(){
-    try { return JSON.parse(localStorage.getItem(KEY)) || []; }
-    catch(e){ return []; }
-  }
-  function saveCart(cart){ localStorage.setItem(KEY, JSON.stringify(cart)); }
-  function formatEUR(n){
-    return new Intl.NumberFormat("de-DE", { style:"currency", currency:"EUR" }).format(n);
-  }
-  function subtotal(cart){ return cart.reduce((s,it)=>s + it.price*it.qty, 0); }
-  function setCount(cart){
-    const el = document.getElementById("whCartCount");
-    if(!el) return;
-    el.textContent = String(cart.reduce((s,it)=>s+it.qty,0));
-  }
-
-  function render(){
-    const cart = loadCart();
-    setCount(cart);
-    const itemsEl = document.getElementById("whCartItems");
-    const subEl = document.getElementById("whCartSubtotal");
-    if(!itemsEl || !subEl) return;
-
-    itemsEl.innerHTML = "";
-    if(cart.length === 0){
-      const d = document.createElement("div");
-      d.style.color = "rgba(0,0,0,.55)";
-      d.style.fontSize = "14px";
-      d.style.padding = "10px 2px";
-      d.textContent = "Dein Warenkorb ist leer.";
-      itemsEl.appendChild(d);
-      subEl.textContent = formatEUR(0);
-      return;
-    }
-
-    cart.forEach((it, idx) => {
-      const row = document.createElement("div");
-      row.className = "wh-item";
-
-      const img = document.createElement("img");
-      img.src = it.image || "";
-      img.alt = it.title || "Produkt";
-
-      const mid = document.createElement("div");
-      const t = document.createElement("div");
-      t.className = "wh-item-title";
-      t.textContent = it.title;
-
-      const m = document.createElement("div");
-      m.className = "wh-item-meta";
-      m.textContent = (formatEUR(it.price) + (it.sku ? " · " + it.sku : ""));
-
-      mid.appendChild(t); mid.appendChild(m);
-
-      const right = document.createElement("div");
-      right.className = "wh-item-actions";
-
-      const qty = document.createElement("div");
-      qty.className = "wh-qty";
-
-      const minus = document.createElement("button");
-      minus.type = "button";
-      minus.textContent = "−";
-      minus.addEventListener("click", () => {
-        const c = loadCart();
-        c[idx].qty -= 1;
-        if(c[idx].qty <= 0) c.splice(idx, 1);
-        saveCart(c); render();
-      });
-
-      const qn = document.createElement("span");
-      qn.textContent = String(it.qty);
-
-      const plus = document.createElement("button");
-      plus.type = "button";
-      plus.textContent = "+";
-      plus.addEventListener("click", () => {
-        const c = loadCart();
-        c[idx].qty += 1;
-        saveCart(c); render();
-      });
-
-      qty.appendChild(minus); qty.appendChild(qn); qty.appendChild(plus);
-
-      const rm = document.createElement("button");
-      rm.className = "wh-remove";
-      rm.type = "button";
-      rm.textContent = "Entfernen";
-      rm.addEventListener("click", () => {
-        const c = loadCart();
-        c.splice(idx, 1);
-        saveCart(c); render();
-      });
-
-      right.appendChild(qty);
-      right.appendChild(rm);
-
-      row.appendChild(img);
-      row.appendChild(mid);
-      row.appendChild(right);
-
-      itemsEl.appendChild(row);
-    });
-
-    subEl.textContent = formatEUR(subtotal(cart));
-  }
-
-  function openCart(){
-    document.documentElement.classList.add("wh-cart-open");
-    document.getElementById("whCartDrawer")?.setAttribute("aria-hidden","false");
-    document.getElementById("whCartOverlay")?.setAttribute("aria-hidden","false");
-    render();
-  }
-
-  function closeCart(){
-    document.documentElement.classList.remove("wh-cart-open");
-    document.getElementById("whCartDrawer")?.setAttribute("aria-hidden","true");
-    document.getElementById("whCartOverlay")?.setAttribute("aria-hidden","true");
-  }
-
-  // expose global add() for product pages
-  window.WHCart = {
-    add({ id, title, price, image, sku, qty }){
-      const cart = loadCart();
-      const found = cart.find(x => x.id === id);
-      const addQty = Number(qty || 1);
-
-      if(found) found.qty += addQty;
-      else cart.push({ id, title, price, image, sku, qty: addQty });
-
-      saveCart(cart);
-      render();
-      openCart();
-    },
-    open: openCart,
-    close: closeCart,
-    render
-  };
-
-  // bind cart UI
-  document.getElementById("whCartBtn")?.addEventListener("click", openCart);
-  document.getElementById("whCartClose")?.addEventListener("click", closeCart);
-  document.getElementById("whCartOverlay")?.addEventListener("click", closeCart);
-
-  // PayPal checkout
-  document.getElementById("whCartCheckout")?.addEventListener("click", () => {
-    window.location.href = PAYPAL_CHECKOUT_URL;
-  });
-
-  // escape closes cart
-  document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeCart(); });
-
-  // mobile burger toggle
-  const burger = document.getElementById("whBurger");
-  const mobileNav = document.getElementById("whMobileNav");
-  burger?.addEventListener("click", () => {
-    mobileNav?.classList.toggle("open");
-  });
-
-  // active nav highlight (desktop + mobile)
-  const path = (location.pathname.split("/").pop() || "index.html").toLowerCase();
-  const map = { "index.html":"startseite", "":"startseite", "heatbelt.html":"heatbelt", "thermogun.html":"thermogun" };
-  const active = map[path];
-  if(active){
-    document.querySelectorAll("[data-nav]").forEach(a=>{
-      a.classList.toggle("active", a.getAttribute("data-nav") === active);
-    });
-  }
-
-  // ✅ hide header on scroll down, show on scroll up
-  const header = document.getElementById("whHeader");
-  let lastY = window.scrollY || 0;
-  let ticking = false;
-
-  function onScroll(){
-    const y = window.scrollY || 0;
-    const delta = y - lastY;
-
-    // small deadzone to prevent jitter
-    if (Math.abs(delta) < 6) return;
-
-    // always show near top
-    if (y < 80) {
-      header?.classList.remove("wh-hide");
-      lastY = y;
-      return;
-    }
-
-    if (delta > 0) header?.classList.add("wh-hide");     // down
-    else header?.classList.remove("wh-hide");            // up
-
-    lastY = y;
-  }
-
-  window.addEventListener("scroll", () => {
-    if(!ticking){
-      window.requestAnimationFrame(() => { onScroll(); ticking = false; });
-      ticking = true;
-    }
-  }, { passive:true });
-
-  // render count on load
-  render();
-})();
-</script>
-<!-- ===== /WarmesHerz Header ===== -->
+<!-- ===== /WarmesHerz Header (include) ===== -->
