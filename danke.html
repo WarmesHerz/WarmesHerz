@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Danke für deine Bestellung – WarmesHerz</title>
 
+  <!-- ✅ Danke-Seite NICHT indexieren -->
+  <meta name="robots" content="noindex, nofollow">
+
   <!-- Meta Pixel Code -->
   <script>
   !function(f,b,e,v,n,t,s)
@@ -82,15 +85,19 @@
       <a class="btn" href="index.html">Zurück zur Startseite</a>
 
       <div class="small">
-        Hinweis: Wenn du diese Seite neu lädst, wird der Kauf nicht doppelt getrackt.
+        Hinweis: Der Kauf wird in diesem Browser nur einmal erfasst.
       </div>
     </div>
   </div>
 
-  <!-- Purchase Event (HeatBelt Pro) -->
+  <!-- ✅ Purchase Event (einmalig) -->
   <script>
   document.addEventListener("DOMContentLoaded", function () {
-    if (sessionStorage.getItem("fb_purchase_tracked")) return;
+    const KEY = "fb_purchase_tracked_v1";
+    if (sessionStorage.getItem(KEY)) return;
+
+    // optional: event_id für bessere Deduplizierung
+    const eventId = "purchase_" + Date.now() + "_" + Math.random().toString(16).slice(2);
 
     function firePurchase() {
       if (typeof fbq !== "function") return false;
@@ -101,9 +108,9 @@
         content_name: 'HeatBelt Pro',
         content_ids: ['HB-PRO'],
         content_type: 'product'
-      });
+      }, { eventID: eventId });
 
-      sessionStorage.setItem("fb_purchase_tracked", "true");
+      sessionStorage.setItem(KEY, "true");
       return true;
     }
 
