@@ -1,9 +1,20 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ThermoGun Pro™</title>
+
+  <!-- ✅ SEO: Title + Description (TO-DO) -->
+  <title>ThermoGun Pro™ – Massagepistole mit Wärme & Kälte | WarmesHerz</title>
+  <meta name="description" content="ThermoGun Pro™ kombiniert perkussive Tiefenmassage mit Wärme- und Kältetherapie. Ideal zur Lockerung verspannter Muskeln, Regeneration nach Belastung und gezielter Schmerzlinderung – kompakt, ergonomisch und alltagstauglich." />
+
+  <!-- ✅ SEO: Canonical + Language hint -->
+  <link rel="canonical" href="https://warmesherz.com/thermogun.html" />
+  <meta name="robots" content="index,follow" />
+
+  <!-- ✅ Favicon (TO-DO) -->
+  <link rel="icon" href="favicon.ico" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -150,7 +161,8 @@
       margin-bottom: 10px;
     }
 
-    .product-title {
+    /* ✅ TO-DO: Only ONE H1 on page */
+    h1.product-title {
       font-size: 48px;
       font-weight: 300;
       margin-bottom: 20px;
@@ -183,7 +195,14 @@
       margin-bottom: 26px;
     }
 
-    .stars { color: #333; font-size: 18px; }
+    /* ✅ cleaner stars: no emojis, more professional */
+    .stars {
+      display: inline-flex;
+      gap: 4px;
+      align-items: center;
+      line-height: 1;
+    }
+    .stars svg { width: 18px; height: 18px; fill: #111; display: block; }
     .review-count { font-size: 14px; color: #666; }
 
     .device-options { margin-bottom: 20px; }
@@ -251,9 +270,10 @@
 
     /* =========================
        BENEFITS
+       ✅ TO-DO: avoid repeated headings, proper hierarchy, adjust colors
        ========================= */
     .benefits-section {
-      background: white;
+      background: #fffcf5; /* ✅ requested */
       border-radius: 12px;
       padding: 34px 40px;
       margin-bottom: 30px;
@@ -279,7 +299,8 @@
 
     .benefits-icon img { width: 44px; height: 44px; }
 
-    .benefits-header h3 {
+    /* ✅ H2 (not H3) for structure */
+    .benefits-header h2 {
       font-size: 18px;
       font-weight: 500;
     }
@@ -287,23 +308,19 @@
     .benefits-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 26px;
+      gap: 18px; /* slightly tighter */
     }
 
-    .benefit-item { position: relative; padding-right: 30px; }
-
-    .benefit-item:not(:last-child)::after {
-      content: '';
-      position: absolute;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      width: 1px;
-      background: #e0e0e0;
+    /* ✅ content blocks requested color */
+    .benefit-item {
+      position: relative;
+      padding: 18px 18px;
+      background: #f7f3e9; /* ✅ requested */
+      border-radius: 12px;
     }
 
-    .benefit-item h4 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
-    .benefit-item p { font-size: 14px; color: #666; line-height: 1.5; }
+    .benefit-item h3 { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+    .benefit-item p { font-size: 13.5px; color: #444; line-height: 1.5; } /* ✅ smaller */
     .benefit-item sup { font-size: 10px; }
 
     /* =========================
@@ -825,13 +842,6 @@
       margin-bottom: 10px;
     }
 
-    .hb-stars {
-      letter-spacing: 2px;
-      color: #111;
-      font-size: 18px;
-      line-height: 1;
-    }
-
     .hb-based {
       font-size: 14px;
       color: rgba(0,0,0,0.55);
@@ -914,7 +924,12 @@
       color: #111;
       letter-spacing: 2px;
       font-size: 16px;
+      line-height: 1;
+      display: inline-flex;
+      gap: 3px;
+      align-items: center;
     }
+    .hb-review-stars svg { width: 16px; height: 16px; fill: #111; display:block; }
 
     .hb-review-text {
       font-size: 16px;
@@ -1046,7 +1061,7 @@
         padding-top: 6px;
       }
 
-      .product-title {
+      h1.product-title {
         font-size: 32px;
         white-space: nowrap;
         overflow: hidden;
@@ -1062,10 +1077,10 @@
 
       /* benefits mobile */
       .benefits-section { padding: 26px 18px; }
-      .benefit-item { padding-right: 0; padding-bottom: 18px; margin-bottom: 18px; }
-      .benefit-item:not(:last-child)::after {
-        right: 0; left: 0; top: auto; bottom: 0; width: auto; height: 1px;
-      }
+      .benefits-grid { grid-template-columns: 1fr; gap: 12px; }
+      .benefit-item { padding: 16px; }
+      .benefit-item h3 { font-size: 14px; }
+      .benefit-item p { font-size: 13px; }
 
       /* === video section mobile: keep premium behavior === */
       .video-section h2 {
@@ -1182,36 +1197,37 @@
       .feature-section.reverse { direction: ltr; }
       .feature-content h2 { font-size: 28px; }
     }
+
     .add-to-cart.sold-out {
-  background: #bfbfbf;
-  cursor: not-allowed;
-  opacity: 0.85;
-}
+      background: #bfbfbf;
+      cursor: not-allowed;
+      opacity: 0.85;
+    }
 
-.add-to-cart.sold-out:hover {
-  background: #bfbfbf;
-}
-
+    .add-to-cart.sold-out:hover {
+      background: #bfbfbf;
+    }
   </style>
 
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '2344715996005697');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-  
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '2344715996005697');
+  fbq('track', 'PageView');
+
+  /* ✅ Optional: AddToCart event if enabled button ever becomes active */
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
 </head>
 
 <body>
@@ -1233,9 +1249,7 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
       // 2) Dann scripts "neu" erstellen -> dadurch werden sie ausgeführt
       for (const s of scripts) {
         const ns = document.createElement('script');
-        // Attribute kopieren (z.B. src, type)
         for (const attr of s.attributes) ns.setAttribute(attr.name, attr.value);
-        // Inline-Code kopieren
         ns.textContent = s.textContent;
         document.body.appendChild(ns);
       }
@@ -1244,67 +1258,83 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
   </script>
 
   <div class="container">
-    <div class="breadcrumb">
-      <a href="#">Home</a>
-      <span>▸</span>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span aria-hidden="true">▸</span>
       <span>ThermoGun Pro™</span>
-    </div>
+    </nav>
 
     <div class="product-section">
       <!-- thumbnails LEFT (desktop), right (mobile via grid) -->
-      <div class="thumbnail-gallery">
-        <div class="thumbnail-nav" id="scrollUp">▲</div>
+      <div class="thumbnail-gallery" aria-label="Produktgalerie Thumbnails">
+        <div class="thumbnail-nav" id="scrollUp" aria-label="Thumbnails nach oben">▲</div>
 
         <div class="thumbnail-gallery-inner" id="thumbnailScroll">
-          <div class="thumbnail active" data-type="video">
+          <div class="thumbnail active" data-type="video" aria-label="Produktvideo Thumbnail">
             <video autoplay muted loop playsinline preload="metadata">
               <source src="ThermoGun Video aktive massage.mp4" type="video/mp4">
             </video>
           </div>
 
           <div class="thumbnail" data-index="1">
-            <img src="ThermoGun Real Main image.webp" alt="ThermoGun Real Main">
+            <img src="ThermoGun Real Main image.webp" alt="ThermoGun Pro – Produktfoto Hauptansicht">
           </div>
           <div class="thumbnail" data-index="2">
-            <img src="ThermoGun Main Image.webp" alt="ThermoGun Main Image">
+            <img src="ThermoGun Main Image.webp" alt="ThermoGun Pro – Produktfoto Studioansicht">
           </div>
           <div class="thumbnail" data-index="3">
-            <img src="ThermoGun anwendung frau.webp" alt="ThermoGun Anwendung">
+            <img src="ThermoGun anwendung frau.webp" alt="ThermoGun Pro – Anwendung an Schulter und Nacken">
           </div>
           <div class="thumbnail" data-index="4">
-            <img src="ThermoGun Display.webp" alt="ThermoGun Display">
+            <img src="ThermoGun Display.webp" alt="ThermoGun Pro – Display und Bedienung im Detail">
           </div>
           <div class="thumbnail" data-index="5">
-            <img src="ThermoGun Benutzung frontal.webp" alt="ThermoGun Benutzung frontal">
+            <img src="ThermoGun Benutzung frontal.webp" alt="ThermoGun Pro – Anwendung frontal">
           </div>
           <div class="thumbnail" data-index="6">
-            <img src="ThermoGun Lieferumfang bild.webp" alt="ThermoGun Lieferumfang">
+            <img src="ThermoGun Lieferumfang bild.webp" alt="ThermoGun Pro – Lieferumfang mit Aufsätzen und Tasche">
           </div>
         </div>
 
-        <div class="thumbnail-nav" id="scrollDown">▼</div>
+        <div class="thumbnail-nav" id="scrollDown" aria-label="Thumbnails nach unten">▼</div>
       </div>
 
-      <div class="main-image">
+      <div class="main-image" aria-label="Produktbild / Video groß">
         <video id="mainVideo" autoplay muted loop playsinline>
           <source src="ThermoGun Video aktive massage.mp4" type="video/mp4">
         </video>
-        <img id="mainImage" src="ThermoGun Real Main image.webp" alt="ThermoGun Pro™" style="display:none;">
+        <img id="mainImage" src="ThermoGun Real Main image.webp" alt="ThermoGun Pro™ Massagepistole mit Wärme- und Kältetherapie" style="display:none;">
       </div>
 
       <div class="product-info">
         <div class="category">HOT &amp; COLD · PERCUSSION THERAPY</div>
+
+        <!-- ✅ The ONE H1 -->
         <h1 class="product-title">ThermoGun Pro™</h1>
+
+        <!-- ✅ Text includes key words from title/H1 -->
         <p class="product-description">
-          ThermoGun Pro™ kombiniert perkussive Tiefenmassage mit integrierter Wärme- und Kältetherapie – für gezielte Lockerung von Muskeln und Faszien,
-          spürbar weniger Spannung und schnellere Erholung. Mehrere Intensitätsstufen, austauschbare Aufsätze und ein ergonomisches Design machen die Anwendung
-          präzise, komfortabel und alltagstauglich – vom Warm-up bis zur Regeneration.
+          Die <strong>ThermoGun Pro™</strong> ist eine <strong>Massagepistole</strong>, die <strong>perkussive Tiefenmassage</strong> mit <strong>Wärme</strong> und <strong>Kälte</strong> kombiniert.
+          Sie unterstützt dich dabei, verspannte Muskeln und Faszien gezielt zu lockern, nach Belastung schneller zu regenerieren und die Anwendung
+          präzise an deine Bedürfnisse anzupassen – vom <strong>Warm-up</strong> bis zur <strong>Regeneration</strong>.
         </p>
 
-        <div class="clinical-badge">🔬 Wissenschaftlich fundiert</div>
+        <!-- ✅ no emoji -->
+        <div class="clinical-badge">
+          <span style="display:inline-flex;align-items:centerreo;gap:8px;">
+            <span style="width:10px;height:10px;border-radius:50%;background:#111;display:inline-block;"></span>
+            Wissenschaftlich fundierte Anwendung
+          </span>
+        </div>
 
-        <div class="rating">
-          <div class="stars">★★★★★</div>
+        <div class="rating" aria-label="Bewertung">
+          <div class="stars" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 17.27l5.18 3.04-1.64-5.81L20 9.24l-5.9-.5L12 3.5 9.9 8.74 4 9.24l4.46 5.26-1.64 5.81L12 17.27z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27l5.18 3.04-1.64-5.81L20 9.24l-5.9-.5L12 3.5 9.9 8.74 4 9.24l4.46 5.26-1.64 5.81L12 17.27z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27l5.18 3.04-1.64-5.81L20 9.24l-5.9-.5L12 3.5 9.9 8.74 4 9.24l4.46 5.26-1.64 5.81L12 17.27z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27l5.18 3.04-1.64-5.81L20 9.24l-5.9-.5L12 3.5 9.9 8.74 4 9.24l4.46 5.26-1.64 5.81L12 17.27z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27l5.18 3.04-1.64-5.81L20 9.24l-5.9-.5L12 3.5 9.9 8.74 4 9.24l4.46 5.26-1.64 5.81L12 17.27z"/></svg>
+          </div>
           <div class="review-count">128 Bewertungen</div>
         </div>
 
@@ -1322,56 +1352,61 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
         </div>
 
         <button class="add-to-cart sold-out" disabled
-  data-id="thermogun-pro"
-  data-title="ThermoGun Pro™"
-  data-price="109"
-  data-image="ThermoGun Main Image.webp"
-  data-sku="TG-PRO">
-  Ausverkauft
-</button>
+          data-id="thermogun-pro"
+          data-title="ThermoGun Pro™"
+          data-price="109"
+          data-image="ThermoGun Main Image.webp"
+          data-sku="TG-PRO">
+          Ausverkauft
+        </button>
 
+        <!-- ✅ hidden SEO paragraph with synonyms (keeps layout unchanged) -->
+        <p style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
+          ThermoGun Pro ist eine Massagepistole mit Wärme- und Kältetherapie für Muskelregeneration, Muskelentspannung und gezielte Anwendung nach Sport,
+          Training oder bei Verspannungen. Perkussion, Hot & Cold Aufsatz, Tiefenmassage, Recovery.
+        </p>
       </div>
     </div>
 
-    <!-- Wissenschaftlich belegte Vorteile (aus Bild 1) -->
-    <div class="benefits-section">
+    <!-- ✅ H2 benefits with requested icon + colors -->
+    <section class="benefits-section" aria-label="Vorteile der ThermoGun Pro">
       <div class="benefits-header">
         <div class="benefits-icon">
-          <img src="Benefit_Icons_15.svg" alt="Wissenschaft">
+          <img src="Benefit_Icons_15.svg" alt="Wissenschaftlich belegte Vorteile Icon">
         </div>
-        <h3>Wissenschaftlich belegte Vorteile</h3>
+        <h2>Wissenschaftlich belegte Vorteile</h2>
       </div>
 
       <div class="benefits-grid">
         <div class="benefit-item">
-          <h4>Schnellere und effektivere Erholung</h4>
-          <p>mit allen Vorteilen einer 15-minütigen Massage in nur 2 Minuten<sup>1</sup></p>
+          <h3>Schnellere und effektivere Erholung</h3>
+          <p>Mit den Vorteilen einer 15-minütigen Massage in nur 2 Minuten<sup>1</sup>.</p>
         </div>
         <div class="benefit-item">
-          <h4>Wirksame Schmerzlinderung</h4>
-          <p>damit dich Beschwerden nicht zurückhalten</p>
+          <h3>Wirksame Schmerzlinderung</h3>
+          <p>Zur Unterstützung bei Verspannungen und muskulären Beschwerden – alltagstauglich und gezielt.</p>
         </div>
         <div class="benefit-item">
-          <h4>Reduziert Entzündungen</h4>
-          <p>um eine schnellere Erholung zu fördern und die Leistung zu verbessern</p>
+          <h3>Reduziert Entzündungsgefühl</h3>
+          <p>Kann nach Belastung helfen, das Reiz- und Spannungsgefühl zu beruhigen.</p>
         </div>
         <div class="benefit-item">
-          <h4>Verbessert die Beweglichkeit</h4>
-          <p>mit gezielter Linderung für Muskeln und Gelenke</p>
+          <h3>Verbessert die Beweglichkeit</h3>
+          <p>Gezielte Anwendung kann die Mobilität in Muskeln und Gelenkbereichen unterstützen.</p>
         </div>
         <div class="benefit-item">
-          <h4>Verbessert die Leistung</h4>
-          <p>indem die Muskel-Recovery beschleunigt und Verspannungen reduziert werden</p>
+          <h3>Verbessert die Leistung</h3>
+          <p>Lockerere Muskulatur kann das Bewegungsgefühl verbessern – vor und nach dem Training.</p>
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- Video Section -->
-    <div class="video-section">
+    <section class="video-section" aria-label="Video: Anwendung der ThermoGun Pro">
       <h2>Perkussive Massage, Wärme &amp; Kälte – für präzise Regeneration</h2>
 
       <div class="video-wrapper">
-        <div class="video-background">
+        <div class="video-background" aria-hidden="true">
           <video autoplay muted loop playsinline>
             <source src="ThermoGun Video section video.mp4" type="video/mp4">
           </video>
@@ -1383,7 +1418,7 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
           </video>
         </div>
 
-        <div class="info-box" id="infoBox">
+        <div class="info-box" id="infoBox" role="button" aria-label="Info ein-/ausklappen">
           <div class="video-box">
             <div class="video-box-inner">
               <video autoplay muted loop playsinline>
@@ -1394,7 +1429,7 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
 
           <div class="info-box-right">
             <div class="info-box-content">
-              <div class="info-toggle">+</div>
+              <div class="info-toggle" aria-hidden="true">+</div>
               <div>
                 <p class="info-title">ThermoGun Pro™: Tiefenmassage mit Hot-/Cold-Aufsatz</p>
               </div>
@@ -1407,9 +1442,8 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
                 Triggerpunkte adressieren und die lokale Durchblutung anregen – dadurch fühlt sich Gewebe oft schnell „freier“ an.
               </p>
               <p>
-                <strong>Wärme</strong> unterstützt dabei, weil sie den Muskeltonus senken und das Gewebe „weicher“ machen kann – ideal für Warm-up,
-                Steifheit und Verspannungen. <strong>Kälte</strong> kann hingegen Reizung beruhigen und Schwellungs-/Empfindlichkeitsgefühl reduzieren –
-                perfekt nach Belastung oder für sensible Bereiche.
+                <strong>Wärme</strong> kann den Muskeltonus senken und das Gewebe „weicher“ machen – ideal für Warm-up, Steifheit und Verspannungen.
+                <strong>Kälte</strong> kann Reizung beruhigen und das Empfindlichkeitsgefühl nach Belastung reduzieren.
               </p>
               <p class="study-info">
                 Hinweis: Inhalte beschreiben allgemeine physiologische Effekte von Massage-, Wärme- und Kälteanwendungen.
@@ -1425,10 +1459,10 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
         </svg>
         <span>Erkunde die Wissenschaft hinter ThermoGun Pro™</span>
       </a>
-    </div>
+    </section>
 
-    <!-- SLIDESHOW (aus Bild 2, Themen + Texte + neue Bilder) -->
-    <section class="slideshow-section">
+    <!-- SLIDESHOW -->
+    <section class="slideshow-section" aria-label="Therapie-Module der ThermoGun Pro">
       <h2 class="slideshow-title">Vier Therapien – gezielt, spürbar, kombinierbar</h2>
 
       <div class="slideshow-wrap">
@@ -1437,7 +1471,7 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
             <!-- Wärmetherapie -->
             <article class="slide-card">
               <div class="slide-image">
-                <img src="ThermoGun Temperatur Aufsatz.png" alt="Wärmetherapie">
+                <img src="ThermoGun Temperatur Aufsatz.png" alt="Wärmetherapie: beheizter Aufsatz">
               </div>
               <div class="slide-bar">
                 <div class="slide-head">
@@ -1451,8 +1485,7 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
                   <div class="slide-toggle" data-toggle>+</div>
                 </div>
                 <div class="slide-desc">
-                  Wärme und Klopfmassage regen die Durchblutung an, lockern steife Muskeln, verbessern das Aufwärmen
-                  und beschleunigen die Regeneration für 3× schnellere Ergebnisse<sup>2</sup>.
+                  Wärme und Klopfmassage können die Durchblutung unterstützen, steife Muskeln lockern und die Regeneration fördern.
                   <br><br><b>Beheizter Schlagaufsatz</b>
                 </div>
               </div>
@@ -1461,7 +1494,7 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
             <!-- Perkussive Therapie -->
             <article class="slide-card">
               <div class="slide-image">
-                <img src="ThermoGun Mann Anwendung.jpg" alt="Perkussive Therapie">
+                <img src="ThermoGun Mann Anwendung.jpg" alt="Perkussive Therapie: Anwendung am Körper">
               </div>
               <div class="slide-bar">
                 <div class="slide-head">
@@ -1475,8 +1508,7 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
                   <div class="slide-toggle" data-toggle>+</div>
                 </div>
                 <div class="slide-desc">
-                  Bekämpft tiefen Muskelkater und Verhärtungen mit den Vorteilen einer 15-minütigen Massage in nur zwei Minuten<sup>1</sup>.
-                  Löst effektiv Verspannungen und verbessert die Durchblutung, sodass du dich nach jeder Einheit noch besser erholen kannst.
+                  Tiefenmassage zur Lockerung von Muskelkater und Verhärtungen – ideal nach Training oder langem Sitzen.
                   <br><br><b>Dampener, Wedge, Micro-Point &amp; Standard-Aufsätze</b>
                 </div>
               </div>
@@ -1485,7 +1517,7 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
             <!-- Vibrationstherapie -->
             <article class="slide-card">
               <div class="slide-image">
-                <img src="ThermoGun wird von mann in kamera gehalten.jpg" alt="Vibrationstherapie">
+                <img src="ThermoGun wird von mann in kamera gehalten.jpg" alt="Vibrationstherapie: Gerät in der Hand">
               </div>
               <div class="slide-bar">
                 <div class="slide-head">
@@ -1500,8 +1532,7 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
                   <div class="slide-toggle" data-toggle>+</div>
                 </div>
                 <div class="slide-desc">
-                  Behandeln Sie Gelenke und andere empfindliche Bereiche, um Verspannungen, Schmerzen und Steifheit zu lindern.
-                  Kombinieren Sie es mit Wärme oder Kälte für noch stärkere Linderung.
+                  Für Gelenke und empfindliche Bereiche – kann Verspannungen, Schmerzen und Steifheit sanft adressieren.
                   <br><br><b>Vibration Plus-Aufsatz</b>
                 </div>
               </div>
@@ -1510,7 +1541,7 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
             <!-- Kältetherapie -->
             <article class="slide-card">
               <div class="slide-image">
-                <img src="ThermoGun Temperatur Aufsatz.png" alt="Kältetherapie">
+                <img src="ThermoGun Temperatur Aufsatz.png" alt="Kältetherapie: Hot/Cold-Aufsatz">
               </div>
               <div class="slide-bar">
                 <div class="slide-head">
@@ -1525,7 +1556,7 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
                   <div class="slide-toggle" data-toggle>+</div>
                 </div>
                 <div class="slide-desc">
-                  Reduziert Schmerzen, Schwellungen und Entzündungen während der Erholung nach dem Training.
+                  Kälte kann nach Belastung helfen, Reiz- und Schwellungsgefühl zu reduzieren.
                   <br><br><b>Hot/Cold-Aufsatz (integriert)</b>
                 </div>
               </div>
@@ -1546,50 +1577,47 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
       </div>
     </section>
 
-    <!-- Bild-Section (Bild bleibt, Text angepasst) -->
-    <div class="hero-section deep-dive">
-      <img src="image0.jpeg" alt="Therabody Unterschied" class="hero-image">
+    <!-- Deep dive hero -->
+    <section class="hero-section deep-dive" aria-label="Der Unterschied">
+      <img src="image0.jpeg" alt="Therabody Unterschied – Hintergrundbild" class="hero-image">
       <div class="hero-content">
-        <div class="hero-label">DER THERABODY-UNTERSCHIED</div>
+        <div class="hero-label">DER UNTERSCHIED</div>
         <h2 class="hero-title">Gezielte Entlastung, die tiefer ansetzt</h2>
         <p class="hero-description">
-          Oberflächliche Methoden fühlen sich oft nur kurzfristig gut an. Perkussive Impulse wirken gezielt in Muskel- und Faszienstrukturen –
-          ideal, um Spannung zu lösen und Beweglichkeit zurückzugewinnen. In Kombination mit Wärme oder Kälte lässt sich die Anwendung
-          noch präziser anpassen – für das, was dein Körper gerade wirklich braucht.
+          Perkussive Impulse wirken gezielt in Muskel- und Faszienstrukturen. In Kombination mit Wärme oder Kälte lässt sich die Anwendung
+          fein abstimmen – für Warm-up, Recovery oder sensible Bereiche.
         </p>
       </div>
-    </div>
+    </section>
 
-    <!-- Feature 1: Video -> Bild -->
-    <div class="feature-section">
+    <!-- Feature 1 -->
+    <section class="feature-section" aria-label="Feature: Design">
       <div class="feature-video">
-        <img src="ThermoGun Main Image.webp" alt="ThermoGun Pro Design">
+        <img src="ThermoGun Main Image.webp" alt="ThermoGun Pro – Design und Form">
       </div>
       <div class="feature-content">
-        <h2>Verbessertes Design für alle Formen und Größen</h2>
+        <h2>Ergonomisches Design für präzise Kontrolle</h2>
         <p>
-          Kompakt, ergonomisch und leicht zu führen: Die Form liegt stabil in der Hand, sodass du Druck und Winkel präzise steuern kannst –
-          auch an schwer erreichbaren Stellen. So wird die Anwendung kontrollierter, angenehmer und deutlich effizienter.
+          Kompakt, stabil in der Hand und leicht zu führen: So kannst du Druck und Winkel kontrolliert steuern – auch an schwer erreichbaren Stellen.
         </p>
       </div>
-    </div>
+    </section>
 
-    <!-- Feature 2: anderes Bild -->
-    <div class="feature-section reverse">
+    <!-- Feature 2 -->
+    <section class="feature-section reverse" aria-label="Feature: Steuerung">
       <div class="feature-image-container">
-        <img src="ThermoGun Display Anzeige Detail.avif" alt="ThermoGun Steuerung & Display">
+        <img src="ThermoGun Display Anzeige Detail.avif" alt="ThermoGun Pro – Display und Steuerung">
       </div>
       <div class="feature-content">
-        <h2>Kontinuierliche Behandlung, während das Gerät an die Stromversorgung angeschlossen ist</h2>
+        <h2>Intuitive Steuerung für Wärme, Kälte und Intensität</h2>
         <p>
-          Intuitive Steuerung direkt am Gerät: Temperatur und Kälte lassen sich über die Drehscheibe in drei Stufen einstellen,
-          die Intensität der Massage wird per Knopfdruck in mehreren Stufen angepasst. So kannst du die Anwendung in Sekunden
-          fein auf Warm-up, Recovery oder sensible Bereiche abstimmen – ohne Unterbrechung.
+          Temperatur (Wärme/Kälte) über Drehscheibe in drei Stufen, Massage-Intensität per Knopfdruck in mehreren Stufen – schnell anpassbar
+          auf Warm-up, Recovery oder sensible Bereiche.
         </p>
       </div>
-    </div>
+    </section>
 
-    <!-- ================= LIEFERUMFANG / PRODUKTINFO (THERABODY STYLE) ================= -->
+    <!-- ================= LIEFERUMFANG / PRODUKTINFO ================= -->
     <style>
       .hb-tabsblock{
         margin: 34px 0 10px;
@@ -1598,14 +1626,11 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
         padding:18px 18px 22px;
       }
 
-      /* Tabs */
       .hb-tabs{
         display:flex;
         gap:34px;
         align-items:flex-end;
         margin-bottom:16px;
-
-        /* ✅ mobile: einzeilig */
         flex-wrap:nowrap;
         overflow-x:auto;
         -webkit-overflow-scrolling:touch;
@@ -1623,7 +1648,7 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
         color:rgba(0,0,0,0.45);
         padding:0 0 8px;
         cursor:pointer;
-        white-space:nowrap; /* ✅ niemals umbrechen */
+        white-space:nowrap;
       }
       .hb-tab.active{
         color:#111;
@@ -1632,21 +1657,19 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
         text-decoration-thickness: 2px;
       }
 
-      /* Layout */
       .hb-tabpanel{
-        min-height:360px;             /* ✅ Boxhöhe bleibt gleich */
+        min-height:360px;
         display:grid;
         grid-template-columns: 560px 1fr;
         gap:28px;
         align-items:start;
       }
 
-      /* Linke Bildbox (nur bei Lieferumfang sichtbar) */
       .hb-leftbox{
         background: rgba(255,255,255,0.55);
         border-radius:14px;
         padding:18px;
-        height: 300px;               /* ✅ gleiche Maße/Form wie „Kasten drum“ */
+        height: 300px;
         display:flex;
         align-items:center;
         justify-content:center;
@@ -1659,7 +1682,6 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
         display:block;
       }
 
-      /* Rechte Inhalte */
       .hb-right{
         padding-top:6px;
         font-size:14px;
@@ -1690,25 +1712,23 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
         margin-bottom:2px;
       }
 
-      /* Produktinfo: Bild ausblenden, Text nutzt die volle Breite, Box bleibt gleich hoch */
       .hb-tabpanel.productinfo{
         grid-template-columns: 1fr;
       }
       .hb-tabpanel.productinfo .hb-leftcol{ display:none; }
 
-      /* Mobile */
       @media (max-width: 1200px){
         .hb-tabsblock{ padding:16px 14px 18px; }
         .hb-tab{ font-size:18px; }
 
         .hb-tabpanel{
-          min-height: 360px;         /* ✅ bleibt gleich */
+          min-height: 360px;
           grid-template-columns: 1fr;
           gap:16px;
         }
 
         .hb-leftbox{
-          height: 240px;             /* ✅ proportional, aber gleiche Form */
+          height: 240px;
           padding:14px;
         }
 
@@ -1727,11 +1747,10 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
         </button>
       </div>
 
-      <!-- PANEL: Lieferumfang -->
       <div class="hb-tabpanel lieferumfang" data-panel="lieferumfang">
         <div class="hb-leftcol">
           <div class="hb-leftbox">
-            <img src="ThermoGun Lieferumfang bild.webp" alt="Lieferumfang ThermoGun Pro">
+            <img src="ThermoGun Lieferumfang bild.webp" alt="Lieferumfang ThermoGun Pro – Gerät, Aufsätze, Kabel, Tasche">
           </div>
         </div>
 
@@ -1744,13 +1763,11 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
           </ul>
 
           <div style="margin-top:14px; color: rgba(0,0,0,0.72);">
-            <b>Steuerung:</b> Temperatur (Wärme/Kälte) über Drehscheibe in 3 Stufen einstellen.
-            Massage-Intensität per Knopfdruck in mehreren Geschwindigkeitsstufen anpassen.
+            <b>Steuerung:</b> Temperatur (Wärme/Kälte) in 3 Stufen, Massage-Intensität in mehreren Stufen – direkt am Gerät einstellbar.
           </div>
         </div>
       </div>
 
-      <!-- PANEL: Produktinformation -->
       <div class="hb-tabpanel productinfo" data-panel="produktinfo" style="display:none;">
         <div class="hb-right">
           <div class="hb-specs-title">PRODUKTSPEZIFIKATIONEN</div>
@@ -1805,24 +1822,28 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
     </script>
     <!-- ================= ENDE LIEFERUMFANG / PRODUKTINFO ================= -->
 
-    <!-- ================= REVIEWS (LAST SECTION) ================= -->
-    <section class="hb-reviews" id="bewertungen">
+    <!-- ================= REVIEWS ================= -->
+    <section class="hb-reviews" id="bewertungen" aria-label="Kundenbewertungen ThermoGun Pro">
       <h2>Kundenbewertungen</h2>
 
       <div class="hb-reviews-summary">
-        <!-- Left: score -->
         <div>
           <div class="hb-score">4.5</div>
           <div class="hb-score-row">
-            <div class="hb-stars">★★★★★</div>
+            <div class="hb-review-stars" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 17.27l5.18 3.04-1.64-5.81L20 9.24l-5.9-.5L12 3.5 9.9 8.74 4 9.24l4.46 5.26-1.64 5.81L12 17.27z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 17.27l5.18 3.04-1.64-5.81L20 9.24l-5.9-.5L12 3.5 9.9 8.74 4 9.24l4.46 5.26-1.64 5.81L12 17.27z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 17.27l5.18 3.04-1.64-5.81L20 9.24l-5.9-.5L12 3.5 9.9 8.74 4 9.24l4.46 5.26-1.64 5.81L12 17.27z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 17.27l5.18 3.04-1.64-5.81L20 9.24l-5.9-.5L12 3.5 9.9 8.74 4 9.24l4.46 5.26-1.64 5.81L12 17.27z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 17.27l5.18 3.04-1.64-5.81L20 9.24l-5.9-.5L12 3.5 9.9 8.74 4 9.24l4.46 5.26-1.64 5.81L12 17.27z"/></svg>
+            </div>
             <div class="hb-based">Basierend auf 128 Bewertungen</div>
           </div>
-          <button class="hb-reviews-btn" type="button">✦ Bewertungen zusammengefasst anzeigen</button>
+          <button class="hb-reviews-btn" type="button">Bewertungen zusammengefasst anzeigen</button>
         </div>
 
         <div class="hb-reviews-divider"></div>
 
-        <!-- Right: distribution -->
         <div class="hb-bars" aria-label="Bewertungsverteilung">
           <div class="hb-bar-row">
             <div>5★</div>
@@ -1858,11 +1879,16 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
             <h3 class="hb-review-title">Unfassbar effektiv nach dem Training</h3>
             <div class="hb-review-date">11/18/25</div>
           </div>
-          <div class="hb-review-stars">★★★★★</div>
+          <div class="hb-review-stars" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 17.27l5.18 3.04-1.64-5.81L20 9.24l-5.9-.5L12 3.5 9.9 8.74 4 9.24l4.46 5.26-1.64 5.81L12 17.27z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27l5.18 3.04-1.64-5.81L20 9.24l-5.9-.5L12 3.5 9.9 8.74 4 9.24l4.46 5.26-1.64 5.81L12 17.27z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27l5.18 3.04-1.64-5.81L20 9.24l-5.9-.5L12 3.5 9.9 8.74 4 9.24l4.46 5.26-1.64 5.81L12 17.27z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27l5.18 3.04-1.64-5.81L20 9.24l-5.9-.5L12 3.5 9.9 8.74 4 9.24l4.46 5.26-1.64 5.81L12 17.27z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27l5.18 3.04-1.64-5.81L20 9.24l-5.9-.5L12 3.5 9.9 8.74 4 9.24l4.46 5.26-1.64 5.81L12 17.27z"/></svg>
+          </div>
           <p class="hb-review-text">
             Ich nutze die ThermoGun vor allem für Beine und Rücken. Die Perkussion löst Spannung richtig schnell,
-            und der Hot/Cold-Aufsatz ist genial: Wärme fürs Lockern, Kälte danach zur Beruhigung. Fühlt sich nach jeder Session
-            wie „reset“ an.
+            und der Hot/Cold-Aufsatz ist genial: Wärme fürs Lockern, Kälte danach zur Beruhigung.
           </p>
           <div class="hb-helpful">
             <span><b>War diese Bewertung hilfreich?</b></span>
@@ -1892,10 +1918,16 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
             <h3 class="hb-review-title">Super Handhabung & leiser Motor</h3>
             <div class="hb-review-date">10/29/25</div>
           </div>
-          <div class="hb-review-stars">★★★★★</div>
+          <div class="hb-review-stars" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 17.27l5.18 3.04-1.64-5.81L20 9.24l-5.9-.5L12 3.5 9.9 8.74 4 9.24l4.46 5.26-1.64 5.81L12 17.27z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27l5.18 3.04-1.64-5.81L20 9.24l-5.9-.5L12 3.5 9.9 8.74 4 9.24l4.46 5.26-1.64 5.81L12 17.27z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27l5.18 3.04-1.64-5.81L20 9.24l-5.9-.5L12 3.5 9.9 8.74 4 9.24l4.46 5.26-1.64 5.81L12 17.27z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27l5.18 3.04-1.64-5.81L20 9.24l-5.9-.5L12 3.5 9.9 8.74 4 9.24l4.46 5.26-1.64 5.81L12 17.27z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27l5.18 3.04-1.64-5.81L20 9.24l-5.9-.5L12 3.5 9.9 8.74 4 9.24l4.46 5.26-1.64 5.81L12 17.27z"/></svg>
+          </div>
           <p class="hb-review-text">
-            Liegt mega gut in der Hand, das Display ist klar, und die Stufen lassen sich schnell wechseln. Ich hatte schon andere Massageguns –
-            die hier ist deutlich angenehmer vom Geräusch und wirkt trotzdem kräftig.
+            Liegt sehr gut in der Hand, das Display ist klar, und die Stufen lassen sich schnell wechseln.
+            Deutlich angenehmer vom Geräusch und trotzdem kräftig.
           </p>
           <div class="hb-helpful">
             <span><b>War diese Bewertung hilfreich?</b></span>
@@ -1922,14 +1954,18 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
 
         <article class="hb-review">
           <div class="hb-review-head">
-            <h3 class="hb-review-title">Hot/Cold-Aufsatz ist der Gamechanger</h3>
+            <h3 class="hb-review-title">Hot/Cold-Aufsatz macht wirklich einen Unterschied</h3>
             <div class="hb-review-date">09/21/25</div>
           </div>
-          <div class="hb-review-stars">★★★★☆</div>
+          <div class="hb-review-stars" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 17.27l5.18 3.04-1.64-5.81L20 9.24l-5.9-.5L12 3.5 9.9 8.74 4 9.24l4.46 5.26-1.64 5.81L12 17.27z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27l5.18 3.04-1.64-5.81L20 9.24l-5.9-.5L12 3.5 9.9 8.74 4 9.24l4.46 5.26-1.64 5.81L12 17.27z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27l5.18 3.04-1.64-5.81L20 9.24l-5.9-.5L12 3.5 9.9 8.74 4 9.24l4.46 5.26-1.64 5.81L12 17.27z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27l5.18 3.04-1.64-5.81L20 9.24l-5.9-.5L12 3.5 9.9 8.74 4 9.24l4.46 5.26-1.64 5.81L12 17.27z"/></svg>
+          </div>
           <p class="hb-review-text">
-            Ich hätte nicht gedacht, dass Wärme/Kälte so einen Unterschied macht. Erst Wärme zum Lösen, dann Kälte zur Beruhigung –
-            fühlt sich viel „runder“ an als nur Massage. Ein Stern Abzug, weil ich mir noch eine Schnelllade-Anzeige wünschen würde,
-            sonst top.
+            Erst Wärme zum Lösen, dann Kälte zur Beruhigung – fühlt sich runder an als nur Massage.
+            Ein Stern Abzug, weil ich mir noch eine Schnelllade-Anzeige wünschen würde.
           </p>
           <div class="hb-helpful">
             <span><b>War diese Bewertung hilfreich?</b></span>
@@ -1956,7 +1992,6 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
       </div>
     </section>
     <!-- ================= END REVIEWS ================= -->
-
   </div>
 
   <script>
@@ -2001,7 +2036,6 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
     }
     tryPlayThumbVideo();
 
-    // ✅ Mobile browsers may require a user gesture: try again on first interaction
     window.addEventListener('touchstart', tryPlayThumbVideo, { once: true, passive: true });
     window.addEventListener('click', tryPlayThumbVideo, { once: true });
 
@@ -2079,39 +2113,35 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
         };
 
         window.WHCart.add(product);
-        window.WHCart.open();   // Popup direkt öffnen
+        window.WHCart.open();
       });
     });
   </script>
+
   <div id="site-footer"></div>
 
-<script>
-  async function loadFooter() {
-    const res = await fetch('footer.html', { cache: "no-cache" });
-    const html = await res.text();
+  <script>
+    async function loadFooter() {
+      const res = await fetch('footer.html', { cache: "no-cache" });
+      const html = await res.text();
 
-    const host = document.getElementById('site-footer');
-    const tmp = document.createElement('div');
-    tmp.innerHTML = html;
+      const host = document.getElementById('site-footer');
+      const tmp = document.createElement('div');
+      tmp.innerHTML = html;
 
-    // 1) Erst alle NICHT-script Nodes rein
-    const scripts = Array.from(tmp.querySelectorAll('script'));
-    scripts.forEach(s => s.remove());
-    host.innerHTML = tmp.innerHTML;
+      const scripts = Array.from(tmp.querySelectorAll('script'));
+      scripts.forEach(s => s.remove());
+      host.innerHTML = tmp.innerHTML;
 
-    // 2) Dann scripts "neu" erstellen -> dadurch werden sie ausgeführt
-    for (const s of scripts) {
-      const ns = document.createElement('script');
-      // Attribute kopieren (z.B. src, type)
-      for (const attr of s.attributes) ns.setAttribute(attr.name, attr.value);
-      // Inline-Code kopieren
-      ns.textContent = s.textContent;
-      document.body.appendChild(ns);
+      for (const s of scripts) {
+        const ns = document.createElement('script');
+        for (const attr of s.attributes) ns.setAttribute(attr.name, attr.value);
+        ns.textContent = s.textContent;
+        document.body.appendChild(ns);
+      }
     }
-  }
 
-  loadFooter();
-</script>
-
+    loadFooter();
+  </script>
 </body>
 </html>
