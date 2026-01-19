@@ -3,7 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Therabody - LED-Therapie</title>
+
+  <!-- ✅ SEO: Optimierter Titel (passt zu WarmesHerz + Produkten) -->
+  <title>WarmesHerz® – HeatBelt Pro™ & ThermoGun Pro™ für Wärme, Licht & Regeneration</title>
+
+  <!-- ✅ SEO: Meta Description (mit WarmesHerz) -->
+  <meta name="description" content="WarmesHerz®: HeatBelt Pro™ & ThermoGun Pro™ für spürbare Entlastung bei Verspannungen. Wärme, Infrarot/LED und Massage zur Unterstützung von Regeneration und Wohlbefinden – ideal für Alltag & Erholung.">
+
+  <!-- ✅ SEO: Canonical -->
+  <link rel="canonical" href="https://warmesherz.com/">
+
+  <!-- ✅ SEO: Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <!-- ✅ Mobile: Apple Touch Icon (optional, aber Audit-Warnung) -->
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -20,6 +35,7 @@
       padding: 80px 40px;
     }
 
+    /* ✅ SEO: Nur eine H1 pro Seite -> globales h1 bleibt, aber wir nutzen es nur einmal (siehe unten) */
     h1 {
       font-size: 2.5rem;
       font-weight: 400;
@@ -85,7 +101,7 @@
 
     /* Desktop: Hero Inhalt 20px weiter runter */
     @media (min-width: 969px) {
-      .hero-content { bottom: 16px; } /* vorher 36px -> 20px tiefer */
+      .hero-content { bottom: 16px; }
     }
 
     .hero-kicker {
@@ -172,22 +188,19 @@
       background: #111;
     }
 
-    /* Randlos: cover + minimaler Zoom */
     .product-media img {
       width: 100%;
       height: 100%;
-      object-fit: cover;     /* statt contain -> kein Rand */
+      object-fit: cover;
       object-position: center;
-      transform: scale(1.06); /* gegen minimale Ränder/Letterboxing */
+      transform: scale(1.06);
       transform-origin: center;
     }
 
-    /* Mobile: nochmal minimal mehr Zoom gegen oberen Rand */
     @media (max-width: 968px) {
       .product-media img { transform: scale(1.10); }
     }
 
-    /* Verdunklung/Verlauf nach unten */
     .product-shade {
       position: absolute;
       inset: 0;
@@ -296,9 +309,12 @@
       top: 100px;
     }
 
-    .gift-intro h1 {
+    /* ✅ SEO: Diese Überschrift ist jetzt H2 (damit nur 1x H1 auf der Seite bleibt) */
+    .gift-intro h2 {
       font-size: 2.5rem;
       margin-bottom: 20px;
+      font-weight: 400;
+      line-height: 1.2;
     }
 
     .gift-intro .subtitle { margin-bottom: 0; }
@@ -331,7 +347,7 @@
       flex: 1;
     }
 
-    .gift-card h2 {
+    .gift-card h3 {
       font-size: 1.8rem;
       font-weight: 400;
       margin-bottom: 15px;
@@ -411,9 +427,13 @@
       margin: 0 auto;
     }
 
-    .contact-container h1 {
+    /* ✅ SEO: Kontakt-Überschrift -> H2 */
+    .contact-container h2 {
       text-align: center;
       margin-bottom: 15px;
+      font-size: 2.5rem;
+      font-weight: 400;
+      line-height: 1.2;
     }
 
     .contact-container .subtitle {
@@ -488,10 +508,13 @@
       margin: 0 auto;
     }
 
-    .comparison-container h1 {
+    /* ✅ SEO: Vergleich-Überschrift -> H2 */
+    .comparison-container h2 {
       font-size: 2rem;
       text-align: center;
       margin-bottom: 10px;
+      font-weight: 400;
+      line-height: 1.2;
     }
 
     .comparison-container .subtitle {
@@ -530,7 +553,7 @@
       margin-bottom: 20px;
     }
 
-    .comparison-header h2 {
+    .comparison-header h3 {
       font-size: 1.5rem;
       font-weight: 400;
       margin-bottom: 4px;
@@ -618,24 +641,24 @@
     }
   </style>
 
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '2344715996005697');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-  
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '2344715996005697');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+
 </head>
 <body>
 
@@ -669,43 +692,58 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
     <div class="hero-media">
       <picture>
         <source media="(max-width: 968px)" srcset="Hero Mobile.png">
-        <img src="Hero Desktop.png" alt="ThermoGun Pro und HeatBelt Pro – Hero">
+        <img src="Hero Desktop.png" alt="WarmesHerz – HeatBelt Pro und ThermoGun Pro für Wärme, Licht und Regeneration">
       </picture>
       <div class="hero-overlay"></div>
 
       <div class="hero-content">
         <div class="hero-kicker">Regeneration, die du sofort spürst</div>
-        <div class="hero-title">Die beste Entlastung für deinen Körper – genau dann, wenn du sie brauchst.</div>
-        <div class="hero-subtitle">Wärme, Licht und Massage sind bewährte Methoden, um Spannung zu lösen und das Schmerzgefühl spürbar zu reduzieren – für ein freieres Körpergefühl im Alltag.</div>
+
+        <!-- ✅ SEO: DAS ist jetzt die einzige H1 auf der Seite -->
+        <h1 class="hero-title">WarmesHerz® – Wärme, Licht und Massage für spürbare Entlastung</h1>
+
+        <!-- ✅ SEO: Wörter aus H1 kommen im Fließtext vor (Wärme, Licht, Massage, Entlastung) -->
+        <div class="hero-subtitle">
+          WarmesHerz kombiniert <strong>Wärme</strong>, <strong>Licht</strong> und <strong>Massage</strong>, um <strong>Entlastung</strong> bei Verspannungen zu unterstützen
+          und das Wohlbefinden im Alltag zu verbessern – für ein freieres Körpergefühl.
+        </div>
+
         <div class="hero-actions">
-          <a class="hero-btn" href="#led-therapy">Produkte ansehen</a>
+          <a class="hero-btn" href="#produkte">Produkte ansehen</a>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Section 1 -->
-  <div class="section-white" id="led-therapy">
+  <div class="section-white" id="produkte">
     <div class="section">
-      <h1>Schnellere Erholung dank LED-Therapie</h1>
-      <p class="subtitle">LED-Therapie unterstützt Regeneration und Wohlbefinden, indem sie gezielt auf Gewebeprozesse einwirkt – genau dort, wo du Entlastung brauchst.</p>
+      <!-- ✅ SEO: vorher H1 -> jetzt H2 -->
+      <h2 style="font-size:2.5rem;font-weight:400;margin-bottom:20px;line-height:1.2;">
+        HeatBelt Pro™ & ThermoGun Pro™ – Regeneration mit Wärme, Licht und Massage
+      </h2>
+
+      <p class="subtitle">
+        Bei WarmesHerz steht <strong>Entlastung</strong> im Fokus: <strong>Wärme</strong> und <strong>Licht</strong> können die Muskulatur beruhigen,
+        <strong>Massage</strong> und <strong>Vibration</strong> helfen dabei, Spannungsgefühle zu lösen – gezielt dort, wo du es brauchst.
+      </p>
 
       <div class="product-grid">
         <div class="product-card">
           <div class="product-media">
-            <img src="ThermoGun anwendung frau.webp" alt="ThermoGun Pro Anwendung">
+            <img src="ThermoGun anwendung frau.webp" alt="ThermoGun Pro – Massage- und Vibrationstherapie zur Muskelentspannung">
           </div>
           <div class="product-shade"></div>
 
           <div class="product-content">
             <h2>ThermoGun Pro™</h2>
-            <p>Perkussion & Vibration, um Spannung zu lösen und Muskeln schnell zu entspannen.</p>
+            <p>Perkussion &amp; Vibration, um Spannung zu lösen und Muskeln schnell zu entspannen.</p>
             <a href="thermogun.html" class="btn">ThermoGun Pro shoppen</a>
           </div>
 
           <div class="feature-bar">
             <div class="feature-icon">
-              <img src="Benefit_Icons_15.svg" alt="Icon">
+              <img src="Benefit_Icons_15.svg" alt="Wissenschaftlich belegte Vorteile">
             </div>
             <span>Schnellere und effektivere Erholung mit allen Vorteilen einer 15-minütigen Massage in nur zwei Minuten²</span>
           </div>
@@ -713,19 +751,19 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
 
         <div class="product-card">
           <div class="product-media">
-            <img src="Tragefoto Infrarot fokus.jpg" alt="HeatBelt Pro Anwendung">
+            <img src="Tragefoto Infrarot fokus.jpg" alt="HeatBelt Pro – Wärmegürtel mit Lichtimpulsen zur Rücken-Entlastung">
           </div>
           <div class="product-shade"></div>
 
           <div class="product-content">
             <h2>HeatBelt Pro™</h2>
-            <p>Wärme & Lichtimpulse, um den Rücken zu entlasten und das Schmerzgefühl zu reduzieren.</p>
+            <p>Wärme &amp; Lichtimpulse, um den Rücken zu entlasten und das Schmerzgefühl zu reduzieren.</p>
             <a href="heatbelt.html" class="btn">HeatBelt Pro shoppen</a>
           </div>
 
           <div class="feature-bar">
             <div class="feature-icon">
-              <img src="Benefit_Icons_15.svg" alt="Icon">
+              <img src="Benefit_Icons_15.svg" alt="Wissenschaftlich belegte Vorteile">
             </div>
             <span>Wissenschaftlich belegte Schmerzlinderung im unteren Rückenbereich³</span>
           </div>
@@ -738,15 +776,17 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
   <div class="section">
     <div class="gift-section-content">
       <div class="gift-intro">
-        <h1>Warum diese Therapien wirken</h1>
-        <p class="subtitle">Wärme, Infrarot/Rotlicht sowie Massage/Vibration greifen direkt in Entspannungs- und Schmerzprozesse ein – und genau deshalb werden sie so häufig genutzt.</p>
+        <h2>Warum diese Therapien wirken</h2>
+        <p class="subtitle">
+          Wärme, Infrarot/Rotlicht sowie Massage/Vibration greifen direkt in Entspannungs- und Schmerzprozesse ein – und genau deshalb werden sie so häufig genutzt.
+        </p>
       </div>
 
       <div class="gift-grid">
         <div class="gift-card">
           <div class="gift-image heatlight"></div>
           <div class="gift-content">
-            <h2>Wärme & Infrarot</h2>
+            <h3>Wärme &amp; Infrarot</h3>
             <p>Entspannt Muskulatur, fördert Durchblutung und kann das Schmerzempfinden deutlich senken.</p>
             <button class="btn btn-dark" onclick="openModal('modal1')">Mehr erfahren</button>
           </div>
@@ -755,7 +795,7 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
         <div class="gift-card">
           <div class="gift-image vibration"></div>
           <div class="gift-content">
-            <h2>Massage & Vibration</h2>
+            <h3>Massage &amp; Vibration</h3>
             <p>Löst Spannung, verbessert die Mikrozirkulation und kann Schmerzsignale spürbar dämpfen.</p>
             <button class="btn btn-dark" onclick="openModal('modal2')">Mehr erfahren</button>
           </div>
@@ -764,26 +804,25 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
     </div>
   </div>
 
-  <!-- Produktvergleich (Inhalt ersetzt, alles Häkchen) -->
+  <!-- Produktvergleich -->
   <div class="comparison-section">
     <div class="comparison-container">
-      <h1>Produktvergleich</h1>
+      <h2>Produktvergleich</h2>
       <p class="subtitle">Vergleichen Sie die wichtigsten Funktionen unserer Premium-Produkte</p>
 
       <div class="comparison-grid">
-        <!-- ThermoGun -->
         <div class="comparison-card">
           <div class="comparison-image-wrapper">
-            <img src="Massagegun dreieck image.png" alt="ThermoGun Pro">
+            <img src="Massagegun dreieck image.png" alt="ThermoGun Pro – Produktbild">
           </div>
           <div class="comparison-header">
-            <h2>ThermoGun Pro™</h2>
+            <h3>ThermoGun Pro™</h3>
             <p class="comparison-price">€109</p>
           </div>
           <div class="comparison-features-wrapper">
             <ul class="comparison-features">
               <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">Perkussive Tiefenmassage zur gezielten Lockerung von Muskeln und Faszien</div></li>
-              <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">Wärme- & Kältefunktion integriert für flexible Hot- und Cold-Therapie</div></li>
+              <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">Wärme- &amp; Kältefunktion integriert für flexible Hot- und Cold-Therapie</div></li>
               <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">Mehrere Massagegeschwindigkeiten für individuelle Intensität</div></li>
               <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">Austauschbare Aufsätze für verschiedene Muskelgruppen und Anwendungen</div></li>
               <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">Kompaktes, ergonomisches Design für einfache Einhandbedienung</div></li>
@@ -792,18 +831,17 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
           </div>
         </div>
 
-        <!-- HeatBelt -->
         <div class="comparison-card">
           <div class="comparison-image-wrapper">
-            <img src="Dreieck Belt image.png" alt="HeatBelt Pro">
+            <img src="Dreieck Belt image.png" alt="HeatBelt Pro – Produktbild">
           </div>
           <div class="comparison-header">
-            <h2>HeatBelt Pro™</h2>
+            <h3>HeatBelt Pro™</h3>
             <p class="comparison-price">€95</p>
           </div>
           <div class="comparison-features-wrapper">
             <ul class="comparison-features">
-              <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">Vierfach-Therapie in einem Gerät: LED, Ferninfrarot, Wärme & Vibration zur gezielten Linderung im unteren Rücken</div></li>
+              <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">Vierfach-Therapie in einem Gerät: LED, Ferninfrarot, Wärme &amp; Vibration zur gezielten Linderung im unteren Rücken</div></li>
               <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">3 Wärmestufen mit Infrarot: Niedrig, Mittel, Hoch (102 °F, 107 °F, 113 °F)</div></li>
               <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">3 Vibrationsmuster: Tief, Hoch und Welle</div></li>
               <li><div class="feature-check-cell"><span class="feature-check"></span></div><div class="feature-text">LED-Funktion: ein / aus</div></li>
@@ -812,7 +850,6 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
             </ul>
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -820,7 +857,7 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
   <!-- Kontaktformular -->
   <div class="contact-section">
     <div class="contact-container">
-      <h1>Kontaktieren Sie uns</h1>
+      <h2>Kontaktieren Sie uns</h2>
       <p class="subtitle">Fragen zu den Produkten, Anwendung oder Versand? Schreiben Sie uns – wir helfen schnell und unkompliziert weiter.</p>
 
       <form class="contact-form" onsubmit="handleSubmit(event)">
@@ -863,11 +900,11 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
     </div>
   </div>
 
-  <!-- Modals (wieder lang) -->
+  <!-- Modals -->
   <div id="modal1" class="modal" onclick="closeModal('modal1')">
     <div class="modal-content" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeModal('modal1')">&times;</button>
-      <h2>Wärme & (Nah-)Infrarot: bewährte Schmerzlinderung</h2>
+      <h2>Wärme &amp; (Nah-)Infrarot: bewährte Schmerzlinderung</h2>
       <p>
         <strong>Wärme zählt zu den effektivsten Methoden gegen muskuläre Schmerzen</strong>, weil sie den Muskeltonus senken, die Durchblutung steigern und dadurch das „Ziehen“ im Gewebe reduzieren kann. Viele spüren schon nach kurzer Zeit spürbar weniger Spannung, mehr Beweglichkeit und ein deutlich entspannteres Körpergefühl.
       </p>
@@ -883,7 +920,7 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
   <div id="modal2" class="modal" onclick="closeModal('modal2')">
     <div class="modal-content" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeModal('modal2')">&times;</button>
-      <h2>Massage & Vibration: direkte Wirkung auf Nerven & Muskulatur</h2>
+      <h2>Massage &amp; Vibration: direkte Wirkung auf Nerven &amp; Muskulatur</h2>
       <p>
         <strong>Massage und Vibration wirken gleichzeitig mechanisch und neurologisch.</strong> Mechanisch können sie verspannte Muskelstränge lockern, Triggerpunkte entspannen und die lokale Durchblutung ankurbeln. Neurologisch können kräftige Reize die Schmerzverarbeitung beeinflussen – viele empfinden dadurch eine schnelle Dämpfung von Schmerzsignalen und ein unmittelbares Gefühl von Entlastung.
       </p>
@@ -909,35 +946,30 @@ src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
       event.target.reset();
     }
   </script>
+
   <div id="site-footer"></div>
+  <script>
+    async function loadFooter() {
+      const res = await fetch('footer.html', { cache: "no-cache" });
+      const html = await res.text();
 
-<script>
-  async function loadFooter() {
-    const res = await fetch('footer.html', { cache: "no-cache" });
-    const html = await res.text();
+      const host = document.getElementById('site-footer');
+      const tmp = document.createElement('div');
+      tmp.innerHTML = html;
 
-    const host = document.getElementById('site-footer');
-    const tmp = document.createElement('div');
-    tmp.innerHTML = html;
+      const scripts = Array.from(tmp.querySelectorAll('script'));
+      scripts.forEach(s => s.remove());
+      host.innerHTML = tmp.innerHTML;
 
-    // 1) Erst alle NICHT-script Nodes rein
-    const scripts = Array.from(tmp.querySelectorAll('script'));
-    scripts.forEach(s => s.remove());
-    host.innerHTML = tmp.innerHTML;
-
-    // 2) Dann scripts "neu" erstellen -> dadurch werden sie ausgeführt
-    for (const s of scripts) {
-      const ns = document.createElement('script');
-      // Attribute kopieren (z.B. src, type)
-      for (const attr of s.attributes) ns.setAttribute(attr.name, attr.value);
-      // Inline-Code kopieren
-      ns.textContent = s.textContent;
-      document.body.appendChild(ns);
+      for (const s of scripts) {
+        const ns = document.createElement('script');
+        for (const attr of s.attributes) ns.setAttribute(attr.name, attr.value);
+        ns.textContent = s.textContent;
+        document.body.appendChild(ns);
+      }
     }
-  }
-
-  loadFooter();
-</script>
+    loadFooter();
+  </script>
 
 </body>
 </html>
