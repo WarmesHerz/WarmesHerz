@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- ✅ SEO: Title + Description (passt zu vorhandenem Inhalt, ohne neue Texte) -->
-  <title>ThermoGun Pro™ – Hot & Cold Percussion Therapy | WarmesHerz</title>
+  <!-- ✅ SEO (To-Do): Titel + Meta Description -->
+  <title>ThermoGun Pro™ – Hot &amp; Cold Percussion Therapy | WarmesHerz</title>
   <meta name="description" content="ThermoGun Pro™ kombiniert perkussive Tiefenmassage mit integrierter Wärme- und Kältetherapie – für gezielte Lockerung, weniger Spannung und schnellere Erholung. Mehrere Intensitätsstufen, Aufsätze und ergonomisches Design." />
 
-  <!-- ✅ SEO: Canonical -->
+  <!-- ✅ SEO (To-Do): Canonical -->
   <link rel="canonical" href="https://warmesherz.com/thermogun.html" />
 
-  <!-- ✅ SEO: Favicon -->
+  <!-- ✅ SEO (To-Do): Favicon + Apple Touch Icon -->
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
@@ -39,14 +39,9 @@
       margin-bottom: 30px;
     }
 
-    .breadcrumb a {
-      color: #666;
-      text-decoration: none;
-    }
+    .breadcrumb a { color: #666; text-decoration: none; }
 
-    /* =========================
-       PRODUCT SECTION (DESKTOP)
-       ========================= */
+    /* ========================= PRODUCT SECTION (DESKTOP) ========================= */
     .product-section {
       background: white;
       border-radius: 12px;
@@ -117,8 +112,7 @@
 
     .thumbnail:hover, .thumbnail.active { border-color: #333; }
 
-    .thumbnail img,
-    .thumbnail video {
+    .thumbnail img, .thumbnail video {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -136,8 +130,7 @@
       padding: 0;
     }
 
-    .main-image video,
-    .main-image img {
+    .main-image video, .main-image img {
       width: 100%;
       height: auto;
       border-radius: 12px;
@@ -145,10 +138,7 @@
       max-height: 600px;
     }
 
-    .main-image video {
-      aspect-ratio: 1 / 1;
-      object-position: center;
-    }
+    .main-image video { aspect-ratio: 1 / 1; object-position: center; }
 
     .product-info { padding: 20px 0; }
 
@@ -186,13 +176,7 @@
       margin: 18px 0;
     }
 
-    .rating {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 26px;
-    }
-
+    .rating { display: flex; align-items: center; gap: 10px; margin-bottom: 26px; }
     .stars { color: #333; font-size: 18px; }
     .review-count { font-size: 14px; color: #666; }
 
@@ -236,11 +220,7 @@
       justify-content: center;
     }
 
-    .option-icon img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+    .option-icon img { width: 100%; height: 100%; object-fit: cover; }
 
     .option-name { font-size: 16px; font-weight: 400; }
     .option-price { font-size: 18px; font-weight: 500; }
@@ -259,9 +239,7 @@
 
     .add-to-cart:hover { background: #000; }
 
-    /* =========================
-       BENEFITS
-       ========================= */
+    /* ========================= BENEFITS ========================= */
     .benefits-section {
       background: white;
       border-radius: 12px;
@@ -289,11 +267,8 @@
 
     .benefits-icon img { width: 44px; height: 44px; }
 
-    /* ✅ bleibt optisch gleich, nur Semantik wird unten H2 */
-    .benefits-header h2 {
-      font-size: 18px;
-      font-weight: 500;
-    }
+    /* ✅ nur Semantik – optisch identisch */
+    .benefits-header h2 { font-size: 18px; font-weight: 500; }
 
     .benefits-grid {
       display: grid;
@@ -313,20 +288,14 @@
       background: #e0e0e0;
     }
 
-    /* ✅ bleibt optisch gleich, nur Semantik wird unten H3 */
+    /* ✅ nur Semantik – optisch identisch */
     .benefit-item h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+
     .benefit-item p { font-size: 14px; color: #666; line-height: 1.5; }
     .benefit-item sup { font-size: 10px; }
 
-    /* =========================
-       VIDEO SECTION (kept high quality)
-       ========================= */
-    .video-section {
-      position: relative;
-      border-radius: 12px;
-      overflow: hidden;
-      margin-bottom: 30px;
-    }
+    /* ========================= VIDEO SECTION (kept high quality) ========================= */
+    .video-section { position: relative; border-radius: 12px; overflow: hidden; margin-bottom: 30px; }
 
     .video-section h2 {
       font-size: 26px;
@@ -336,43 +305,15 @@
       color: #333;
     }
 
-    .video-wrapper {
-      position: relative;
-      width: 100%;
-      height: 600px;
-      border-radius: 12px;
-      overflow: hidden;
-    }
+    .video-wrapper { position: relative; width: 100%; height: 600px; border-radius: 12px; overflow: hidden; }
 
-    .video-background {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-    }
+    .video-background { position: absolute; inset: 0; z-index: 1; }
 
-    .video-background video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-    }
+    .video-background video { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
 
-    .video-container {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 2;
-    }
+    .video-container { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; z-index: 2; }
 
-    .video-placeholder {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-    }
+    .video-placeholder { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
 
     /* collapsed glass (desktop) */
     .info-box {
@@ -399,12 +340,8 @@
     /* expanded overlay */
     .info-box.expanded {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: 100%; height: 100%;
       max-width: none;
       border-radius: 12px;
       flex-direction: row;
@@ -417,13 +354,7 @@
       transform: none;
     }
 
-    .video-box {
-      display: none;
-      width: 50%;
-      height: 100%;
-      padding: 24px;
-    }
-
+    .video-box { display: none; width: 50%; height: 100%; padding: 24px; }
     .info-box.expanded .video-box { display: block; }
 
     .video-box-inner {
@@ -437,18 +368,9 @@
       justify-content: center;
     }
 
-    .video-box-inner video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-    }
+    .video-box-inner video { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
 
-    .info-box-right {
-      width: 100%;
-      transition: all 0.35s ease;
-      min-width: 0;
-    }
+    .info-box-right { width: 100%; transition: all 0.35s ease; min-width: 0; }
 
     .info-box.expanded .info-box-right {
       width: 50%;
@@ -458,17 +380,8 @@
       min-height: 0;
     }
 
-    .info-box-content {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      width: 100%;
-    }
-
-    .info-box.expanded .info-box-content {
-      margin-bottom: 18px;
-      align-items: flex-start;
-    }
+    .info-box-content { display: flex; align-items: center; gap: 12px; width: 100%; }
+    .info-box.expanded .info-box-content { margin-bottom: 18px; align-items: flex-start; }
 
     .info-toggle {
       width: 32px;
@@ -488,106 +401,30 @@
     .info-title { font-size: 13px; line-height: 1.35; font-weight: 400; margin: 0; }
     .info-subtitle { font-size: 10px; opacity: 0.8; margin: 4px 0 0 0; }
 
-    .expanded-content {
-      display: none;
-      opacity: 0;
-      transition: opacity 0.35s ease 0.15s;
-      overflow: auto;
-      padding-right: 4px;
-    }
+    .expanded-content { display: none; opacity: 0; transition: opacity 0.35s ease 0.15s; overflow: auto; padding-right: 4px; }
+    .info-box.expanded .expanded-content { display: block; opacity: 1; }
 
-    .info-box.expanded .expanded-content {
-      display: block;
-      opacity: 1;
-    }
-
-    .expanded-content h3 {
-      font-size: 22px;
-      font-weight: 400;
-      margin: 0 0 14px 0;
-      line-height: 1.25;
-    }
-
-    .expanded-content p {
-      font-size: 14px;
-      line-height: 1.65;
-      margin-bottom: 14px;
-      opacity: 0.92;
-    }
-
+    .expanded-content h3 { font-size: 22px; font-weight: 400; margin: 0 0 14px 0; line-height: 1.25; }
+    .expanded-content p { font-size: 14px; line-height: 1.65; margin-bottom: 14px; opacity: 0.92; }
     .expanded-content .study-info { font-size: 12px; opacity: 0.7; margin-bottom: 14px; }
 
-    .science-link {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: #333;
-      font-size: 14px;
-      padding-top: 18px;
-    }
-
+    .science-link { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #333; font-size: 14px; padding-top: 18px; }
     .science-link:hover { text-decoration: underline; }
-
     .science-icon { width: 24px; height: 24px; }
 
-    /* =========================
-       SLIDESHOW (desktop controls)
-       ========================= */
-    .slideshow-section {
-      margin-bottom: 30px;
-      background: #f5f3f0;
-      padding: 18px 0 10px;
-    }
-
-    .slideshow-title {
-      font-size: 34px;
-      font-weight: 300;
-      margin: 0 0 22px;
-      line-height: 1.15;
-    }
-
+    /* ========================= SLIDESHOW (desktop controls) ========================= */
+    .slideshow-section { margin-bottom: 30px; background: #f5f3f0; padding: 18px 0 10px; }
+    .slideshow-title { font-size: 34px; font-weight: 300; margin: 0 0 22px; line-height: 1.15; }
     .slideshow-wrap { position: relative; }
-
-    .slideshow-viewport {
-      overflow: hidden;
-      padding: 0 0 10px;
-    }
-
-    .slideshow-track {
-      display: flex;
-      gap: 18px;
-      transition: transform 0.45s ease;
-      will-change: transform;
-    }
-
-    .slide-card {
-      flex: 0 0 520px;
-      border-radius: 16px;
-      overflow: hidden;
-      background: white;
-      position: relative;
-    }
-
-    .slide-image {
-      width: 100%;
-      height: 340px;
-      overflow: hidden;
-      background: #ddd;
-    }
-
-    .slide-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+    .slideshow-viewport { overflow: hidden; padding: 0 0 10px; }
+    .slideshow-track { display: flex; gap: 18px; transition: transform 0.45s ease; will-change: transform; }
+    .slide-card { flex: 0 0 520px; border-radius: 16px; overflow: hidden; background: white; position: relative; }
+    .slide-image { width: 100%; height: 340px; overflow: hidden; background: #ddd; }
+    .slide-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
     .slide-bar {
       position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      left: 0; right: 0; bottom: 0;
       background: #f5e6d3;
       padding: 16px 18px;
       border-radius: 0 0 16px 16px;
@@ -598,23 +435,12 @@
       justify-content: flex-start;
     }
 
-    .slide-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
+    .slide-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 
-    .slide-title-group {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
-      flex: 1;
-    }
-
+    .slide-title-group { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
     .slide-icon { width: 22px; height: 22px; flex-shrink: 0; }
 
+    /* ✅ nur Semantik – optisch identisch */
     .slide-title {
       font-size: 17px;
       font-weight: 600;
@@ -640,47 +466,17 @@
       cursor: pointer;
     }
 
-    .slide-desc {
-      margin-top: 12px;
-      font-size: 14px;
-      line-height: 1.55;
-      color: #333;
-      opacity: 0.92;
-      display: none;
-    }
-
+    .slide-desc { margin-top: 12px; font-size: 14px; line-height: 1.55; color: #333; opacity: 0.92; display: none; }
     .slide-card.expanded .slide-bar { height: 190px; }
     .slide-card.expanded .slide-desc { display: block; }
 
-    .slideshow-controls {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      margin-top: 14px;
-    }
+    .slideshow-controls { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 14px; }
 
-    .ticks {
-      display: flex;
-      justify-content: center;
-      gap: 18px;
-      flex: 1;
-    }
-
-    .tick {
-      width: 120px;
-      height: 2px;
-      background: #cfc9be;
-      border-radius: 2px;
-    }
-
+    .ticks { display: flex; justify-content: center; gap: 18px; flex: 1; }
+    .tick { width: 120px; height: 2px; background: #cfc9be; border-radius: 2px; }
     .tick.active { background: #111; }
 
-    .arrows {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
+    .arrows { display: flex; gap: 10px; align-items: center; }
 
     .nav-arrow {
       width: 42px;
@@ -696,287 +492,60 @@
       user-select: none;
     }
 
-    .nav-arrow:hover {
-      background: #111;
-      color: white;
-      border-color: #111;
-    }
+    .nav-arrow:hover { background: #111; color: white; border-color: #111; }
 
-    /* =========================
-       HERO + FEATURES
-       ========================= */
-    .hero-section {
-      position: relative;
-      height: 500px;
-      border-radius: 12px;
-      overflow: hidden;
-      margin-bottom: 30px;
-    }
-
+    /* ========================= HERO + FEATURES ========================= */
+    .hero-section { position: relative; height: 500px; border-radius: 12px; overflow: hidden; margin-bottom: 30px; }
     .hero-image { width: 100%; height: 100%; object-fit: cover; }
-
-    .hero-content {
-      position: absolute;
-      top: 40px;
-      left: 40px;
-      max-width: 520px;
-      color: #333;
-      background: rgba(245, 243, 240, 0.95);
-      padding: 28px;
-      border-radius: 12px;
-    }
-
-    .hero-label {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #666;
-      margin-bottom: 15px;
-    }
-
-    .hero-title {
-      font-size: 44px;
-      font-weight: 300;
-      line-height: 1.15;
-      margin-bottom: 18px;
-    }
-
-    .hero-description {
-      font-size: 16px;
-      line-height: 1.6;
-      color: #555;
-    }
-
-    .feature-section {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-      margin-bottom: 30px;
-      background: transparent;
-      border-radius: 0;
-      padding: 0;
-    }
-
+    .hero-content { position: absolute; top: 40px; left: 40px; max-width: 520px; color: #333; background: rgba(245, 243, 240, 0.95); padding: 28px; border-radius: 12px; }
+    .hero-label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #666; margin-bottom: 15px; }
+    .hero-title { font-size: 44px; font-weight: 300; line-height: 1.15; margin-bottom: 18px; }
+    .hero-description { font-size: 16px; line-height: 1.6; color: #555; }
+    .feature-section { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-bottom: 30px; background: transparent; border-radius: 0; padding: 0; }
     .feature-section.reverse { direction: rtl; }
     .feature-section.reverse > * { direction: ltr; }
-
-    .feature-video,
-    .feature-image-container {
-      border-radius: 14px;
-      overflow: hidden;
-      background: white;
-    }
-
-    .feature-video img,
-    .feature-image-container img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .feature-content h2 {
-      font-size: 34px;
-      font-weight: 300;
-      margin-bottom: 16px;
-      line-height: 1.25;
-    }
-
-    .feature-content p {
-      font-size: 16px;
-      line-height: 1.6;
-      color: #555;
-    }
-
+    .feature-video, .feature-image-container { border-radius: 14px; overflow: hidden; background: white; }
+    .feature-video img, .feature-image-container img { width: 100%; height: auto; display: block; }
+    .feature-content h2 { font-size: 34px; font-weight: 300; margin-bottom: 16px; line-height: 1.25; }
+    .feature-content p { font-size: 16px; line-height: 1.6; color: #555; }
     .hero-section.deep-dive { background: #f0eadc; }
 
-    /* =========================
-       REVIEWS (Therabody-like)
-       ========================= */
-    .hb-reviews {
-      margin-top: 44px;
-      padding-top: 26px;
-      border-top: 1px solid rgba(0,0,0,0.12);
-    }
-
-    .hb-reviews h2 {
-      font-family: Georgia, 'Times New Roman', serif;
-      font-size: 44px;
-      font-weight: 500;
-      margin: 0 0 22px;
-      color: #111;
-    }
-
-    .hb-reviews-summary {
-      display: grid;
-      grid-template-columns: 1fr 1px 1.2fr;
-      gap: 26px;
-      align-items: start;
-      padding: 14px 0 24px;
-    }
-
-    .hb-reviews-divider {
-      width: 1px;
-      height: 100%;
-      background: rgba(0,0,0,0.12);
-    }
-
-    .hb-score {
-      font-family: Georgia, 'Times New Roman', serif;
-      font-size: 64px;
-      line-height: 1;
-      font-weight: 600;
-      margin: 0 0 10px;
-      color: #111;
-    }
-
-    .hb-score-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .hb-stars {
-      letter-spacing: 2px;
-      color: #111;
-      font-size: 18px;
-      line-height: 1;
-    }
-
-    .hb-based {
-      font-size: 14px;
-      color: rgba(0,0,0,0.55);
-    }
-
-    .hb-reviews-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border: 1px solid rgba(0,0,0,0.65);
-      background: transparent;
-      border-radius: 6px;
-      padding: 10px 14px;
-      font-size: 14px;
-      cursor: pointer;
-    }
-
-    .hb-bars {
-      display: grid;
-      gap: 10px;
-      margin-top: 6px;
-      max-width: 520px;
-    }
-
-    .hb-bar-row {
-      display: grid;
-      grid-template-columns: 18px 1fr 34px;
-      gap: 12px;
-      align-items: center;
-      font-size: 14px;
-      color: #111;
-    }
-
-    .hb-bar-track {
-      height: 4px;
-      background: rgba(0,0,0,0.12);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .hb-bar-fill {
-      height: 100%;
-      background: #111;
-      width: 0%;
-    }
-
+    /* ========================= REVIEWS (Therabody-like) ========================= */
+    .hb-reviews { margin-top: 44px; padding-top: 26px; border-top: 1px solid rgba(0,0,0,0.12); }
+    .hb-reviews h2 { font-family: Georgia, 'Times New Roman', serif; font-size: 44px; font-weight: 500; margin: 0 0 22px; color: #111; }
+    .hb-reviews-summary { display: grid; grid-template-columns: 1fr 1px 1.2fr; gap: 26px; align-items: start; padding: 14px 0 24px; }
+    .hb-reviews-divider { width: 1px; height: 100%; background: rgba(0,0,0,0.12); }
+    .hb-score { font-family: Georgia, 'Times New Roman', serif; font-size: 64px; line-height: 1; font-weight: 600; margin: 0 0 10px; color: #111; }
+    .hb-score-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .hb-stars { letter-spacing: 2px; color: #111; font-size: 18px; line-height: 1; }
+    .hb-based { font-size: 14px; color: rgba(0,0,0,0.55); }
+    .hb-reviews-btn { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(0,0,0,0.65); background: transparent; border-radius: 6px; padding: 10px 14px; font-size: 14px; cursor: pointer; }
+    .hb-bars { display: grid; gap: 10px; margin-top: 6px; max-width: 520px; }
+    .hb-bar-row { display: grid; grid-template-columns: 18px 1fr 34px; gap: 12px; align-items: center; font-size: 14px; color: #111; }
+    .hb-bar-track { height: 4px; background: rgba(0,0,0,0.12); border-radius: 4px; overflow: hidden; }
+    .hb-bar-fill { height: 100%; background: #111; width: 0%; }
     .hb-reviews-list { margin-top: 18px; }
-
-    .hb-review {
-      padding: 18px 0 22px;
-      border-top: 1px solid rgba(0,0,0,0.12);
-    }
-
-    .hb-review-head {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 18px;
-      margin-bottom: 6px;
-    }
-
-    .hb-review-title {
-      font-family: Georgia, 'Times New Roman', serif;
-      font-size: 28px;
-      font-weight: 500;
-      margin: 0;
-      color: #111;
-    }
-
-    .hb-review-date {
-      font-size: 14px;
-      color: rgba(0,0,0,0.6);
-      white-space: nowrap;
-    }
-
-    .hb-review-stars {
-      margin: 6px 0 10px;
-      color: #111;
-      letter-spacing: 2px;
-      font-size: 16px;
-    }
-
-    .hb-review-text {
-      font-size: 16px;
-      line-height: 1.65;
-      color: rgba(0,0,0,0.8);
-      margin: 0 0 14px;
-      max-width: 980px;
-    }
-
-    .hb-helpful {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      font-size: 14px;
-      color: rgba(0,0,0,0.75);
-    }
-
-    .hb-help-actions {
-      display: inline-flex;
-      gap: 12px;
-      align-items: center;
-      color: rgba(0,0,0,0.75);
-    }
-
-    .hb-help-actions span {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .hb-icon-btn {
-      width: 18px;
-      height: 18px;
-      display: inline-block;
-      vertical-align: middle;
-    }
+    .hb-review { padding: 18px 0 22px; border-top: 1px solid rgba(0,0,0,0.12); }
+    .hb-review-head { display: flex; align-items: baseline; justify-content: space-between; gap: 18px; margin-bottom: 6px; }
+    .hb-review-title { font-family: Georgia, 'Times New Roman', serif; font-size: 28px; font-weight: 500; margin: 0; color: #111; }
+    .hb-review-date { font-size: 14px; color: rgba(0,0,0,0.6); white-space: nowrap; }
+    .hb-review-stars { margin: 6px 0 10px; color: #111; letter-spacing: 2px; font-size: 16px; }
+    .hb-review-text { font-size: 16px; line-height: 1.65; color: rgba(0,0,0,0.8); margin: 0 0 14px; max-width: 980px; }
+    .hb-helpful { display: flex; align-items: center; gap: 14px; font-size: 14px; color: rgba(0,0,0,0.75); }
+    .hb-help-actions { display: inline-flex; gap: 12px; align-items: center; color: rgba(0,0,0,0.75); }
+    .hb-help-actions span { display: inline-flex; align-items: center; gap: 6px; }
+    .hb-icon-btn { width: 18px; height: 18px; display: inline-block; vertical-align: middle; }
 
     /* Mobile reviews */
     @media (max-width: 1200px) {
       .hb-reviews h2 { font-size: 36px; }
-      .hb-reviews-summary {
-        grid-template-columns: 1fr;
-        gap: 18px;
-      }
+      .hb-reviews-summary { grid-template-columns: 1fr; gap: 18px; }
       .hb-reviews-divider { display: none; }
       .hb-score { font-size: 54px; }
       .hb-review-title { font-size: 24px; }
     }
 
-    /* =========================
-       MOBILE: ONLY the requested fixes
-       ========================= */
+    /* ========================= MOBILE (unchanged) ========================= */
     @media (max-width: 1200px) {
       .product-section {
         grid-template-columns: 1fr 54px;
@@ -996,8 +565,7 @@
         height: 100%;
       }
 
-      .main-image video,
-      .main-image img {
+      .main-image video, .main-image img {
         width: 100%;
         height: 100%;
         max-height: none;
@@ -1035,31 +603,14 @@
         max-width: 52px;
       }
 
-      .product-info {
-        order: 3;
-        grid-column: 1 / -1;
-        padding-top: 6px;
-      }
-
-      .product-title {
-        font-size: 32px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      .clinical-badge {
-        font-size: 11px;
-        padding: 6px 12px;
-      }
-
+      .product-info { order: 3; grid-column: 1 / -1; padding-top: 6px; }
+      .product-title { font-size: 32px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .clinical-badge { font-size: 11px; padding: 6px 12px; }
       .add-to-cart { margin-top: 10px; }
 
       .benefits-section { padding: 26px 18px; }
       .benefit-item { padding-right: 0; padding-bottom: 18px; margin-bottom: 18px; }
-      .benefit-item:not(:last-child)::after {
-        right: 0; left: 0; top: auto; bottom: 0; width: auto; height: 1px;
-      }
+      .benefit-item:not(:last-child)::after { right: 0; left: 0; top: auto; bottom: 0; width: auto; height: 1px; }
 
       .video-section h2 { font-size: 22px; padding-bottom: 14px; }
       .video-wrapper { height: 380px; }
@@ -1090,7 +641,6 @@
       }
 
       .info-box.expanded .video-box { display: none; }
-
       .info-box.expanded .info-box-right {
         width: 100% !important;
         height: 100% !important;
@@ -1103,18 +653,9 @@
       .expanded-content { overflow: auto; }
 
       .slideshow-section { padding: 10px 0 0; }
+      .slideshow-title { font-size: 32px; padding: 0 18px; margin-bottom: 18px; }
 
-      .slideshow-title {
-        font-size: 32px;
-        padding: 0 18px;
-        margin-bottom: 18px;
-      }
-
-      .slideshow-viewport {
-        overflow: visible;
-        padding-left: 18px;
-        padding-right: 0;
-      }
+      .slideshow-viewport { overflow: visible; padding-left: 18px; padding-right: 0; }
 
       .slideshow-track {
         transform: none !important;
@@ -1127,66 +668,41 @@
       }
 
       .slideshow-track::-webkit-scrollbar { display: none; }
-
-      .slide-card {
-        flex: 0 0 78vw;
-        scroll-snap-align: start;
-      }
-
+      .slide-card { flex: 0 0 78vw; scroll-snap-align: start; }
       .slide-image { height: 460px; }
-
       .slide-bar { height: 86px; }
       .slide-card.expanded .slide-bar { height: 220px; }
-
       .slideshow-controls { display: none; }
 
       .hero-section { height: auto; }
       .hero-image { height: 380px; }
-      .hero-content {
-        position: relative;
-        top: 0; left: 0;
-        padding: 22px 18px;
-        max-width: 100%;
-        background: white;
-        border-radius: 0;
-      }
+      .hero-content { position: relative; top: 0; left: 0; padding: 22px 18px; max-width: 100%; background: white; border-radius: 0; }
       .hero-title { font-size: 30px; }
 
-      .feature-section {
-        grid-template-columns: 1fr;
-        gap: 22px;
-        padding: 0;
-      }
+      .feature-section { grid-template-columns: 1fr; gap: 22px; padding: 0; }
       .feature-section.reverse { direction: ltr; }
       .feature-content h2 { font-size: 28px; }
     }
 
-    .add-to-cart.sold-out {
-      background: #bfbfbf;
-      cursor: not-allowed;
-      opacity: 0.85;
-    }
-
-    .add-to-cart.sold-out:hover {
-      background: #bfbfbf;
-    }
+    .add-to-cart.sold-out { background: #bfbfbf; cursor: not-allowed; opacity: 0.85; }
+    .add-to-cart.sold-out:hover { background: #bfbfbf; }
   </style>
 
   <!-- Meta Pixel Code -->
   <script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '2344715996005697');
-  fbq('track', 'PageView');
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '2344715996005697');
+    fbq('track', 'PageView');
   </script>
   <noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
+    src="https://www.facebook.com/tr?id=2344715996005697&ev=PageView&noscript=1"
   /></noscript>
   <!-- End Meta Pixel Code -->
 </head>
@@ -1226,14 +742,12 @@
     <div class="product-section">
       <div class="thumbnail-gallery">
         <div class="thumbnail-nav" id="scrollUp">▲</div>
-
         <div class="thumbnail-gallery-inner" id="thumbnailScroll">
           <div class="thumbnail active" data-type="video">
             <video autoplay muted loop playsinline preload="metadata">
               <source src="ThermoGun Video aktive massage.mp4" type="video/mp4">
             </video>
           </div>
-
           <div class="thumbnail" data-index="1">
             <img src="ThermoGun Real Main image.webp" alt="ThermoGun Real Main">
           </div>
@@ -1253,7 +767,6 @@
             <img src="ThermoGun Lieferumfang bild.webp" alt="ThermoGun Lieferumfang">
           </div>
         </div>
-
         <div class="thumbnail-nav" id="scrollDown">▼</div>
       </div>
 
@@ -1305,12 +818,12 @@
       </div>
     </div>
 
+    <!-- Wissenschaftlich belegte Vorteile -->
     <div class="benefits-section">
       <div class="benefits-header">
         <div class="benefits-icon">
           <img src="Benefit_Icons_15.svg" alt="Wissenschaft">
         </div>
-        <!-- ✅ Semantik sauber: H2, optisch identisch -->
         <h2>Wissenschaftlich belegte Vorteile</h2>
       </div>
 
@@ -1338,6 +851,7 @@
       </div>
     </div>
 
+    <!-- Video Section -->
     <div class="video-section">
       <h2>Perkussive Massage, Wärme &amp; Kälte – für präzise Regeneration</h2>
 
@@ -1398,10 +912,505 @@
       </a>
     </div>
 
-    <!-- (Rest deiner Seite bleibt 1:1 wie gehabt) -->
-    <!-- ... Slideshow, Hero, Features, Tabs, Reviews ... -->
-    <!-- Ich lasse den Rest bewusst unverändert, um Design 0% anzufassen. -->
+    <!-- SLIDESHOW -->
+    <section class="slideshow-section">
+      <h2 class="slideshow-title">Vier Therapien – gezielt, spürbar, kombinierbar</h2>
 
+      <div class="slideshow-wrap">
+        <div class="slideshow-viewport">
+          <div class="slideshow-track" id="slideshowTrack">
+            <!-- Wärmetherapie -->
+            <article class="slide-card">
+              <div class="slide-image">
+                <img src="ThermoGun Temperatur Aufsatz.png" alt="Wärmetherapie">
+              </div>
+              <div class="slide-bar">
+                <div class="slide-head">
+                  <div class="slide-title-group">
+                    <svg class="slide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 2v10m0 0L8 8m4 4l4-4" />
+                      <path d="M12 12v10" />
+                    </svg>
+                    <h3 class="slide-title">Wärmetherapie</h3>
+                  </div>
+                  <div class="slide-toggle" data-toggle>+</div>
+                </div>
+                <div class="slide-desc">
+                  Wärme und Klopfmassage regen die Durchblutung an, lockern steife Muskeln, verbessern das Aufwärmen und beschleunigen die Regeneration für 3× schnellere Ergebnisse<sup>2</sup>.
+                  <br><br><b>Beheizter Schlagaufsatz</b>
+                </div>
+              </div>
+            </article>
+
+            <!-- Perkussive Therapie -->
+            <article class="slide-card">
+              <div class="slide-image">
+                <img src="ThermoGun Mann Anwendung.jpg" alt="Perkussive Therapie">
+              </div>
+              <div class="slide-bar">
+                <div class="slide-head">
+                  <div class="slide-title-group">
+                    <svg class="slide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                      <path d="M2 17l10 5 10-5M2 12l10 5 10-5" />
+                    </svg>
+                    <h3 class="slide-title">Perkussive Therapie</h3>
+                  </div>
+                  <div class="slide-toggle" data-toggle>+</div>
+                </div>
+                <div class="slide-desc">
+                  Bekämpft tiefen Muskelkater und Verhärtungen mit den Vorteilen einer 15-minütigen Massage in nur zwei Minuten<sup>1</sup>. Löst effektiv Verspannungen und verbessert die Durchblutung, sodass du dich nach jeder Einheit noch besser erholen kannst.
+                  <br><br><b>Dampener, Wedge, Micro-Point &amp; Standard-Aufsätze</b>
+                </div>
+              </div>
+            </article>
+
+            <!-- Vibrationstherapie -->
+            <article class="slide-card">
+              <div class="slide-image">
+                <img src="ThermoGun wird von mann in kamera gehalten.jpg" alt="Vibrationstherapie">
+              </div>
+              <div class="slide-bar">
+                <div class="slide-head">
+                  <div class="slide-title-group">
+                    <svg class="slide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M3 12c2.5-2 5-2 7.5 0s5 2 7.5 0" />
+                      <path d="M3 16c2.5-2 5-2 7.5 0s5 2 7.5 0" />
+                      <path d="M3 8c2.5-2 5-2 7.5 0s5 2 7.5 0" />
+                    </svg>
+                    <h3 class="slide-title">Vibrationstherapie</h3>
+                  </div>
+                  <div class="slide-toggle" data-toggle>+</div>
+                </div>
+                <div class="slide-desc">
+                  Behandeln Sie Gelenke und andere empfindliche Bereiche, um Verspannungen, Schmerzen und Steifheit zu lindern. Kombinieren Sie es mit Wärme oder Kälte für noch stärkere Linderung.
+                  <br><br><b>Vibration Plus-Aufsatz</b>
+                </div>
+              </div>
+            </article>
+
+            <!-- Kältetherapie -->
+            <article class="slide-card">
+              <div class="slide-image">
+                <img src="ThermoGun Temperatur Aufsatz.png" alt="Kältetherapie">
+              </div>
+              <div class="slide-bar">
+                <div class="slide-head">
+                  <div class="slide-title-group">
+                    <svg class="slide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 2l3 6-3 3-3-3 3-6z" />
+                      <path d="M12 11v11" />
+                      <path d="M7 14h10" />
+                    </svg>
+                    <h3 class="slide-title">Kältetherapie</h3>
+                  </div>
+                  <div class="slide-toggle" data-toggle>+</div>
+                </div>
+                <div class="slide-desc">
+                  Reduziert Schmerzen, Schwellungen und Entzündungen während der Erholung nach dem Training.
+                  <br><br><b>Hot/Cold-Aufsatz (integriert)</b>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="slideshow-controls" id="slideshowControls">
+          <div class="ticks">
+            <div class="tick active" id="tick1"></div>
+            <div class="tick" id="tick2"></div>
+          </div>
+          <div class="arrows">
+            <div class="nav-arrow" id="prevSlide">‹</div>
+            <div class="nav-arrow" id="nextSlide">›</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bild-Section -->
+    <div class="hero-section deep-dive">
+      <img src="image0.jpeg" alt="Therabody Unterschied" class="hero-image">
+      <div class="hero-content">
+        <div class="hero-label">DER THERABODY-UNTERSCHIED</div>
+        <h2 class="hero-title">Gezielte Entlastung, die tiefer ansetzt</h2>
+        <p class="hero-description">
+          Oberflächliche Methoden fühlen sich oft nur kurzfristig gut an. Perkussive Impulse wirken gezielt in Muskel- und Faszienstrukturen – ideal, um Spannung zu lösen und Beweglichkeit zurückzugewinnen.
+          In Kombination mit Wärme oder Kälte lässt sich die Anwendung noch präziser anpassen – für das, was dein Körper gerade wirklich braucht.
+        </p>
+      </div>
+    </div>
+
+    <!-- Feature 1 -->
+    <div class="feature-section">
+      <div class="feature-video">
+        <img src="ThermoGun Main Image.webp" alt="ThermoGun Pro Design">
+      </div>
+      <div class="feature-content">
+        <h2>Verbessertes Design für alle Formen und Größen</h2>
+        <p>
+          Kompakt, ergonomisch und leicht zu führen: Die Form liegt stabil in der Hand, sodass du Druck und Winkel präzise steuern kannst – auch an schwer erreichbaren Stellen.
+          So wird die Anwendung kontrollierter, angenehmer und deutlich effizienter.
+        </p>
+      </div>
+    </div>
+
+    <!-- Feature 2 -->
+    <div class="feature-section reverse">
+      <div class="feature-image-container">
+        <img src="ThermoGun Display Anzeige Detail.avif" alt="ThermoGun Steuerung & Display">
+      </div>
+      <div class="feature-content">
+        <h2>Kontinuierliche Behandlung, während das Gerät an die Stromversorgung angeschlossen ist</h2>
+        <p>
+          Intuitive Steuerung direkt am Gerät: Temperatur und Kälte lassen sich über die Drehscheibe in drei Stufen einstellen, die Intensität der Massage wird per Knopfdruck in mehreren Stufen angepasst.
+          So kannst du die Anwendung in Sekunden fein auf Warm-up, Recovery oder sensible Bereiche abstimmen – ohne Unterbrechung.
+        </p>
+      </div>
+    </div>
+
+    <!-- ================= LIEFERUMFANG / PRODUKTINFO (THERABODY STYLE) ================= -->
+    <style>
+      .hb-tabsblock{
+        margin: 34px 0 10px;
+        background:#fcd7b3;
+        border-radius:16px;
+        padding:18px 18px 22px;
+      }
+
+      .hb-tabs{
+        display:flex;
+        gap:34px;
+        align-items:flex-end;
+        margin-bottom:16px;
+        flex-wrap:nowrap;
+        overflow-x:auto;
+        -webkit-overflow-scrolling:touch;
+        scrollbar-width:none;
+      }
+
+      .hb-tabs::-webkit-scrollbar{ display:none; }
+
+      .hb-tab{
+        appearance:none;
+        border:0;
+        background:transparent;
+        font: inherit;
+        font-size:20px;
+        font-weight:500;
+        color:rgba(0,0,0,0.45);
+        padding:0 0 8px;
+        cursor:pointer;
+        white-space:nowrap;
+      }
+
+      .hb-tab.active{
+        color:#111;
+        text-decoration: underline;
+        text-underline-offset: 10px;
+        text-decoration-thickness: 2px;
+      }
+
+      .hb-tabpanel{
+        min-height:360px;
+        display:grid;
+        grid-template-columns: 560px 1fr;
+        gap:28px;
+        align-items:start;
+      }
+
+      .hb-leftbox{
+        background: rgba(255,255,255,0.55);
+        border-radius:14px;
+        padding:18px;
+        height: 300px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        overflow:hidden;
+      }
+
+      .hb-leftbox img{
+        width:100%;
+        height:100%;
+        object-fit:contain;
+        display:block;
+      }
+
+      .hb-right{
+        padding-top:6px;
+        font-size:14px;
+        line-height:1.55;
+        color:#111;
+      }
+
+      .hb-bullets{ margin: 0; padding-left: 18px; }
+      .hb-bullets li{ margin: 0 0 10px; }
+
+      .hb-specs-title{
+        font-size:10px;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        color: rgba(0,0,0,0.55);
+        margin-bottom: 12px;
+      }
+
+      .hb-specs{
+        display:grid;
+        gap:16px;
+        max-width: 520px;
+      }
+
+      .hb-specs b{
+        display:block;
+        font-weight:600;
+        margin-bottom:2px;
+      }
+
+      .hb-tabpanel.productinfo{ grid-template-columns: 1fr; }
+      .hb-tabpanel.productinfo .hb-leftcol{ display:none; }
+
+      @media (max-width: 1200px){
+        .hb-tabsblock{ padding:16px 14px 18px; }
+        .hb-tab{ font-size:18px; }
+        .hb-tabpanel{
+          min-height: 360px;
+          grid-template-columns: 1fr;
+          gap:16px;
+        }
+        .hb-leftbox{
+          height: 240px;
+          padding:14px;
+        }
+        .hb-right{ padding-top: 2px; }
+        .hb-specs{ max-width: none; }
+      }
+    </style>
+
+    <section class="hb-tabsblock" id="hbTabsBlock">
+      <div class="hb-tabs" role="tablist" aria-label="Lieferumfang und Produktinformation">
+        <button class="hb-tab active" role="tab" aria-selected="true" data-tab="lieferumfang">
+          Im Lieferumfang enthalten
+        </button>
+        <button class="hb-tab" role="tab" aria-selected="false" data-tab="produktinfo">
+          Produktinformation
+        </button>
+      </div>
+
+      <div class="hb-tabpanel lieferumfang" data-panel="lieferumfang">
+        <div class="hb-leftcol">
+          <div class="hb-leftbox">
+            <img src="ThermoGun Lieferumfang bild.webp" alt="Lieferumfang ThermoGun Pro">
+          </div>
+        </div>
+        <div class="hb-right">
+          <ul class="hb-bullets">
+            <li>ThermoGun Pro™ Massagegerät</li>
+            <li>4 Massageköpfe (inkl. 1 Hot/Cold-Aufsatz)</li>
+            <li>USB-C / Typ-C Ladekabel</li>
+            <li>Travel Bag / Aufbewahrungstasche</li>
+          </ul>
+
+          <div style="margin-top:14px; color: rgba(0,0,0,0.72);">
+            <b>Steuerung:</b> Temperatur (Wärme/Kälte) über Drehscheibe in 3 Stufen einstellen.
+            Massage-Intensität per Knopfdruck in mehreren Geschwindigkeitsstufen anpassen.
+          </div>
+        </div>
+      </div>
+
+      <div class="hb-tabpanel productinfo" data-panel="produktinfo" style="display:none;">
+        <div class="hb-right">
+          <div class="hb-specs-title">PRODUKTSPEZIFIKATIONEN</div>
+          <div class="hb-specs">
+            <div><b>Anwendung:</b> Ganzkörper</div>
+            <div><b>Typ:</b> Mini-Massagepistole</div>
+            <div><b>Motor:</b> Bürstenloser Motor</div>
+            <div><b>Geschwindigkeit:</b> 6 Geschwindigkeitsstufen</div>
+            <div><b>Akkukapazität:</b> 2000 mAh</div>
+            <div><b>Arbeitszeit:</b> 30–60 Minuten</div>
+            <div><b>Ladezeit:</b> ca. 3 Stunden</div>
+            <div><b>Ladegerät:</b> Typ-C</div>
+            <div><b>Wärme:</b> 35–50℃</div>
+            <div><b>Kälte:</b> 0.5–15.5℃</div>
+            <div><b>Spannung:</b> 7,4 V</div>
+            <div><b>Massageköpfe:</b> 4 Massageköpfe</div>
+            <div><b>Materialien:</b> PA6+20%GF, Silikonkautschuk, Aluminiumlegierung</div>
+            <div><b>Produktgröße:</b> 181,5 × 170 × 48 mm</div>
+            <div><b>Größe Farbverpackung:</b> 265 × 210 × 66 mm</div>
+            <div><b>Nettogewicht / Bruttogewicht:</b> 0,9 / 1,3 kg</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      (function(){
+        const block = document.getElementById('hbTabsBlock');
+        if(!block) return;
+        const tabs = block.querySelectorAll('.hb-tab');
+        const panels = block.querySelectorAll('.hb-tabpanel');
+
+        function show(tabName){
+          panels.forEach(p => {
+            const isActive = p.getAttribute('data-panel') === tabName;
+            p.style.display = isActive ? '' : 'none';
+          });
+
+          tabs.forEach(t => {
+            const isActive = t.getAttribute('data-tab') === tabName;
+            t.classList.toggle('active', isActive);
+            t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+          });
+        }
+
+        tabs.forEach(t => {
+          t.addEventListener('click', () => show(t.getAttribute('data-tab')));
+        });
+      })();
+    </script>
+    <!-- ================= ENDE LIEFERUMFANG / PRODUKTINFO ================= -->
+
+    <!-- ================= REVIEWS (LAST SECTION) ================= -->
+    <section class="hb-reviews" id="bewertungen">
+      <h2>Kundenbewertungen</h2>
+
+      <div class="hb-reviews-summary">
+        <div>
+          <div class="hb-score">4.5</div>
+          <div class="hb-score-row">
+            <div class="hb-stars">★★★★★</div>
+            <div class="hb-based">Basierend auf 128 Bewertungen</div>
+          </div>
+          <button class="hb-reviews-btn" type="button">✦ Bewertungen zusammengefasst anzeigen</button>
+        </div>
+
+        <div class="hb-reviews-divider"></div>
+
+        <div class="hb-bars" aria-label="Bewertungsverteilung">
+          <div class="hb-bar-row">
+            <div>5★</div>
+            <div class="hb-bar-track"><div class="hb-bar-fill" style="width:71.9%"></div></div>
+            <div>92</div>
+          </div>
+          <div class="hb-bar-row">
+            <div>4★</div>
+            <div class="hb-bar-track"><div class="hb-bar-fill" style="width:17.2%"></div></div>
+            <div>22</div>
+          </div>
+          <div class="hb-bar-row">
+            <div>3★</div>
+            <div class="hb-bar-track"><div class="hb-bar-fill" style="width:5.5%"></div></div>
+            <div>7</div>
+          </div>
+          <div class="hb-bar-row">
+            <div>2★</div>
+            <div class="hb-bar-track"><div class="hb-bar-fill" style="width:2.3%"></div></div>
+            <div>3</div>
+          </div>
+          <div class="hb-bar-row">
+            <div>1★</div>
+            <div class="hb-bar-track"><div class="hb-bar-fill" style="width:3.1%"></div></div>
+            <div>4</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hb-reviews-list">
+        <article class="hb-review">
+          <div class="hb-review-head">
+            <h3 class="hb-review-title">Unfassbar effektiv nach dem Training</h3>
+            <div class="hb-review-date">11/18/25</div>
+          </div>
+          <div class="hb-review-stars">★★★★★</div>
+          <p class="hb-review-text">
+            Ich nutze die ThermoGun vor allem für Beine und Rücken. Die Perkussion löst Spannung richtig schnell, und der Hot/Cold-Aufsatz ist genial:
+            Wärme fürs Lockern, Kälte danach zur Beruhigung. Fühlt sich nach jeder Session wie „reset“ an.
+          </p>
+          <div class="hb-helpful">
+            <span><b>War diese Bewertung hilfreich?</b></span>
+            <div class="hb-help-actions" aria-label="Hilfreich Abstimmung">
+              <span>
+                <svg class="hb-icon-btn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 9V5a3 3 0 00-3-3l-1 7"></path>
+                  <path d="M7 9H4a2 2 0 00-2 2v9a2 2 0 002 2h3"></path>
+                  <path d="M7 22h9a2 2 0 002-1.7l1-7A2 2 0 0017 11H9"></path>
+                </svg> 0
+              </span>
+              <span>
+                <svg class="hb-icon-btn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M10 15v4a3 3 0 003 3l1-7"></path>
+                  <path d="M17 15h3a2 2 0 002-2V4a2 2 0 00-2-2h-3"></path>
+                  <path d="M17 2H8a2 2 0 00-2 1.7l-1 7A2 2 0 007 13h8"></path>
+                </svg> 0
+              </span>
+            </div>
+          </div>
+        </article>
+
+        <article class="hb-review">
+          <div class="hb-review-head">
+            <h3 class="hb-review-title">Super Handhabung &amp; leiser Motor</h3>
+            <div class="hb-review-date">10/29/25</div>
+          </div>
+          <div class="hb-review-stars">★★★★★</div>
+          <p class="hb-review-text">
+            Liegt mega gut in der Hand, das Display ist klar, und die Stufen lassen sich schnell wechseln. Ich hatte schon andere Massageguns –
+            die hier ist deutlich angenehmer vom Geräusch und wirkt trotzdem kräftig.
+          </p>
+          <div class="hb-helpful">
+            <span><b>War diese Bewertung hilfreich?</b></span>
+            <div class="hb-help-actions">
+              <span>
+                <svg class="hb-icon-btn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 9V5a3 3 0 00-3-3l-1 7"></path>
+                  <path d="M7 9H4a2 2 0 00-2 2v9a2 2 0 002 2h3"></path>
+                  <path d="M7 22h9a2 2 0 002-1.7l1-7A2 2 0 0017 11H9"></path>
+                </svg> 0
+              </span>
+              <span>
+                <svg class="hb-icon-btn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M10 15v4a3 3 0 003 3l1-7"></path>
+                  <path d="M17 15h3a2 2 0 002-2V4a2 2 0 00-2-2h-3"></path>
+                  <path d="M17 2H8a2 2 0 00-2 1.7l-1 7A2 2 0 007 13h8"></path>
+                </svg> 0
+              </span>
+            </div>
+          </div>
+        </article>
+
+        <article class="hb-review">
+          <div class="hb-review-head">
+            <h3 class="hb-review-title">Hot/Cold-Aufsatz ist der Gamechanger</h3>
+            <div class="hb-review-date">09/21/25</div>
+          </div>
+          <div class="hb-review-stars">★★★★☆</div>
+          <p class="hb-review-text">
+            Ich hätte nicht gedacht, dass Wärme/Kälte so einen Unterschied macht. Erst Wärme zum Lösen, dann Kälte zur Beruhigung –
+            fühlt sich viel „runder“ an als nur Massage. Ein Stern Abzug, weil ich mir noch eine Schnelllade-Anzeige wünschen würde, sonst top.
+          </p>
+          <div class="hb-helpful">
+            <span><b>War diese Bewertung hilfreich?</b></span>
+            <div class="hb-help-actions">
+              <span>
+                <svg class="hb-icon-btn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 9V5a3 3 0 00-3-3l-1 7"></path>
+                  <path d="M7 9H4a2 2 0 00-2 2v9a2 2 0 002 2h3"></path>
+                  <path d="M7 22h9a2 2 0 002-1.7l1-7A2 2 0 0017 11H9"></path>
+                </svg> 0
+              </span>
+              <span>
+                <svg class="hb-icon-btn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M10 15v4a3 3 0 003 3l1-7"></path>
+                  <path d="M17 15h3a2 2 0 002-2V4a2 2 0 00-2-2h-3"></path>
+                  <path d="M17 2H8a2 2 0 00-2 1.7l-1 7A2 2 0 007 13h8"></path>
+                </svg> 0
+              </span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+    <!-- ================= END REVIEWS ================= -->
   </div>
 
   <script>
@@ -1456,7 +1465,18 @@
       });
     }
 
-    // ✅ BUGFIX: dein translateX war kaputt (Design bleibt gleich)
+    // Slideshow expand toggles
+    document.querySelectorAll('.slide-card').forEach(card => {
+      const btn = card.querySelector('[data-toggle]');
+      if(!btn) return;
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        card.classList.toggle('expanded');
+        btn.textContent = card.classList.contains('expanded') ? '−' : '+';
+      });
+    });
+
+    // Slideshow desktop nav (2 pages)
     const track = document.getElementById('slideshowTrack');
     const prev = document.getElementById('prevSlide');
     const next = document.getElementById('nextSlide');
@@ -1464,9 +1484,7 @@
     const tick2 = document.getElementById('tick2');
     let slideIndex = 0;
 
-    function isMobile() {
-      return window.matchMedia('(max-width: 1200px)').matches;
-    }
+    function isMobile() { return window.matchMedia('(max-width: 1200px)').matches; }
 
     function updateTicks() {
       if (!tick1 || !tick2) return;
@@ -1482,13 +1500,21 @@
       const gap = 18;
       const step = (cardW + gap) * 2;
       slideIndex = Math.max(0, Math.min(1, slideIndex));
+      /* ✅ BUGFIX: Template-String */
       track.style.transform = `translateX(-${slideIndex * step}px)`;
       updateTicks();
     }
 
     if (prev && next) {
-      prev.addEventListener('click', () => { slideIndex = Math.max(0, slideIndex - 1); updateTrack(); });
-      next.addEventListener('click', () => { slideIndex = Math.min(1, slideIndex + 1); updateTrack(); });
+      prev.addEventListener('click', () => {
+        slideIndex = Math.max(0, slideIndex - 1);
+        updateTrack();
+      });
+
+      next.addEventListener('click', () => {
+        slideIndex = Math.min(1, slideIndex + 1);
+        updateTrack();
+      });
     }
 
     window.addEventListener('resize', () => {
@@ -1500,11 +1526,10 @@
     updateTrack();
     updateTicks();
 
-    // UNIVERSAL ADD TO CART
+    // UNIVERSAL ADD TO CART (MULTI PRODUCT READY)
     document.querySelectorAll('.add-to-cart').forEach(btn => {
       btn.addEventListener('click', () => {
         if (!window.WHCart) return;
-
         const product = {
           id: btn.dataset.id,
           title: btn.dataset.title,
@@ -1513,7 +1538,6 @@
           sku: btn.dataset.sku || "",
           qty: 1
         };
-
         window.WHCart.add(product);
         window.WHCart.open();
       });
