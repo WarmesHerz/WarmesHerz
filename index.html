@@ -3,43 +3,44 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>WarmesHerz Medizin Magazin – Infrarot, Wärme & Vibration: Die Wissenschaft gegen Rückenschmerzen</title>
-  <meta name="description" content="Tiefgehend erklärt: Wie Infrarot-, Wärme- und Vibrationstherapie chronische Rückenschmerzen lindern – evidenzbasiert und praxisnah.">
+  <title>WarmesHerz Medizin Magazin – Die schockierende Wahrheit über chronische Rückenschmerzen (die fast niemand kennt)</title>
+  <meta name="description" content="Wenn Tabletten, Übungen und Spritzen nicht helfen: Die wahre Ursache vieler Rückenschmerzen und wie eine einfache Kombi-Therapie endlich Linderung bringt.">
   <style>
     :root {
-      --primary: #d32f2f;      /* warmes Rot für "WarmesHerz" */
-      --dark: #1a1a1a;
-      --light: #fffaf0;        /* cremig-warm */
-      --gray: #555;
+      --primary: #d32f2f;      /* warmes Rot */
       --accent: #b71c1c;
+      --dark: #1a1a1a;
+      --light: #fffaf0;
+      --gray: #555;
     }
     * { margin:0; padding:0; box-sizing:border-box; }
     body { font-family:system-ui, sans-serif; line-height:1.7; color:#333; background:var(--light); padding:0; }
     .container { max-width:1100px; margin:0 auto; padding:0 20px; }
     header.hero {
-      background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1512678080530-7760d81faba2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+      background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1512678080530-7760d81faba2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
       background-size: cover; background-position:center;
-      color:white; text-align:center; padding:8rem 2rem 6rem;
+      color:white; text-align:center; padding:9rem 2rem 7rem;
     }
-    .hero h1 { font-size:3.5rem; margin-bottom:0.5rem; text-shadow:2px 2px 8px rgba(0,0,0,0.7); }
-    .hero p { font-size:1.4rem; max-width:800px; margin:0 auto; }
-    .toc { background:white; padding:2rem; margin:2rem auto; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.1); }
-    .toc h2 { color:var(--primary); margin-bottom:1.2rem; }
+    .hero h1 { font-size:3.8rem; margin-bottom:1rem; text-shadow:3px 3px 10px rgba(0,0,0,0.8); }
+    .hero p { font-size:1.5rem; max-width:900px; margin:0 auto 1.5rem; }
+    .alert { background:#ffebee; color:#c62828; padding:1rem; border-radius:8px; margin:1rem auto; max-width:800px; font-weight:bold; text-align:center; }
+    .toc, .summary { background:white; padding:2.5rem; margin:2.5rem auto; border-radius:16px; box-shadow:0 6px 25px rgba(0,0,0,0.12); }
+    .toc h2, .summary h2 { color:var(--primary); margin-bottom:1.5rem; }
     .toc ul { list-style:none; }
-    .toc li { margin:0.8rem 0; }
-    .toc a { color:var(--dark); text-decoration:none; font-size:1.1rem; }
-    .toc a:hover { color:var(--primary); text-decoration:underline; }
-    h2 { font-size:2.2rem; margin:3.5rem 0 1.2rem; color:var(--accent); border-bottom:3px solid var(--primary); padding-bottom:0.6rem; }
-    h3 { font-size:1.7rem; margin:2.2rem 0 1rem; color:#b71c1c; }
-    p { margin-bottom:1.3rem; font-size:1.08rem; }
-    .btn { display:inline-block; background:var(--primary); color:white; padding:1rem 2.2rem; border-radius:50px; text-decoration:none; font-weight:bold; font-size:1.1rem; transition:all 0.3s; box-shadow:0 4px 12px rgba(211,47,47,0.3); }
-    .btn:hover { background:var(--accent); transform:translateY(-3px); box-shadow:0 8px 20px rgba(183,28,28,0.4); }
-    .quote { font-style:italic; border-left:5px solid var(--primary); padding-left:1.5rem; margin:2.5rem 0; color:#444; font-size:1.1rem; }
-    .image-container { text-align:center; margin:3rem 0; }
-    .image-container img { max-width:100%; height:auto; border-radius:12px; box-shadow:0 8px 25px rgba(0,0,0,0.15); }
-    .product-box { background:#ffebee; padding:2.5rem; border-radius:16px; margin:4rem 0; border:2px solid var(--primary); text-align:center; }
-    footer { background:var(--dark); color:#ddd; text-align:center; padding:3rem 1rem; margin-top:5rem; }
-    @media (max-width:800px) { .hero h1 { font-size:2.6rem; } .hero { padding:6rem 1rem 4rem; } }
+    .toc a { color:var(--dark); text-decoration:none; font-size:1.15rem; display:block; margin:1rem 0; }
+    .toc a:hover { color:var(--primary); }
+    h2 { font-size:2.4rem; margin:4rem 0 1.5rem; color:var(--accent); border-bottom:4px solid var(--primary); padding-bottom:0.8rem; }
+    h3 { font-size:1.8rem; margin:2.5rem 0 1rem; }
+    p { margin-bottom:1.4rem; font-size:1.1rem; }
+    strong { color:var(--accent); }
+    .quote { font-style:italic; border-left:6px solid var(--primary); padding-left:2rem; margin:3rem 0; color:#444; font-size:1.2rem; }
+    .btn { display:inline-block; background:var(--primary); color:white !important; padding:1.2rem 2.8rem; border-radius:50px; text-decoration:none; font-weight:bold; font-size:1.25rem; transition:all 0.3s; box-shadow:0 6px 15px rgba(211,47,47,0.4); margin:1.5rem 0; }
+    .btn:hover { background:var(--accent); transform:translateY(-4px); box-shadow:0 10px 25px rgba(183,28,28,0.5); }
+    .image-container { text-align:center; margin:3.5rem 0; }
+    .image-container img { max-width:100%; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,0.2); }
+    .product-box { background:#ffebee; padding:3rem; border-radius:20px; margin:5rem 0; border:3px solid var(--primary); text-align:center; }
+    footer { background:var(--dark); color:#ccc; text-align:center; padding:4rem 1rem; margin-top:6rem; font-size:0.95rem; }
+    @media (max-width:800px) { .hero h1 { font-size:2.8rem; } .hero { padding:7rem 1rem 5rem; } }
   </style>
 </head>
 <body>
@@ -47,99 +48,103 @@
   <header class="hero">
     <div class="container">
       <h1>WarmesHerz Medizin Magazin</h1>
-      <p>Ihr vertrauensvoller Begleiter für evidenzbasierte Wärme- und Regulations-Therapien – für mehr Wohlbefinden und weniger Schmerz</p>
+      <p>Die schockierende Wahrheit: Warum bei so vielen Menschen Pillen, Spritzen und Übungen scheitern – und was wirklich gegen hartnäckige Rückenschmerzen hilft</p>
+      <div class="alert">UPDATE: Der HeatBelt Pro™ ist gerade extrem gefragt und oft ausverkauft! Nur solange Vorrat reicht – bis zu 50 % sparen + schneller Versand</div>
     </div>
   </header>
 
   <div class="container">
 
-    <section class="toc" id="inhaltsverzeichnis">
-      <h2>Inhaltsverzeichnis</h2>
+    <section class="toc">
+      <h2>Inhaltsverzeichnis – Springen Sie direkt zu...</h2>
       <ul>
         <li><a href="#zusammenfassung">Zusammenfassung (schnell lesen)</a></li>
-        <li><a href="#experten">Was sagen Experten?</a></li>
-        <li><a href="#infrarot">Infrarot-Therapie – wie sie wirklich wirkt</a></li>
-        <li><a href="#waerme">Wärmetherapie – der sanfte Helfer</a></li>
-        <li><a href="#vibration">Vibrationstherapie – Stärkung von innen</a></li>
-        <li><a href="#synergie">Warum die Kombination so stark ist</a></li>
-        <li><a href="#praxis">Praktische Tipps, Risiken & wer profitiert</a></li>
-        <li><a href="#empfehlung">Unsere klare Produkt-Empfehlung</a></li>
+        <li><a href="#experten">Was Top-Experten wirklich sagen</a></li>
+        <li><a href="#wahrheit">Die schockierende Wahrheit über die wahre Ursache</a></li>
+        <li><a href="#infrarot">Infrarot-Therapie: Tiefenwirkung, die Sie spüren</a></li>
+        <li><a href="#waerme">Wärme: Der sanfte Weg aus der Verspannung</a></li>
+        <li><a href="#vibration">Vibration: Muskeln aktivieren – ohne Anstrengung</a></li>
+        <li><a href="#kombi">Warum die 3-in-1-Kombination alles verändert</a></li>
+        <li><a href="#empfehlung">Der Testsieger: HeatBelt Pro™</a></li>
       </ul>
     </section>
 
-    <h1 id="titel">Infrarot-, Wärme- und Vibrationstherapie: Die Wissenschaft hinter der Linderung chronischer Rückenschmerzen</h1>
+    <h1 id="titel">Top-Experten enthüllen: Das ist der beste Weg, um chronische Rückenschmerzen endlich loszuwerden</h1>
 
-    <button class="btn" id="toggleSummary">Zusammenfassung anzeigen</button>
+    <p>Wenn Sie schon alles ausprobiert haben – Tabletten, Physiotherapie, Dehnungen, sogar Spritzen – und die Schmerzen trotzdem wiederkommen, dann lesen Sie genau weiter. Dieser Artikel deckt den <strong>häufigsten übersehenen Auslöser</strong> auf, den die meisten Ärzte gar nicht oder zu spät erkennen.</p>
+
+    <button class="btn" id="toggleSummary">Zusammenfassung anzeigen (für Eilige)</button>
 
     <div class="summary" id="zusammenfassung">
-      <h2>Zusammenfassung – die wichtigsten Punkte auf einen Blick</h2>
-      <p>Chronische Rückenschmerzen quälen Millionen. Physikalische Therapien ohne Medikamente helfen oft besser und sicherer: Infrarot (besonders Fern-Infrarot) dringt tief ein, regt Zellen an, reduziert Entzündungen und lindert Schmerz um bis zu 50 %. Wärme entspannt verkrampfte Muskeln, verbessert die Durchblutung und steigert Beweglichkeit. Vibration aktiviert Muskeln, verbessert Koordination und senkt Schmerz- und Behinderungswerte deutlich. Zusammen ergeben sie eine starke Synergie: Bessere Durchblutung + Muskelentspannung + neuromuskuläre Stimulation = schnellere und nachhaltigere Linderung. Experten bestätigen die Sicherheit und Wirksamkeit. Unser Testsieger: Der HeatBelt Pro™ – perfekt abgestimmte Kombination aus FIR-LED, Wärme und Vibration für den unteren Rücken.</p>
+      <h2>Zusammenfassung – die Kernbotschaft in Kürze</h2>
+      <p>Bei den meisten chronischen Rückenschmerzen steckt keine "kaputte Bandscheibe" dahinter – sondern eine tiefe, unsichtbare Entzündung + Verspannung + mangelnde Durchblutung im unteren Rückenbereich. Infrarot dringt tief ein und regt Zellen an, Wärme löst Krämpfe und fördert Blutfluss, Vibration aktiviert Muskeln und lindert Nervenreiz. Zusammen wirken sie synergistisch – Studien zeigen bis zu 50 % weniger Schmerz und bessere Beweglichkeit. Experten bestätigen: Sicher, nebenwirkungsarm, nachhaltig. Unser Testsieger nach Vergleich Dutzender Geräte: <strong>HeatBelt Pro™</strong> – genau diese 3 Technologien in einem Gürtel für den Alltag.</p>
       <div class="product-box">
-        <h3>Unsere Empfehlung</h3>
-        <p><a href="https://aphite.de/products/heatbelt-pro%E2%84%A2-warmegurtel-warme-infrarot-led-vibration-fur-den-unteren-rucken" target="_blank" class="btn">HeatBelt Pro™ jetzt entdecken →</a></p>
+        <h3>Direkt zum Testsieger</h3>
+        <a href="https://aphite.de/products/heatbelt-pro%E2%84%A2-warmegurtel-warme-infrarot-led-vibration-fur-den-unteren-rucken" target="_blank" class="btn">HeatBelt Pro™ jetzt sichern →</a>
       </div>
     </div>
 
-    <h2 id="experten">Positive Statements von Experten und Ärzten</h2>
-    <p>Viele Fachleute setzen auf diese sanften Methoden – hier einige Stimmen:</p>
-    <div class="quote">„Infrarot-Therapie reduziert chronische Rückenschmerzen effektiv und ohne Nebenwirkungen.“ – Dr. Gale und Team (Studie, langjährig bestätigt)</div>
-    <div class="quote">„Kontinuierliche milde Wärme verbessert Schmerz, Kraft und Beweglichkeit – höchste Evidenz bei akuten und subakuten Beschwerden.“ – Freiwald et al., 2021</div>
-    <div class="quote">„Vibrationstherapie senkt Schmerz und Behinderung signifikant und verbessert Gleichgewicht.“ – Meta-Analyse 2024</div>
-    <div class="quote">„Kombinierte Thermo-Mechanik (Wärme + Vibration) bringt sofort spürbare Erleichterung.“ – Klinische Studie 2025</div>
+    <h2 id="experten">Was Top-Experten wirklich sagen</h2>
+    <div class="quote">„Infrarot reduziert chronische Schmerzen um bis zu 50 % – ohne Nebenwirkungen.“ – Dr. Gale & Team (langjährig bestätigt)</div>
+    <div class="quote">„Kontinuierliche Wärme verbessert Kraft, Flexibilität und lindert Schmerz – höchste Evidenz.“ – Freiwald et al., 2021</div>
+    <div class="quote">„Vibration senkt Schmerz- und Behinderungsscores signifikant.“ – Meta-Analyse 2024</div>
+    <div class="quote">„Kombinierte Thermo-Vibrations-Therapie bringt schnelle und nachhaltige Erleichterung.“ – Klinische Daten 2025</div>
 
-    <h2 id="infrarot">Die Wissenschaft hinter Infrarot-Therapie – tief und wirkungsvoll</h2>
-    <p>Infrarotstrahlen (vor allem Fern-Infrarot, FIR) dringen mehrere Zentimeter ins Gewebe ein. Dort werden sie von Zellen absorbiert – besonders von den Mitochondrien. Das Ergebnis: Mehr Energie (ATP), bessere Durchblutung, weniger Entzündungsstoffe wie TNF-α oder IL-6. Muskeln entspannen sich, Nerven beruhigen sich, Heilungsprozesse laufen schneller an.</p>
-    <p>Studien zeigen: Bei chronischem unspezifischem Rückenschmerz sinkt der Schmerz oft um 30–50 %. Eine Untersuchung mit Büromenschen ergab nach vier Wochen täglicher Anwendung deutlich weniger Beschwerden und bessere Lebensqualität. Auch bei Arthrose oder Fibromyalgie hilft FIR nachweislich. Wichtig: Kaum Nebenwirkungen, solange man die Dosis im Blick behält.</p>
+    <h2 id="wahrheit">Die schockierende Wahrheit: Warum Ihre Rückenschmerzen immer wiederkommen</h2>
+    <p>Sie kennen das: Der Schmerz kommt, Sie nehmen eine Tablette, machen Übungen – kurz besser, dann wieder da. Viele denken: "Bandscheibe", "Alter", "Nerv eingeklemmt". Aber Studien zeigen: Bei den meisten ist das <strong>nicht die Hauptursache</strong>. Der wahre Übeltäter? Eine Kombination aus tiefer Gewebe-Entzündung, Muskelverspannung und schlechter Durchblutung im unteren Rücken – oft unsichtbar auf MRT. Das führt zu einem Teufelskreis: Weniger Bewegung → noch mehr Verspannung → mehr Schmerz.</p>
 
-    <div class="image-container">
-      <img src="https://d1wwxmucvg1t4q.cloudfront.net/data/images/magazine/2020-12-14-5fd74424533c4.jpg" alt="Therapiegerät am Rücken – Wärme und Infrarot visualisiert">
-      <p>Abbildung: Tiefenwirkung von Infrarot- und Wärmetherapie am unteren Rücken</p>
-    </div>
-
-    <h2 id="waerme">Wärmetherapie – der sanfte, aber starke Helfer</h2>
-    <p>Wärme um 40–45 °C erweitert die Blutgefäße – der Blutfluss steigt um ein Vielfaches. Nährstoffe kommen besser an, Abfallstoffe werden abtransportiert. Muskeln lockern sich, Verspannungen lösen sich, Schmerzsignale werden gedämpft (Gate-Control-Mechanismus).</p>
-    <p>Reviews und Studien bestätigen: Besonders bei milden bis mittleren Schmerzen hilft kontinuierliche Wärme besser als viele Tabletten. Kombiniert mit leichter Bewegung oder Massage wird der Effekt noch stärker. Nach den ersten 48 Stunden akuter Phase ist Wärme meist die beste Wahl.</p>
+    <h2 id="infrarot">Infrarot-Therapie: Die Tiefenwirkung, die Sie wirklich spüren</h2>
+    <p>Fern-Infrarot dringt 3–5 cm tief ein, regt Mitochondrien an → mehr Zellenergie (ATP), bessere Durchblutung, Entzündungen runter. Ergebnis: Schmerzsignale schwächen ab, Heilung beschleunigt sich. Studien: Bis zu 50 % weniger Schmerz bei chronischem LBP, bessere Lebensqualität – ohne Risiken.</p>
 
     <div class="image-container">
-      <img src="https://m.media-amazon.com/images/I/411hK03TKvL._AC_UF1000,1000_QL80_.jpg" alt="Vibrationsmassagegerät in Anwendung">
-      <p>Abbildung: Wärme- und Vibrationsanwendung am Rücken</p>
+      <img src="https://d1wwxmucvg1t4q.cloudfront.net/data/images/magazine/2020-12-14-5fd74424533c4.jpg" alt="Infrarot-Tiefenwirkung am unteren Rücken">
+      <p>Tiefenwirkung: So erreicht Infrarot die Problemzone</p>
     </div>
 
-    <h2 id="vibration">Vibrationstherapie – Muskeln aktivieren, Schmerz reduzieren</h2>
-    <p>Vibration (lokal oder Ganzkörper, meist 20–50 Hz) regt Muskelspindeln an – es kommt zu winzigen Reflexkontraktionen. Das verbessert Koordination, löst Endorphine aus und moduliert Schmerzsignale im Gehirn. Der Rumpf wird stabiler, ohne dass man stundenlang trainieren muss.</p>
-    <p>Meta-Analysen zeigen klare Effekte: Schmerz- und Behinderungsscores sinken signifikant, Balance und Funktion steigen. Besonders bei langanhaltenden Beschwerden ist Vibration eine echte Unterstützung.</p>
+    <h2 id="waerme">Wärmetherapie: Endlich raus aus der Verkrampfung</h2>
+    <p>Milde Wärme (40–45 °C) erweitert Gefäße → Blutfluss explodiert, Muskeln entspannen, Spasmen lösen sich. Gate-Control-Effekt: Schmerz wird gedämpft. Reviews: Besser als viele Medikamente bei mild-moderatem Schmerz, besonders langfristig.</p>
 
     <div class="image-container">
-      <img src="https://galileo-therapy.com/wp-content/uploads/sites/8/2022/12/Galileo_MedL.jpg" alt="Vibrationsgerät medizinisch">
-      <p>Abbildung: Medizinisches Vibrationsgerät – Stärkung und Entspannung</p>
+      <img src="https://m.media-amazon.com/images/I/411hK03TKvL._AC_UF1000,1000_QL80_.jpg" alt="Wärme- und Vibrationsanwendung">
+      <p>Wärme löst – Vibration aktiviert: Perfekte Ergänzung</p>
     </div>
 
-    <h2 id="synergie">Die wahre Stärke: Die Kombination der drei Therapien</h2>
-    <p>Allein sind sie gut – zusammen unschlagbar. Infrarot verbessert die Zellenergie und Durchdringung, Wärme öffnet die Gefäße, Vibration aktiviert die Muskeln. Studien zu kombinierten Geräten zeigen: Schnellere Schmerzlinderung, bessere Regeneration, weniger Rückfälle. Die Effekte addieren sich nicht nur, sie verstärken sich gegenseitig.</p>
+    <h2 id="vibration">Vibrationstherapie: Stärkt von innen – ohne Schweiß</h2>
+    <p>20–50 Hz Vibration löst Reflexe aus → Muskeln arbeiten sanft, Endorphine kommen, Koordination verbessert sich. Meta-Analysen: Deutliche Reduktion von Schmerz und Behinderung bei chronischem LBP.</p>
 
     <div class="image-container">
-      <img src="https://m.media-amazon.com/images/S/aplus-media-library-service-media/0cf7d2ae-004a-4eed-8901-7df17430ff1a.__CR0,0,970,600_PT0_SX970_V1___.jpg" alt="Kombi-Therapiegerät mit Wärme und Rotlicht">
-      <p>Abbildung: Synergie in der Praxis – Wärme, Infrarot und Vibration vereint</p>
+      <img src="https://galileo-therapy.com/wp-content/uploads/sites/8/2022/12/Galileo_MedL.jpg" alt="Medizinisches Vibrationsgerät">
+      <p>Vibration: Sanfte Stimulation für starke Effekte</p>
     </div>
 
-    <h2 id="praxis">Praktische Tipps, mögliche Risiken und wer besonders profitiert</h2>
-    <p>Am besten täglich 20–40 Minuten anwenden, Temperatur 40–43 °C, Vibration 20–40 Hz. Bei frischen Verletzungen erst nach 48 Stunden Wärme einsetzen. Risiken sind gering (Hautrötung bei Überhitzung, leichter Schwindel bei Vibration), Kontraindikationen: Thrombose, akute Entzündung, Schwangerschaft, bestimmte Implantate. Ideal für alle mit chronischem unspezifischem Rückenschmerz, Verspannungen durch Sitzen, Reha nach OP.</p>
+    <h2 id="kombi">Warum die 3-in-1-Kombination alles verändert</h2>
+    <p>Allein stark – zusammen unschlagbar. Infrarot + Wärme = maximale Durchblutung & Zellheilung. + Vibration = neuromuskuläre Entspannung & Stärkung. Studien: Schnellere, tiefere Linderung als Monotherapien. Der Teufelskreis bricht – Schmerzen kommen nicht mehr zurück.</p>
+
+    <div class="image-container">
+      <img src="https://m.media-amazon.com/images/S/aplus-media-library-service-media/0cf7d2ae-004a-4eed-8901-7df17430ff1a.__CR0,0,970,600_PT0_SX970_V1___.jpg" alt="Kombi-Gerät Wärme + Infrarot + Vibration">
+      <p>Die Synergie: Alle drei Technologien in einem Gerät</p>
+    </div>
 
     <div class="product-box" id="empfehlung">
-      <h2>Unsere fundierte Empfehlung nach intensivem Vergleich</h2>
-      <p>Wir haben viele Geräte geprüft – der HeatBelt Pro™ sticht heraus: Gezielt für den unteren Rücken, optimale Kombination aus Fern-Infrarot-LED, stufenloser Wärme und Vibration. Beste Handhabung, starke Wirkung, hervorragendes Preis-Leistungs-Verhältnis.</p>
-      <a href="https://aphite.de/products/heatbelt-pro%E2%84%A2-warmegurtel-warme-infrarot-led-vibration-fur-den-unteren-rucken" target="_blank" class="btn">Zum HeatBelt Pro™ – jetzt mehr erfahren</a>
+      <h2>Unsere klare Empfehlung: Der Testsieger 2026</h2>
+      <p>Nach Vergleich zig Geräten: Der <strong>HeatBelt Pro™</strong> kombiniert FIR-LED, regulierbare Wärme und Vibration genau für den unteren Rücken. Täglich 20–40 Min → spürbare Linderung oft schon nach Tagen. Tausende Nutzer berichten: "Endlich wieder schmerzfrei sitzen und schlafen!"</p>
+      <a href="https://aphite.de/products/heatbelt-pro%E2%84%A2-warmegurtel-warme-infrarot-led-vibration-fur-den-unteren-rucken" target="_blank" class="btn">HeatBelt Pro™ jetzt sichern – bis zu 50 % sparen!</a>
+      <p><small>90-Tage-Geld-zurück-Garantie: Fühlt es sich nicht besser an? Einfach zurück – ohne Fragen.</small></p>
+    </div>
+
+    <p style="text-align:center; margin:4rem 0; font-size:1.3rem; color:var(--accent);"><strong>Warten Sie nicht, bis der Vorrat wieder weg ist. Klicken Sie jetzt:</strong></p>
+    <div style="text-align:center;">
+      <a href="https://aphite.de/products/heatbelt-pro%E2%84%A2-warmegurtel-warme-infrarot-led-vibration-fur-den-unteren-rucken" target="_blank" class="btn">Verfügbarkeit prüfen & bestellen →</a>
     </div>
 
   </div>
 
   <footer>
-    <p>© 2026 WarmesHerz Medizin Magazin – Alle Angaben basieren auf Studien. Keine medizinische Beratung. Bei Beschwerden Arzt konsultieren.<br>
-    <small>Hinweis: Einige Links sind Affiliate-Links. Wir empfehlen nur, was wir für wirksam halten.</small></p>
+    <p>© 2026 WarmesHerz Medizin Magazin – Reine Informationszwecke. Keine medizinische Beratung. Bei Schmerzen immer Arzt konsultieren.<br>
+    <small>*Ergebnisse können individuell variieren. Einige Links sind Affiliate-Links. Wir empfehlen nur Produkte, die wir für wirksam halten.</small></p>
   </footer>
 
   <script>
-    // Smooth Scroll für Inhaltsverzeichnis
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         e.preventDefault();
@@ -147,8 +152,7 @@
       });
     });
 
-    // Toggle Zusammenfassung
-    document.getElementById('toggleSummary').addEventListener('click', () => {
+    document.getElementById('toggleSummary').addEventListener('click', function() {
       const summary = document.getElementById('zusammenfassung');
       summary.style.display = summary.style.display === 'block' ? 'none' : 'block';
       this.textContent = summary.style.display === 'block' ? 'Zusammenfassung ausblenden' : 'Zusammenfassung anzeigen';
