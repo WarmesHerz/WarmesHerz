@@ -1,59 +1,364 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medizinische Fachzeitschrift: Infrarottherapie</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Assume there's a CSS file for styling -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wissenschaft & Gesundheit Magazin – Fakten & Erklärungen</title>
+  <meta name="description" content="Wissenschaftlich fundierte Artikel zu Gesundheit, Wohlbefinden und mehr. Erfahre, wie Dinge wirklich wirken.">
+  <style>
+    :root {
+      --primary: #0066cc;
+      --dark: #1a1a1a;
+      --light: #f8f9fa;
+      --gray: #6c757d;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: var(--light);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      background: var(--dark);
+      color: white;
+      padding: 1.5rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      text-decoration: none;
+      color: white;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1532094409864-186d3a2e31b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 8rem 2rem;
+    }
+
+    .hero h1 {
+      font-size: 3.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      padding: 0.9rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s;
+    }
+
+    .btn:hover {
+      background: #0052a3;
+      transform: translateY(-3px);
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2.5rem;
+      padding: 4rem 0;
+    }
+
+    .main-articles h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+      color: var(--dark);
+      border-bottom: 3px solid var(--primary);
+      padding-bottom: 0.8rem;
+    }
+
+    .featured {
+      margin-bottom: 3rem;
+    }
+
+    .featured img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .featured h3 {
+      font-size: 2rem;
+      margin: 1.2rem 0 0.8rem;
+    }
+
+    .article-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    .card h4 {
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .meta {
+      color: var(--gray);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    aside {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      height: fit-content;
+      position: sticky;
+      top: 100px;
+    }
+
+    aside h3 {
+      font-size: 1.6rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .widget {
+      margin-bottom: 2rem;
+    }
+
+    .widget ul {
+      list-style: none;
+    }
+
+    .widget li {
+      margin: 0.8rem 0;
+    }
+
+    .widget a {
+      color: var(--dark);
+      text-decoration: none;
+    }
+
+    .widget a:hover {
+      color: var(--primary);
+    }
+
+    footer {
+      background: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 3rem 0 2rem;
+      margin-top: 4rem;
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    @media (max-width: 992px) {
+      .content {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        position: static;
+      }
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        padding: 6rem 1rem;
+      }
+      nav a {
+        margin-left: 1rem;
+        font-size: 0.95rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Medizinische Fachzeitschrift</h1>
-        <img src="logo.png" alt="Magazine Logo">
-    </header>
 
-    <main>
-        <section>
-            <button id="toggle">Vollversion / Kurzversion</button>
-            <div id="fullVersion" style="display: none;">
-                <!-- Detailed medical explanations and images -->
-                <h2>Infrarottherapie: Eine umfassende Analyse</h2>
-                <img src="infrared_therapy.jpg" alt="Infrarottherapie">
-                <p>In der Infrarottherapie werden...</p>
-                <blockquote>
-                    <p>»Die Infrarottherapie hat sich als äußerst effektiv...«</p>
-                    <footer>- Dr. Beispiel, Experte für Physiotherapie</footer>
-                </blockquote>
-                <p>Wissenschaftliche Erklärungen...</p>
-            </div>
-            <div id="shortVersion">
-                <!-- Short version content -->
-                <h2>Infrarottherapie: Kurzbeschreibung</h2>
-                <p>Infrarottherapie ist eine innovative Methode zur... </p>
-            </div>
-        </section>
+  <header>
+    <div class="container">
+      <a href="#" class="logo">Wissenschaft Magazin</a>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#gesundheit">Gesundheit</a>
+        <a href="#wissen">Wissen</a>
+        <a href="#tipps">Tipps</a>
+      </nav>
+    </div>
+  </header>
 
-        <section>
-            <h2>Produkt Empfehlung: HeatBelt Pro</h2>
-            <p>Wir empfehlen das HeatBelt Pro von <a href="https://aphite.de" target="_blank">aphite.de</a> für...</p>
-            <img src="heatbelt_pro.jpg" alt="HeatBelt Pro">
-        </section>
+  <section class="hero" id="home">
+    <div class="container">
+      <h1>Verstehe die Wissenschaft hinter deinem Wohlbefinden</h1>
+      <p>Hier erklären echte Experten einfach und fundiert, wie Dinge wirklich wirken – ohne Hype, nur Fakten.</p>
+      <a href="#produkt" class="btn">Zum bewährten Ansatz →</a>
+    </div>
+  </section>
+
+  <div class="container content">
+    <main class="main-articles">
+
+      <div class="featured">
+        <img src="https://images.unsplash.com/photo-1505751171719-91b7a1f31tar?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Featured">
+        <h3>Warum Schlaf wirklich der beste Biohack ist – Studien 2025/26</h3>
+        <p class="meta">23. Februar 2026 • 8 Min Lesezeit</p>
+        <p>Neue Meta-Analysen zeigen: 7–9 Stunden Schlaf schlagen fast jedes Supplement...</p>
+      </div>
+
+      <h2>Beliebte Artikel</h2>
+      <div class="article-grid">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1553456558-c2e9f635e3d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Artikel 1">
+          <div class="card-content">
+            <h4>Die Wahrheit über Nootropika – was wirklich wirkt</h4>
+            <p class="meta">20. Feb 2026 • Dr. Anna M.</p>
+            <p>Wir haben 15 Studien gecheckt...</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1511688878353-3a2f5be94cd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Artikel 2">
+          <div class="card-content">
+            <h4>Magnesium: Der unterschätzte Mineralstoff</h4>
+            <p class="meta">18. Feb 2026 • 6 Min</p>
+            <p>Welche Form ist die beste Bioverfügbarkeit?</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1571019613454-1cf549634bba?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Artikel 3">
+          <div class="card-content">
+            <h4>Intervallfasten – Mythos oder Gamechanger?</h4>
+            <p class="meta">15. Feb 2026 • 10 Min</p>
+            <p>Aktuelle Daten aus 2026...</p>
+          </div>
+        </div>
+      </div>
+
     </main>
-    <footer>
-        <p>&copy; 2026 Medizinische Fachzeitschrift</p>
-    </footer>
 
-    <script>
-        document.getElementById("toggle").onclick = function() {
-            var fullVersion = document.getElementById("fullVersion");
-            if (fullVersion.style.display === "none") {
-                fullVersion.style.display = "block";
-                this.innerHTML = "Kurzversion";
-            } else {
-                fullVersion.style.display = "none";
-                this.innerHTML = "Vollversion";
-            }
-        };
-    </script>
+    <aside>
+      <div class="widget">
+        <h3>Kategorien</h3>
+        <ul>
+          <li><a href="#">Schlaf & Regeneration</a></li>
+          <li><a href="#">Nahrungsergänzung</a></li>
+          <li><a href="#">Mentale Klarheit</a></li>
+          <li><a href="#">Hormone & Balance</a></li>
+          <li><a href="#">Anti-Aging</a></li>
+        </ul>
+      </div>
+
+      <div class="widget">
+        <h3>Empfohlener Ansatz</h3>
+        <p>Nach intensiver Recherche empfehlen viele Experten <strong>unser optimiertes Komplex-Präparat</strong> – alle Wirkstoffe in der richtigen Dosierung & Bioverfügbarkeit.</p>
+        <a href="https://deinedomain.de/produkt" id="produkt" class="btn" style="margin-top:1rem; width:100%; text-align:center;">Jetzt mehr erfahren →</a>
+      </div>
+
+      <div class="widget">
+        <h3>Newsletter</h3>
+        <p>Erhalte wöchentlich neue Studien-Zusammenfassungen.</p>
+        <input type="email" placeholder="Deine E-Mail" style="width:100%; padding:0.8rem; margin:0.8rem 0; border:1px solid #ddd; border-radius:6px;">
+        <button class="btn" style="width:100%;">Abonnieren</button>
+      </div>
+    </aside>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Wissenschaft Magazin – Alle Rechte vorbehalten. <br>
+      <small>Hinweis: Einige Links sind Affiliate-Links. Wir empfehlen nur, was wir selbst getestet haben.</small></p>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth Scroll für interne Links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Fake Newsletter-Button (nur Demo)
+    document.querySelector('button.btn').addEventListener('click', () => {
+      alert('Danke! Du wirst bald Updates erhalten (Demo).');
+    });
+  </script>
+
 </body>
 </html>
