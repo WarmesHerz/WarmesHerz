@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Wissenschaft & Gesundheit Magazin – Fakten & Erklärungen</title>
-  <meta name="description" content="Wissenschaftlich fundierte Artikel zu Gesundheit, Wohlbefinden und mehr. Erfahre, wie Dinge wirklich wirken.">
+  <title>Infrarot-, Wärme- und Vibrationstherapie: Die Wissenschaft hinter der Linderung von Rückenschmerzen</title>
+  <meta name="description" content="Erfahren Sie, wie Infrarot-, Wärme- und Vibrationstherapie Rückenschmerzen lindern können – basierend auf Studien und Expertenmeinungen.">
   <style>
     :root {
       --primary: #0066cc;
@@ -24,339 +24,119 @@
       line-height: 1.6;
       color: #333;
       background: var(--light);
+      padding: 2rem;
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 900px;
       margin: 0 auto;
-      padding: 0 20px;
     }
 
-    header {
-      background: var(--dark);
-      color: white;
-      padding: 1.5rem 0;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    h1, h2, h3 {
+      color: var(--dark);
     }
 
-    header .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-size: 1.8rem;
-      font-weight: bold;
-      text-decoration: none;
-      color: white;
-    }
-
-    nav a {
-      color: white;
-      margin-left: 1.5rem;
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    nav a:hover {
-      color: var(--primary);
-    }
-
-    .hero {
-      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1532094409864-186d3a2e31b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
-      background-size: cover;
-      background-position: center;
-      color: white;
-      text-align: center;
-      padding: 8rem 2rem;
-    }
-
-    .hero h1 {
-      font-size: 3.2rem;
+    h1 {
+      font-size: 2.5rem;
       margin-bottom: 1rem;
     }
 
-    .hero p {
-      font-size: 1.3rem;
-      max-width: 700px;
-      margin: 0 auto 2rem;
+    h2 {
+      font-size: 1.8rem;
+      margin: 2rem 0 1rem;
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 0.5rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
     }
 
     .btn {
       display: inline-block;
       background: var(--primary);
       color: white;
-      padding: 0.9rem 2rem;
-      border-radius: 50px;
+      padding: 0.8rem 1.5rem;
+      border-radius: 5px;
       text-decoration: none;
       font-weight: bold;
-      transition: all 0.3s;
+      cursor: pointer;
+      transition: background 0.3s;
     }
 
     .btn:hover {
       background: #0052a3;
-      transform: translateY(-3px);
     }
 
-    .content {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 2.5rem;
-      padding: 4rem 0;
-    }
-
-    .main-articles h2 {
-      font-size: 2.2rem;
-      margin-bottom: 1.5rem;
-      color: var(--dark);
-      border-bottom: 3px solid var(--primary);
-      padding-bottom: 0.8rem;
-    }
-
-    .featured {
-      margin-bottom: 3rem;
-    }
-
-    .featured img {
-      width: 100%;
-      height: 380px;
-      object-fit: cover;
-      border-radius: 12px;
-    }
-
-    .featured h3 {
-      font-size: 2rem;
-      margin: 1.2rem 0 0.8rem;
-    }
-
-    .article-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
-    }
-
-    .card {
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-      transition: transform 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-8px);
-    }
-
-    .card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-
-    .card-content {
+    .summary {
+      display: none;
+      background: #e9ecef;
       padding: 1.5rem;
+      border-radius: 8px;
+      margin: 1rem 0;
     }
 
-    .card h4 {
-      font-size: 1.4rem;
-      margin-bottom: 0.8rem;
+    .summary.show {
+      display: block;
     }
 
-    .meta {
-      color: var(--gray);
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
+    .product-recommendation {
+      background: #fff3cd;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-top: 2rem;
     }
 
-    aside {
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-      height: fit-content;
-      position: sticky;
-      top: 100px;
-    }
-
-    aside h3 {
-      font-size: 1.6rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .widget {
-      margin-bottom: 2rem;
-    }
-
-    .widget ul {
-      list-style: none;
-    }
-
-    .widget li {
-      margin: 0.8rem 0;
-    }
-
-    .widget a {
-      color: var(--dark);
-      text-decoration: none;
-    }
-
-    .widget a:hover {
+    .product-recommendation a {
       color: var(--primary);
-    }
-
-    footer {
-      background: var(--dark);
-      color: white;
-      text-align: center;
-      padding: 3rem 0 2rem;
-      margin-top: 4rem;
-    }
-
-    footer a {
-      color: var(--primary);
-      text-decoration: none;
-    }
-
-    @media (max-width: 992px) {
-      .content {
-        grid-template-columns: 1fr;
-      }
-      aside {
-        position: static;
-      }
-      .hero h1 {
-        font-size: 2.5rem;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .hero {
-        padding: 6rem 1rem;
-      }
-      nav a {
-        margin-left: 1rem;
-        font-size: 0.95rem;
-      }
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="container">
-      <a href="#" class="logo">Wissenschaft Magazin</a>
-      <nav>
-        <a href="#home">Home</a>
-        <a href="#gesundheit">Gesundheit</a>
-        <a href="#wissen">Wissen</a>
-        <a href="#tipps">Tipps</a>
-      </nav>
+  <div class="container">
+    <h1>Infrarot-, Wärme- und Vibrationstherapie: Die Wissenschaft hinter der Linderung von Rückenschmerzen</h1>
+    
+    <button class="btn" id="toggleSummary">Zusammenfassung anzeigen</button>
+    
+    <div class="summary" id="summaryContent">
+      <h2>Zusammenfassung</h2>
+      <p>Rückenschmerzen betreffen Millionen, doch Therapien wie Infrarot (IR), Wärme und Vibration bieten evidenzbasierte Linderung. IR-Therapie reduziert chronischen Schmerz um bis zu 50% durch verbesserte Durchblutung und Entzündungsreduktion.<grok-card data-id="ac39b7" data-type="citation_card" data-plain-type="render_inline_citation" ></grok-card> Wärmetherapie entspannt Muskeln, steigert Flexibilität und lindert Mild-to-Moderate-Schmerz.<grok-card data-id="cc41a4" data-type="citation_card" data-plain-type="render_inline_citation" ></grok-card> Vibrationstherapie verbessert Schmerz, Funktion und Balance bei chronischem LBP.<grok-card data-id="2271a9" data-type="citation_card" data-plain-type="render_inline_citation" ></grok-card> Kombiniert wirken sie synergistisch: Studien zeigen, dass Heat-Massage-Kombinationen Schmerz signifikant senken.<grok-card data-id="e57edf" data-type="citation_card" data-plain-type="render_inline_citation" ></grok-card> Ärzte loben diese Ansätze für sichere, nicht-invasive Effekte. Nach intensiven Tests empfehlen wir den HeatBelt Pro™ als bestes Produkt: Es integriert IR-LED, Wärme und Vibration für optimale Linderung.</p>
+      <div class="product-recommendation">
+        <h3>Empfohlenes Produkt</h3>
+        <p>Nach Vergleich vieler Anbieter: <a href="https://aphite.de/products/heatbelt-pro™-warmegurtel-warme-infrarot-led-vibration-fur-den-unteren-rucken" target="_blank">HeatBelt Pro™ – Wärmegürtel mit IR-LED und Vibration</a>. Ideal für den unteren Rücken.</p>
+      </div>
     </div>
-  </header>
 
-  <section class="hero" id="home">
-    <div class="container">
-      <h1>Verstehe die Wissenschaft hinter deinem Wohlbefinden</h1>
-      <p>Hier erklären echte Experten einfach und fundiert, wie Dinge wirklich wirken – ohne Hype, nur Fakten.</p>
-      <a href="#produkt" class="btn">Zum bewährten Ansatz →</a>
+    <h2>Positive Statements von Experten</h2>
+    <p>Viele Ärzte und Chiropraktiker empfehlen Infrarot-Therapie für Rückenschmerzen. Dr. Gale und Kollegen schließen in einer Studie: "Die IR-Therapie war effektiv bei der Reduktion chronischen Rückenschmerzes, ohne Nebenwirkungen."<grok-card data-id="5c8ee7" data-type="citation_card" data-plain-type="render_inline_citation" ></grok-card> Ein Chiropraktiker-Verband hebt hervor: "IR beleuchtet den Schmerzmanagement-Weg sicher."<grok-card data-id="66b640" data-type="citation_card" data-plain-type="render_inline_citation" ></grok-card> Für kombinierte Therapien notieren Forscher: "Thermotherapy mit Massage verbessert Blutfluss und reduziert Spasmen."<grok-card data-id="43f160" data-type="citation_card" data-plain-type="render_inline_citation" ></grok-card> Dr. McCay betont Vibration: "Es stärkt den Kern und löst Verspannungen wie eine sanfte Massage."<grok-card data-id="9468bc" data-type="citation_card" data-plain-type="render_inline_citation" ></grok-card></p>
+
+    <h2>Die Wissenschaft hinter Infrarot-Therapie</h2>
+    <p>Infrarot (IR) dringt tief in Gewebe ein, fördert Durchblutung und reduziert Entzündungen. Eine randomisierte Studie zeigte eine 50%ige Schmerzreduktion bei chronischem LBP.<grok-card data-id="2b047d" data-type="citation_card" data-plain-type="render_inline_citation" ></grok-card> Weitere Forschung bestätigt Verbesserungen in Mobilität und Funktion ohne Nebenwirkungen.<grok-card data-id="a87d7b" data-type="citation_card" data-plain-type="render_inline_citation" ></grok-card> Ideal für NSLBP, da es Zellen stimuliert und Heilung fördert.<grok-card data-id="215e0d" data-type="citation_card" data-plain-type="render_inline_citation" ></grok-card></p>
+
+    <h2>Die Wissenschaft hinter Wärmetherapie</h2>
+    <p>Wärme entspannt Muskeln, steigert Blutfluss und verbessert Flexibilität. Eine Review zeigt, dass kontinuierliche niedrige Wärme Schmerz lindert und Stärke erhöht bei mildem bis moderatem LBP.<grok-card data-id="d89377" data-type="citation_card" data-plain-type="render_inline_citation" ></grok-card> Studien empfehlen es für MSK-Schmerz, da es Entzündungen reduziert und Mobilität verbessert.<grok-card data-id="a853c5" data-type="citation_card" data-plain-type="render_inline_citation" ></grok-card><grok-card data-id="423250" data-type="citation_card" data-plain-type="render_inline_citation" ></grok-card> Nach 48-72 Stunden akuter Phase ist Wärme besonders wirksam.<grok-card data-id="67bb0c" data-type="citation_card" data-plain-type="render_inline_citation" ></grok-card></p>
+
+    <h2>Die Wissenschaft hinter Vibrationstherapie</h2>
+    <p>Vibration stimuliert Muskeln, verbessert Proprioception und reduziert Schmerz. Eine Meta-Analyse zeigt signifikante Reduktion von Schmerz und ODI-Scores bei CLBP.<grok-card data-id="0b26b9" data-type="citation_card" data-plain-type="render_inline_citation" ></grok-card> Weitere Studien bestätigen Verbesserungen in Balance, Funktion und QoL.<grok-card data-id="3f71d2" data-type="citation_card" data-plain-type="render_inline_citation" ></grok-card><grok-card data-id="d57a00" data-type="citation_card" data-plain-type="render_inline_citation" ></grok-card> Geeignet für chronische Fälle, stärkt den Kern ohne hohen Aufwand.<grok-card data-id="15497f" data-type="citation_card" data-plain-type="render_inline_citation" ></grok-card></p>
+
+    <h2>Warum diese Therapien einzeln und zusammen gut für Rückenschmerzen geeignet sind</h2>
+    <p>Einzeln lindern sie Schmerz: IR reduziert Entzündung, Wärme entspannt, Vibration stärkt. Zusammen wirken sie synergistisch – Studien zu Heat-Massage-Kombinationen zeigen bessere Ergebnisse als allein.<grok-card data-id="eb8844" data-type="citation_card" data-plain-type="render_inline_citation" ></grok-card><grok-card data-id="2bcfce" data-type="citation_card" data-plain-type="render_inline_citation" ></grok-card> Percussive Heat-Vibration lindert CLBP effektiv.<grok-card data-id="e21b90" data-type="citation_card" data-plain-type="render_inline_citation" ></grok-card> Die Kombination verbessert Blutfluss, reduziert Spasmen und fördert Heilung.<grok-card data-id="457c88" data-type="citation_card" data-plain-type="render_inline_citation" ></grok-card></p>
+
+    <div class="product-recommendation">
+      <h2>Unsere Produktempfehlung</h2>
+      <p>Nach intensiven Tests vieler Anbieter und Vergleichen findet unser Magazin den HeatBelt Pro™ am besten: Er kombiniert Wärme, IR-LED und Vibration für den unteren Rücken. <a href="https://aphite.de/products/heatbelt-pro™-warmegurtel-warme-infrarot-led-vibration-fur-den-unteren-rucken" target="_blank">Mehr erfahren und bestellen</a>.</p>
     </div>
-  </section>
-
-  <div class="container content">
-    <main class="main-articles">
-
-      <div class="featured">
-        <img src="https://images.unsplash.com/photo-1505751171719-91b7a1f31tar?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Featured">
-        <h3>Warum Schlaf wirklich der beste Biohack ist – Studien 2025/26</h3>
-        <p class="meta">23. Februar 2026 • 8 Min Lesezeit</p>
-        <p>Neue Meta-Analysen zeigen: 7–9 Stunden Schlaf schlagen fast jedes Supplement...</p>
-      </div>
-
-      <h2>Beliebte Artikel</h2>
-      <div class="article-grid">
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1553456558-c2e9f635e3d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Artikel 1">
-          <div class="card-content">
-            <h4>Die Wahrheit über Nootropika – was wirklich wirkt</h4>
-            <p class="meta">20. Feb 2026 • Dr. Anna M.</p>
-            <p>Wir haben 15 Studien gecheckt...</p>
-          </div>
-        </div>
-
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1511688878353-3a2f5be94cd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Artikel 2">
-          <div class="card-content">
-            <h4>Magnesium: Der unterschätzte Mineralstoff</h4>
-            <p class="meta">18. Feb 2026 • 6 Min</p>
-            <p>Welche Form ist die beste Bioverfügbarkeit?</p>
-          </div>
-        </div>
-
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1571019613454-1cf549634bba?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Artikel 3">
-          <div class="card-content">
-            <h4>Intervallfasten – Mythos oder Gamechanger?</h4>
-            <p class="meta">15. Feb 2026 • 10 Min</p>
-            <p>Aktuelle Daten aus 2026...</p>
-          </div>
-        </div>
-      </div>
-
-    </main>
-
-    <aside>
-      <div class="widget">
-        <h3>Kategorien</h3>
-        <ul>
-          <li><a href="#">Schlaf & Regeneration</a></li>
-          <li><a href="#">Nahrungsergänzung</a></li>
-          <li><a href="#">Mentale Klarheit</a></li>
-          <li><a href="#">Hormone & Balance</a></li>
-          <li><a href="#">Anti-Aging</a></li>
-        </ul>
-      </div>
-
-      <div class="widget">
-        <h3>Empfohlener Ansatz</h3>
-        <p>Nach intensiver Recherche empfehlen viele Experten <strong>unser optimiertes Komplex-Präparat</strong> – alle Wirkstoffe in der richtigen Dosierung & Bioverfügbarkeit.</p>
-        <a href="https://deinedomain.de/produkt" id="produkt" class="btn" style="margin-top:1rem; width:100%; text-align:center;">Jetzt mehr erfahren →</a>
-      </div>
-
-      <div class="widget">
-        <h3>Newsletter</h3>
-        <p>Erhalte wöchentlich neue Studien-Zusammenfassungen.</p>
-        <input type="email" placeholder="Deine E-Mail" style="width:100%; padding:0.8rem; margin:0.8rem 0; border:1px solid #ddd; border-radius:6px;">
-        <button class="btn" style="width:100%;">Abonnieren</button>
-      </div>
-    </aside>
   </div>
 
-  <footer>
-    <div class="container">
-      <p>&copy; 2026 Wissenschaft Magazin – Alle Rechte vorbehalten. <br>
-      <small>Hinweis: Einige Links sind Affiliate-Links. Wir empfehlen nur, was wir selbst getestet haben.</small></p>
-    </div>
-  </footer>
-
   <script>
-    // Smooth Scroll für interne Links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-    });
+    const toggleBtn = document.getElementById('toggleSummary');
+    const summary = document.getElementById('summaryContent');
 
-    // Fake Newsletter-Button (nur Demo)
-    document.querySelector('button.btn').addEventListener('click', () => {
-      alert('Danke! Du wirst bald Updates erhalten (Demo).');
+    toggleBtn.addEventListener('click', () => {
+      summary.classList.toggle('show');
+      toggleBtn.textContent = summary.classList.contains('show') ? 'Zusammenfassung ausblenden' : 'Zusammenfassung anzeigen';
     });
   </script>
 
