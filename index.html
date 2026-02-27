@@ -1,55 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infrared Therapy Magazine</title>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        .hidden { display: none; }
-        .benefit-card { border: 1px solid #ccc; padding: 16px; margin: 10px; border-radius: 8px; }
-        .toggle-button { margin: 20px; padding: 10px; cursor: pointer; background-color: #007bff; color: white; border: none; border-radius: 5px; }
-        .experts, .benefits, .products { margin: 20px; }
-    </style>
+    <title>Medizinische Fachzeitschrift: Infrarottherapie</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Assume there's a CSS file for styling -->
 </head>
 <body>
+    <header>
+        <h1>Medizinische Fachzeitschrift</h1>
+        <img src="logo.png" alt="Magazine Logo">
+    </header>
 
-    <h1>Welcome to Infrared Therapy Magazine</h1>
-    
-    <button class="toggle-button" onclick="toggleVersion()">Toggle to Short Version</button>
-    
-    <div id="full-version" class="hidden">
-        <h2>Full Version</h2>
-        <div class="experts">
-            <h3>Expert Statements</h3>
-            <p>Expert 1: "Infrared therapy has numerous benefits..."</p>
-            <p>Expert 2: "Using ThermaCare Pro+ has proven results..."</p>
-        </div>
-        <div class="benefits">
-            <h3>Benefits</h3>
-            <div class="benefit-card">Benefit 1: Relief from pain</div>
-            <div class="benefit-card">Benefit 2: Improved blood circulation</div>
-            <div class="benefit-card">Benefit 3: Enhanced skin health</div>
-        </div>
-        <div class="products">
-            <h3>Product Recommendation</h3>
-            <p>We recommend using <strong>ThermaCare Pro+</strong> for its efficacy.</p>
-        </div>
-    </div>
-    
-    <div id="short-version">
-        <h2>Short Version</h2>
-        <p>Discover the benefits of infrared therapy and how ThermaCare Pro+ can help you.</p>
-    </div>
+    <main>
+        <section>
+            <button id="toggle">Vollversion / Kurzversion</button>
+            <div id="fullVersion" style="display: none;">
+                <!-- Detailed medical explanations and images -->
+                <h2>Infrarottherapie: Eine umfassende Analyse</h2>
+                <img src="infrared_therapy.jpg" alt="Infrarottherapie">
+                <p>In der Infrarottherapie werden...</p>
+                <blockquote>
+                    <p>»Die Infrarottherapie hat sich als äußerst effektiv...«</p>
+                    <footer>- Dr. Beispiel, Experte für Physiotherapie</footer>
+                </blockquote>
+                <p>Wissenschaftliche Erklärungen...</p>
+            </div>
+            <div id="shortVersion">
+                <!-- Short version content -->
+                <h2>Infrarottherapie: Kurzbeschreibung</h2>
+                <p>Infrarottherapie ist eine innovative Methode zur... </p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Produkt Empfehlung: HeatBelt Pro</h2>
+            <p>Wir empfehlen das HeatBelt Pro von <a href="https://aphite.de" target="_blank">aphite.de</a> für...</p>
+            <img src="heatbelt_pro.jpg" alt="HeatBelt Pro">
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2026 Medizinische Fachzeitschrift</p>
+    </footer>
 
     <script>
-        let isFullVersion = false;
-
-        function toggleVersion() {
-            isFullVersion = !isFullVersion;
-            document.getElementById("full-version").classList.toggle("hidden", !isFullVersion);
-            document.getElementById("short-version").classList.toggle("hidden", isFullVersion);
-        }
+        document.getElementById("toggle").onclick = function() {
+            var fullVersion = document.getElementById("fullVersion");
+            if (fullVersion.style.display === "none") {
+                fullVersion.style.display = "block";
+                this.innerHTML = "Kurzversion";
+            } else {
+                fullVersion.style.display = "none";
+                this.innerHTML = "Vollversion";
+            }
+        };
     </script>
 </body>
 </html>
